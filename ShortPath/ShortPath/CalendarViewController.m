@@ -7,6 +7,7 @@
 //
 
 #import "CalendarViewController.h"
+#import <FontAwesomeKit.h>
 
 @interface CalendarViewController ()
 
@@ -34,6 +35,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(UITabBarItem *)tabBarItem
+{
+    FAKIonIcons *tabIcon = [FAKIonIcons ios7CalendarIconWithSize:30];
+    [tabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
+    UIImage *tabIconImage = [tabIcon imageWithSize:CGSizeMake(30,30)];
+    
+    
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Events" image:tabIconImage selectedImage:tabIconImage];
+    
+    return tabBarItem;
+}
+
 
 /*
 #pragma mark - Navigation

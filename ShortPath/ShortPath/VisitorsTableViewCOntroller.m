@@ -7,6 +7,7 @@
 //
 
 #import "VisitorsTableViewCOntroller.h"
+#import <FontAwesomeKit.h>
 
 @interface VisitorsTableViewCOntroller ()
 
@@ -32,6 +33,17 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(UITabBarItem *)tabBarItem
+{
+    FAKIonIcons *tabIcon = [FAKIonIcons ios7PeopleIconWithSize:30];
+    [tabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
+    UIImage *tabIconImage = [tabIcon imageWithSize:CGSizeMake(30,30)];
+    
+    
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Visitors" image:tabIconImage selectedImage:tabIconImage];
+    return tabBarItem;
 }
 
 - (void)didReceiveMemoryWarning

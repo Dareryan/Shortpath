@@ -1,5 +1,5 @@
 //
-//  VisitorsViewController.h
+//  CalendarViewController.h
 //  ShortPath
 //
 //  Created by Dare Ryan on 4/2/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VisitorsViewController : UIViewController
+@interface CalendarViewController : UIViewController
 
 @end

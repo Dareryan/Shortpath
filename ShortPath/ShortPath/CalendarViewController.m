@@ -1,18 +1,18 @@
 //
-//  VisitorsViewController.m
+//  CalendarViewController.m
 //  ShortPath
 //
 //  Created by Dare Ryan on 4/2/14.
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
-#import "VisitorsViewController.h"
+#import "CalendarViewController.h"
 
-@interface VisitorsViewController ()
+@interface CalendarViewController ()
 
 @end
 
-@implementation VisitorsViewController
+@implementation CalendarViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

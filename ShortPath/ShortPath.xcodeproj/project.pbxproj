@@ -28,7 +28,9 @@
 		2E3B25AF18EB15F30090336C /* logo (2).png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25AE18EB15F30090336C /* logo (2).png */; };
 		2E3B25B818EB1BEB0090336C /* shapes.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25B718EB1BEB0090336C /* shapes.png */; };
 		2E3B25BA18EB1ECF0090336C /* low_contrast_linen_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */; };
-		4546B9CD18EC54FB00388603 /* VisitorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9CC18EC54FB00388603 /* VisitorsViewController.m */; };
+		4546B9D118EC563600388603 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D018EC563600388603 /* CalendarViewController.m */; };
+		4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D318EC565A00388603 /* SettingsTableViewController.m */; };
+		4546B9D718EC567900388603 /* VisitorsTableViewCOntroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D618EC567900388603 /* VisitorsTableViewCOntroller.m */; };
 		9850B75C9CB04B5FB8E4FC7A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01787EEBDFC44B7EB2652066 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -71,8 +73,12 @@
 		2E3B25AE18EB15F30090336C /* logo (2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo (2).png"; path = "ShortPath/logo (2).png"; sourceTree = "<group>"; };
 		2E3B25B718EB1BEB0090336C /* shapes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shapes.png; path = ShortPath/shapes.png; sourceTree = "<group>"; };
 		2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "low_contrast_linen_@2X.png"; path = "ShortPath/low_contrast_linen_@2X.png"; sourceTree = "<group>"; };
-		4546B9CB18EC54FB00388603 /* VisitorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitorsViewController.h; sourceTree = "<group>"; };
-		4546B9CC18EC54FB00388603 /* VisitorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitorsViewController.m; sourceTree = "<group>"; };
+		4546B9CF18EC563600388603 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		4546B9D018EC563600388603 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		4546B9D218EC565A00388603 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		4546B9D318EC565A00388603 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		4546B9D518EC567900388603 /* VisitorsTableViewCOntroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitorsTableViewCOntroller.h; sourceTree = "<group>"; };
+		4546B9D618EC567900388603 /* VisitorsTableViewCOntroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitorsTableViewCOntroller.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,8 +199,12 @@
 				2E3B258818EB0F780090336C /* FISAppDelegate.h */,
 				2E3B258918EB0F780090336C /* FISAppDelegate.m */,
 				2E3B258B18EB0F780090336C /* Main.storyboard */,
-				4546B9CB18EC54FB00388603 /* VisitorsViewController.h */,
-				4546B9CC18EC54FB00388603 /* VisitorsViewController.m */,
+				4546B9D518EC567900388603 /* VisitorsTableViewCOntroller.h */,
+				4546B9D618EC567900388603 /* VisitorsTableViewCOntroller.m */,
+				4546B9D218EC565A00388603 /* SettingsTableViewController.h */,
+				4546B9D318EC565A00388603 /* SettingsTableViewController.m */,
+				4546B9CF18EC563600388603 /* CalendarViewController.h */,
+				4546B9D018EC563600388603 /* CalendarViewController.m */,
 				2E3B258E18EB0F780090336C /* FISViewController.h */,
 				2E3B258F18EB0F780090336C /* FISViewController.m */,
 			);
@@ -341,9 +351,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4546B9D718EC567900388603 /* VisitorsTableViewCOntroller.m in Sources */,
+				4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */,
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
-				4546B9CD18EC54FB00388603 /* VisitorsViewController.m in Sources */,
 				2E3B258618EB0F780090336C /* main.m in Sources */,
+				4546B9D118EC563600388603 /* CalendarViewController.m in Sources */,
 				2E3B258A18EB0F780090336C /* FISAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

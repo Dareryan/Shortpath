@@ -74,7 +74,7 @@
         <scene sceneID="g1e-9B-n6I">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="ZZK-gI-xKU" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="9X9-J9-x1q">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -88,7 +88,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6DA-bz-2Ms" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1140" y="114"/>
+            <point key="canvasLocation" x="1128" y="158"/>
         </scene>
         <!--View Controller - Item 2-->
         <scene sceneID="D9V-nd-PxN">

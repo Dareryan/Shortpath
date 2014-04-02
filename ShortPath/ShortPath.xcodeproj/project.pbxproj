@@ -26,10 +26,10 @@
 		2E3B25A318EB0F780090336C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25A118EB0F780090336C /* InfoPlist.strings */; };
 		2E3B25A518EB0F780090336C /* ShortPathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3B25A418EB0F780090336C /* ShortPathTests.m */; };
 		2E3B25AF18EB15F30090336C /* logo (2).png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25AE18EB15F30090336C /* logo (2).png */; };
-		2E3B25B418EB18D90090336C /* Bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25B118EB18D90090336C /* Bg-1.png */; };
-		2E3B25B518EB18D90090336C /* Bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25B218EB18D90090336C /* Bg.png */; };
 		2E3B25B818EB1BEB0090336C /* shapes.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25B718EB1BEB0090336C /* shapes.png */; };
 		2E3B25BA18EB1ECF0090336C /* low_contrast_linen_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */; };
+		4546B9CD18EC54FB00388603 /* VisitorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9CC18EC54FB00388603 /* VisitorsViewController.m */; };
+		9850B75C9CB04B5FB8E4FC7A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01787EEBDFC44B7EB2652066 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0073ECE0EDAC4C3C8FB7BE0B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		01787EEBDFC44B7EB2652066 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E02FADC18EB406200FF5770 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		2E02FADD18EB406200FF5770 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
 		2E02FADE18EB406200FF5770 /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
@@ -60,17 +62,17 @@
 		2E3B258C18EB0F780090336C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2E3B258E18EB0F780090336C /* FISViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FISViewController.h; sourceTree = "<group>"; };
 		2E3B258F18EB0F780090336C /* FISViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FISViewController.m; sourceTree = "<group>"; };
-		2E3B259118EB0F780090336C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2E3B259118EB0F780090336C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ShortPath/Images.xcassets; sourceTree = "<group>"; };
 		2E3B259718EB0F780090336C /* ShortPathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShortPathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E3B259818EB0F780090336C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2E3B25A018EB0F780090336C /* ShortPathTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShortPathTests-Info.plist"; sourceTree = "<group>"; };
 		2E3B25A218EB0F780090336C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2E3B25A418EB0F780090336C /* ShortPathTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShortPathTests.m; sourceTree = "<group>"; };
-		2E3B25AE18EB15F30090336C /* logo (2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo (2).png"; sourceTree = "<group>"; };
-		2E3B25B118EB18D90090336C /* Bg-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bg-1.png"; sourceTree = "<group>"; };
-		2E3B25B218EB18D90090336C /* Bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bg.png; sourceTree = "<group>"; };
-		2E3B25B718EB1BEB0090336C /* shapes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shapes.png; sourceTree = "<group>"; };
-		2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "low_contrast_linen_@2X.png"; sourceTree = "<group>"; };
+		2E3B25AE18EB15F30090336C /* logo (2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo (2).png"; path = "ShortPath/logo (2).png"; sourceTree = "<group>"; };
+		2E3B25B718EB1BEB0090336C /* shapes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shapes.png; path = ShortPath/shapes.png; sourceTree = "<group>"; };
+		2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "low_contrast_linen_@2X.png"; path = "ShortPath/low_contrast_linen_@2X.png"; sourceTree = "<group>"; };
+		4546B9CB18EC54FB00388603 /* VisitorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitorsViewController.h; sourceTree = "<group>"; };
+		4546B9CC18EC54FB00388603 /* VisitorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitorsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				2E3B257C18EB0F780090336C /* CoreGraphics.framework in Frameworks */,
 				2E3B257E18EB0F780090336C /* UIKit.framework in Frameworks */,
 				2E3B257A18EB0F780090336C /* Foundation.framework in Frameworks */,
+				9850B75C9CB04B5FB8E4FC7A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,8 +116,14 @@
 			children = (
 				2E3B257F18EB0F780090336C /* ShortPath */,
 				2E3B259E18EB0F780090336C /* ShortPathTests */,
+				2E3B258018EB0F780090336C /* Supporting Files */,
 				2E3B257818EB0F780090336C /* Frameworks */,
 				2E3B257718EB0F780090336C /* Products */,
+				0073ECE0EDAC4C3C8FB7BE0B /* Pods.xcconfig */,
+				2E3B259118EB0F780090336C /* Images.xcassets */,
+				2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */,
+				2E3B25B718EB1BEB0090336C /* shapes.png */,
+				2E3B25AE18EB15F30090336C /* logo (2).png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,6 +143,7 @@
 				2E3B257B18EB0F780090336C /* CoreGraphics.framework */,
 				2E3B257D18EB0F780090336C /* UIKit.framework */,
 				2E3B259818EB0F780090336C /* XCTest.framework */,
+				01787EEBDFC44B7EB2652066 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -141,17 +151,7 @@
 		2E3B257F18EB0F780090336C /* ShortPath */ = {
 			isa = PBXGroup;
 			children = (
-				2E3B258818EB0F780090336C /* FISAppDelegate.h */,
-				2E3B258918EB0F780090336C /* FISAppDelegate.m */,
-				2E3B258B18EB0F780090336C /* Main.storyboard */,
-				2E3B258E18EB0F780090336C /* FISViewController.h */,
-				2E3B258F18EB0F780090336C /* FISViewController.m */,
-				2E3B259118EB0F780090336C /* Images.xcassets */,
-				2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */,
-				2E3B25B718EB1BEB0090336C /* shapes.png */,
-				2E3B25AE18EB15F30090336C /* logo (2).png */,
-				2E3B25B018EB18D90090336C /* Bg.imageset */,
-				2E3B258018EB0F780090336C /* Supporting Files */,
+				4546B9CE18EC550D00388603 /* ViewControllers */,
 			);
 			path = ShortPath;
 			sourceTree = "<group>";
@@ -166,6 +166,7 @@
 				2E3B258718EB0F780090336C /* ShortPath-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = ShortPath;
 			sourceTree = "<group>";
 		};
 		2E3B259E18EB0F780090336C /* ShortPathTests */ = {
@@ -186,14 +187,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2E3B25B018EB18D90090336C /* Bg.imageset */ = {
+		4546B9CE18EC550D00388603 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2E3B25B118EB18D90090336C /* Bg-1.png */,
-				2E3B25B218EB18D90090336C /* Bg.png */,
+				2E3B258818EB0F780090336C /* FISAppDelegate.h */,
+				2E3B258918EB0F780090336C /* FISAppDelegate.m */,
+				2E3B258B18EB0F780090336C /* Main.storyboard */,
+				4546B9CB18EC54FB00388603 /* VisitorsViewController.h */,
+				4546B9CC18EC54FB00388603 /* VisitorsViewController.m */,
+				2E3B258E18EB0F780090336C /* FISViewController.h */,
+				2E3B258F18EB0F780090336C /* FISViewController.m */,
 			);
-			name = Bg.imageset;
-			path = "Chatroom-Bg.imageset";
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,9 +208,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E3B25A818EB0F780090336C /* Build configuration list for PBXNativeTarget "ShortPath" */;
 			buildPhases = (
+				623E75D8D9114AE0965CF622 /* Check Pods Manifest.lock */,
 				2E3B257218EB0F780090336C /* Sources */,
 				2E3B257318EB0F780090336C /* Frameworks */,
 				2E3B257418EB0F780090336C /* Resources */,
+				AE1EB31465284BD785F5FBDE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -275,13 +282,11 @@
 			files = (
 				2E02FAE318EB406200FF5770 /* Oswald-Regular.ttf in Resources */,
 				2E02FAE018EB406200FF5770 /* OFL.txt in Resources */,
-				2E3B25B418EB18D90090336C /* Bg-1.png in Resources */,
 				2E02FAE118EB406200FF5770 /* Oswald-Bold.ttf in Resources */,
 				2E02FAE218EB406200FF5770 /* Oswald-Light.ttf in Resources */,
 				2E3B25B818EB1BEB0090336C /* shapes.png in Resources */,
 				2E3B259218EB0F780090336C /* Images.xcassets in Resources */,
 				2E3B258418EB0F780090336C /* InfoPlist.strings in Resources */,
-				2E3B25B518EB18D90090336C /* Bg.png in Resources */,
 				2E3B258D18EB0F780090336C /* Main.storyboard in Resources */,
 				2E3B25AF18EB15F30090336C /* logo (2).png in Resources */,
 				2E3B25BA18EB1ECF0090336C /* low_contrast_linen_@2X.png in Resources */,
@@ -298,12 +303,46 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		623E75D8D9114AE0965CF622 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AE1EB31465284BD785F5FBDE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2E3B257218EB0F780090336C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
+				4546B9CD18EC54FB00388603 /* VisitorsViewController.m in Sources */,
 				2E3B258618EB0F780090336C /* main.m in Sources */,
 				2E3B258A18EB0F780090336C /* FISAppDelegate.m in Sources */,
 			);
@@ -429,6 +468,7 @@
 		};
 		2E3B25A918EB0F780090336C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0073ECE0EDAC4C3C8FB7BE0B /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -442,6 +482,7 @@
 		};
 		2E3B25AA18EB0F780090336C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0073ECE0EDAC4C3C8FB7BE0B /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

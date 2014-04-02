@@ -23,6 +23,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
    
+    self.imageView.hidden = YES;
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     
@@ -33,6 +34,10 @@
     [self.view.layer insertSublayer:gradient atIndex:0];
     
     
+  
+    
+    
+    
 
 }
 
@@ -41,25 +46,45 @@
     [super viewDidLoad];
     
     
-    self.logoText.font = [UIFont fontWithName:@"Oswald-Regular" size:50.0];
-    
-    self.logoText.text = @"Shortpath";
     
     
-    
-    self.imageView.alpha = 0; [UIView animateWithDuration:0.5f animations:^{ self.imageView.alpha=1.0; }];
-    
-    CABasicAnimation *rotate = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-    rotate.fromValue = [NSNumber numberWithFloat:0];
-    rotate.toValue = [NSNumber numberWithFloat: M_PI];
-    rotate.duration = .5;
-    [self.imageView.layer addAnimation:rotate forKey:nil];
     
     
     
     
 	
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+    self.logoText.font = [UIFont fontWithName:@"Oswald-Regular" size:50.0];
+    
+    self.logoText.text = @"Shortpath";
+
+    self.imageView.alpha = 0; [UIView animateWithDuration:0.5f animations:^{
+        self.imageView.hidden = NO;
+        
+        self.imageView.alpha=1.0;
+        
+        
+    }];
+    
+    CABasicAnimation *rotate = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    rotate.fromValue = [NSNumber numberWithFloat:0];
+    rotate.toValue = [NSNumber numberWithFloat: M_PI];
+    rotate.duration = .5;
+    [self.imageView.layer addAnimation:rotate forKey:nil];
+
+
+    
+    
+
+}
+-(void)viewWillLayoutSubviews
+{
+  
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle

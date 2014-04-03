@@ -34,9 +34,6 @@
     [self.view.layer insertSublayer:gradient atIndex:0];
     
     
-  
-    
-    
     
 
 }
@@ -46,13 +43,6 @@
     [super viewDidLoad];
     
     
-    
-    
-    
-    
-    
-    
-	
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -71,16 +61,6 @@
         
     }];
     
-    CABasicAnimation *rotate = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-    rotate.fromValue = [NSNumber numberWithFloat:0];
-    rotate.toValue = [NSNumber numberWithFloat: M_PI];
-    rotate.duration = .5;
-    [self.imageView.layer addAnimation:rotate forKey:nil];
-
-
-    
-    
-
 }
 -(void)viewWillLayoutSubviews
 {

@@ -28,6 +28,7 @@
 		2E3B25AF18EB15F30090336C /* logo (2).png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25AE18EB15F30090336C /* logo (2).png */; };
 		2E3B25B818EB1BEB0090336C /* shapes.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25B718EB1BEB0090336C /* shapes.png */; };
 		2E3B25BA18EB1ECF0090336C /* low_contrast_linen_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */; };
+		2EDC906B18EDA473003EB2A4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EDC906A18EDA472003EB2A4 /* AudioToolbox.framework */; };
 		4546B9D118EC563600388603 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D018EC563600388603 /* CalendarViewController.m */; };
 		4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D318EC565A00388603 /* SettingsTableViewController.m */; };
 		4546B9D718EC567900388603 /* VisitorsTableViewCOntroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D618EC567900388603 /* VisitorsTableViewCOntroller.m */; };
@@ -73,6 +74,7 @@
 		2E3B25AE18EB15F30090336C /* logo (2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo (2).png"; path = "ShortPath/logo (2).png"; sourceTree = "<group>"; };
 		2E3B25B718EB1BEB0090336C /* shapes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shapes.png; path = ShortPath/shapes.png; sourceTree = "<group>"; };
 		2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "low_contrast_linen_@2X.png"; path = "ShortPath/low_contrast_linen_@2X.png"; sourceTree = "<group>"; };
+		2EDC906A18EDA472003EB2A4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4546B9CF18EC563600388603 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		4546B9D018EC563600388603 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		4546B9D218EC565A00388603 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EDC906B18EDA473003EB2A4 /* AudioToolbox.framework in Frameworks */,
 				2E3B257C18EB0F780090336C /* CoreGraphics.framework in Frameworks */,
 				2E3B257E18EB0F780090336C /* UIKit.framework in Frameworks */,
 				2E3B257A18EB0F780090336C /* Foundation.framework in Frameworks */,
@@ -145,6 +148,7 @@
 		2E3B257818EB0F780090336C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2EDC906A18EDA472003EB2A4 /* AudioToolbox.framework */,
 				2E3B257918EB0F780090336C /* Foundation.framework */,
 				2E3B257B18EB0F780090336C /* CoreGraphics.framework */,
 				2E3B257D18EB0F780090336C /* UIKit.framework */,
@@ -261,6 +265,13 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Eugene Watson";
 				TargetAttributes = {
+					2E3B257518EB0F780090336C = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
+					};
 					2E3B259618EB0F780090336C = {
 						TestTargetID = 2E3B257518EB0F780090336C;
 					};

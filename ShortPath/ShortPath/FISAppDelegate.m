@@ -13,6 +13,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    //Create Nav VC here
+    //Check to see if have a token
+    // set root view based on having a token or not
+    //make method to handle logging out - delete the token and pop back to root nav controller and present login screen (Blue Logo screen)
+    
+    
     return YES;
 }
 							

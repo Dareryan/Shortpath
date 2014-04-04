@@ -7,6 +7,8 @@
 //
 
 #import "FISAppDelegate.h"
+#import "FISTabBarControllerViewController.h"
+#import "FISViewController.h"
 
 @implementation FISAppDelegate
 
@@ -17,10 +19,21 @@
     //Create Nav VC here
     //Check to see if have a token
     // set root view based on having a token or not
-    //make method to handle logging out - delete the token and pop back to root nav controller and present login screen (Blue Logo screen)
     
+    //make method to handle logging out - delete the token and pop back to root nav controller and present login screen (Blue Logo screen)
+    //this is everytime app is launched, need to check for token bc not always coming from log out screen
+    
+    //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    FISTabBarControllerViewController *tabBarVC = (FISTabBarControllerViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"tabBarVC"];
+//    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController: tabBarVC];
+//    navVC.navigationBarHidden = YES;
+//    self.window.rootViewController = navVC;
+//    [self.window makeKeyAndVisible];
+
     
     return YES;
+
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -49,5 +62,14 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
++(void)hasToken
+{
+    
+    
+}
+
+
+
 
 @end

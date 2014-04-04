@@ -8,6 +8,7 @@
 
 #import "CalendarViewController.h"
 #import <FontAwesomeKit.h>
+#import "FISViewController.h"
 
 @interface CalendarViewController ()
 
@@ -24,11 +25,33 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+       // Do any additional setup after loading the view.
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults objectForKey:@"key"]) {
+        NSLog(@"key found");
+        
+    } else {
+        
+        NSLog(@"There is no key");
+        [self presentViewController:loginVC animated:YES completion:nil];
+        
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -42,9 +65,14 @@
     [tabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
     UIImage *tabIconImage = [tabIcon imageWithSize:CGSizeMake(30,30)];
     
+    FAKIonIcons *selectedTabIcon = [FAKIonIcons ios7CalendarIconWithSize:30];
+    [selectedTabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor]];
+    UIImage *selectedTabIconImage = [tabIcon imageWithSize:CGSizeMake(30,30)];
     
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Events" image:tabIconImage selectedImage:tabIconImage];
     
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Events" image:tabIconImage selectedImage:selectedTabIconImage];
+    
+
     return tabBarItem;
 }
 

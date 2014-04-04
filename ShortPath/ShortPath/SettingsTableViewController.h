@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface SettingsTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface SettingsTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITabBarControllerDelegate>
+
 
 
 

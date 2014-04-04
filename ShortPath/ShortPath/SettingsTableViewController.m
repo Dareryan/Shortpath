@@ -9,6 +9,8 @@
 #import "SettingsTableViewController.h"
 #import <FontAwesomeKit.h>
 #import "FISViewController.h"
+#import "FISAppDelegate.h"
+
 
 @interface SettingsTableViewController ()
 
@@ -27,9 +29,11 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -44,10 +48,30 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults objectForKey:@"key"]) {
+        NSLog(@"key found");
+        
+    } else {
+        
+        NSLog(@"There is no key");
+        [self presentViewController:loginVC animated:YES completion:nil];
+        
+    }
+    
+}
+
 -(UITabBarItem *)tabBarItem
 {
     FAKIonIcons *tabIcon = [FAKIonIcons ios7GearIconWithSize:30];
-    [tabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
+    //[tabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
     UIImage *tabIconImage = [tabIcon imageWithSize:CGSizeMake(30,30)];
     
     
@@ -138,19 +162,26 @@
     else {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
-        [self presentViewController:loginVC animated:YES completion:^{
-            
-        }];
+        [self presentViewController:loginVC animated:YES completion:nil];
+        self.tabBarController.navigationController.viewControllers = @[loginVC];
+        [self.tabBarController.navigationController pushViewController:loginVC animated:YES];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:@"key"];
+        [defaults synchronize];
+        NSLog(@"Key Deleted");
+        
     }
 }
 
 -(void)vibrate
 {
-    
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    
 }
 
+
+
+//pop to root view controller
 
 /*
  // Override to support conditional editing of the table view.

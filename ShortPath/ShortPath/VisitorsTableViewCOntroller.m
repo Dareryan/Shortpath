@@ -8,6 +8,7 @@
 
 #import "VisitorsTableViewCOntroller.h"
 #import <FontAwesomeKit.h>
+#import "FISViewController.h"
 
 @interface VisitorsTableViewCOntroller ()
 
@@ -28,6 +29,8 @@
 {
     [super viewDidLoad];
     
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -35,16 +38,38 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults objectForKey:@"key"]) {
+        NSLog(@"key found");
+        
+    } else {
+        
+        NSLog(@"There is no key");
+        [self presentViewController:loginVC animated:YES completion:nil];
+        
+    }
+
+}
 -(UITabBarItem *)tabBarItem
 {
     FAKIonIcons *tabIcon = [FAKIonIcons ios7PeopleIconWithSize:30];
-    [tabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
+    //[tabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
     UIImage *tabIconImage = [tabIcon imageWithSize:CGSizeMake(30,30)];
     
     
     UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Visitors" image:tabIconImage selectedImage:tabIconImage];
+    
     return tabBarItem;
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -14,11 +14,18 @@ PODS:
     - FontAwesomeKit/Core
   - FontAwesomeKit/Zocial (2.1.5):
     - FontAwesomeKit/Core
+  - TapkuLibrary (0.3.5)
 
 DEPENDENCIES:
   - FontAwesomeKit (~> 2.1.0)
+  - TapkuLibrary (from `https://github.com/joystate/tapkulibrary.git`)
+
+EXTERNAL SOURCES:
+  TapkuLibrary:
+    :git: https://github.com/joystate/tapkulibrary.git
 
 SPEC CHECKSUMS:
   FontAwesomeKit: 7d935e100337d503bdaefde2ea16be740b81ed13
+  TapkuLibrary: 187d3cd6b9b68064105954afe534f962611b6d48
 
 COCOAPODS: 0.29.0

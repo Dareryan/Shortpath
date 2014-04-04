@@ -32,6 +32,7 @@
 		4546B9D118EC563600388603 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D018EC563600388603 /* CalendarViewController.m */; };
 		4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D318EC565A00388603 /* SettingsTableViewController.m */; };
 		4546B9D718EC567900388603 /* VisitorsTableViewCOntroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D618EC567900388603 /* VisitorsTableViewCOntroller.m */; };
+		45A377F718EF034B00051F1B /* CalendarContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A377F618EF034B00051F1B /* CalendarContainerViewController.m */; };
 		9850B75C9CB04B5FB8E4FC7A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01787EEBDFC44B7EB2652066 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		4546B9D318EC565A00388603 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		4546B9D518EC567900388603 /* VisitorsTableViewCOntroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitorsTableViewCOntroller.h; sourceTree = "<group>"; };
 		4546B9D618EC567900388603 /* VisitorsTableViewCOntroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitorsTableViewCOntroller.m; sourceTree = "<group>"; };
+		45A377F518EF034B00051F1B /* CalendarContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarContainerViewController.h; sourceTree = "<group>"; };
+		45A377F618EF034B00051F1B /* CalendarContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarContainerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +206,8 @@
 				2E3B258818EB0F780090336C /* FISAppDelegate.h */,
 				2E3B258918EB0F780090336C /* FISAppDelegate.m */,
 				2E3B258B18EB0F780090336C /* Main.storyboard */,
+				45A377F518EF034B00051F1B /* CalendarContainerViewController.h */,
+				45A377F618EF034B00051F1B /* CalendarContainerViewController.m */,
 				4546B9D518EC567900388603 /* VisitorsTableViewCOntroller.h */,
 				4546B9D618EC567900388603 /* VisitorsTableViewCOntroller.m */,
 				4546B9D218EC565A00388603 /* SettingsTableViewController.h */,
@@ -367,6 +372,7 @@
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
 				2E3B258618EB0F780090336C /* main.m in Sources */,
 				4546B9D118EC563600388603 /* CalendarViewController.m in Sources */,
+				45A377F718EF034B00051F1B /* CalendarContainerViewController.m in Sources */,
 				2E3B258A18EB0F780090336C /* FISAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -42,3 +42,9 @@
 #define COCOAPODS_VERSION_MINOR_FontAwesomeKit_Zocial 1
 #define COCOAPODS_VERSION_PATCH_FontAwesomeKit_Zocial 5
 
+// TapkuLibrary
+#define COCOAPODS_POD_AVAILABLE_TapkuLibrary
+#define COCOAPODS_VERSION_MAJOR_TapkuLibrary 0
+#define COCOAPODS_VERSION_MINOR_TapkuLibrary 3
+#define COCOAPODS_VERSION_PATCH_TapkuLibrary 5
+

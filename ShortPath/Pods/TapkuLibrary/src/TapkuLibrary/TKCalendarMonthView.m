@@ -349,7 +349,7 @@ static UIImage *tileImage;
 		NSInteger pre = firstOfPrev > 0 ? lastOfPrev - firstOfPrev + 1 : 0;
 		NSInteger index = today +  pre-1;
 		CGRect r = [self rectForCellAtIndex:index];
-		r.origin.y -= 6.5;
+		r.origin.y -= 5.5;
 		[[UIImage imageWithContentsOfFile:TKBUNDLE(@"calendar/Month Calendar Date Tile.png")] drawInRect:r];
 	}
 	
@@ -558,15 +558,15 @@ static UIImage *tileImage;
 		self.dot.hidden = YES;
 		
 	}else if(portion==1 && day == today){
-		self.currentDay.shadowOffset = CGSizeMake(0, -1);
-		self.dot.shadowOffset = CGSizeMake(0, -1);
+		//self.currentDay.shadowOffset = CGSizeMake(0, -1);
+		//self.dot.shadowOffset = CGSizeMake(0, -1);
 
         NSString *path = TKBUNDLE(@"calendar/Month Calendar Date Tile Selected.png");
 		self.selectedImageView.image = [[UIImage imageWithContentsOfFile:path] stretchableImageWithLeftCapWidth:1 topCapHeight:0];
 		markWasOnToday = YES;
 	}else if(markWasOnToday){
-		self.dot.shadowOffset = CGSizeMake(0, -1);
-		self.currentDay.shadowOffset = CGSizeMake(0, -1);
+		//self.dot.shadowOffset = CGSizeMake(0, -1);
+		//self.currentDay.shadowOffset = CGSizeMake(0, -1);
 		NSString *path = TKBUNDLE(@"calendar/Month Calendar Date Tile Selected.png");
 		self.selectedImageView.image = [[UIImage imageWithContentsOfFile:path] stretchableImageWithLeftCapWidth:1 topCapHeight:0];
 		markWasOnToday = NO;

@@ -45,6 +45,7 @@
 #pragma mark - TKCalendarMonthViewDelegate methods
 
 - (void)calendarMonthView:(TKCalendarMonthView *)monthView didSelectDate:(NSDate *)d {
+
 	NSLog(@"calendarMonthView didSelectDate %@", d);
 }
 
@@ -60,7 +61,7 @@
 	NSLog(@"Make sure to update 'data' variable to pull from CoreData, website, User Defaults, or some other source.");
 	// When testing initially you will have to update the dates in this array so they are visible at the
 	// time frame you are testing the code.
-	NSArray *data = @[[NSDate date], [NSDate dateWithTimeIntervalSince1970:1397144655]];
+	NSArray *data = @[[NSDate date], [NSDate dateWithTimeIntervalSince1970:1397144655], [NSDate dateWithTimeIntervalSince1970:1397100000]];
 	
     
 	// Initialise empty marks array, this will be populated with TRUE/FALSE in order for each day a marker should be placed on.
@@ -68,7 +69,8 @@
 	
 	// Initialise calendar to current type and set the timezone to never have daylight saving
 	NSCalendar *cal = [NSCalendar currentCalendar];
-	[cal setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    [cal setTimeZone:[NSTimeZone defaultTimeZone]];
+	//[cal setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
 	
 	// Construct DateComponents based on startDate so the iterating date can be created.
 	// Its massively important to do this assigning via the NSCalendar and NSDateComponents because of daylight saving has been removed

@@ -70,12 +70,13 @@
 
 -(UITabBarItem *)tabBarItem
 {
-    FAKIonIcons *tabIcon = [FAKIonIcons ios7GearIconWithSize:30];
-    //[tabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
-    UIImage *tabIconImage = [tabIcon imageWithSize:CGSizeMake(30,30)];
+    FAKIonIcons *tabIconUnselected = [FAKIonIcons ios7GearOutlineIconWithSize:30];
+    UIImage *tabIconImageUnselected = [tabIconUnselected imageWithSize:CGSizeMake(30,30)];
     
+    FAKIonIcons *tabIconSelected = [FAKIonIcons ios7GearIconWithSize:30.0f];
+    UIImage *tabIconImageSelected = [tabIconSelected imageWithSize:CGSizeMake(30,30)];
     
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Settings" image:tabIconImage selectedImage:tabIconImage];
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Settings" image:tabIconImageUnselected selectedImage:tabIconImageSelected];
     
     return tabBarItem;
 }

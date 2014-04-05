@@ -61,18 +61,14 @@
 
 -(UITabBarItem *)tabBarItem
 {
-    FAKIonIcons *tabIcon = [FAKIonIcons ios7CalendarIconWithSize:30];
-    [tabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
-    UIImage *tabIconImage = [tabIcon imageWithSize:CGSizeMake(30,30)];
+    FAKIonIcons *tabIconUnselected = [FAKIonIcons ios7CalendarOutlineIconWithSize:30];
+    UIImage *tabIconImageUnselected = [tabIconUnselected imageWithSize:CGSizeMake(30,30)];
     
-    FAKIonIcons *selectedTabIcon = [FAKIonIcons ios7CalendarIconWithSize:30];
-    [selectedTabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor]];
-    UIImage *selectedTabIconImage = [tabIcon imageWithSize:CGSizeMake(30,30)];
+    FAKIonIcons *tabIconSelected = [FAKIonIcons ios7CalendarIconWithSize:30.0f];
+    UIImage *tabIconImageSelected = [tabIconSelected imageWithSize:CGSizeMake(30,30)];
     
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Events" image:tabIconImageUnselected selectedImage:tabIconImageSelected];
     
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Events" image:tabIconImage selectedImage:selectedTabIconImage];
-    
-
     return tabBarItem;
 }
 

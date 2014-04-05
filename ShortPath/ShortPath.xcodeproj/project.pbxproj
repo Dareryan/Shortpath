@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C018EF5AE600329B9F /* VisitorsVC.m */; };
+		2502C8C318EFC04A00329B9F /* visitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2502C8C218EFC04A00329B9F /* visitors.plist */; };
+		2502C8C618EFC34300329B9F /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C518EFC34300329B9F /* Visitor.m */; };
+		2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */; };
 		2E02FAE018EB406200FF5770 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2E02FADC18EB406200FF5770 /* OFL.txt */; };
 		2E02FAE118EB406200FF5770 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E02FADD18EB406200FF5770 /* Oswald-Bold.ttf */; };
 		2E02FAE218EB406200FF5770 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E02FADE18EB406200FF5770 /* Oswald-Light.ttf */; };
@@ -33,7 +37,6 @@
 		4531B01E18EF51C700DA0CD4 /* CalendarContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4531B01D18EF51C700DA0CD4 /* CalendarContainerViewController.m */; };
 		4546B9D118EC563600388603 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D018EC563600388603 /* CalendarViewController.m */; };
 		4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D318EC565A00388603 /* SettingsTableViewController.m */; };
-		4546B9D718EC567900388603 /* VisitorsTableViewCOntroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D618EC567900388603 /* VisitorsTableViewCOntroller.m */; };
 		9850B75C9CB04B5FB8E4FC7A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01787EEBDFC44B7EB2652066 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +53,13 @@
 /* Begin PBXFileReference section */
 		0073ECE0EDAC4C3C8FB7BE0B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		01787EEBDFC44B7EB2652066 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2502C8BF18EF5AE600329B9F /* VisitorsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitorsVC.h; sourceTree = "<group>"; };
+		2502C8C018EF5AE600329B9F /* VisitorsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitorsVC.m; sourceTree = "<group>"; };
+		2502C8C218EFC04A00329B9F /* visitors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = visitors.plist; sourceTree = "<group>"; };
+		2502C8C418EFC34300329B9F /* Visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
+		2502C8C518EFC34300329B9F /* Visitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitor.m; sourceTree = "<group>"; };
+		2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewVisitorVC.h; sourceTree = "<group>"; };
+		2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewVisitorVC.m; sourceTree = "<group>"; };
 		2E02FADC18EB406200FF5770 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		2E02FADD18EB406200FF5770 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
 		2E02FADE18EB406200FF5770 /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
@@ -85,8 +95,6 @@
 		4546B9D018EC563600388603 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		4546B9D218EC565A00388603 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		4546B9D318EC565A00388603 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
-		4546B9D518EC567900388603 /* VisitorsTableViewCOntroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitorsTableViewCOntroller.h; sourceTree = "<group>"; };
-		4546B9D618EC567900388603 /* VisitorsTableViewCOntroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitorsTableViewCOntroller.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				4546B9CE18EC550D00388603 /* ViewControllers */,
+				2502C8C418EFC34300329B9F /* Visitor.h */,
+				2502C8C518EFC34300329B9F /* Visitor.m */,
 			);
 			path = ShortPath;
 			sourceTree = "<group>";
@@ -180,6 +190,7 @@
 				2E3B258218EB0F780090336C /* InfoPlist.strings */,
 				2E3B258518EB0F780090336C /* main.m */,
 				2E3B258718EB0F780090336C /* ShortPath-Prefix.pch */,
+				2502C8C218EFC04A00329B9F /* visitors.plist */,
 			);
 			name = "Supporting Files";
 			path = ShortPath;
@@ -211,8 +222,6 @@
 				2E3B258B18EB0F780090336C /* Main.storyboard */,
 				2E5FB06618EE0936004CE912 /* FISTabBarControllerViewController.h */,
 				2E5FB06718EE0936004CE912 /* FISTabBarControllerViewController.m */,
-				4546B9D518EC567900388603 /* VisitorsTableViewCOntroller.h */,
-				4546B9D618EC567900388603 /* VisitorsTableViewCOntroller.m */,
 				4546B9D218EC565A00388603 /* SettingsTableViewController.h */,
 				4546B9D318EC565A00388603 /* SettingsTableViewController.m */,
 				4546B9CF18EC563600388603 /* CalendarViewController.h */,
@@ -221,6 +230,10 @@
 				2E3B258F18EB0F780090336C /* FISViewController.m */,
 				4531B01C18EF51C700DA0CD4 /* CalendarContainerViewController.h */,
 				4531B01D18EF51C700DA0CD4 /* CalendarContainerViewController.m */,
+				2502C8BF18EF5AE600329B9F /* VisitorsVC.h */,
+				2502C8C018EF5AE600329B9F /* VisitorsVC.m */,
+				2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */,
+				2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -318,6 +331,7 @@
 				2E3B25B818EB1BEB0090336C /* shapes.png in Resources */,
 				2E3B259218EB0F780090336C /* Images.xcassets in Resources */,
 				2E3B258418EB0F780090336C /* InfoPlist.strings in Resources */,
+				2502C8C318EFC04A00329B9F /* visitors.plist in Resources */,
 				2E3B258D18EB0F780090336C /* Main.storyboard in Resources */,
 				2E3B25AF18EB15F30090336C /* logo (2).png in Resources */,
 				2E3B25BA18EB1ECF0090336C /* low_contrast_linen_@2X.png in Resources */,
@@ -373,9 +387,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4531B01E18EF51C700DA0CD4 /* CalendarContainerViewController.m in Sources */,
-				4546B9D718EC567900388603 /* VisitorsTableViewCOntroller.m in Sources */,
 				4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */,
+				2502C8C618EFC34300329B9F /* Visitor.m in Sources */,
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
+				2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */,
+				2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */,
 				2E3B258618EB0F780090336C /* main.m in Sources */,
 				2E5FB06818EE0936004CE912 /* FISTabBarControllerViewController.m in Sources */,
 				4546B9D118EC563600388603 /* CalendarViewController.m in Sources */,

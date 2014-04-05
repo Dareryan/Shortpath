@@ -1,20 +1,20 @@
 //
-//  VisitorsTableViewCOntroller.m
-//  
+//  AddNewVisitorVC.m
+//  ShortPath
 //
-//  Created by Dare Ryan on 4/2/14.
-//
+//  Created by Bram Vandevelde on 2014-04-05.
+//  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
-#import "VisitorsTableViewCOntroller.h"
-#import <FontAwesomeKit.h>
-#import "FISViewController.h"
+#import "AddNewVisitorVC.h"
 
-@interface VisitorsTableViewCOntroller ()
+@interface AddNewVisitorVC ()
+
+
 
 @end
 
-@implementation VisitorsTableViewCOntroller
+@implementation AddNewVisitorVC
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,47 +29,12 @@
 {
     [super viewDidLoad];
     
-    
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ([defaults objectForKey:@"key"]) {
-        NSLog(@"key found");
-        
-    } else {
-        
-        NSLog(@"There is no key");
-        [self presentViewController:loginVC animated:YES completion:nil];
-        
-    }
-
-}
--(UITabBarItem *)tabBarItem
-{
-    FAKIonIcons *tabIcon = [FAKIonIcons ios7PeopleIconWithSize:30];
-    //[tabIcon addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]];
-    UIImage *tabIconImage = [tabIcon imageWithSize:CGSizeMake(30,30)];
-    
-    
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Visitors" image:tabIconImage selectedImage:tabIconImage];
-    
-    return tabBarItem;
-}
-
-
 
 - (void)didReceiveMemoryWarning
 {

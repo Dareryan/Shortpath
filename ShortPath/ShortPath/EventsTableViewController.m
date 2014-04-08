@@ -13,103 +13,163 @@
 @interface EventsTableViewController ()
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
+@property (strong, nonatomic) NSDate *selectedDate;
+@property (strong, nonatomic) NSArray *eventsForDate;
 
 @end
 
 @implementation EventsTableViewController
 
-
-
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewDidAppear:animated];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     self.dataStore.fetchedResultsController.delegate = self;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificatonReceived:) name:@"dateNotif" object:nil];
     
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+  
+}
+
+- (NSDate *)setTimeToMidnight: (NSDate *)date
+{
+    NSTimeInterval interval = [date timeIntervalSince1970];
+    
+    CGFloat shift = interval - 14400;
+    
+    NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:shift];
+
+    return newDate;
+}
+
+
+- (NSDate *)setTimeToEndOfDay: (NSDate *)date
+{
+    NSTimeInterval interval = [date timeIntervalSince1970];
+    
+    CGFloat shift = interval + 71999;
+    
+    NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:shift];
+    
+    return newDate;
+}
+
+
+
+- (void)notificatonReceived: (NSNotification *)notification
+{
+
+    NSDictionary *dict = [notification userInfo];
+    
+    self.selectedDate = dict[@"date"]; //epoch
+    
+    NSDate *beginningOfDay = [self setTimeToMidnight:self.selectedDate];
+    NSDate *endOfDay = [self setTimeToEndOfDay:self.selectedDate];
+ 
+    NSFetchRequest *eventsRequest = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"(start >= %@) AND (start <= %@)", beginningOfDay, endOfDay];
+    
+    eventsRequest.predicate = filter;
+    
+    self.eventsForDate = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil];
+    
+    //NSLog(@"Events for this date: %@", self.eventsForDate);
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.dataStore.fetchedResultsController.sections count];;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dataStore.fetchedResultsController.sections[section] numberOfObjects];;
+    return [self.eventsForDate count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
+    
+    Event *currentEvent = self.eventsForDate[indexPath.row];
+    
+    cell.textLabel.text = currentEvent.title;
+    
     return cell;
 }
 
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    Event *event = [self.dataStore.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = event.title;
-}
-
-#pragma mark - NSFetchedResultsControllerDelegate Methods
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath {
-    
-    UITableView *tableView = self.tableView;
-    
-    switch(type) {
-            
-        case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-                    atIndexPath:indexPath];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView endUpdates];
-}
+//- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+//{
+//    Event *event = [self.dataStore.fetchedResultsController objectAtIndexPath:indexPath];
+//    cell.textLabel.text = event.title;
+//}
+//
+//#pragma mark - NSFetchedResultsControllerDelegate Methods
+//
+//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+//    [self.tableView beginUpdates];
+//}
+//
+//- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+//           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+//{
+//    switch(type) {
+//        case NSFetchedResultsChangeInsert:
+//            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//            
+//        case NSFetchedResultsChangeDelete:
+//            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//    }
+//}
+//
+//- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+//       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+//      newIndexPath:(NSIndexPath *)newIndexPath {
+//    
+//    UITableView *tableView = self.tableView;
+//    
+//    switch(type) {
+//            
+//        case NSFetchedResultsChangeInsert:
+//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+//                             withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//            
+//        case NSFetchedResultsChangeDelete:
+//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+//                             withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//            
+//        case NSFetchedResultsChangeUpdate:
+//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+//                    atIndexPath:indexPath];
+//            break;
+//            
+//        case NSFetchedResultsChangeMove:
+//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+//                             withRowAnimation:UITableViewRowAnimationFade];
+//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+//                             withRowAnimation:UITableViewRowAnimationFade];
+//            break;
+//    }
+//}
+//
+//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+//    [self.tableView endUpdates];
+//}
 
 
 

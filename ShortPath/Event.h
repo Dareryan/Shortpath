@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSNumber * allDay;
 @property (nonatomic, retain) NSString * color;
-@property (nonatomic, retain) NSDate * end;
+@property (nonatomic, retain) NSNumber * end;
 @property (nonatomic, retain) NSString * identifier;
 @property (nonatomic, retain) NSDate * start;
 @property (nonatomic, retain) NSString * title;

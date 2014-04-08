@@ -27,6 +27,7 @@
         NSNumber *dateNumber = dict[@"start"];
                 
         newEvent.start = [NSDate dateWithTimeIntervalSince1970:[dateNumber doubleValue]];
+        
         newEvent.title = dict[@"title"];
         newEvent.identifier = [NSString stringWithFormat:@"%@", dict[@"id"]];
         

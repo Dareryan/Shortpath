@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0578973A18F487A300C513C5 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0578973918F487A300C513C5 /* Event.m */; };
 		0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2AF18F4561200D02D78 /* Event+Methods.m */; };
 		0589F2B118F45BDB00D02D78 /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA536218F450A800948310 /* Visitor.m */; };
 		0589F2B418F45D7700D02D78 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2B318F45D7700D02D78 /* EventsTableViewController.m */; };
-		0589F2B718F45FA800D02D78 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2B618F45FA800D02D78 /* Event.m */; };
 		05EA535018F44BB100948310 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EA534F18F44BB100948310 /* CoreData.framework */; };
 		05EA535318F44BE300948310 /* ShortPath.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EA535118F44BE300948310 /* ShortPath.xcdatamodeld */; };
 		05EA535718F44F2300948310 /* ShortPathDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA535618F44F2300948310 /* ShortPathDataStore.m */; };
@@ -59,12 +59,12 @@
 /* Begin PBXFileReference section */
 		0073ECE0EDAC4C3C8FB7BE0B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		01787EEBDFC44B7EB2652066 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0578973818F487A300C513C5 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		0578973918F487A300C513C5 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		0589F2AE18F4561200D02D78 /* Event+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+Methods.h"; sourceTree = "<group>"; };
 		0589F2AF18F4561200D02D78 /* Event+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+Methods.m"; sourceTree = "<group>"; };
 		0589F2B218F45D7700D02D78 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsTableViewController.h; sourceTree = "<group>"; };
 		0589F2B318F45D7700D02D78 /* EventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsTableViewController.m; sourceTree = "<group>"; };
-		0589F2B518F45FA800D02D78 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		0589F2B618F45FA800D02D78 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		05EA534F18F44BB100948310 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		05EA535218F44BE300948310 /* ShortPath.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShortPath.xcdatamodel; sourceTree = "<group>"; };
 		05EA535518F44F2300948310 /* ShortPathDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortPathDataStore.h; sourceTree = "<group>"; };
@@ -144,8 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				05EA535118F44BE300948310 /* ShortPath.xcdatamodeld */,
-				0589F2B518F45FA800D02D78 /* Event.h */,
-				0589F2B618F45FA800D02D78 /* Event.m */,
+				0578973818F487A300C513C5 /* Event.h */,
+				0578973918F487A300C513C5 /* Event.m */,
 				05EA536118F450A800948310 /* Visitor.h */,
 				05EA536218F450A800948310 /* Visitor.m */,
 				0589F2AE18F4561200D02D78 /* Event+Methods.h */,
@@ -433,7 +433,7 @@
 				2E5FB06818EE0936004CE912 /* FISTabBarControllerViewController.m in Sources */,
 				05EA535318F44BE300948310 /* ShortPath.xcdatamodeld in Sources */,
 				4546B9D118EC563600388603 /* CalendarViewController.m in Sources */,
-				0589F2B718F45FA800D02D78 /* Event.m in Sources */,
+				0578973A18F487A300C513C5 /* Event.m in Sources */,
 				0589F2B418F45D7700D02D78 /* EventsTableViewController.m in Sources */,
 				2E3B258A18EB0F780090336C /* FISAppDelegate.m in Sources */,
 			);

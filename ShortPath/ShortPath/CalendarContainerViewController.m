@@ -58,6 +58,11 @@
 
 - (void)calendarMonthView:(TKCalendarMonthView *)monthView didSelectDate:(NSDate *)d {
 
+    NSDictionary *dateDict = [[NSDictionary alloc]initWithObjectsAndKeys:d, @"date",nil];
+    
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dateNotif" object:nil userInfo:dateDict];
+    
 	NSLog(@"calendarMonthView didSelectDate %@", d);
 }
 
@@ -81,8 +86,7 @@
         
         [data addObject:event.start];
     }
-    
-    NSLog(@"%@", data);
+
 	
     
 	// Initialise empty marks array, this will be populated with TRUE/FALSE in order for each day a marker should be placed on.

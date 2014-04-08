@@ -47,7 +47,7 @@
         _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"fetchResultsCache"];
         [self.fetchedResultsController performFetch:nil];
         
-        _eventDicts = @[@{@"start": @(1396373400), @"title": @"first event", @"id": @(416064)},
+        _eventDicts = @[@{@"start": @(1396944000), @"title": @"first event", @"id": @(416064)},
                             @{@"start": @(1396375200), @"title": @"second event", @"id": @(416065)},
                             @{@"start": @(1396375200), @"title": @"third event", @"id": @(416066)}];
     }

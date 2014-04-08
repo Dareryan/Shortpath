@@ -35,6 +35,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
     self.calendar = [[TKCalendarMonthView alloc] init];
     self.calendar.delegate = self;
     self.calendar.dataSource = self;
@@ -45,11 +52,6 @@
     
     NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
     self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
     // Do any additional setup after loading the view.
     
 }

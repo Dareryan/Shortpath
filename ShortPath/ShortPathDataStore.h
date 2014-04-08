@@ -21,4 +21,6 @@
 
 +(ShortPathDataStore*) sharedDataStore;
 
+- (void)addEventsToContext;
+
 @end

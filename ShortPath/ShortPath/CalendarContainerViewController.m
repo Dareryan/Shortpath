@@ -9,13 +9,14 @@
 #import "CalendarContainerViewController.h"
 #import <TapkuLibrary/NSDate+TKCategory.h>
 #import "ShortPathDataStore.h"
-#import "Event.h"
+#import "Event+Methods.h"
 
 @interface CalendarContainerViewController ()
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 
 @property (strong, nonatomic) NSArray *events;
+
 
 @end
 
@@ -41,6 +42,10 @@
     [self.view addSubview:self.calendar];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    
+    
+    
 }
 
 - (void)viewDidLoad

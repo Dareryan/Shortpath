@@ -7,6 +7,13 @@
 //
 
 #import "ShortPathDataStore.h"
+#import "Event+Methods.h"
+
+@interface ShortPathDataStore ()
+
+@property (strong, nonatomic) NSArray *eventDicts;
+
+@end
 
 @implementation ShortPathDataStore
 
@@ -39,6 +46,10 @@
         
         _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"fetchResultsCache"];
         [self.fetchedResultsController performFetch:nil];
+        
+        _eventDicts = @[@{@"start": @(1396373400), @"title": @"first event", @"id": @(416064)},
+                            @{@"start": @(1396375200), @"title": @"second event", @"id": @(416065)},
+                            @{@"start": @(1396375200), @"title": @"third event", @"id": @(416066)}];
     }
     return self;
 }
@@ -54,6 +65,15 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+    }
+}
+
+
+- (void)addEventsToContext
+{
+    for (NSDictionary *dict in self.eventDicts) {
+        [Event addEventFromDict:dict
+                      ToContext:self.managedObjectContext];
     }
 }
 

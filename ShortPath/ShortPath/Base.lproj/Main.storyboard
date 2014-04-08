@@ -292,16 +292,16 @@
             </objects>
             <point key="canvasLocation" x="2281" y="129"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Events Table View Controller-->
         <scene sceneID="X24-y3-3at">
             <objects>
-                <tableViewController id="bf8-Wu-myx" sceneMemberID="viewController">
+                <tableViewController id="bf8-Wu-myx" customClass="EventsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="23J-fe-pdL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="236"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Til-UE-sjm">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="Til-UE-sjm">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Til-UE-sjm" id="DXK-Cd-8d9">
@@ -318,7 +318,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VHl-W2-o38" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2286" y="490"/>
+            <point key="canvasLocation" x="2737" y="490"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="rCu-nu-KKK">

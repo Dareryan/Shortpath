@@ -8,7 +8,14 @@
 
 #import "CalendarContainerViewController.h"
 #import <TapkuLibrary/NSDate+TKCategory.h>
+#import "ShortPathDataStore.h"
+#import "Event.h"
+
 @interface CalendarContainerViewController ()
+
+@property (strong, nonatomic) ShortPathDataStore *dataStore;
+
+@property (strong, nonatomic) NSArray *events;
 
 @end
 
@@ -33,13 +40,15 @@
     
     [self.view addSubview:self.calendar];
     
-    
+    self.dataStore = [ShortPathDataStore sharedDataStore];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+    self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
 }
 
 #pragma mark - TKCalendarMonthViewDelegate methods
@@ -61,7 +70,14 @@
 	NSLog(@"Make sure to update 'data' variable to pull from CoreData, website, User Defaults, or some other source.");
 	// When testing initially you will have to update the dates in this array so they are visible at the
 	// time frame you are testing the code.
-	NSArray *data = @[[NSDate date], [NSDate dateWithTimeIntervalSince1970:1397144655], [NSDate dateWithTimeIntervalSince1970:1397100000]];
+	//NSArray *data = @[[NSDate date], [NSDate dateWithTimeIntervalSince1970:1397144655], [NSDate dateWithTimeIntervalSince1970:1397100000]];
+    
+    NSMutableArray *data = [[NSMutableArray alloc]init];
+    
+    for (Event *event in self.events) {
+        
+        [data addObject:event.start];
+    }
 	
     
 	// Initialise empty marks array, this will be populated with TRUE/FALSE in order for each day a marker should be placed on.

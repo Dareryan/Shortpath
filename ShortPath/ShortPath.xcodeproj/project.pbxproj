@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05EA535018F44BB100948310 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EA534F18F44BB100948310 /* CoreData.framework */; };
+		05EA535318F44BE300948310 /* ShortPath.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EA535118F44BE300948310 /* ShortPath.xcdatamodeld */; };
+		05EA535718F44F2300948310 /* ShortPathDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA535618F44F2300948310 /* ShortPathDataStore.m */; };
+		05EA536018F450A700948310 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA535F18F450A700948310 /* Event.m */; };
+		05EA536318F450A800948310 /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA536218F450A800948310 /* Visitor.m */; };
 		2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C018EF5AE600329B9F /* VisitorsVC.m */; };
 		2502C8C318EFC04A00329B9F /* visitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2502C8C218EFC04A00329B9F /* visitors.plist */; };
 		2502C8C618EFC34300329B9F /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C518EFC34300329B9F /* Visitor.m */; };
@@ -53,6 +58,14 @@
 /* Begin PBXFileReference section */
 		0073ECE0EDAC4C3C8FB7BE0B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		01787EEBDFC44B7EB2652066 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		05EA534F18F44BB100948310 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		05EA535218F44BE300948310 /* ShortPath.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShortPath.xcdatamodel; sourceTree = "<group>"; };
+		05EA535518F44F2300948310 /* ShortPathDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortPathDataStore.h; sourceTree = "<group>"; };
+		05EA535618F44F2300948310 /* ShortPathDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortPathDataStore.m; sourceTree = "<group>"; };
+		05EA535E18F450A700948310 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		05EA535F18F450A700948310 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		05EA536118F450A800948310 /* Visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
+		05EA536218F450A800948310 /* Visitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitor.m; sourceTree = "<group>"; };
 		2502C8BF18EF5AE600329B9F /* VisitorsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitorsVC.h; sourceTree = "<group>"; };
 		2502C8C018EF5AE600329B9F /* VisitorsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitorsVC.m; sourceTree = "<group>"; };
 		2502C8C218EFC04A00329B9F /* visitors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = visitors.plist; sourceTree = "<group>"; };
@@ -102,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05EA535018F44BB100948310 /* CoreData.framework in Frameworks */,
 				2EDC906B18EDA473003EB2A4 /* AudioToolbox.framework in Frameworks */,
 				2E3B257C18EB0F780090336C /* CoreGraphics.framework in Frameworks */,
 				2E3B257E18EB0F780090336C /* UIKit.framework in Frameworks */,
@@ -123,6 +137,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05EA535418F44BFC00948310 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				05EA535118F44BE300948310 /* ShortPath.xcdatamodeld */,
+				05EA536118F450A800948310 /* Visitor.h */,
+				05EA536218F450A800948310 /* Visitor.m */,
+				05EA535E18F450A700948310 /* Event.h */,
+				05EA535F18F450A700948310 /* Event.m */,
+				05EA535518F44F2300948310 /* ShortPathDataStore.h */,
+				05EA535618F44F2300948310 /* ShortPathDataStore.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		2E02FADB18EB406200FF5770 /* Oswald */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +165,7 @@
 		2E3B256D18EB0F780090336C = {
 			isa = PBXGroup;
 			children = (
+				05EA535418F44BFC00948310 /* Model */,
 				2E3B257F18EB0F780090336C /* ShortPath */,
 				2E3B259E18EB0F780090336C /* ShortPathTests */,
 				2E3B258018EB0F780090336C /* Supporting Files */,
@@ -162,6 +191,7 @@
 		2E3B257818EB0F780090336C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05EA534F18F44BB100948310 /* CoreData.framework */,
 				2EDC906A18EDA472003EB2A4 /* AudioToolbox.framework */,
 				2E3B257918EB0F780090336C /* Foundation.framework */,
 				2E3B257B18EB0F780090336C /* CoreGraphics.framework */,
@@ -285,7 +315,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = FIS;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Eugene Watson";
 				TargetAttributes = {
 					2E3B257518EB0F780090336C = {
@@ -388,12 +418,16 @@
 			files = (
 				4531B01E18EF51C700DA0CD4 /* CalendarContainerViewController.m in Sources */,
 				4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */,
+				05EA536318F450A800948310 /* Visitor.m in Sources */,
 				2502C8C618EFC34300329B9F /* Visitor.m in Sources */,
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
 				2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */,
+				05EA536018F450A700948310 /* Event.m in Sources */,
 				2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */,
 				2E3B258618EB0F780090336C /* main.m in Sources */,
+				05EA535718F44F2300948310 /* ShortPathDataStore.m in Sources */,
 				2E5FB06818EE0936004CE912 /* FISTabBarControllerViewController.m in Sources */,
+				05EA535318F44BE300948310 /* ShortPath.xcdatamodeld in Sources */,
 				4546B9D118EC563600388603 /* CalendarViewController.m in Sources */,
 				2E3B258A18EB0F780090336C /* FISAppDelegate.m in Sources */,
 			);
@@ -449,7 +483,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -488,7 +521,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -548,7 +580,6 @@
 		2E3B25AC18EB0F780090336C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ShortPath.app/ShortPath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -571,7 +602,6 @@
 		2E3B25AD18EB0F780090336C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ShortPath.app/ShortPath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -618,6 +648,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		05EA535118F44BE300948310 /* ShortPath.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				05EA535218F44BE300948310 /* ShortPath.xcdatamodel */,
+			);
+			currentVersion = 05EA535218F44BE300948310 /* ShortPath.xcdatamodel */;
+			name = ShortPath.xcdatamodeld;
+			path = ShortPath/ShortPath.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2E3B256E18EB0F780090336C /* Project object */;
 }

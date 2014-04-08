@@ -43,17 +43,15 @@
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
-    
-    
-    
+    NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+    self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
-    self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
+    
 }
 
 #pragma mark - TKCalendarMonthViewDelegate methods
@@ -83,6 +81,8 @@
         
         [data addObject:event.start];
     }
+    
+    NSLog(@"%@", data);
 	
     
 	// Initialise empty marks array, this will be populated with TRUE/FALSE in order for each day a marker should be placed on.

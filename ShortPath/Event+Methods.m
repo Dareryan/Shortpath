@@ -24,12 +24,15 @@
         
         Event *newEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:context];
         
-        newEvent.start = dict[@"start"];
+        NSNumber *dateNumber = dict[@"start"];
+                
+        newEvent.start = [NSDate dateWithTimeIntervalSince1970:[dateNumber doubleValue]];
         newEvent.title = dict[@"title"];
         newEvent.identifier = [NSString stringWithFormat:@"%@", dict[@"id"]];
         
         return newEvent;
     } else {
+        
         return events[0];
     }
 

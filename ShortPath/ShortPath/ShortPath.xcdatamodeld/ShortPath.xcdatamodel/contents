@@ -3,9 +3,9 @@
     <entity name="Event" representedClassName="Event" syncable="YES">
         <attribute name="allDay" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="end" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="start" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="visitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Visitor" inverseName="event" inverseEntity="Visitor" syncable="YES"/>

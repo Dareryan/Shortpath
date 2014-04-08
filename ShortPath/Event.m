@@ -12,13 +12,13 @@
 
 @implementation Event
 
-@dynamic url;
 @dynamic allDay;
+@dynamic color;
 @dynamic end;
+@dynamic identifier;
 @dynamic start;
 @dynamic title;
-@dynamic color;
-@dynamic identifier;
+@dynamic url;
 @dynamic visitors;
 
 @end

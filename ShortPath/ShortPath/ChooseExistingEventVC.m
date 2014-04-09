@@ -57,7 +57,7 @@
     UISearchDisplayController *searchDPC = [[UISearchDisplayController alloc] init];
     searchDPC.displaysSearchBarInNavigationBar = YES;
     
-    
+
 }
 
 

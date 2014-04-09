@@ -34,7 +34,7 @@
 #import "TKGlobal.h"
 #import "UIImage+TKCategory.h"
 #import "NSDate+CalendarGrid.h"
-#import "TKGradientView.h"
+//#import "TKGradientView.h"
 #import "UIColor+TKCategory.h"
 #import "UIImageView+TKCategory.h"
 #import "UIView+TKCategory.h"
@@ -433,8 +433,6 @@ static UIImage *tileImage;
 		i++;
 		index++;
 	}
-	
-	
 }
 
 - (BOOL) selectDay:(NSInteger)day{
@@ -492,6 +490,7 @@ static UIImage *tileImage;
 	return hasDot;
 	
 }
+
 - (NSDate*) dateSelected{
 	if(selectedDay < 1 || selectedPortion != 1) return nil;
 	
@@ -983,15 +982,15 @@ static UIImage *tileImage;
 {
 	if(_topBackground) return _topBackground;
 	
-	TKGradientView *gradient = [[TKGradientView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, TOP_BAR_HEIGHT)];
-	gradient.colors = @[[UIColor colorWithHex:0xf4f4f5],[UIColor colorWithHex:0xccccd1]];
-	gradient.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 44, gradient.bounds.size.width, 1)];
-	line.backgroundColor = [UIColor colorWithHex:0xaaaeb6];
-	line.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	[gradient addSubview:line];
-	
-	gradient.userInteractionEnabled = YES;
+//	TKGradientView *gradient = [[TKGradientView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, TOP_BAR_HEIGHT)];
+//	gradient.colors = @[[UIColor colorWithHex:0xf4f4f5],[UIColor colorWithHex:0xccccd1]];
+//	gradient.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+////	UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 44, gradient.bounds.size.width, 1)];
+//	line.backgroundColor = [UIColor colorWithHex:0xaaaeb6];
+//	line.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+////	[gradient addSubview:line];
+//	
+//	gradient.userInteractionEnabled = YES;
 	_topBackground = nil;
 	return _topBackground;
 }
@@ -1047,18 +1046,18 @@ static UIImage *tileImage;
 }
 - (UIView *) shadow{
 	if(_shadow) return _shadow;
-	
-	TKGradientView *grad  = [[TKGradientView alloc] initWithFrame:CGRectMake(0, 0, 100, self.frame.size.width)];
-	grad.colors = @[[UIColor colorWithWhite:0 alpha:0],[UIColor colorWithWhite:0 alpha:0.0],[UIColor colorWithWhite:0 alpha:0.1]];
-	_shadow = grad;
+//	
+//	TKGradientView *grad  = [[TKGradientView alloc] initWithFrame:CGRectMake(0, 0, 100, self.frame.size.width)];
+//	grad.colors = @[[UIColor colorWithWhite:0 alpha:0],[UIColor colorWithWhite:0 alpha:0.0],[UIColor colorWithWhite:0 alpha:0.1]];
+//	_shadow = grad;
 	_shadow.userInteractionEnabled = NO;
 	return _shadow;
 }
 - (UIView *) dropshadow{
 	if(_dropshadow) return _dropshadow;
 	
-	TKGradientView *grad  = [[TKGradientView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 10)];
-	grad.backgroundColor = [UIColor clearColor];
+//	TKGradientView *grad  = [[TKGradientView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 10)];
+//	grad.backgroundColor = [UIColor clearColor];
 	//grad.colors = @[[UIColor colorWithWhite:0 alpha:0.3],[UIColor colorWithWhite:0 alpha:0.0]];
 	//_dropshadow = grad;
 	_dropshadow.userInteractionEnabled = NO;

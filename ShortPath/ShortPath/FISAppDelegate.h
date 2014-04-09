@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShortPathDataStore.h"
 
 @interface FISAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) ShortPathDataStore *dataStore;
 
 @end

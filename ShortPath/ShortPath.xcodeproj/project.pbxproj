@@ -11,6 +11,11 @@
 		2502C8C318EFC04A00329B9F /* visitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2502C8C218EFC04A00329B9F /* visitors.plist */; };
 		2502C8C618EFC34300329B9F /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C518EFC34300329B9F /* Visitor.m */; };
 		2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */; };
+		252E510218F33D0A00318154 /* ChooseExistingEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 252E510118F33D0A00318154 /* ChooseExistingEventVC.m */; };
+		2573984918F450090013C428 /* AddNewEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2573984818F450090013C428 /* AddNewEventVC.m */; };
+		2573984D18F47B820013C428 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2573984C18F47B820013C428 /* InputCell.m */; };
+		2573985018F49ACA0013C428 /* SwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2573984F18F49ACA0013C428 /* SwitchCell.m */; };
+		25AA356E18F5C75600CE2F0A /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AA356D18F5C75600CE2F0A /* DateCell.m */; };
 		2E02FAE018EB406200FF5770 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2E02FADC18EB406200FF5770 /* OFL.txt */; };
 		2E02FAE118EB406200FF5770 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E02FADD18EB406200FF5770 /* Oswald-Bold.ttf */; };
 		2E02FAE218EB406200FF5770 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E02FADE18EB406200FF5770 /* Oswald-Light.ttf */; };
@@ -60,6 +65,16 @@
 		2502C8C518EFC34300329B9F /* Visitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitor.m; sourceTree = "<group>"; };
 		2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewVisitorVC.h; sourceTree = "<group>"; };
 		2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewVisitorVC.m; sourceTree = "<group>"; };
+		252E510018F33D0A00318154 /* ChooseExistingEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseExistingEventVC.h; sourceTree = "<group>"; };
+		252E510118F33D0A00318154 /* ChooseExistingEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseExistingEventVC.m; sourceTree = "<group>"; };
+		2573984718F450090013C428 /* AddNewEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewEventVC.h; sourceTree = "<group>"; };
+		2573984818F450090013C428 /* AddNewEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewEventVC.m; sourceTree = "<group>"; };
+		2573984B18F47B820013C428 /* InputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCell.h; sourceTree = "<group>"; };
+		2573984C18F47B820013C428 /* InputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputCell.m; sourceTree = "<group>"; };
+		2573984E18F49ACA0013C428 /* SwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchCell.h; sourceTree = "<group>"; };
+		2573984F18F49ACA0013C428 /* SwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchCell.m; sourceTree = "<group>"; };
+		25AA356C18F5C75600CE2F0A /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
+		25AA356D18F5C75600CE2F0A /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
 		2E02FADC18EB406200FF5770 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		2E02FADD18EB406200FF5770 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
 		2E02FADE18EB406200FF5770 /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
@@ -123,6 +138,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2573984A18F47B540013C428 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2573984B18F47B820013C428 /* InputCell.h */,
+				2573984C18F47B820013C428 /* InputCell.m */,
+				2573984E18F49ACA0013C428 /* SwitchCell.h */,
+				2573984F18F49ACA0013C428 /* SwitchCell.m */,
+				25AA356C18F5C75600CE2F0A /* DateCell.h */,
+				25AA356D18F5C75600CE2F0A /* DateCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		2E02FADB18EB406200FF5770 /* Oswald */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +203,7 @@
 		2E3B257F18EB0F780090336C /* ShortPath */ = {
 			isa = PBXGroup;
 			children = (
+				2573984A18F47B540013C428 /* Views */,
 				4546B9CE18EC550D00388603 /* ViewControllers */,
 				2502C8C418EFC34300329B9F /* Visitor.h */,
 				2502C8C518EFC34300329B9F /* Visitor.m */,
@@ -234,6 +263,10 @@
 				2502C8C018EF5AE600329B9F /* VisitorsVC.m */,
 				2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */,
 				2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */,
+				252E510018F33D0A00318154 /* ChooseExistingEventVC.h */,
+				252E510118F33D0A00318154 /* ChooseExistingEventVC.m */,
+				2573984718F450090013C428 /* AddNewEventVC.h */,
+				2573984818F450090013C428 /* AddNewEventVC.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -388,11 +421,16 @@
 			files = (
 				4531B01E18EF51C700DA0CD4 /* CalendarContainerViewController.m in Sources */,
 				4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */,
+				2573984D18F47B820013C428 /* InputCell.m in Sources */,
+				2573985018F49ACA0013C428 /* SwitchCell.m in Sources */,
+				252E510218F33D0A00318154 /* ChooseExistingEventVC.m in Sources */,
 				2502C8C618EFC34300329B9F /* Visitor.m in Sources */,
+				25AA356E18F5C75600CE2F0A /* DateCell.m in Sources */,
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
 				2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */,
 				2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */,
 				2E3B258618EB0F780090336C /* main.m in Sources */,
+				2573984918F450090013C428 /* AddNewEventVC.m in Sources */,
 				2E5FB06818EE0936004CE912 /* FISTabBarControllerViewController.m in Sources */,
 				4546B9D118EC563600388603 /* CalendarViewController.m in Sources */,
 				2E3B258A18EB0F780090336C /* FISAppDelegate.m in Sources */,

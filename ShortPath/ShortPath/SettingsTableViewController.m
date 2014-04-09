@@ -138,7 +138,7 @@
     {
         [self vibrate];
         NSLog(@"I shook");
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Log Out" message: @"Are you sure you want to log out?" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Log Out" message: @"Are you sure you want to log out?" delegate:self  cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
         [alert show];
     }
 }
@@ -158,7 +158,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        NSLog(@"pressed Cancel");
+        NSLog(@"pressed No");
     }
     else {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

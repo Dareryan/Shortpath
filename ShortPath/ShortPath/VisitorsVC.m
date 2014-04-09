@@ -9,6 +9,8 @@
 #import "VisitorsVC.h"
 #import <FontAwesomeKit.h>
 #import "Visitor.h"
+#import "AddNewEventVC.h"
+#import "ChooseExistingEventVC.h"
 
 @interface VisitorsVC ()
 
@@ -21,6 +23,9 @@
 @property (strong, nonatomic) NSMutableDictionary *sections;
 
 @property (strong, nonatomic) NSMutableArray *searchResults;
+
+- (IBAction)addNewVisitor:(id)sender;
+
 
 @end
 
@@ -384,6 +389,32 @@ static NSString *TableViewSelectedRowKey = @"TableViewSelectedRowKey";
     if (selectedIndexPath != nil)
     {
         [self.tableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+    }
+}
+
+- (IBAction)addNewVisitor:(id)sender {
+    UIActionSheet *newVisitorAS = [[UIActionSheet alloc] initWithTitle:@"Assign to" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"New Event", @"Existing Event", nil];
+    
+    [newVisitorAS showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%@", [actionSheet buttonTitleAtIndex:buttonIndex]);
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    if (buttonIndex == 0) {
+        AddNewEventVC *addNewEvent = (AddNewEventVC *)[storyboard instantiateViewControllerWithIdentifier:@"addNewEventXib"];
+        UINavigationController *addNewEventNavController = [[UINavigationController alloc] initWithRootViewController:addNewEvent];
+        
+        [self presentViewController:addNewEventNavController animated:YES completion:nil];
+    }
+    else if (buttonIndex == 1) {
+        ChooseExistingEventVC *chooseExistingEvent = (ChooseExistingEventVC *)[storyboard instantiateViewControllerWithIdentifier:@"chooseXib"];
+        UINavigationController *chooseNavController = [[UINavigationController alloc] initWithRootViewController:chooseExistingEvent];
+        
+        [self presentViewController:chooseNavController animated:YES completion:nil];
     }
 }
 

@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
 - (IBAction)startDateDidChange:(id)sender;
 - (IBAction)endDateDidChange:(id)sender;
+- (IBAction)doneButtonPressed:(id)sender;
+- (IBAction)cancelButtonPressed:(id)sender;
 
 @end
 
@@ -243,5 +245,13 @@
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 
+}
+
+- (IBAction)doneButtonPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)cancelButtonPressed:(id)sender {
+     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextFIeld;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 
-- (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)doneButtonPressed:(id)sender;
 
 @end
@@ -35,7 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+   
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -48,7 +48,18 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+  
+    
+}
 #pragma mark - Table view data source
 
 
@@ -101,9 +112,9 @@
 }
 */
 
-- (IBAction)cancelButtonPressed:(id)sender {
-}
 
 - (IBAction)doneButtonPressed:(id)sender {
+    
+      [self.navigationController popViewControllerAnimated:YES];
 }
 @end

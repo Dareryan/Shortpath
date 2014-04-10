@@ -120,11 +120,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Visitor" id="Hiu-Mu-vTB">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="vcp-nK-5w7">
-                            <connections>
-                                <action selector="cancelButtonPressed:" destination="HxY-o5-756" id="lZf-HC-3NZ"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ix5-N2-McI">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="HxY-o5-756" id="TGM-B0-mWL"/>
@@ -1138,6 +1133,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Visitors" id="lsz-YG-U24">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="LcJ-Vi-Ufn"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lcO-be-EAw">
                             <connections>
                                 <segue destination="HxY-o5-756" kind="push" id="BsE-l3-FFE"/>
@@ -1419,8 +1415,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Visitor" id="Elw-xg-bsq">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rCk-MY-P0O"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="eNZ-QO-kKA"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rCk-MY-P0O">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="e9k-S8-goQ" id="WHd-C6-yMg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="eNZ-QO-kKA">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="e9k-S8-goQ" id="mrF-nT-53V"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
@@ -1437,7 +1441,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jns-cV-UEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3548" y="702"/>
+            <point key="canvasLocation" x="3502" y="714"/>
         </scene>
     </scenes>
     <resources>

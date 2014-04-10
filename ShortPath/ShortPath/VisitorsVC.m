@@ -10,6 +10,7 @@
 #import <FontAwesomeKit.h>
 #import "Visitor.h"
 #import "AddNewEventVC.h"
+#import "FISViewController.h"
 
 @interface VisitorsVC ()
 
@@ -105,6 +106,25 @@
     UITabBarItem *tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Visitors" image:tabIconImageUnselected selectedImage:tabIconImageSelected];
     
     return tabBarItem;
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults objectForKey:@"key"]) {
+        NSLog(@"key found");
+        
+    } else {
+        
+        NSLog(@"There is no key");
+        [self presentViewController:loginVC animated:YES completion:nil];
+        
+    }
+
 }
 
 #pragma mark - Table view data source

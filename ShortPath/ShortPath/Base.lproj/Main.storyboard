@@ -626,7 +626,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="logIn" id="vXZ-lx-hvc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="logIn" id="vXZ-lx-hvc" customClass="FISViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="x6w-pF-dCb"/>
                         <viewControllerLayoutGuide type="bottom" id="wmv-Zm-L2G"/>

@@ -52,9 +52,7 @@
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
-    [self.dataStore fetchedResultsController];
-    
-    self.visitors = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"visitors" ofType:@"plist"]];
+    [self.dataStore fetchVisitors];
     
     self.searchResults = [NSMutableArray arrayWithCapacity:[self.visitors count]];
     
@@ -149,7 +147,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"visitorCell" forIndexPath:indexPath];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];

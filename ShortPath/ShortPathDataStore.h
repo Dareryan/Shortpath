@@ -25,5 +25,6 @@
 - (void)addEventsToContext;
 
 - (NSInteger)numberOfVisitors;
+- (void)fetchVisitors;
 
 @end

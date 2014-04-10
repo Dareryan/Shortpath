@@ -163,5 +163,11 @@
     return [self.visitors count];
 }
 
+- (void)fetchVisitors
+{
+    NSFetchRequest *visitorsFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Visitor"];
+    
+    self.visitors = [self.managedObjectContext executeFetchRequest:visitorsFetchRequest error:nil];
+}
 
 @end

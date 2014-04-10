@@ -16,6 +16,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITableViewCell *startDateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *endDateCell;
+@property (nonatomic) BOOL isEditingStartDate;
+@property (nonatomic) BOOL isEditingEndDate;
+@property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
 - (IBAction)startDateDidChange:(id)sender;
 - (IBAction)endDateDidChange:(id)sender;
 
@@ -35,7 +39,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.isEditingStartDate = NO;
+    self.isEditingEndDate = NO;
+    [self.startDatePicker setHidden:YES];
+    [self.endDatePicker setHidden:YES];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -43,12 +50,21 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
+-(void)viewDidAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewDidAppear:animated];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
+    
+    self.startDateCell.textLabel.text = @"Start Date";
+    self.endDateCell.textLabel.text = @"End Date";
+    self.startDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.startDatePicker.date];
+    self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
+    [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    
 }
-
 #pragma mark - Table view data source
 
 
@@ -112,10 +128,120 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(indexPath.section==5 && indexPath.row == 0)
+    {
+        self.isEditingStartDate = !self.isEditingStartDate;
+        self.isEditingEndDate = NO;
+        
+        if (self.isEditingStartDate) {
+            [self.startDatePicker setHidden:NO];
+        }
+        
+        [UIView animateWithDuration:.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:5]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [tableView reloadData];
+        }];
+    }
+    
+    else if (indexPath.section == 6 && indexPath.row == 0) {
+        self.isEditingEndDate = !self.isEditingEndDate;
+        self.isEditingStartDate = NO;
+        if (self.isEditingEndDate){
+            [self.endDatePicker setHidden:NO];
+        }
+        
+        [UIView animateWithDuration:.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:6]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [tableView reloadData];
+        }];
+        
+    }
+    else{
+        
+        if (!(indexPath.section == 5 && indexPath.row ==1))
+        {
+            self.isEditingStartDate = NO;
+            
+            [UIView animateWithDuration:.4 animations:^{
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:5]] withRowAnimation:UITableViewRowAnimationFade];
+                
+                [tableView reloadData];
+            }];
+            
+            
+            
+        }
+        if (!(indexPath.section == 6 && indexPath.row ==1)) {
+            self.isEditingEndDate = NO;
+            
+            [UIView animateWithDuration:.4 animations:^{
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:6]] withRowAnimation:UITableViewRowAnimationFade];
+                
+                [tableView reloadData];
+            }];
+            
+        }
+        
+    }
+    
+    
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    if (indexPath.section ==5 && indexPath.row ==1) {
+        
+        if (self.isEditingStartDate)
+        {
+            return 225.0;
+        }
+        else
+        {
+            return 0.0;
+        }
+    }
+    
+    if (indexPath.section ==6 && indexPath.row == 1) {
+        if (self.isEditingEndDate) {
+            
+            return 225.0;
+            
+        }
+        else{
+            return 0;
+            
+        }
+    }
+    
+    return self.tableView.rowHeight;
+}
+
 
 - (IBAction)startDateDidChange:(id)sender {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
+    
+    self.startDateCell.textLabel.text = @"Start Date";
+    self.startDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.startDatePicker.date];
+    [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
 
 - (IBAction)endDateDidChange:(id)sender {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
+    
+    self.endDateCell.textLabel.text = @"End Date";
+    self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
+    [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+
 }
 @end

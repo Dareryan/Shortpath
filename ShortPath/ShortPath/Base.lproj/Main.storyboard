@@ -1427,15 +1427,17 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="companyTextField" destination="9Su-xs-n0c" id="5V9-kd-vIE"/>
                         <outlet property="emailTextField" destination="5Yi-DT-EYn" id="SBL-Z5-FpX"/>
                         <outlet property="endDateCell" destination="6N1-v7-Gcq" id="baU-pI-PJZ"/>
+                        <outlet property="endDatePicker" destination="B4b-6r-hfb" id="i4J-qi-ELH"/>
                         <outlet property="firstNameTextField" destination="i7D-Vx-I55" id="lWT-qK-Efj"/>
                         <outlet property="lastNameTextField" destination="LtX-8R-BXg" id="XLx-ML-siU"/>
                         <outlet property="phoneNumberTextField" destination="BLj-j3-o5U" id="tn7-YW-FP5"/>
                         <outlet property="startDateCell" destination="Qbo-IB-u27" id="CZ4-gs-g7w"/>
+                        <outlet property="startDatePicker" destination="qR0-E2-SGr" id="UbV-fT-Brh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jns-cV-UEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3396" y="430"/>
+            <point key="canvasLocation" x="3548" y="702"/>
         </scene>
     </scenes>
     <resources>

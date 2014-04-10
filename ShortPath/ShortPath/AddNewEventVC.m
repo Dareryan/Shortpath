@@ -12,6 +12,7 @@
 @interface AddNewEventVC ()
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (nonatomic) BOOL isEditingStartDate;
 
 - (IBAction)cancelTapped:(id)sender;
 - (IBAction)doneTapped:(id)sender;

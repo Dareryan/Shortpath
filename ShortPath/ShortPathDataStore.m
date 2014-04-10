@@ -8,10 +8,13 @@
 
 #import "ShortPathDataStore.h"
 #import "Event+Methods.h"
+#import "APIClient.h"
+
 
 @interface ShortPathDataStore ()
 
 @property (strong, nonatomic) NSArray *eventDicts;
+@property (strong, nonatomic) APIClient *apiClient;
 
 @end
 
@@ -34,6 +37,18 @@
     return _sharedDataStore;
 }
 
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        
+        _apiClient = [[APIClient alloc]init];
+    }
+    return self;
+}
+
+
 - (void)saveContext
 {
     NSError *error = nil;
@@ -47,6 +62,40 @@
         }
     }
 }
+
+
+#pragma mark - API to Core Data methods
+
+- (void)addUserToCoreDataWithCompletion: (void(^)(User *))completionBlock
+{
+    
+    [self.apiClient fetchUserInfoWithCompletion:^(NSDictionary *userDict) {
+        
+        User *newUser = [User getUserFromDict:userDict ToContext:self.managedObjectContext];
+        
+        NSLog(@"%@", newUser.username);
+        
+        
+        completionBlock(newUser);
+    }];
+}
+
+
+- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(Event *))completionBlock
+{
+    [self.apiClient fetchEventsForUser:user Completion:^(NSArray *eventDicts) {
+        
+        for (NSDictionary *eventDict in eventDicts) {
+            
+            Event *newEvent = [Event getEventFromDict:eventDict ToContext:self.managedObjectContext];
+            
+            completionBlock(newEvent);
+        }
+    }];
+}
+
+
+
 
 
 #pragma mark - Core Data stack

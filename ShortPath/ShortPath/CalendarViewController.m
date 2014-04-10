@@ -9,8 +9,11 @@
 #import "CalendarViewController.h"
 #import <FontAwesomeKit.h>
 #import "FISViewController.h"
+#import "ShortPathDataStore.h"
 
 @interface CalendarViewController ()
+
+@property (strong, nonatomic) ShortPathDataStore *dataStore;
 
 @end
 
@@ -30,10 +33,28 @@
 {
     [super viewDidLoad];
     
-       // Do any additional setup after loading the view.
+    self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
+        
+        [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
+            
+            NSLog(@"event added");
+            
+            [user addEventsObject:event];
+            
+            [weakSelf.dataStore saveContext];
+        }];
+        
+    }];
+        
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    
+    
     [super viewDidAppear:animated];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
@@ -46,7 +67,7 @@
     } else {
         
         NSLog(@"There is no key");
-        [self presentViewController:loginVC animated:YES completion:nil];
+        //[self presentViewController:loginVC animated:YES completion:nil];
         
     }
     

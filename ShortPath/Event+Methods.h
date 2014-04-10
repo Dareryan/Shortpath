@@ -10,6 +10,6 @@
 
 @interface Event (Methods)
 
-+ (Event *)addEventFromDict: (NSDictionary *)dict ToContext: (NSManagedObjectContext *)context;
++ (Event *)getEventFromDict: (NSDictionary *)dict ToContext: (NSManagedObjectContext *)context;
 
 @end

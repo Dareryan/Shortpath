@@ -81,6 +81,22 @@
 }
 
 
+- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(Event *))completionBlock
+{
+    [self.apiClient fetchEventsForUser:user Completion:^(NSArray *eventDicts) {
+        
+        for (NSDictionary *eventDict in eventDicts) {
+            
+            Event *newEvent = [Event getEventFromDict:eventDict ToContext:self.managedObjectContext];
+            
+            completionBlock(newEvent);
+        }
+    }];
+}
+
+
+
+
 
 #pragma mark - Core Data stack
 

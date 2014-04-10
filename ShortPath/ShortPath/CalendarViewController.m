@@ -34,11 +34,22 @@
     [super viewDidLoad];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
-    [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
-        NSLog(@"user %@ added", user.username);
-        [self.dataStore saveContext];
-    }];
     
+    __weak typeof(self) weakSelf = self;
+    
+    [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
+        
+        [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
+            
+            NSLog(@"event added");
+            
+            [user addEventsObject:event];
+            
+            [weakSelf.dataStore saveContext];
+        }];
+        
+    }];
+        
 }
 
 -(void)viewDidAppear:(BOOL)animated{

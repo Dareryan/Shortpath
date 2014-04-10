@@ -168,7 +168,7 @@
         [self.tabBarController.navigationController pushViewController:loginVC animated:YES];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults removeObjectForKey:@"key"];
+        [defaults removeObjectForKey:@"responseObject"];
         [defaults synchronize];
         NSLog(@"Key Deleted");
         

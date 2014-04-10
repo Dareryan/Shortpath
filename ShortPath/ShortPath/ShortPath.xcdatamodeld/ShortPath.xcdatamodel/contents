@@ -8,7 +8,15 @@
         <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="events" inverseEntity="User" syncable="YES"/>
         <relationship name="visitors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Visitor" inverseName="event" inverseEntity="Visitor" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="building_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="user" inverseEntity="Event" syncable="YES"/>
     </entity>
     <entity name="Visitor" representedClassName="Visitor" syncable="YES">
         <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,7 +27,8 @@
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="visitors" inverseEntity="Event" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="-45" positionY="0" width="128" height="165"/>
+        <element name="Event" positionX="63" positionY="-79" width="128" height="178"/>
         <element name="Visitor" positionX="-254" positionY="9" width="128" height="133"/>
+        <element name="User" positionX="-189" positionY="-189" width="128" height="118"/>
     </elements>
 </model>

@@ -17,11 +17,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    APIClient *client = [[APIClient alloc]init];
-    [client fetchUserInfoWithCompletion:^(NSDictionary *dict) {
-        NSLog(@"%@", dict);
-    }];
-    
+
     // Override point for customization after application launch.
     
     //Create Nav VC here

@@ -9,7 +9,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="addNewVisitorXib" id="HxY-o5-756" customClass="AddNewVisitorVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="sVt-9p-pUd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -148,7 +148,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="addNewEventXib" id="bc8-Ye-GgK" customClass="AddNewEventVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="33" sectionFooterHeight="10" id="rWZ-jI-Ef3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -352,10 +352,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
                         <outlet property="doneButton" destination="k29-Hx-yFv" id="5Tp-Kv-mS3"/>
+                        <outlet property="endDateCell" destination="YVp-Db-9rV" id="KlN-aG-s4D"/>
                         <outlet property="endDatePicker" destination="kF4-Bx-lnl" id="s47-Gm-Vjp"/>
+                        <outlet property="startDateCell" destination="cn5-mb-WDA" id="j9Z-Yd-j4T"/>
                         <outlet property="startDatePicker" destination="ka3-1m-I5f" id="TeC-FU-mlY"/>
                         <outlet property="titleLabel" destination="34W-rH-uyI" id="sa0-8p-DR1"/>
                         <outlet property="titleTextField" destination="34W-rH-uyI" id="PWX-DP-1mG"/>
@@ -607,8 +610,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="wCK-Z3-qDA"/>
+                    <size key="freeformSize" width="320" height="1000"/>
                     <connections>
+                        <outlet property="arrivalDatePicker" destination="QrR-Ha-tNI" id="qQn-8v-7QQ"/>
                         <outlet property="arrivalTimeCell" destination="CI6-tQ-qEz" id="MCt-XI-GRN"/>
+                        <outlet property="departureDatePicker" destination="fHu-Pv-7gF" id="NOW-eA-RWz"/>
                         <outlet property="departureTimeCell" destination="tZf-Hy-gRm" id="UTD-fJ-12s"/>
                         <outlet property="nameCell" destination="TQ4-t1-0dm" id="QYO-6V-KKn"/>
                     </connections>
@@ -620,7 +626,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="logIn" id="vXZ-lx-hvc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="logIn" id="vXZ-lx-hvc" customClass="FISViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="x6w-pF-dCb"/>
                         <viewControllerLayoutGuide type="bottom" id="wmv-Zm-L2G"/>
@@ -1110,7 +1116,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <viewControllerLayoutGuide type="bottom" id="ffK-hI-6Ia"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FBE-59-dC6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TVi-0C-EtJ">
@@ -1122,7 +1128,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wVF-Am-nfH">
-                                <rect key="frame" x="-1" y="108" width="320" height="412"/>
+                                <rect key="frame" x="-1" y="108" width="320" height="844"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -1421,15 +1427,17 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="companyTextField" destination="9Su-xs-n0c" id="5V9-kd-vIE"/>
                         <outlet property="emailTextField" destination="5Yi-DT-EYn" id="SBL-Z5-FpX"/>
                         <outlet property="endDateCell" destination="6N1-v7-Gcq" id="baU-pI-PJZ"/>
+                        <outlet property="endDatePicker" destination="B4b-6r-hfb" id="i4J-qi-ELH"/>
                         <outlet property="firstNameTextField" destination="i7D-Vx-I55" id="lWT-qK-Efj"/>
                         <outlet property="lastNameTextField" destination="LtX-8R-BXg" id="XLx-ML-siU"/>
                         <outlet property="phoneNumberTextField" destination="BLj-j3-o5U" id="tn7-YW-FP5"/>
                         <outlet property="startDateCell" destination="Qbo-IB-u27" id="CZ4-gs-g7w"/>
+                        <outlet property="startDatePicker" destination="qR0-E2-SGr" id="UbV-fT-Brh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jns-cV-UEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3396" y="430"/>
+            <point key="canvasLocation" x="3548" y="702"/>
         </scene>
     </scenes>
     <resources>

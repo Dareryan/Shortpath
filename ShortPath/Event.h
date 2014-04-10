@@ -2,14 +2,14 @@
 //  Event.h
 //  ShortPath
 //
-//  Created by Nadia Yudina on 4/8/14.
+//  Created by Nadia Yudina on 4/10/14.
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Visitor;
+@class User, Visitor;
 
 @interface Event : NSManagedObject
 
@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) NSSet *visitors;
+@property (nonatomic, retain) User *user;
 @end
 
 @interface Event (CoreDataGeneratedAccessors)

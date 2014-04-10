@@ -2,7 +2,7 @@
 //  Visitor.m
 //  ShortPath
 //
-//  Created by Nadia Yudina on 4/8/14.
+//  Created by Nadia Yudina on 4/10/14.
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
@@ -12,11 +12,11 @@
 
 @implementation Visitor
 
+@dynamic company;
+@dynamic email;
 @dynamic firstName;
 @dynamic lastName;
-@dynamic company;
 @dynamic phone;
-@dynamic email;
 @dynamic event;
 
 @end

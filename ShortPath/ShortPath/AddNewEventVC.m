@@ -13,6 +13,9 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (nonatomic) BOOL isEditingStartDate;
+@property (nonatomic) BOOL isEditingEndDate;
+@property (weak, nonatomic) IBOutlet UITableViewCell *startDateCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *endDateCell;
 
 - (IBAction)cancelTapped:(id)sender;
 - (IBAction)doneTapped:(id)sender;
@@ -48,6 +51,10 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.isEditingStartDate = NO;
+    self.isEditingEndDate = NO;
+    [self.startDatePicker setHidden:YES];
+    [self.endDatePicker setHidden:YES];
     
     //    [self.tableView registerClass:[SwitchCell class] forCellReuseIdentifier:@"switchCell"];
 //    [self.tableView registerClass:[DateCell class] forCellReuseIdentifier:@"dateCell"];
@@ -111,6 +118,70 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(indexPath.section==1 && indexPath.row == 0)
+    {
+        self.isEditingStartDate = !self.isEditingStartDate;
+        self.isEditingEndDate = NO;
+        
+        if (self.isEditingStartDate) {
+            [self.startDatePicker setHidden:NO];
+        }
+        
+        [UIView animateWithDuration:.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [tableView reloadData];
+        }];
+    }
+    
+    else if (indexPath.section == 2 && indexPath.row == 0) {
+        self.isEditingEndDate = !self.isEditingEndDate;
+        self.isEditingStartDate = NO;
+        if (self.isEditingEndDate){
+            [self.endDatePicker setHidden:NO];
+        }
+        
+        [UIView animateWithDuration:.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [tableView reloadData];
+        }];
+        
+    }
+    else{
+        
+        if (!(indexPath.section == 1 && indexPath.row ==1))
+        {
+            self.isEditingStartDate = NO;
+            
+            [UIView animateWithDuration:.4 animations:^{
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+                
+                [tableView reloadData];
+            }];
+            
+            
+            
+        }
+        if (!(indexPath.section == 2 && indexPath.row ==1)) {
+            self.isEditingEndDate = NO;
+            
+            [UIView animateWithDuration:.4 animations:^{
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
+                
+                [tableView reloadData];
+            }];
+            
+        }
+        
+    }
+    
+    
+}
+
 
 - (IBAction)cancelTapped:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -121,7 +192,20 @@
 }
 
 - (IBAction)startDatePickerValueChanged:(id)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
+    
+    self.startDateCell.textLabel.text = @"Start Date";
+    self.startDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.startDatePicker.date];
+    [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+
 }
 - (IBAction)endDatePickerValueChanged:(id)sender {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
+    
+    self.endDateCell.textLabel.text = @"End Date";
+    self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
+    [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
 @end

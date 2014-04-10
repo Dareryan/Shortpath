@@ -356,7 +356,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
                         <outlet property="doneButton" destination="k29-Hx-yFv" id="5Tp-Kv-mS3"/>
+                        <outlet property="endDateCell" destination="YVp-Db-9rV" id="KlN-aG-s4D"/>
                         <outlet property="endDatePicker" destination="kF4-Bx-lnl" id="s47-Gm-Vjp"/>
+                        <outlet property="startDateCell" destination="cn5-mb-WDA" id="j9Z-Yd-j4T"/>
                         <outlet property="startDatePicker" destination="ka3-1m-I5f" id="TeC-FU-mlY"/>
                         <outlet property="titleLabel" destination="34W-rH-uyI" id="sa0-8p-DR1"/>
                         <outlet property="titleTextField" destination="34W-rH-uyI" id="PWX-DP-1mG"/>

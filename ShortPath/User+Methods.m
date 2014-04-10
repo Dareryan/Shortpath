@@ -25,9 +25,9 @@
         
         User *newUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
         
-        newUser.group_id = userDict[@"primary_group_id"];
-        newUser.building_id = userDict[@"primary_building_id"];
-        newUser.identifier = userDict[@"id"];
+        newUser.group_id = [NSString stringWithFormat:@"%@", userDict[@"primary_group_id"]];
+        newUser.building_id = [NSString stringWithFormat:@"%@", userDict[@"primary_building_id"]];
+        newUser.identifier = [NSString stringWithFormat:@"%@", userDict[@"id"]];
         newUser.username = userDict[@"username"];
         
         return newUser;

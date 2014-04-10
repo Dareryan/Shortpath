@@ -75,6 +75,7 @@
         
         NSLog(@"%@", newUser.username);
         
+        
         completionBlock(newUser);
     }];
 }

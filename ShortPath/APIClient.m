@@ -12,8 +12,8 @@
 
 @interface APIClient ()
 
-@property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (strong, nonatomic) NSString *token;
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 
 @end
 
@@ -28,20 +28,29 @@
 }
 
 
+
 -(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://core.staging.shortpath.net/api/users/me.json"];
+    
+    //AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [self.manager.requestSerializer setValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
+    
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+    securityPolicy.allowInvalidCertificates=YES;
+    self.manager.securityPolicy=securityPolicy;
+    
+    NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
+
     
     [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSDictionary *userDict = responseObject[@"user"];
+        NSDictionary *dict = responseObject[@"user"];
+        completionBlock(dict);
         
-        NSLog(@"responce dict %@", responseObject);
-        
-        completionBlock(userDict);
-        
-    } failure:nil];
-}
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error on API call %@", error);
+    }];}
 
 
 

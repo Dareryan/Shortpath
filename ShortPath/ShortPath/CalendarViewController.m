@@ -33,7 +33,12 @@
 {
     [super viewDidLoad];
     
-       // Do any additional setup after loading the view.
+    self.dataStore = [ShortPathDataStore sharedDataStore];
+    [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
+        NSLog(@"user %@ added", user.username);
+        [self.dataStore saveContext];
+    }];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{

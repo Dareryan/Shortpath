@@ -15,7 +15,6 @@
 		05EA535318F44BE300948310 /* ShortPath.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EA535118F44BE300948310 /* ShortPath.xcdatamodeld */; };
 		05EA535718F44F2300948310 /* ShortPathDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA535618F44F2300948310 /* ShortPathDataStore.m */; };
 		2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C018EF5AE600329B9F /* VisitorsVC.m */; };
-		2502C8C318EFC04A00329B9F /* visitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2502C8C218EFC04A00329B9F /* visitors.plist */; };
 		2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */; };
 		25127EA118F5FAB7008BB7C1 /* AddNewEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 25127EA018F5FAB7008BB7C1 /* AddNewEventVC.m */; };
 		2E02FAE018EB406200FF5770 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2E02FADC18EB406200FF5770 /* OFL.txt */; };
@@ -78,7 +77,6 @@
 		05EA536218F450A800948310 /* Visitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitor.m; sourceTree = "<group>"; };
 		2502C8BF18EF5AE600329B9F /* VisitorsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitorsVC.h; sourceTree = "<group>"; };
 		2502C8C018EF5AE600329B9F /* VisitorsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitorsVC.m; sourceTree = "<group>"; };
-		2502C8C218EFC04A00329B9F /* visitors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = visitors.plist; sourceTree = "<group>"; };
 		2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewVisitorVC.h; sourceTree = "<group>"; };
 		2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewVisitorVC.m; sourceTree = "<group>"; };
 		25127E9F18F5FAB7008BB7C1 /* AddNewEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewEventVC.h; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 				2E3B258218EB0F780090336C /* InfoPlist.strings */,
 				2E3B258518EB0F780090336C /* main.m */,
 				2E3B258718EB0F780090336C /* ShortPath-Prefix.pch */,
-				2502C8C218EFC04A00329B9F /* visitors.plist */,
 			);
 			name = "Supporting Files";
 			path = ShortPath;
@@ -391,7 +388,6 @@
 				2E3B25B818EB1BEB0090336C /* shapes.png in Resources */,
 				2E3B259218EB0F780090336C /* Images.xcassets in Resources */,
 				2E3B258418EB0F780090336C /* InfoPlist.strings in Resources */,
-				2502C8C318EFC04A00329B9F /* visitors.plist in Resources */,
 				2E3B258D18EB0F780090336C /* Main.storyboard in Resources */,
 				2E3B25AF18EB15F30090336C /* logo (2).png in Resources */,
 				2E3B25BA18EB1ECF0090336C /* low_contrast_linen_@2X.png in Resources */,

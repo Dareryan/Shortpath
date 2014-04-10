@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class Visitor;
 
 @interface ShortPathDataStore : NSObject
 
@@ -22,5 +23,7 @@
 +(ShortPathDataStore*) sharedDataStore;
 
 - (void)addEventsToContext;
+
+- (NSInteger)numberOfVisitors;
 
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VisitorsVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
+@interface VisitorsVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

@@ -12,6 +12,7 @@
 @interface ShortPathDataStore ()
 
 @property (strong, nonatomic) NSArray *eventDicts;
+@property (strong, nonatomic) NSArray *visitors;
 
 @end
 
@@ -155,6 +156,11 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (NSInteger)numberOfVisitors
+{
+    return [self.visitors count];
 }
 
 

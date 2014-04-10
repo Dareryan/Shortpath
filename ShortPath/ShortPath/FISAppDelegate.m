@@ -10,6 +10,8 @@
 #import "FISTabBarControllerViewController.h"
 #import "FISViewController.h"
 
+#import "Visitor.h"
+
 
 @implementation FISAppDelegate
 
@@ -37,7 +39,24 @@
 //    self.window.rootViewController = navVC;
 //    [self.window makeKeyAndVisible];
 
+    Visitor *eugene = [NSEntityDescription insertNewObjectForEntityForName:@"Eugene" inManagedObjectContext:self.dataStore.managedObjectContext];
+    eugene.firstName = @"Eugene";
+    eugene.lastName = @"Watson";
     
+    Visitor *bram = [NSEntityDescription insertNewObjectForEntityForName:@"Bram" inManagedObjectContext:self.dataStore.managedObjectContext];
+    bram.firstName = @"Bram";
+    bram.lastName = @"Vandevelde";
+    
+    Visitor *dare = [NSEntityDescription insertNewObjectForEntityForName:@"Dare" inManagedObjectContext:self.dataStore.managedObjectContext];
+    dare.firstName = @"Dare";
+    dare.lastName = @"Ryan";
+    
+    Visitor *nadia = [NSEntityDescription insertNewObjectForEntityForName:@"Nadia" inManagedObjectContext:self.dataStore.managedObjectContext];
+    nadia.firstName = @"Nadia";
+    nadia.lastName = @"Yudina";
+    
+    [self.dataStore saveContext];
+
     return YES;
 
 }

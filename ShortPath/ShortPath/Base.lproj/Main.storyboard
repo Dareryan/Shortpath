@@ -828,7 +828,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Mh-ST-SgB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2799" y="-1517"/>
+            <point key="canvasLocation" x="2799" y="-1329"/>
         </scene>
         <!--Events Table View Controller-->
         <scene sceneID="X24-y3-3at">
@@ -859,7 +859,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VHl-W2-o38" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2799" y="-1031"/>
+            <point key="canvasLocation" x="2799" y="-843"/>
         </scene>
         <!--Event Detail Table View Controller-->
         <scene sceneID="mF5-oP-Shq">

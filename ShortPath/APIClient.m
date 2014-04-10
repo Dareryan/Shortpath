@@ -7,7 +7,7 @@
 //
 
 #import "APIClient.h"
-#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking.h>
 
 
 @interface APIClient ()
@@ -19,25 +19,6 @@
 
 @implementation APIClient
 
--(void)singletonInit
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.token = [defaults objectForKey:@"token"];
-}
-
-+(APIClient *) sharedInstance
-{
-    static APIClient *_sharedInstance = nil;
-    
-    static dispatch_once_t oncePredicate;
-    dispatch_once(&oncePredicate, ^{
-        _sharedInstance = [[self alloc] init];
-        [_sharedInstance singletonInit];
-    });
-    
-    return _sharedInstance;
-}
-
 - (AFHTTPSessionManager *)manager
 {
     if (!_manager) {
@@ -46,26 +27,24 @@
     return _manager;
 }
 
--(void)fetchUserInfo
+
+-(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock
 {
+    NSString *urlString = [NSString stringWithFormat:@"http://core.staging.shortpath.net/api/users/me.json"];
     
+    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSDictionary *userDict = responseObject[@"user"];
+        
+        NSLog(@"responce dict %@", responseObject);
+        
+        completionBlock(userDict);
+        
+    } failure:nil];
 }
 
 
 
-
-//- (void)fetchInterestingPhotosWithCompletion: (void(^)(NSArray *))completionBlock
-//{
-//    NSString *URLString = [NSString stringWithFormat:@"%@/?method=flickr.interestingness.getList&api_key=%@&%@", BASE_URL, FlickrAPIKey, PARAMS];
-//    
-//    [self.manager GET:URLString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-//        
-//        NSArray *photos = responseObject[@"photos"][@"photo"];
-//        
-//        completionBlock(photos);
-//        
-//    } failure:nil];
-//}
 
 
 @end

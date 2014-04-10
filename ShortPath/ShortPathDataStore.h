@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User+Methods.h"
 
 @interface ShortPathDataStore : NSObject
 
@@ -14,13 +15,12 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-
+- (void)addUserToCoreDataWithCompletion: (void(^)(User *))completionBlock;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
 +(ShortPathDataStore*) sharedDataStore;
 
-- (void)addEventsToContext;
 
 @end

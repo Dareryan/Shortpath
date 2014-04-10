@@ -24,9 +24,6 @@
 {
     [super viewDidAppear:animated];
     
-    self.dataStore = [ShortPathDataStore sharedDataStore];
-    self.dataStore.fetchedResultsController.delegate = self;
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificatonReceived:) name:@"dateNotif" object:nil];
     
 }

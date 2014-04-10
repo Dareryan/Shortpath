@@ -11,6 +11,7 @@
 		05582AC718F7331500148951 /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC618F7331500148951 /* Visitor.m */; };
 		05582ACA18F7331600148951 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC918F7331600148951 /* User.m */; };
 		05582ACD18F7331600148951 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582ACC18F7331600148951 /* Event.m */; };
+		05582AD018F733B600148951 /* User+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582ACF18F733B600148951 /* User+Methods.m */; };
 		0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2AF18F4561200D02D78 /* Event+Methods.m */; };
 		0589F2B418F45D7700D02D78 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2B318F45D7700D02D78 /* EventsTableViewController.m */; };
 		05EA535018F44BB100948310 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EA534F18F44BB100948310 /* CoreData.framework */; };
@@ -74,6 +75,8 @@
 		05582AC918F7331600148951 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		05582ACB18F7331600148951 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		05582ACC18F7331600148951 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		05582ACE18F733B600148951 /* User+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Methods.h"; sourceTree = "<group>"; };
+		05582ACF18F733B600148951 /* User+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Methods.m"; sourceTree = "<group>"; };
 		0589F2AE18F4561200D02D78 /* Event+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+Methods.h"; sourceTree = "<group>"; };
 		0589F2AF18F4561200D02D78 /* Event+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+Methods.m"; sourceTree = "<group>"; };
 		0589F2B218F45D7700D02D78 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsTableViewController.h; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 				05582ACC18F7331600148951 /* Event.m */,
 				05582AC818F7331600148951 /* User.h */,
 				05582AC918F7331600148951 /* User.m */,
+				05582ACE18F733B600148951 /* User+Methods.h */,
+				05582ACF18F733B600148951 /* User+Methods.m */,
 				05582AC518F7331500148951 /* Visitor.h */,
 				05582AC618F7331500148951 /* Visitor.m */,
 				0589F2AE18F4561200D02D78 /* Event+Methods.h */,
@@ -469,6 +474,7 @@
 				4531B01E18EF51C700DA0CD4 /* CalendarContainerViewController.m in Sources */,
 				05582AC718F7331500148951 /* Visitor.m in Sources */,
 				45B136DF18F70F9400A3302E /* CreateEventForExistingVisitorTVC.m in Sources */,
+				05582AD018F733B600148951 /* User+Methods.m in Sources */,
 				4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */,
 				0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */,
 				05582ACA18F7331600148951 /* User.m in Sources */,

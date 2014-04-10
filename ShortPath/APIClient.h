@@ -10,6 +10,6 @@
 
 @interface APIClient : NSObject
 
-+(APIClient *) sharedInstance;
+-(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock;
 
 @end

@@ -9,6 +9,7 @@
 #import "FISAppDelegate.h"
 #import "FISTabBarControllerViewController.h"
 #import "FISViewController.h"
+#import "APIClient.h"
 
 
 @implementation FISAppDelegate
@@ -16,9 +17,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    self.dataStore = [ShortPathDataStore sharedDataStore];
-
-    [self.dataStore addEventsToContext];
+    APIClient *client = [[APIClient alloc]init];
+    [client fetchUserInfoWithCompletion:^(NSDictionary *dict) {
+        NSLog(@"%@", dict);
+    }];
     
     // Override point for customization after application launch.
     

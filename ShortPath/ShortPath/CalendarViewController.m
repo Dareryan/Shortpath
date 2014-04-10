@@ -9,8 +9,11 @@
 #import "CalendarViewController.h"
 #import <FontAwesomeKit.h>
 #import "FISViewController.h"
+#import "ShortPathDataStore.h"
 
 @interface CalendarViewController ()
+
+@property (strong, nonatomic) ShortPathDataStore *dataStore;
 
 @end
 
@@ -34,6 +37,8 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    
+    
     [super viewDidAppear:animated];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
@@ -46,7 +51,7 @@
     } else {
         
         NSLog(@"There is no key");
-        [self presentViewController:loginVC animated:YES completion:nil];
+        //[self presentViewController:loginVC animated:YES completion:nil];
         
     }
     

@@ -7,9 +7,7 @@
 //
 
 #import "AddNewEventVC.h"
-#import "InputCell.h"
-#import "SwitchCell.h"
-#import "DateCell.h"
+
 
 @interface AddNewEventVC ()
 
@@ -18,6 +16,11 @@
 - (IBAction)cancelTapped:(id)sender;
 - (IBAction)doneTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *titleLabel;
+- (IBAction)startDatePickerValueChanged:(id)sender;
+@property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
+- (IBAction)endDatePickerValueChanged:(id)sender;
+@property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
+@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 
 @end
 
@@ -45,8 +48,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    [self.tableView registerClass:[InputCell class] forCellReuseIdentifier:@"cell"];
-//    [self.tableView registerClass:[SwitchCell class] forCellReuseIdentifier:@"switchCell"];
+    //    [self.tableView registerClass:[SwitchCell class] forCellReuseIdentifier:@"switchCell"];
 //    [self.tableView registerClass:[DateCell class] forCellReuseIdentifier:@"dateCell"];
 }
 
@@ -117,4 +119,8 @@
     //code
 }
 
+- (IBAction)startDatePickerValueChanged:(id)sender {
+}
+- (IBAction)endDatePickerValueChanged:(id)sender {
+}
 @end

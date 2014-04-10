@@ -1,27 +1,18 @@
 //
-//  AddNewVisitorVC.m
+//  EventInviteesTableViewController.m
 //  ShortPath
 //
-//  Created by Bram Vandevelde on 2014-04-05.
+//  Created by Dare Ryan on 4/10/14.
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
-#import "AddNewVisitorVC.h"
-#import "InputCell.h"
+#import "EventInviteesTableViewController.h"
 
-@interface AddNewVisitorVC ()
-@property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *companyTextField;
-@property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextFIeld;
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-
-- (IBAction)cancelButtonPressed:(id)sender;
-- (IBAction)doneButtonPressed:(id)sender;
+@interface EventInviteesTableViewController ()
 
 @end
 
-@implementation AddNewVisitorVC
+@implementation EventInviteesTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -51,6 +42,30 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+#warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    return 0;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+#warning Incomplete method implementation.
+    // Return the number of rows in the section.
+    return 0;
+}
+
+/*
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    // Configure the cell...
+    
+    return cell;
+}
+*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -101,9 +116,4 @@
 }
 */
 
-- (IBAction)cancelButtonPressed:(id)sender {
-}
-
-- (IBAction)doneButtonPressed:(id)sender {
-}
 @end

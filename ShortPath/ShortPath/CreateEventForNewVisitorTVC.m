@@ -1,27 +1,27 @@
 //
-//  AddNewVisitorVC.m
+//  CreateEventForNewVisitorTVC.m
 //  ShortPath
 //
-//  Created by Bram Vandevelde on 2014-04-05.
+//  Created by Dare Ryan on 4/10/14.
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
-#import "AddNewVisitorVC.h"
-#import "InputCell.h"
+#import "CreateEventForNewVisitorTVC.h"
 
-@interface AddNewVisitorVC ()
+@interface CreateEventForNewVisitorTVC ()
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *companyTextField;
-@property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextFIeld;
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-
-- (IBAction)cancelButtonPressed:(id)sender;
-- (IBAction)doneButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UITableViewCell *startDateCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *endDateCell;
+- (IBAction)startDateDidChange:(id)sender;
+- (IBAction)endDateDidChange:(id)sender;
 
 @end
 
-@implementation AddNewVisitorVC
+@implementation CreateEventForNewVisitorTVC
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -51,6 +51,18 @@
 
 #pragma mark - Table view data source
 
+
+
+/*
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    // Configure the cell...
+    
+    return cell;
+}
+*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -101,9 +113,9 @@
 }
 */
 
-- (IBAction)cancelButtonPressed:(id)sender {
+- (IBAction)startDateDidChange:(id)sender {
 }
 
-- (IBAction)doneButtonPressed:(id)sender {
+- (IBAction)endDateDidChange:(id)sender {
 }
 @end

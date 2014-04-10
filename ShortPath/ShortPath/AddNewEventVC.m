@@ -17,6 +17,7 @@
 
 - (IBAction)cancelTapped:(id)sender;
 - (IBAction)doneTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *titleLabel;
 
 @end
 
@@ -57,86 +58,7 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 3;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    NSInteger rows = 0;
-    
-    switch (section) {
-        case 0:
-            rows = 2;
-            break;
-        case 1:
-            rows = 3;
-            break;
-        case 2:
-            rows = 1;
-            break;
-        default:
-            break;
-    }
-    
-    return rows;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
-//    UITableViewCell *inputCell = [tableView dequeueReusableCellWithIdentifier:@"inputCell" forIndexPath:indexPath];
-//    UITableViewCell *switchCell = [tableView dequeueReusableCellWithIdentifier:@"switchCell" forIndexPath:indexPath];
-//    UITableViewCell *dateCell = [tableView dequeueReusableCellWithIdentifier:@"dateCell" forIndexPath:indexPath];
-    
-    // Configure the cell...
-    if (indexPath.section == 0) {
-        switch (indexPath.row) {
-            case 0:
-            {
-                cell = (InputCell *)cell;
-            }
-                break;
-            case 1:
-            {
-                cell = (InputCell *)cell;
-            }
-                break;
-            default:
-                break;
-        }
-    }
-    else if (indexPath.section == 1) {
-        switch (indexPath.row) {
-            case 0:
-                cell = (SwitchCell *)cell;
-                break;
-            case 1:
-                cell = (DateCell *)cell;
-                break;
-            case 2:
-                cell = (DateCell *)cell;
-            default:
-                break;
-        }
-    }
-    else if (indexPath.section == 2){
-        switch (indexPath.row) {
-            case 0:
-                break;
-                
-            default:
-                break;
-        }
-    }
-    
-    return cell;
-}
 
 /*
 // Override to support conditional editing of the table view.

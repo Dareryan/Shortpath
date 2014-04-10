@@ -18,7 +18,6 @@
 		2502C8C318EFC04A00329B9F /* visitors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2502C8C218EFC04A00329B9F /* visitors.plist */; };
 		2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */; };
 		25127EA118F5FAB7008BB7C1 /* AddNewEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 25127EA018F5FAB7008BB7C1 /* AddNewEventVC.m */; };
-		25127EA418F5FACE008BB7C1 /* ChooseExistingEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 25127EA318F5FACE008BB7C1 /* ChooseExistingEventVC.m */; };
 		25127EAB18F5FAE5008BB7C1 /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25127EA618F5FAE5008BB7C1 /* DateCell.m */; };
 		25127EAC18F5FAE5008BB7C1 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25127EA818F5FAE5008BB7C1 /* InputCell.m */; };
 		25127EAD18F5FAE5008BB7C1 /* SwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25127EAA18F5FAE5008BB7C1 /* SwitchCell.m */; };
@@ -83,8 +82,6 @@
 		2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewVisitorVC.m; sourceTree = "<group>"; };
 		25127E9F18F5FAB7008BB7C1 /* AddNewEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewEventVC.h; sourceTree = "<group>"; };
 		25127EA018F5FAB7008BB7C1 /* AddNewEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewEventVC.m; sourceTree = "<group>"; };
-		25127EA218F5FACE008BB7C1 /* ChooseExistingEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseExistingEventVC.h; sourceTree = "<group>"; };
-		25127EA318F5FACE008BB7C1 /* ChooseExistingEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseExistingEventVC.m; sourceTree = "<group>"; };
 		25127EA518F5FAE5008BB7C1 /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
 		25127EA618F5FAE5008BB7C1 /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
 		25127EA718F5FAE5008BB7C1 /* InputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCell.h; sourceTree = "<group>"; };
@@ -288,8 +285,6 @@
 				4531B01D18EF51C700DA0CD4 /* CalendarContainerViewController.m */,
 				2502C8BF18EF5AE600329B9F /* VisitorsVC.h */,
 				2502C8C018EF5AE600329B9F /* VisitorsVC.m */,
-				25127EA218F5FACE008BB7C1 /* ChooseExistingEventVC.h */,
-				25127EA318F5FACE008BB7C1 /* ChooseExistingEventVC.m */,
 				2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */,
 				2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */,
 				25127E9F18F5FAB7008BB7C1 /* AddNewEventVC.h */,
@@ -451,7 +446,6 @@
 				4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */,
 				0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */,
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
-				25127EA418F5FACE008BB7C1 /* ChooseExistingEventVC.m in Sources */,
 				2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */,
 				2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */,
 				2E3B258618EB0F780090336C /* main.m in Sources */,

@@ -16,6 +16,8 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (void)addUserToCoreDataWithCompletion: (void(^)(User *))completionBlock;
+- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(Event *))completionBlock;
+
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

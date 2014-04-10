@@ -10,10 +10,10 @@
 
 @implementation Event (Methods)
 
-+ (Event *)addEventFromDict: (NSDictionary *)dict ToContext: (NSManagedObjectContext *)context
++ (Event *)getEventFromDict: (NSDictionary *)dict ToContext: (NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
-    NSString *searchID = dict[@"id"];
+    NSString *searchID = dict[@"event_occurence"][@"id"];
     
     NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"identifier==%@",searchID];
     fetchRequest.predicate = searchPredicate;
@@ -24,12 +24,11 @@
         
         Event *newEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:context];
         
-        NSNumber *dateNumber = dict[@"start"];
+        NSNumber *dateNumber = dict[@"event_occurence"][@"start_time"];
                 
         newEvent.start = [NSDate dateWithTimeIntervalSince1970:[dateNumber doubleValue]];
         
-        newEvent.title = dict[@"title"];
-        newEvent.identifier = [NSString stringWithFormat:@"%@", dict[@"id"]];
+        newEvent.identifier = [NSString stringWithFormat:@"%@", dict[@"event_occurence"][@"id"]];
         
         return newEvent;
     } else {

@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0578973A18F487A300C513C5 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0578973918F487A300C513C5 /* Event.m */; };
+		05582AC418F72DCF00148951 /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC318F72DCF00148951 /* APIClient.m */; };
+		05582AC718F7331500148951 /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC618F7331500148951 /* Visitor.m */; };
+		05582ACA18F7331600148951 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC918F7331600148951 /* User.m */; };
+		05582ACD18F7331600148951 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582ACC18F7331600148951 /* Event.m */; };
 		0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2AF18F4561200D02D78 /* Event+Methods.m */; };
-		0589F2B118F45BDB00D02D78 /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA536218F450A800948310 /* Visitor.m */; };
 		0589F2B418F45D7700D02D78 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2B318F45D7700D02D78 /* EventsTableViewController.m */; };
 		05EA535018F44BB100948310 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EA534F18F44BB100948310 /* CoreData.framework */; };
 		05EA535318F44BE300948310 /* ShortPath.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EA535118F44BE300948310 /* ShortPath.xcdatamodeld */; };
@@ -63,8 +65,14 @@
 /* Begin PBXFileReference section */
 		0073ECE0EDAC4C3C8FB7BE0B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		01787EEBDFC44B7EB2652066 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		0578973818F487A300C513C5 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		0578973918F487A300C513C5 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		05582AC218F72DCF00148951 /* APIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIClient.h; sourceTree = "<group>"; };
+		05582AC318F72DCF00148951 /* APIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIClient.m; sourceTree = "<group>"; };
+		05582AC518F7331500148951 /* Visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
+		05582AC618F7331500148951 /* Visitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitor.m; sourceTree = "<group>"; };
+		05582AC818F7331600148951 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		05582AC918F7331600148951 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		05582ACB18F7331600148951 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		05582ACC18F7331600148951 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		0589F2AE18F4561200D02D78 /* Event+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+Methods.h"; sourceTree = "<group>"; };
 		0589F2AF18F4561200D02D78 /* Event+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+Methods.m"; sourceTree = "<group>"; };
 		0589F2B218F45D7700D02D78 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsTableViewController.h; sourceTree = "<group>"; };
@@ -73,8 +81,6 @@
 		05EA535218F44BE300948310 /* ShortPath.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShortPath.xcdatamodel; sourceTree = "<group>"; };
 		05EA535518F44F2300948310 /* ShortPathDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortPathDataStore.h; sourceTree = "<group>"; };
 		05EA535618F44F2300948310 /* ShortPathDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortPathDataStore.m; sourceTree = "<group>"; };
-		05EA536118F450A800948310 /* Visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
-		05EA536218F450A800948310 /* Visitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitor.m; sourceTree = "<group>"; };
 		2502C8BF18EF5AE600329B9F /* VisitorsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitorsVC.h; sourceTree = "<group>"; };
 		2502C8C018EF5AE600329B9F /* VisitorsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitorsVC.m; sourceTree = "<group>"; };
 		2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewVisitorVC.h; sourceTree = "<group>"; };
@@ -153,14 +159,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05582AC118F72D9800148951 /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				05582AC218F72DCF00148951 /* APIClient.h */,
+				05582AC318F72DCF00148951 /* APIClient.m */,
+			);
+			name = APIClient;
+			sourceTree = "<group>";
+		};
 		05EA535418F44BFC00948310 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				05EA535118F44BE300948310 /* ShortPath.xcdatamodeld */,
-				0578973818F487A300C513C5 /* Event.h */,
-				0578973918F487A300C513C5 /* Event.m */,
-				05EA536118F450A800948310 /* Visitor.h */,
-				05EA536218F450A800948310 /* Visitor.m */,
+				05582ACB18F7331600148951 /* Event.h */,
+				05582ACC18F7331600148951 /* Event.m */,
+				05582AC818F7331600148951 /* User.h */,
+				05582AC918F7331600148951 /* User.m */,
+				05582AC518F7331500148951 /* Visitor.h */,
+				05582AC618F7331500148951 /* Visitor.m */,
 				0589F2AE18F4561200D02D78 /* Event+Methods.h */,
 				0589F2AF18F4561200D02D78 /* Event+Methods.m */,
 				05EA535518F44F2300948310 /* ShortPathDataStore.h */,
@@ -183,6 +200,7 @@
 		2E3B256D18EB0F780090336C = {
 			isa = PBXGroup;
 			children = (
+				05582AC118F72D9800148951 /* APIClient */,
 				05EA535418F44BFC00948310 /* Model */,
 				2E3B257F18EB0F780090336C /* ShortPath */,
 				2E3B259E18EB0F780090336C /* ShortPathTests */,
@@ -442,11 +460,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0589F2B118F45BDB00D02D78 /* Visitor.m in Sources */,
+				05582ACD18F7331600148951 /* Event.m in Sources */,
+				05582AC418F72DCF00148951 /* APIClient.m in Sources */,
 				4531B01E18EF51C700DA0CD4 /* CalendarContainerViewController.m in Sources */,
+				05582AC718F7331500148951 /* Visitor.m in Sources */,
 				45B136DF18F70F9400A3302E /* CreateEventForExistingVisitorTVC.m in Sources */,
 				4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */,
 				0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */,
+				05582ACA18F7331600148951 /* User.m in Sources */,
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
 				2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */,
 				2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */,
@@ -456,7 +477,6 @@
 				2E5FB06818EE0936004CE912 /* FISTabBarControllerViewController.m in Sources */,
 				05EA535318F44BE300948310 /* ShortPath.xcdatamodeld in Sources */,
 				4546B9D118EC563600388603 /* CalendarViewController.m in Sources */,
-				0578973A18F487A300C513C5 /* Event.m in Sources */,
 				45B136D918F70BD400A3302E /* EventDetailTableViewController.m in Sources */,
 				45B136E218F7109C00A3302E /* CreateEventForNewVisitorTVC.m in Sources */,
 				45B136DC18F70BF900A3302E /* EventInviteesTableViewController.m in Sources */,

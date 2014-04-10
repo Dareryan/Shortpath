@@ -2,7 +2,7 @@
 //  Visitor.h
 //  ShortPath
 //
-//  Created by Nadia Yudina on 4/8/14.
+//  Created by Nadia Yudina on 4/10/14.
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
@@ -13,11 +13,11 @@
 
 @interface Visitor : NSManagedObject
 
+@property (nonatomic, retain) NSString * company;
+@property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSString * lastName;
-@property (nonatomic, retain) NSString * company;
 @property (nonatomic, retain) NSString * phone;
-@property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) Event *event;
 
 @end

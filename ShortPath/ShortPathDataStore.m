@@ -35,26 +35,6 @@
     return _sharedDataStore;
 }
 
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
-        fetchRequest.fetchBatchSize = 20;
-        NSSortDescriptor *fullnameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-        fetchRequest.sortDescriptors = @[fullnameDescriptor];
-        
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"fetchResultsCache"];
-        [self.fetchedResultsController performFetch:nil];
-        
-        _eventDicts = @[@{@"start": @(1396944000), @"title": @"first event", @"id": @(416064)},
-                            @{@"start": @(1396375200), @"title": @"second event", @"id": @(416065)},
-                            @{@"start": @(1396375200), @"title": @"third event", @"id": @(416066)}];
-    }
-    return self;
-}
-
 - (void)saveContext
 {
     NSError *error = nil;
@@ -69,14 +49,6 @@
     }
 }
 
-
-- (void)addEventsToContext
-{
-    for (NSDictionary *dict in self.eventDicts) {
-        [Event addEventFromDict:dict
-                      ToContext:self.managedObjectContext];
-    }
-}
 
 #pragma mark - Core Data stack
 

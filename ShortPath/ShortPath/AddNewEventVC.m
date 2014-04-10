@@ -60,10 +60,20 @@
 //    [self.tableView registerClass:[DateCell class] forCellReuseIdentifier:@"dateCell"];
 }
 
-- (void)didReceiveMemoryWarning
+-(void)viewDidAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewDidAppear:animated];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
+    
+    self.startDateCell.textLabel.text = @"Start Date";
+    self.endDateCell.textLabel.text = @"End Date";
+    self.startDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.startDatePicker.date];
+    self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
+    [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    
 }
 
 #pragma mark - Table view data source
@@ -181,6 +191,38 @@
     
     
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    if (indexPath.section ==1 && indexPath.row ==1) {
+        
+        if (self.isEditingStartDate)
+        {
+            return 225.0;
+        }
+        else
+        {
+            return 0.0;
+        }
+    }
+    
+    if (indexPath.section ==2 && indexPath.row == 1) {
+        if (self.isEditingEndDate) {
+            
+            return 225.0;
+            
+        }
+        else{
+            return 0;
+            
+        }
+    }
+    
+    return self.tableView.rowHeight;
+}
+
 
 
 - (IBAction)cancelTapped:(id)sender {

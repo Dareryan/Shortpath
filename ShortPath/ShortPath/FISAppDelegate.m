@@ -16,10 +16,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    self.dataStore = [ShortPathDataStore sharedDataStore];
-
-    [self.dataStore addEventsToContext];
-    
+      
     // Override point for customization after application launch.
     
     //Create Nav VC here

@@ -610,8 +610,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="wCK-Z3-qDA"/>
+                    <size key="freeformSize" width="320" height="1000"/>
                     <connections>
+                        <outlet property="arrivalDatePicker" destination="QrR-Ha-tNI" id="qQn-8v-7QQ"/>
                         <outlet property="arrivalTimeCell" destination="CI6-tQ-qEz" id="MCt-XI-GRN"/>
+                        <outlet property="departureDatePicker" destination="fHu-Pv-7gF" id="NOW-eA-RWz"/>
                         <outlet property="departureTimeCell" destination="tZf-Hy-gRm" id="UTD-fJ-12s"/>
                         <outlet property="nameCell" destination="TQ4-t1-0dm" id="QYO-6V-KKn"/>
                     </connections>

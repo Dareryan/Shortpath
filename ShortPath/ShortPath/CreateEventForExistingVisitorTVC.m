@@ -14,6 +14,10 @@
 - (IBAction)arrivalDateDidChange:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableViewCell *departureTimeCell;
 - (IBAction)departureDateDidChange:(id)sender;
+@property (weak, nonatomic) IBOutlet UIDatePicker *arrivalDatePicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *departureDatePicker;
+@property (nonatomic) BOOL arrivalTimeIsEditing;
+@property (nonatomic) BOOL departureTimeIsEditing;
 
 
 @end
@@ -33,11 +37,30 @@
 {
     [super viewDidLoad];
     
+    self.arrivalTimeIsEditing = NO;
+    self.isEditingEndDateCell = NO;
+    
+    [self.datePicker setHidden:YES];
+    [self.endDatePicker setHidden:YES];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
+    
+    self.arrivalTimeCell.textLabel.text = @"Arrival";
+    self.arrivalTimeCell.textLabel.text = @"Departure";
+    self.arrivalTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.arrivalDatePicker.date];
+    self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
+    [self.arrivalTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
 
 - (void)didReceiveMemoryWarning

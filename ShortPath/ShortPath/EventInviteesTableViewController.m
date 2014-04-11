@@ -9,6 +9,7 @@
 #import "EventInviteesTableViewController.h"
 #import "ShortPathDataStore.h"
 #import "Event+Methods.h"
+#import "Visitor+Methods.h"
 
 @interface EventInviteesTableViewController ()
 
@@ -25,20 +26,24 @@
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
+    
+    
+    [self getVisitorsForEvent:self.event];
+    
 }
 
 //here goes API call????
-- (NSArray *)getVisitorsForEvent: (Event *)event
+- (void)getVisitorsForEvent: (Event *)event
 {
     NSFetchRequest *eventsRequest = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
     
-    NSPredicate *filter = [NSPredicate predicateWithFormat:@"identifier", event.identifier];
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"identifier=%@", event.identifier];
     
     eventsRequest.predicate = filter;
     
-    Event *event = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
+    Event *currentEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
     
-    self.visitors = [event.visitors allObjects];
+    self.visitors = [currentEvent.visitors allObjects];
     
 }
 
@@ -53,8 +58,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    
     return [self.visitors count];
 }
 
@@ -62,6 +65,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    Visitor *visitor = self.visitors[indexPath.row];
+    
+    cell.textLabel.text = visitor.firstName;
     
     return cell;
 }

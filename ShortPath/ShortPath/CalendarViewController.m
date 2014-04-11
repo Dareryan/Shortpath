@@ -10,6 +10,8 @@
 #import <FontAwesomeKit.h>
 #import "FISViewController.h"
 #import "ShortPathDataStore.h"
+#import "Event+Methods.h"
+#import "Visitor+Methods.h"
 
 @interface CalendarViewController ()
 
@@ -19,6 +21,22 @@
 
 @implementation CalendarViewController
 
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.dataStore = [ShortPathDataStore sharedDataStore];
+   
+}
 
 - (void)eventsToCoreData
 {
@@ -40,6 +58,7 @@
 - (void)removeEventsFromCoreData
 {
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+    
     NSArray *events = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil];
     
     for (NSManagedObject *ev in events) {
@@ -50,18 +69,22 @@
 
 }
 
-
-- (void)viewDidLoad
+- (void)addFakeVisitorsToEventForApr13th: (NSManagedObjectContext *)cont
 {
-    [super viewDidLoad];
+    NSFetchRequest *eventsRequest = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
     
-    self.dataStore = [ShortPathDataStore sharedDataStore];
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"identifier==%@", @"593716"];
     
-    //[self eventsToCoreData];
+    eventsRequest.predicate = filter;
+    
+    Event *targetEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
+    
+    Visitor *bob = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
+    bob.firstName = @"Bob";
+    
+    [targetEvent addVisitorsObject:bob];
     
 }
-
-
 
 -(void)viewDidAppear:(BOOL)animated
 

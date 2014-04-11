@@ -4,7 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-AFOAuth2Client.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-FontAwesomeKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TapkuLibrary.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +32,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>657BC083BEA247B19F63336B</key>
+		<key>086724A0D9774DA38B1262AF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E642C822E3C14E018B6801B0</key>
+		<key>35C5B486182040AF83C69AE2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>55D7E0959E544C86BBF8A744</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5C4DFDDA354C45BDAB5AF1C8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>61EC6FD24AC14332AFC5CBD6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>80B4C916EA4149CBBDD3B20B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B002E77CF36D4FFE969903A9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F3927E9D518640DB8329438B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE342F4BCFE94E10A72E90B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF5DA490A36D49FDA2981D8C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

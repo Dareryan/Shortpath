@@ -18,6 +18,8 @@ PODS:
   - AFNetworking/UIKit (2.2.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - AFOAuth2Client (0.1.1):
+    - AFNetworking (~> 2.0)
   - FontAwesomeKit (2.1.5):
     - FontAwesomeKit/Core
     - FontAwesomeKit/FontAwesome
@@ -37,15 +39,19 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - AFOAuth2Client (from `https://github.com/mlwelles/AFOAuth2Client.git`)
   - FontAwesomeKit (~> 2.1.0)
   - TapkuLibrary (from `https://github.com/joystate/tapkulibrary.git`)
 
 EXTERNAL SOURCES:
+  AFOAuth2Client:
+    :git: https://github.com/mlwelles/AFOAuth2Client.git
   TapkuLibrary:
     :git: https://github.com/joystate/tapkulibrary.git
 
 SPEC CHECKSUMS:
   AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
+  AFOAuth2Client: 05536bd4175add72e7efcb6b749d4e9685ed02f7
   FontAwesomeKit: 7d935e100337d503bdaefde2ea16be740b81ed13
   TapkuLibrary: 187d3cd6b9b68064105954afe534f962611b6d48
 

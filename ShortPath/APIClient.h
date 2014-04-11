@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User+Methods.h"
 
 @interface APIClient : NSObject
 
-+(APIClient *) sharedInstance;
+-(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock;
+
+- (void)fetchEventsForUser: (User *)user Completion: (void(^)(NSArray *))completionBlock;
 
 @end

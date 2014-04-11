@@ -24,9 +24,6 @@
 {
     [super viewDidAppear:animated];
     
-   
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificatonReceived:) name:@"dateNotif" object:nil];
     
 }

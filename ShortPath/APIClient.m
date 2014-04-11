@@ -7,65 +7,77 @@
 //
 
 #import "APIClient.h"
-#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking.h>
+
 
 
 @interface APIClient ()
 
-@property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (strong, nonatomic) NSString *token;
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 
 @end
 
 @implementation APIClient
 
--(void)singletonInit
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.token = [defaults objectForKey:@"token"];
-}
-
-+(APIClient *) sharedInstance
-{
-    static APIClient *_sharedInstance = nil;
-    
-    static dispatch_once_t oncePredicate;
-    dispatch_once(&oncePredicate, ^{
-        _sharedInstance = [[self alloc] init];
-        [_sharedInstance singletonInit];
-    });
-    
-    return _sharedInstance;
-}
-
 - (AFHTTPSessionManager *)manager
 {
     if (!_manager) {
         _manager = [AFHTTPSessionManager manager];
+        [_manager.requestSerializer setValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
+        
+        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        securityPolicy.allowInvalidCertificates=YES;
+        _manager.securityPolicy=securityPolicy;
     }
     return _manager;
 }
 
--(void)fetchUserInfo
+
+-(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock
 {
     
+    //AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    //[self.manager.requestSerializer setValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
+    
+//    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+//    securityPolicy.allowInvalidCertificates=YES;
+//    self.manager.securityPolicy=securityPolicy;
+    
+    NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
+
+    
+    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSDictionary *dict = responseObject[@"user"];
+        completionBlock(dict);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error on API call %@", error);
+    }];
+
+}
+
+- (void)fetchEventsForUser: (User *)user Completion: (void(^)(NSArray *))completionBlock
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events", user.group_id];
+    
+    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray *eventDicts = responseObject;
+        
+        NSLog(@"%@", responseObject);
+        
+        completionBlock(eventDicts);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error on API call %@", error);
+    }];
 }
 
 
 
-
-//- (void)fetchInterestingPhotosWithCompletion: (void(^)(NSArray *))completionBlock
-//{
-//    NSString *URLString = [NSString stringWithFormat:@"%@/?method=flickr.interestingness.getList&api_key=%@&%@", BASE_URL, FlickrAPIKey, PARAMS];
-//    
-//    [self.manager GET:URLString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-//        
-//        NSArray *photos = responseObject[@"photos"][@"photo"];
-//        
-//        completionBlock(photos);
-//        
-//    } failure:nil];
-//}
 
 
 @end

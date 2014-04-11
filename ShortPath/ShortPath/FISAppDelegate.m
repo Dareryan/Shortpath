@@ -9,6 +9,7 @@
 #import "FISAppDelegate.h"
 #import "FISTabBarControllerViewController.h"
 #import "FISViewController.h"
+#import "APIClient.h"
 
 #import "Visitor.h"
 
@@ -18,7 +19,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-      
+//    APIClient *cl = [[APIClient alloc]init];
+//    
+//    [cl fetchUserInfoWithCompletion:^(NSDictionary *dict) {
+//        NSLog(@"%@", dict);
+//    }];
+    
     // Override point for customization after application launch.
     
     //Create Nav VC here

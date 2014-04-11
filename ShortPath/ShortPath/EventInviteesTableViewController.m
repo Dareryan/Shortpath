@@ -7,65 +7,65 @@
 //
 
 #import "EventInviteesTableViewController.h"
+#import "ShortPathDataStore.h"
+#import "Event+Methods.h"
 
 @interface EventInviteesTableViewController ()
+
+@property (strong, nonatomic) NSArray *visitors;
+@property (strong, nonatomic) ShortPathDataStore *dataStore;
 
 @end
 
 @implementation EventInviteesTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.dataStore = [ShortPathDataStore sharedDataStore];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
+//here goes API call????
+- (NSArray *)getVisitorsForEvent: (Event *)event
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSFetchRequest *eventsRequest = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+    
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"identifier", event.identifier];
+    
+    eventsRequest.predicate = filter;
+    
+    Event *event = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
+    
+    self.visitors = [event.visitors allObjects];
+    
 }
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+
+    
+    return [self.visitors count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

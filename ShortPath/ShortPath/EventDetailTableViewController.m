@@ -7,6 +7,7 @@
 //
 
 #import "EventDetailTableViewController.h"
+#import "EventInviteesTableViewController.h"
 
 @interface EventDetailTableViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *titleCell;
@@ -39,6 +40,15 @@
     //[formatter setDateStyle:NSDateFormatterShortStyle];
     NSString *dateString = [formatter stringFromDate:date];
     return dateString;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    EventInviteesTableViewController *inviteesVC = [segue destinationViewController];
+    
+    inviteesVC.event = self.event;
+    
 }
 
 

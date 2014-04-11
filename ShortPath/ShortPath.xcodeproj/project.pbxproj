@@ -290,6 +290,8 @@
 		4546B9CE18EC550D00388603 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2502C8BF18EF5AE600329B9F /* VisitorsVC.h */,
+				2502C8C018EF5AE600329B9F /* VisitorsVC.m */,
 				4546B9CF18EC563600388603 /* CalendarViewController.h */,
 				4546B9D018EC563600388603 /* CalendarViewController.m */,
 				4531B01C18EF51C700DA0CD4 /* CalendarContainerViewController.h */,
@@ -313,8 +315,6 @@
 				4546B9D318EC565A00388603 /* SettingsTableViewController.m */,
 				2E3B258E18EB0F780090336C /* FISViewController.h */,
 				2E3B258F18EB0F780090336C /* FISViewController.m */,
-				2502C8BF18EF5AE600329B9F /* VisitorsVC.h */,
-				2502C8C018EF5AE600329B9F /* VisitorsVC.m */,
 				2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */,
 				2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */,
 				25127E9F18F5FAB7008BB7C1 /* AddNewEventVC.h */,

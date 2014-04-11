@@ -17,8 +17,6 @@
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSArray *visitors;
 @property (strong, nonatomic) NSArray *letters;
@@ -27,7 +25,10 @@
 
 @property (strong, nonatomic) NSMutableArray *searchResults;
 
-- (IBAction)addNewVisitor:(id)sender;
+@property (strong, nonatomic) UISearchBar *searchBar;
+@property (strong, nonatomic) UISearchDisplayController *searchController;
+
+
 
 
 @end
@@ -36,33 +37,26 @@
 
 @implementation VisitorsVC
 
-
 #pragma mark - Lifecycle methods
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    
-    self.searchBar.delegate = self;
-    self.searchDisplayController.delegate = self;
-    self.searchDisplayController.searchResultsDataSource = self;
-    self.searchDisplayController.searchResultsDelegate = self;
-    
+    [self setupSearch];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"Visitor"];
+    
     self.visitors = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil];
     
     self.searchResults = [NSMutableArray arrayWithCapacity:[self.visitors count]];
     
     self.sections = [[NSMutableDictionary alloc] init];
     
-    self.letters = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
+    //self.letters = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
     
     [self createSectionToVisitorsDictionary];
 
@@ -86,6 +80,24 @@
     }
     
 }
+
+- (void)setupSearch {
+    
+    // create a new Search Bar and add it to the table view
+    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)];
+    self.tableView.tableHeaderView = self.searchBar;
+    
+    // we need to be the delegate so the cancel button works
+    self.searchBar.delegate = self;
+    
+    // create the Search Display Controller with the above Search Bar
+    self.searchController = [[UISearchDisplayController alloc]initWithSearchBar:self.searchBar contentsController:self];
+    self.searchController.delegate = self;
+    self.searchController.searchResultsDataSource = self;
+    self.searchController.searchResultsDelegate = self;
+    
+}
+
 
 
 -(UITabBarItem *)tabBarItem
@@ -136,18 +148,19 @@
     }
 }
 
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-{
-    return self.letters;
-    //    return [[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-}
+//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+//{
+//    return self.letters;
+//    //    return [[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"visitorCell" forIndexPath:indexPath];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"visitorCell"];
     }
     
 
@@ -180,18 +193,21 @@
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"firstName contains[c] %@", searchText];
     
     self.searchResults = [NSMutableArray arrayWithArray:[self.visitors filteredArrayUsingPredicate:resultPredicate]];
+
 }
 
 
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    NSLog(@"%@", searchString);
+    //NSLog(@"Letter %@", searchString);
     
     [self filterContentForSearchText:searchString
                                scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
                                       objectAtIndex:[self.searchDisplayController.searchBar
                                                      selectedScopeButtonIndex]]];
+    
+    //NSLog(@"Results %@", self.searchResults);
     
     return YES;
 }

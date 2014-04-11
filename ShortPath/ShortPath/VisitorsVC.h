@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VisitorsVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface VisitorsVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
 @end

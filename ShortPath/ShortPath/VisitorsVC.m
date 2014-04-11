@@ -143,15 +143,17 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     }
     
-    // Configure the cell...
+
     Visitor *visitor;
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
         visitor = [self.searchResults objectAtIndex:indexPath.row];
+        
         cell.textLabel.text = @"result";
-    }
-    else {
+        
+    } else {
+        
        visitor = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
         
         cell.textLabel.text = visitor.firstName;
@@ -165,6 +167,27 @@
 
 
 #pragma mark - Content Filtering
+
+- (void)filterContentForSearchText:(NSString *)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"firstName contains[c] %@", searchText];
+    
+    self.searchResults = [NSMutableArray arrayWithArray:[self.visitors filteredArrayUsingPredicate:resultPredicate]];
+}
+
+
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
+}
+
+
 
 //- (void)updateFilteredContentForSearchString:(NSString *)searchString productType:(NSString *)type
 //{

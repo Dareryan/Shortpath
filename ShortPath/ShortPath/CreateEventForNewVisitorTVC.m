@@ -59,8 +59,8 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-    self.startDateCell.textLabel.text = @"Start Date";
-    self.endDateCell.textLabel.text = @"End Date";
+    self.startDateCell.textLabel.text = @"Arrival";
+    self.endDateCell.textLabel.text = @"Departure";
     self.startDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.startDatePicker.date];
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
@@ -200,7 +200,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-    self.startDateCell.textLabel.text = @"Start Date";
+    self.startDateCell.textLabel.text = @"Arrival";
     self.startDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.startDatePicker.date];
     [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
@@ -210,14 +210,50 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-    self.endDateCell.textLabel.text = @"End Date";
+    self.endDateCell.textLabel.text = @"Departure";
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if ([self.firstNameTextField.text isEqualToString:@""] && [self.lastNameTextField.text isEqualToString:@""] && [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    else if ([self.firstNameTextField.text isEqualToString:@""] && [self.lastNameTextField.text isEqualToString:@""]){
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first and last name" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+
+    }
+    else if ([self.firstNameTextField.text isEqualToString:@""]) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order add a new visitor, you must enter a first name." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    else if ([self.lastNameTextField.text isEqualToString:@""]){
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order add a new visitor, you must enter a last name." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    else if ([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        
+    }
+    else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)){
+        
+        /*
+         Add code to insert event and visitor object into coredata. Event title should be set to [NSString stringWithFormat:@"%@ %@ visits", self.firstNameTextField.text, self.lastNameTextField.text];
+         */
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        
+    }
+
+    
+    
+   
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {

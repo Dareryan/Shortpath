@@ -235,7 +235,7 @@
 
 - (IBAction)doneTapped:(id)sender {
     
-    if ([self.titleLabel.text isEqualToString:@""] && [self.startDateCell.detailTextLabel.text isEqualToString:self.endDateCell.detailTextLabel.text]) {
+    if ([self.titleLabel.text isEqualToString:@""] && [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a title and valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
@@ -244,12 +244,12 @@
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a title." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
-     else if ([self.startDateCell.detailTextLabel.text isEqualToString:self.endDateCell.detailTextLabel.text]) {
+     else if ([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
          UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
          [alertView show];
 
     }
-    if(![self.titleLabel.text isEqualToString:@""] && ![self.startDateCell.detailTextLabel.text isEqualToString:self.endDateCell.detailTextLabel.text]){
+    else if(![self.titleLabel.text isEqualToString:@""] && ![self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0){
        
         //Create and Add New Event Object Here
         

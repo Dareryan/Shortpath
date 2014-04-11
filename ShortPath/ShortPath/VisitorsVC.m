@@ -25,6 +25,8 @@
 
 @property (strong, nonatomic) NSMutableArray *searchResults;
 
+@property (strong, nonatomic) NSFetchedResultsController *
+
 - (IBAction)addNewVisitor:(id)sender;
 
 
@@ -52,7 +54,7 @@
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
-    [self.dataStore fetchVisitors];
+    [self.dataStore fetchedResultsController];
     
     self.searchResults = [NSMutableArray arrayWithCapacity:[self.visitors count]];
     

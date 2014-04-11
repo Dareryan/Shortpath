@@ -18,9 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    self.dataStore = [ShortPathDataStore sharedDataStore];
+    ShortPathDataStore *dataStore = [ShortPathDataStore sharedDataStore];
 
-    [self.dataStore addEventsToContext];
+    [dataStore addEventsToContext];
     
     // Override point for customization after application launch.
     
@@ -39,23 +39,24 @@
 //    self.window.rootViewController = navVC;
 //    [self.window makeKeyAndVisible];
 
-    Visitor *eugene = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    
+    Visitor *eugene = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:dataStore.managedObjectContext];
     eugene.firstName = @"Eugene";
     eugene.lastName = @"Watson";
     
-    Visitor *bram = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    Visitor *bram = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:dataStore.managedObjectContext];
     bram.firstName = @"Bram";
     bram.lastName = @"Vandevelde";
     
-    Visitor *dare = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    Visitor *dare = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:dataStore.managedObjectContext];
     dare.firstName = @"Dare";
     dare.lastName = @"Ryan";
     
-    Visitor *nadia = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    Visitor *nadia = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:dataStore.managedObjectContext];
     nadia.firstName = @"Nadia";
     nadia.lastName = @"Yudina";
     
-    [self.dataStore saveContext];
+    [dataStore saveContext];
 
     return YES;
 

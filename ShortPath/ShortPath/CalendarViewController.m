@@ -38,53 +38,6 @@
    
 }
 
-- (void)eventsToCoreData
-{
-    __weak typeof(self) weakSelf = self;
-    
-    [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
-        
-        [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
-            
-            [user addEventsObject:event];
-            
-            [weakSelf.dataStore saveContext];
-        }];
-        
-    }];
-
-}
-
-- (void)removeEventsFromCoreData
-{
-    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
-    
-    NSArray *events = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil];
-    
-    for (NSManagedObject *ev in events) {
-        
-        [self.dataStore.managedObjectContext deleteObject:ev];
-        [self.dataStore saveContext];
-    }
-
-}
-
-- (void)addFakeVisitorsToEventForApr13th: (NSManagedObjectContext *)cont
-{
-    NSFetchRequest *eventsRequest = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
-    
-    NSPredicate *filter = [NSPredicate predicateWithFormat:@"identifier==%@", @"593716"];
-    
-    eventsRequest.predicate = filter;
-    
-    Event *targetEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
-    
-    Visitor *bob = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
-    bob.firstName = @"Bob";
-    
-    [targetEvent addVisitorsObject:bob];
-    
-}
 
 -(void)viewDidAppear:(BOOL)animated
 
@@ -110,12 +63,6 @@
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 -(UITabBarItem *)tabBarItem
 {
     FAKIonIcons *tabIconUnselected = [FAKIonIcons ios7CalendarOutlineIconWithSize:30];
@@ -128,6 +75,58 @@
     
     return tabBarItem;
 }
+
+
+#pragma mark - helpers to populate core data
+
+- (void)eventsToCoreData
+{
+    __weak typeof(self) weakSelf = self;
+    
+    [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
+        
+        [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
+            
+            [user addEventsObject:event];
+            
+            [weakSelf.dataStore saveContext];
+        }];
+        
+    }];
+    
+}
+
+- (void)removeEventsFromCoreData
+{
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+    
+    NSArray *events = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil];
+    
+    for (NSManagedObject *ev in events) {
+        
+        [self.dataStore.managedObjectContext deleteObject:ev];
+        [self.dataStore saveContext];
+    }
+    
+}
+
+- (void)addFakeVisitorsToEventForApr13th: (NSManagedObjectContext *)cont
+{
+    NSFetchRequest *eventsRequest = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+    
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"identifier==%@", @"593716"];
+    
+    eventsRequest.predicate = filter;
+    
+    Event *targetEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
+    
+    Visitor *bob = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
+    bob.firstName = @"Bob";
+    
+    [targetEvent addVisitorsObject:bob];
+    
+}
+
 
 
 

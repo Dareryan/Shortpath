@@ -62,7 +62,11 @@
     } else {
         
         NSLog(@"There is no key");
+<<<<<<< HEAD
+//        [self presentViewController:loginVC animated:YES completion:nil];
+=======
         //[self presentViewController:loginVC animated:YES completion:nil];
+>>>>>>> 525c6da048d584ca7d044fe201de7402cfbc482e
         
     }
     
@@ -168,7 +172,7 @@
         [self.tabBarController.navigationController pushViewController:loginVC animated:YES];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults removeObjectForKey:@"key"];
+        [defaults removeObjectForKey:@"responseObject"];
         [defaults synchronize];
         NSLog(@"Key Deleted");
         

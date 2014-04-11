@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class Visitor;
 #import "User+Methods.h"
 
 @interface ShortPathDataStore : NSObject
@@ -24,5 +25,8 @@
 
 +(ShortPathDataStore*) sharedDataStore;
 
+
+- (NSInteger)numberOfVisitors;
+- (void)fetchVisitors;
 
 @end

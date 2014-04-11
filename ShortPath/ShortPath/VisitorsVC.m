@@ -8,11 +8,14 @@
 
 #import "VisitorsVC.h"
 #import <FontAwesomeKit.h>
+#import "ShortPathDataStore.h"
 #import "Visitor.h"
 #import "AddNewEventVC.h"
 #import "FISViewController.h"
 
 @interface VisitorsVC ()
+
+@property (strong, nonatomic) ShortPathDataStore *dataStore;
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -49,14 +52,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.visitors = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"visitors" ofType:@"plist"]];
+    self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    [self.dataStore fetchVisitors];
     
     self.searchResults = [NSMutableArray arrayWithCapacity:[self.visitors count]];
     
     self.sections = [[NSMutableDictionary alloc] init];
     self.letters = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#"];
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     
     BOOL found;
     
@@ -152,7 +155,8 @@
         return [self.searchResults count];
     }
     else {
-        return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
+//        return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
+        return [self.dataStore numberOfVisitors];
     }
 }
 
@@ -164,7 +168,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"visitorCell" forIndexPath:indexPath];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];

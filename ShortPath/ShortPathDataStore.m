@@ -14,6 +14,7 @@
 @interface ShortPathDataStore ()
 
 @property (strong, nonatomic) NSArray *eventDicts;
+@property (strong, nonatomic) NSArray *visitors;
 @property (strong, nonatomic) APIClient *apiClient;
 
 @end
@@ -178,5 +179,16 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+- (NSInteger)numberOfVisitors
+{
+    return [self.visitors count];
+}
+
+- (void)fetchVisitors
+{
+    NSFetchRequest *visitorsFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Visitor"];
+    
+    self.visitors = [self.managedObjectContext executeFetchRequest:visitorsFetchRequest error:nil];
+}
 
 @end

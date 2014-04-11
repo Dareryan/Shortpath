@@ -11,6 +11,8 @@
 #import "FISViewController.h"
 #import "APIClient.h"
 
+#import "Visitor.h"
+
 
 @implementation FISAppDelegate
 
@@ -40,7 +42,24 @@
 //    self.window.rootViewController = navVC;
 //    [self.window makeKeyAndVisible];
 
+    Visitor *eugene = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    eugene.firstName = @"Eugene";
+    eugene.lastName = @"Watson";
     
+    Visitor *bram = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    bram.firstName = @"Bram";
+    bram.lastName = @"Vandevelde";
+    
+    Visitor *dare = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    dare.firstName = @"Dare";
+    dare.lastName = @"Ryan";
+    
+    Visitor *nadia = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    nadia.firstName = @"Nadia";
+    nadia.lastName = @"Yudina";
+    
+    [self.dataStore saveContext];
+
     return YES;
 
 }

@@ -230,6 +230,7 @@
 }
 
 - (IBAction)doneTapped:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
     //code
 }
 

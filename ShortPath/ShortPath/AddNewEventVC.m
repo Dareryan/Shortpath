@@ -7,6 +7,8 @@
 //
 
 #import "AddNewEventVC.h"
+#import "Event+Methods.h"
+
 
 
 @interface AddNewEventVC ()
@@ -25,6 +27,7 @@
 - (IBAction)endDatePickerValueChanged:(id)sender;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
+@property (weak, nonatomic) IBOutlet UITableViewCell *titleCell;
 
 @end
 
@@ -48,7 +51,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    self.titleTextField.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.isEditingStartDate = NO;
@@ -73,6 +76,7 @@
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    
     
 }
 
@@ -230,8 +234,36 @@
 }
 
 - (IBAction)doneTapped:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    //code
+    
+    if ([self.titleLabel.text isEqualToString:@""] && [self.startDateCell.detailTextLabel.text isEqualToString:self.endDateCell.detailTextLabel.text]) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a title and valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    else if ([self.titleLabel.text isEqualToString:@""]) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a title." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+     else if ([self.startDateCell.detailTextLabel.text isEqualToString:self.endDateCell.detailTextLabel.text]) {
+         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+         [alertView show];
+
+    }
+    if(![self.titleLabel.text isEqualToString:@""] && ![self.startDateCell.detailTextLabel.text isEqualToString:self.endDateCell.detailTextLabel.text]){
+       
+        //Create and Add New Event Object Here
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+
+    }
+    
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (IBAction)startDatePickerValueChanged:(id)sender {
@@ -246,7 +278,6 @@
 - (IBAction)endDatePickerValueChanged:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
-    
     self.endDateCell.textLabel.text = @"End Date";
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];

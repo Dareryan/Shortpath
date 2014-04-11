@@ -137,7 +137,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    if (self.searchDisplayController.active) {
         
         return [self.searchResults count];
         
@@ -166,7 +166,7 @@
 
     Visitor *visitor;
     
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    if (self.searchDisplayController.active) {
         
         visitor = [self.searchResults objectAtIndex:indexPath.row];
         

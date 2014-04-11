@@ -72,67 +72,68 @@
 
 
 /*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
+ - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+ 
+ // Configure the cell...
+ 
+ return cell;
+ }
+ */
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSIndexPath *topIP = [NSIndexPath indexPathForRow:1 inSection:5];
+    NSIndexPath *bottomIP = [NSIndexPath indexPathForRow:1 inSection:6];
     if(indexPath.section==5 && indexPath.row == 0)
     {
         self.isEditingStartDate = !self.isEditingStartDate;
@@ -142,56 +143,33 @@
             [self.startDatePicker setHidden:NO];
         }
         
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:5]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            [tableView reloadData];
-        }];
+        [self.tableView reloadRowsAtIndexPaths:@[topIP] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadData];
+        [tableView scrollToRowAtIndexPath:topIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
-    
     else if (indexPath.section == 6 && indexPath.row == 0) {
         self.isEditingEndDate = !self.isEditingEndDate;
         self.isEditingStartDate = NO;
+        
         if (self.isEditingEndDate){
             [self.endDatePicker setHidden:NO];
         }
-        
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:6]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            [tableView reloadData];
-        }];
-        
+        [self.tableView reloadRowsAtIndexPaths:@[bottomIP] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadData];
+        [tableView scrollToRowAtIndexPath:bottomIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     else{
-        
-        if (!(indexPath.section == 5 && indexPath.row ==1))
-        {
+        if (!(indexPath.section == 5 && indexPath.row ==1)){
             self.isEditingStartDate = NO;
-            
-            [UIView animateWithDuration:.4 animations:^{
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:5]] withRowAnimation:UITableViewRowAnimationFade];
-                
-                [tableView reloadData];
-            }];
-            
-            
-            
+            [self.tableView reloadRowsAtIndexPaths:@[topIP] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView reloadData];
         }
         if (!(indexPath.section == 6 && indexPath.row ==1)) {
             self.isEditingEndDate = NO;
-            
-            [UIView animateWithDuration:.4 animations:^{
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:6]] withRowAnimation:UITableViewRowAnimationFade];
-                
-                [tableView reloadData];
-            }];
-            
+            [self.tableView reloadRowsAtIndexPaths:@[bottomIP] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView reloadData];
         }
-        
     }
-    
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -199,33 +177,20 @@
     
     
     if (indexPath.section ==5 && indexPath.row ==1) {
-        
-        if (self.isEditingStartDate)
-        {
-            
+        if (self.isEditingStartDate){
             return 225.0;
-             [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        }
-        else
-        {
+        }else{
             return 0.0;
         }
     }
-    
     if (indexPath.section ==6 && indexPath.row == 1) {
         if (self.isEditingEndDate) {
-            
             return 225.0;
-             [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-           
-            
         }
         else{
             return 0;
-            
         }
     }
-    
     return self.tableView.rowHeight;
 }
 
@@ -248,7 +213,7 @@
     self.endDateCell.textLabel.text = @"End Date";
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
-
+    
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
@@ -256,6 +221,6 @@
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
-     [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

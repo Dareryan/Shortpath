@@ -9,6 +9,7 @@
 #import "EventsTableViewController.h"
 #import "ShortPathDataStore.h"
 #import "Event+Methods.h"
+#import "EventDetailTableViewController.h"
 
 @interface EventsTableViewController ()
 
@@ -31,32 +32,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.dataStore = [ShortPathDataStore sharedDataStore];
   
 }
 
-- (NSDate *)setTimeToMidnight: (NSDate *)date
+
+ - (NSArray *) returnStartAndEndOfGivenDate:(NSDate *)date
+
 {
-    NSTimeInterval interval = [date timeIntervalSince1970];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
     
-    CGFloat shift = interval - 14400;
+    NSDateComponents *dateComponents = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit |NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:date];
+    dateComponents.hour = 0;
+    dateComponents.minute = 0;
+    dateComponents.second = 0;
     
-    NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:shift];
-
-    return newDate;
+    NSDate *startDate = [calendar dateFromComponents:dateComponents];
+    
+    dateComponents.hour = 24;
+    
+    NSDate *endDate = [calendar dateFromComponents:dateComponents];
+    
+    NSArray *dates = @[startDate, endDate];
+    
+    return dates;
 }
-
-
-- (NSDate *)setTimeToEndOfDay: (NSDate *)date
-{
-    NSTimeInterval interval = [date timeIntervalSince1970];
-    
-    CGFloat shift = interval + 71999;
-    
-    NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:shift];
-    
-    return newDate;
-}
-
 
 
 - (void)notificatonReceived: (NSNotification *)notification
@@ -66,18 +67,19 @@
     
     self.selectedDate = dict[@"date"]; //epoch
     
-    NSDate *beginningOfDay = [self setTimeToMidnight:self.selectedDate];
-    NSDate *endOfDay = [self setTimeToEndOfDay:self.selectedDate];
+    NSArray *startAndEnd = [self returnStartAndEndOfGivenDate:self.selectedDate];
+    
+    NSDate *beginningOfDay = startAndEnd[0];
+    
+    NSDate *endOfDay = startAndEnd[1];
  
     NSFetchRequest *eventsRequest = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
 
-    NSPredicate *filter = [NSPredicate predicateWithFormat:@"(start >= %@) AND (start <= %@)", beginningOfDay, endOfDay];
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"(start >= %@) AND (start < %@)", beginningOfDay, endOfDay];
     
     eventsRequest.predicate = filter;
     
     self.eventsForDate = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil];
-    
-    //NSLog(@"Events for this date: %@", self.eventsForDate);
     
     [self.tableView reloadData];
 }
@@ -100,73 +102,24 @@
     
     Event *currentEvent = self.eventsForDate[indexPath.row];
     
-    cell.textLabel.text = currentEvent.title;
+    cell.textLabel.text = currentEvent.identifier;
     
     return cell;
 }
 
 
-//- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-//{
-//    Event *event = [self.dataStore.fetchedResultsController objectAtIndexPath:indexPath];
-//    cell.textLabel.text = event.title;
-//}
-//
-//#pragma mark - NSFetchedResultsControllerDelegate Methods
-//
-//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-//    [self.tableView beginUpdates];
-//}
-//
-//- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-//           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-//{
-//    switch(type) {
-//        case NSFetchedResultsChangeInsert:
-//            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//    }
-//}
-//
-//- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-//       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-//      newIndexPath:(NSIndexPath *)newIndexPath {
-//    
-//    UITableView *tableView = self.tableView;
-//    
-//    switch(type) {
-//            
-//        case NSFetchedResultsChangeInsert:
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeUpdate:
-//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
-//                    atIndexPath:indexPath];
-//            break;
-//            
-//        case NSFetchedResultsChangeMove:
-//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//                             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//    }
-//}
-//
-//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-//    [self.tableView endUpdates];
-//}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
+    
+    Event *event = self.eventsForDate[ip.row];
+    
+    EventDetailTableViewController *eventDetailVC = [segue destinationViewController];
+    
+    eventDetailVC.event = event;
+    
+}
 
 
 

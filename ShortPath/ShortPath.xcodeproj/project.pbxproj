@@ -10,8 +10,8 @@
 		05582AC418F72DCF00148951 /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC318F72DCF00148951 /* APIClient.m */; };
 		05582AC718F7331500148951 /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC618F7331500148951 /* Visitor.m */; };
 		05582ACA18F7331600148951 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC918F7331600148951 /* User.m */; };
-		05582ACD18F7331600148951 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582ACC18F7331600148951 /* Event.m */; };
 		05582AD018F733B600148951 /* User+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582ACF18F733B600148951 /* User+Methods.m */; };
+		05582B1418F82FB600148951 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582B1318F82FB600148951 /* Event.m */; };
 		0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2AF18F4561200D02D78 /* Event+Methods.m */; };
 		0589F2B418F45D7700D02D78 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2B318F45D7700D02D78 /* EventsTableViewController.m */; };
 		05EA535018F44BB100948310 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EA534F18F44BB100948310 /* CoreData.framework */; };
@@ -73,10 +73,10 @@
 		05582AC618F7331500148951 /* Visitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitor.m; sourceTree = "<group>"; };
 		05582AC818F7331600148951 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		05582AC918F7331600148951 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		05582ACB18F7331600148951 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		05582ACC18F7331600148951 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		05582ACE18F733B600148951 /* User+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Methods.h"; sourceTree = "<group>"; };
 		05582ACF18F733B600148951 /* User+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Methods.m"; sourceTree = "<group>"; };
+		05582B1218F82FB600148951 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		05582B1318F82FB600148951 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		0589F2AE18F4561200D02D78 /* Event+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+Methods.h"; sourceTree = "<group>"; };
 		0589F2AF18F4561200D02D78 /* Event+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+Methods.m"; sourceTree = "<group>"; };
 		0589F2B218F45D7700D02D78 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsTableViewController.h; sourceTree = "<group>"; };
@@ -176,9 +176,9 @@
 		05EA535418F44BFC00948310 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				05582B1218F82FB600148951 /* Event.h */,
+				05582B1318F82FB600148951 /* Event.m */,
 				05EA535118F44BE300948310 /* ShortPath.xcdatamodeld */,
-				05582ACB18F7331600148951 /* Event.h */,
-				05582ACC18F7331600148951 /* Event.m */,
 				05582AC818F7331600148951 /* User.h */,
 				05582AC918F7331600148951 /* User.m */,
 				05582ACE18F733B600148951 /* User+Methods.h */,
@@ -288,6 +288,14 @@
 		4546B9CE18EC550D00388603 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4546B9CF18EC563600388603 /* CalendarViewController.h */,
+				4546B9D018EC563600388603 /* CalendarViewController.m */,
+				4531B01C18EF51C700DA0CD4 /* CalendarContainerViewController.h */,
+				4531B01D18EF51C700DA0CD4 /* CalendarContainerViewController.m */,
+				0589F2B218F45D7700D02D78 /* EventsTableViewController.h */,
+				0589F2B318F45D7700D02D78 /* EventsTableViewController.m */,
+				45B136D718F70BD400A3302E /* EventDetailTableViewController.h */,
+				45B136D818F70BD400A3302E /* EventDetailTableViewController.m */,
 				2E3B258818EB0F780090336C /* FISAppDelegate.h */,
 				2E3B258918EB0F780090336C /* FISAppDelegate.m */,
 				2E3B258B18EB0F780090336C /* Main.storyboard */,
@@ -295,22 +303,14 @@
 				45B136E118F7109C00A3302E /* CreateEventForNewVisitorTVC.m */,
 				45B136DD18F70F9400A3302E /* CreateEventForExistingVisitorTVC.h */,
 				45B136DE18F70F9400A3302E /* CreateEventForExistingVisitorTVC.m */,
-				0589F2B218F45D7700D02D78 /* EventsTableViewController.h */,
-				0589F2B318F45D7700D02D78 /* EventsTableViewController.m */,
 				2E5FB06618EE0936004CE912 /* FISTabBarControllerViewController.h */,
 				2E5FB06718EE0936004CE912 /* FISTabBarControllerViewController.m */,
-				45B136D718F70BD400A3302E /* EventDetailTableViewController.h */,
-				45B136D818F70BD400A3302E /* EventDetailTableViewController.m */,
 				4546B9D218EC565A00388603 /* SettingsTableViewController.h */,
 				4546B9D318EC565A00388603 /* SettingsTableViewController.m */,
-				4546B9CF18EC563600388603 /* CalendarViewController.h */,
-				4546B9D018EC563600388603 /* CalendarViewController.m */,
 				2E3B258E18EB0F780090336C /* FISViewController.h */,
 				2E3B258F18EB0F780090336C /* FISViewController.m */,
 				45B136DA18F70BF900A3302E /* EventInviteesTableViewController.h */,
 				45B136DB18F70BF900A3302E /* EventInviteesTableViewController.m */,
-				4531B01C18EF51C700DA0CD4 /* CalendarContainerViewController.h */,
-				4531B01D18EF51C700DA0CD4 /* CalendarContainerViewController.m */,
 				2502C8BF18EF5AE600329B9F /* VisitorsVC.h */,
 				2502C8C018EF5AE600329B9F /* VisitorsVC.m */,
 				2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */,
@@ -469,7 +469,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05582ACD18F7331600148951 /* Event.m in Sources */,
 				05582AC418F72DCF00148951 /* APIClient.m in Sources */,
 				4531B01E18EF51C700DA0CD4 /* CalendarContainerViewController.m in Sources */,
 				05582AC718F7331500148951 /* Visitor.m in Sources */,
@@ -479,6 +478,7 @@
 				0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */,
 				05582ACA18F7331600148951 /* User.m in Sources */,
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
+				05582B1418F82FB600148951 /* Event.m in Sources */,
 				2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */,
 				2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */,
 				2E3B258618EB0F780090336C /* main.m in Sources */,

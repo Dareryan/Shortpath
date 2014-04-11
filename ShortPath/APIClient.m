@@ -51,9 +51,11 @@
     [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary *dict = responseObject[@"user"];
+        
         completionBlock(dict);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
         NSLog(@"Error on API call %@", error);
     }];
 
@@ -67,11 +69,10 @@
         
         NSArray *eventDicts = responseObject;
         
-        NSLog(@"%@", responseObject);
-        
         completionBlock(eventDicts);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
         NSLog(@"Error on API call %@", error);
     }];
 }

@@ -19,13 +19,35 @@
 
 @implementation CalendarViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+- (void)eventsToCoreData
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    __weak typeof(self) weakSelf = self;
+    
+    [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
+        
+        [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
+            
+            [user addEventsObject:event];
+            
+            [weakSelf.dataStore saveContext];
+        }];
+        
+    }];
+
+}
+
+- (void)removeEventsFromCoreData
+{
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+    NSArray *events = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil];
+    
+    for (NSManagedObject *ev in events) {
+        
+        [self.dataStore.managedObjectContext deleteObject:ev];
+        [self.dataStore saveContext];
     }
-    return self;
+
 }
 
 
@@ -35,27 +57,18 @@
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
-    __weak typeof(self) weakSelf = self;
+    //[self eventsToCoreData];
     
-    [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
-        
-        [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
-            
-            NSLog(@"event added");
-            
-            [user addEventsObject:event];
-            
-            [weakSelf.dataStore saveContext];
-        }];
-        
-    }];
-        
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    
-    
+
+
+-(void)viewDidAppear:(BOOL)animated
+
+{
+
     [super viewDidAppear:animated];
+    
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
     
@@ -94,15 +107,5 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

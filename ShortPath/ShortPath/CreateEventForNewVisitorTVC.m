@@ -202,7 +202,9 @@
         
         if (self.isEditingStartDate)
         {
+            
             return 225.0;
+             [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
         else
         {
@@ -214,6 +216,8 @@
         if (self.isEditingEndDate) {
             
             return 225.0;
+             [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+           
             
         }
         else{

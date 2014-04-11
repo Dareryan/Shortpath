@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddNewEventVC : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AddNewEventVC : UITableViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @end

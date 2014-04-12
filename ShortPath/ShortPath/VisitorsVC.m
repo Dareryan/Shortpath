@@ -26,6 +26,7 @@
 @property (strong, nonatomic) NSMutableArray *searchResults;
 
 @property (strong, nonatomic) UISearchBar *searchBar;
+
 @property (strong, nonatomic) UISearchDisplayController *searchController;
 
 
@@ -102,26 +103,20 @@
     // Return the number of sections.
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
+        
         return 1;
+        
     } else {
+        
         return [[self.sections allKeys] count];
     }
 
-    
-
-//    NSInteger number = 0;
-//    
-//    if (tableView == self.tableView) {
-//        
-//        number = [[self.sections allKeys] count];
-//    }
-//    return number;
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-//}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

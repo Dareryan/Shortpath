@@ -44,8 +44,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view
     
-    [self setupSearch];
-    
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"Visitor"];
@@ -81,24 +79,6 @@
     
 }
 
-- (void)setupSearch {
-    
-    // create a new Search Bar and add it to the table view
-    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)];
-    self.tableView.tableHeaderView = self.searchBar;
-    
-    // we need to be the delegate so the cancel button works
-    self.searchBar.delegate = self;
-    
-    // create the Search Display Controller with the above Search Bar
-    self.searchController = [[UISearchDisplayController alloc]initWithSearchBar:self.searchBar contentsController:self];
-    self.searchController.delegate = self;
-    self.searchController.searchResultsDataSource = self;
-    self.searchController.searchResultsDelegate = self;
-    
-}
-
-
 
 -(UITabBarItem *)tabBarItem
 {
@@ -120,24 +100,33 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    NSInteger number = 0;
     
-    if (tableView == self.tableView) {
-        
-        number = [[self.sections allKeys] count];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return 1;
+    } else {
+        return [[self.sections allKeys] count];
     }
-    return number;
+
+    
+
+//    NSInteger number = 0;
+//    
+//    if (tableView == self.tableView) {
+//        
+//        number = [[self.sections allKeys] count];
+//    }
+//    return number;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (self.searchDisplayController.active) {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
         
         return [self.searchResults count];
         
@@ -166,20 +155,18 @@
 
     Visitor *visitor;
     
-    if (self.searchDisplayController.active) {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
         
         visitor = [self.searchResults objectAtIndex:indexPath.row];
-        
-        cell.textLabel.text = @"result";
         
     } else {
         
        visitor = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-        
-        cell.textLabel.text = visitor.firstName;
+
     }
     
-    //    cell.detailTextLabel.text = @"testDetail";
+    cell.textLabel.text = visitor.firstName;
+
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;

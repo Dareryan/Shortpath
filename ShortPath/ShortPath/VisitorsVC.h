@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Event+Methods.h"
 
 @interface VisitorsVC : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate>
+
+@property (strong, nonatomic) Event *event;
 
 @end

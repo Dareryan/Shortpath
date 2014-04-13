@@ -12,6 +12,7 @@
 #import "Visitor+Methods.h"
 #import "AddNewEventVC.h"
 #import "FISViewController.h"
+#import "CreateEventForNewVisitorTVC.h"
 
 @interface VisitorsVC ()
 
@@ -58,6 +59,7 @@
     //self.letters = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
     
     [self createSectionToVisitorsDictionary];
+
 
 }
 
@@ -140,14 +142,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"visitorCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"visitorCell"];
     
     if (cell == nil) {
         
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"visitorCell"];
     }
     
-
     Visitor *visitor;
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
@@ -177,7 +178,6 @@
     self.searchResults = [NSMutableArray arrayWithArray:[self.visitors filteredArrayUsingPredicate:resultPredicate]];
 
 }
-
 
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
@@ -236,6 +236,8 @@
     }
     
 }
+
+
 
 
 @end

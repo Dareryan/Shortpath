@@ -174,6 +174,14 @@
 			name = APIClient;
 			sourceTree = "<group>";
 		};
+		05582B5918FA033900148951 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2E3B258B18EB0F780090336C /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		05EA535418F44BFC00948310 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +218,7 @@
 		2E3B256D18EB0F780090336C = {
 			isa = PBXGroup;
 			children = (
+				05582B5918FA033900148951 /* View */,
 				05582AC118F72D9800148951 /* APIClient */,
 				05EA535418F44BFC00948310 /* Model */,
 				2E3B257F18EB0F780090336C /* ShortPath */,
@@ -292,6 +301,8 @@
 			children = (
 				2502C8BF18EF5AE600329B9F /* VisitorsVC.h */,
 				2502C8C018EF5AE600329B9F /* VisitorsVC.m */,
+				2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */,
+				2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */,
 				4546B9CF18EC563600388603 /* CalendarViewController.h */,
 				4546B9D018EC563600388603 /* CalendarViewController.m */,
 				4531B01C18EF51C700DA0CD4 /* CalendarContainerViewController.h */,
@@ -304,7 +315,6 @@
 				45B136DB18F70BF900A3302E /* EventInviteesTableViewController.m */,
 				2E3B258818EB0F780090336C /* FISAppDelegate.h */,
 				2E3B258918EB0F780090336C /* FISAppDelegate.m */,
-				2E3B258B18EB0F780090336C /* Main.storyboard */,
 				45B136E018F7109C00A3302E /* CreateEventForNewVisitorTVC.h */,
 				45B136E118F7109C00A3302E /* CreateEventForNewVisitorTVC.m */,
 				45B136DD18F70F9400A3302E /* CreateEventForExistingVisitorTVC.h */,
@@ -315,8 +325,6 @@
 				4546B9D318EC565A00388603 /* SettingsTableViewController.m */,
 				2E3B258E18EB0F780090336C /* FISViewController.h */,
 				2E3B258F18EB0F780090336C /* FISViewController.m */,
-				2502C8C718EFC3F500329B9F /* AddNewVisitorVC.h */,
-				2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */,
 				25127E9F18F5FAB7008BB7C1 /* AddNewEventVC.h */,
 				25127EA018F5FAB7008BB7C1 /* AddNewEventVC.m */,
 			);
@@ -530,6 +538,7 @@
 				2E3B258C18EB0F780090336C /* Base */,
 			);
 			name = Main.storyboard;
+			path = ShortPath;
 			sourceTree = "<group>";
 		};
 		2E3B25A118EB0F780090336C /* InfoPlist.strings */ = {

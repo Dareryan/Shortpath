@@ -8,6 +8,8 @@
 
 #import "AddNewVisitorVC.h"
 #import "InputCell.h"
+#import "Visitor+Methods.h"
+#import "ShortPathDataStore.h"
 
 @interface AddNewVisitorVC ()
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
@@ -16,105 +18,53 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextFIeld;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 
+@property (strong, nonatomic) ShortPathDataStore *dataStore;
+
 - (IBAction)doneButtonPressed:(id)sender;
 
 @end
 
 @implementation AddNewVisitorVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+    
+    self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    self.firstNameTextField.placeholder = @"First Name";
+    self.lastNameTextField.placeholder = @"Last Name";
+    self.companyTextField.placeholder = @"Company";
+    self.phoneNumberTextFIeld.placeholder = @"Phone Number";
+    self.emailTextField.placeholder = @"Email Address";
+    
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
+//add to api
+- (void)createNewVisitorForEvent
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+    Visitor *newVisitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    newVisitor.firstName = self.firstNameTextField.text;
+    newVisitor.lastName = self.lastNameTextField.text;
+    newVisitor.company = self.companyTextField.text;
+    newVisitor.phone = self.phoneNumberTextFIeld.text;
+    newVisitor.email = self.emailTextField.text;
     
+    [self.event addVisitorsObject:newVisitor];
     
+    [self.dataStore saveContext];
 }
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-  
-    
-}
+
 #pragma mark - Table view data source
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 - (IBAction)doneButtonPressed:(id)sender {
     
-      [self.navigationController popViewControllerAnimated:YES];
+    //[self createNewVisitorForEvent];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 @end

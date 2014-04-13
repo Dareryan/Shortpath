@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Visitor+Methods.h"
 
 @interface CreateEventForExistingVisitorTVC : UITableViewController
+
+@property (strong, nonatomic) Visitor *visitor;
 
 @end

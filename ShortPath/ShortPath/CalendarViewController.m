@@ -35,6 +35,10 @@
     [super viewDidLoad];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    //[self eventsToCoreData];
+    
+    //[self addFakeVisitorsToEventForApr13th:self.dataStore.managedObjectContext];
    
 }
 
@@ -120,10 +124,12 @@
     
     Event *targetEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
     
-    Visitor *bob = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
-    bob.firstName = @"Bob";
+    Visitor *alice = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
+    alice.firstName = @"Alice";
     
-    [targetEvent addVisitorsObject:bob];
+    [targetEvent addVisitorsObject:alice];
+    
+    [self.dataStore saveContext];
     
 }
 

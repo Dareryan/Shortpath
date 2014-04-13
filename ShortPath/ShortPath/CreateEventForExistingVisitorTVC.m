@@ -7,6 +7,9 @@
 //
 
 #import "CreateEventForExistingVisitorTVC.h"
+#import "Event+Methods.h"
+#import "ShortPathDataStore.h"
+#import "User+Methods.h"
 
 @interface CreateEventForExistingVisitorTVC ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameCell;
@@ -19,34 +22,34 @@
 @property (nonatomic) BOOL arrivalTimeIsEditing;
 @property (nonatomic) BOOL departureTimeIsEditing;
 
+@property (strong, nonatomic) ShortPathDataStore *dataStore;
+
 
 @end
 
 @implementation CreateEventForExistingVisitorTVC
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (IBAction)doneButtonPressed:(id)sender
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    //[self createNewVisitorEvent];
+
 }
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.dataStore = [ShortPathDataStore sharedDataStore];
     
     self.arrivalTimeIsEditing = NO;
     self.departureTimeIsEditing = NO;
     
     [self.arrivalDatePicker setHidden:YES];
     [self.departureDatePicker setHidden:YES];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.nameCell.textLabel.text = self.visitor.firstName;
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -63,74 +66,29 @@
     [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
 
-- (void)didReceiveMemoryWarning
+
+-(void)createNewVisitorEvent
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
-
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
-    return cell;
+    User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+    
+    Event *visitorsEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
+    
+    visitorsEvent.start = self.arrivalDatePicker.date;
+    visitorsEvent.end = self.departureDatePicker.date;
+    visitorsEvent.title = [NSString stringWithFormat:@"Meeting with: %@", self.visitor.firstName];
+    
+    [visitorsEvent addVisitorsObject:self.visitor];
+    [user addEventsObject:visitorsEvent];
+    
+    [self.dataStore saveContext];
+ 
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -175,8 +133,6 @@
                 
                 [tableView reloadData];
             }];
-            
-            
             
         }
         if (!(indexPath.section == 2 && indexPath.row ==1)) {
@@ -236,6 +192,8 @@
     self.arrivalTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.arrivalDatePicker.date];
     [self.arrivalTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
+
+
 - (IBAction)departureDateDidChange:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];

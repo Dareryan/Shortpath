@@ -7,8 +7,13 @@
 //
 
 #import "CreateEventForNewVisitorTVC.h"
+#import "Visitor+Methods.h"
+#import "ShortPathDataStore.h"
+#import "Event+Methods.h"
+#import "User+Methods.h"
 
 @interface CreateEventForNewVisitorTVC ()
+
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *companyTextField;
@@ -25,31 +30,24 @@
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
 
+@property (strong, nonatomic) ShortPathDataStore *dataStore;
+
 @end
 
 @implementation CreateEventForNewVisitorTVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.dataStore = [ShortPathDataStore sharedDataStore];
+    
     self.isEditingStartDate = NO;
     self.isEditingEndDate = NO;
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -186,13 +184,36 @@
          */
         
         [self dismissViewControllerAnimated:YES completion:nil];
-        
-        
+ 
     }
+  
+}
 
+//api call POST event
+-(void)createNewVisitorEvent
+{
     
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
-   
+    User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+    
+    Visitor *newVisitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    newVisitor.firstName = self.firstNameTextField.text;
+    newVisitor.lastName = self.lastNameTextField.text;
+    newVisitor.company = self.companyTextField.text;
+    newVisitor.phone = self.phoneNumberTextField.text;
+    newVisitor.email = self.emailTextField.text;
+    
+    Event *visitorsEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
+    visitorsEvent.start = self.startDatePicker.date;
+    visitorsEvent.end = self.endDatePicker.date;
+    visitorsEvent.title = [NSString stringWithFormat:@"Meeting with: %@", newVisitor.firstName];
+    
+    [visitorsEvent addVisitorsObject:newVisitor];
+    [user addEventsObject:visitorsEvent];
+    
+    [self.dataStore saveContext];
+    
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {

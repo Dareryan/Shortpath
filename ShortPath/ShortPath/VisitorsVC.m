@@ -13,6 +13,7 @@
 #import "AddNewEventVC.h"
 #import "FISViewController.h"
 #import "CreateEventForNewVisitorTVC.h"
+#import "CreateEventForExistingVisitorTVC.h"
 
 @interface VisitorsVC ()
 
@@ -238,6 +239,18 @@
 }
 
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"fromVisitor"]) {
+        CreateEventForExistingVisitorTVC *existingVC = [segue destinationViewController];
+        
+        NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
+        
+        Visitor *visitor = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:ip.section]] objectAtIndex:ip.row];
+        
+        existingVC.visitor = visitor;        
+    }
+}
 
 
 @end

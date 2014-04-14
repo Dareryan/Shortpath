@@ -122,29 +122,20 @@
     
     if  (tableView == self.searchDisplayController.searchResultsTableView){
         return nil;
-        
     }
     
     else{
-    
-        return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-       
-
+    return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
     }
-   
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        
-        return [self.searchResults count];
-        
+    return [self.searchResults count];
     } else {
-        
-        return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
-        
+    return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
     }
 }
 
@@ -177,7 +168,8 @@
 
     }
     
-    cell.textLabel.text = visitor.firstName;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",visitor.firstName, visitor.lastName];
+    cell.detailTextLabel.text = visitor.email;
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     

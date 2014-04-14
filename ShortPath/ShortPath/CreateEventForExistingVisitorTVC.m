@@ -32,7 +32,7 @@
 - (IBAction)doneButtonPressed:(id)sender
 {
     //[self createNewVisitorEvent];
-
+    
 }
 
 
@@ -84,7 +84,7 @@
     [user addEventsObject:visitorsEvent];
     
     [self.dataStore saveContext];
- 
+    
 }
 
 
@@ -153,36 +153,22 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     if (indexPath.section ==1 && indexPath.row ==1) {
-        
         if (self.arrivalTimeIsEditing)
         {
             return 225.0;
-        }
-        else
-        {
+        } else {
             return 0.0;
         }
-    }
-    
-    if (indexPath.section ==2 && indexPath.row == 1) {
+    } if (indexPath.section ==2 && indexPath.row == 1) {
         if (self.departureTimeIsEditing) {
-            
             return 225.0;
-            
-        }
-        else{
+        } else {
             return 0;
-            
         }
     }
-    
     return self.tableView.rowHeight;
 }
-
-
 
 - (IBAction)arrivalDateDidChange:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];

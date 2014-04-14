@@ -155,26 +155,26 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     
+     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    
     if ([self.firstNameTextField.text isEqualToString:@""] && [self.lastNameTextField.text isEqualToString:@""] && [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+       
         [alertView show];
     }
     else if ([self.firstNameTextField.text isEqualToString:@""] && [self.lastNameTextField.text isEqualToString:@""]){
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first and last name" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        
         [alertView show];
 
     }
     else if ([self.firstNameTextField.text isEqualToString:@""]) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order add a new visitor, you must enter a first name." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alertView show];
+               [alertView show];
     }
     else if ([self.lastNameTextField.text isEqualToString:@""]){
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order add a new visitor, you must enter a last name." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        
         [alertView show];
     }
     else if ([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alertView show];
+              [alertView show];
         
     }
     else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)){

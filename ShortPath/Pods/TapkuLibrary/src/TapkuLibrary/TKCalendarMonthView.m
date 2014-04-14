@@ -365,8 +365,8 @@ static UIImage *tileImage;
 	NSInteger index = 0, mc = self.marks.count;
 	
 	
-	UIFont *font = [UIFont boldSystemFontOfSize:DATE_FONT_SIZE];
-	UIFont *font2 =[UIFont boldSystemFontOfSize:DOT_FONT_SIZE];
+	UIFont *font = [UIFont systemFontOfSize:DATE_FONT_SIZE];
+	UIFont *font2 =[UIFont systemFontOfSize:DOT_FONT_SIZE];
 	UIColor *color = grayGradientColor;
     
     
@@ -446,7 +446,7 @@ static UIImage *tileImage;
 	
 	selectedDay = day;
 	selectedPortion = 1;
-	self.currentDay.font = [UIFont boldSystemFontOfSize:DATE_FONT_SIZE];
+	self.currentDay.font = [UIFont systemFontOfSize:DATE_FONT_SIZE];
 
 	
 	BOOL hasDot = NO;
@@ -548,7 +548,7 @@ static UIImage *tileImage;
 		day = day - daysInMonth;
 	}
 	
-	self.currentDay.font = [UIFont boldSystemFontOfSize:DATE_FONT_SIZE];
+	self.currentDay.font = [UIFont systemFontOfSize:DATE_FONT_SIZE];
 	self.currentDay.hidden = NO;
 	self.dot.hidden = NO;
 	
@@ -629,7 +629,7 @@ static UIImage *tileImage;
 	_currentDay.text = @"1";
 	_currentDay.textColor = [UIColor whiteColor];
 	_currentDay.backgroundColor = [UIColor clearColor];
-	_currentDay.font = [UIFont boldSystemFontOfSize:DATE_FONT_SIZE];
+	_currentDay.font = [UIFont systemFontOfSize:DATE_FONT_SIZE];
 	_currentDay.textAlignment = NSTextAlignmentCenter;
 	_currentDay.shadowColor = [UIColor darkGrayColor];
 	_currentDay.shadowOffset = CGSizeMake(0, 0);
@@ -1005,7 +1005,7 @@ static UIImage *tileImage;
 	_monthYear = [[UILabel alloc] initWithFrame:CGRectInset(CGRectMake(0, 0, VIEW_WIDTH, 36), 40, 6)];
 	_monthYear.textAlignment = NSTextAlignmentCenter;
 	_monthYear.backgroundColor = [UIColor clearColor];
-	_monthYear.font = [UIFont boldSystemFontOfSize:22];
+	_monthYear.font = [UIFont systemFontOfSize:22];
 	_monthYear.shadowColor = [UIColor whiteColor];
 	_monthYear.shadowOffset = CGSizeMake(0,1);
 	_monthYear.textColor = gradientColor;

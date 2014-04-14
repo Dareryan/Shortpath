@@ -190,5 +190,22 @@
     [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
 - (IBAction)doneButtonTapped:(id)sender {
+    
+
+    
+  if ([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        
+    } else {
+        
+        //Create and Add New Event Object Here
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        
+    }
+
+    
 }
 @end

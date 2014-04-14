@@ -8,6 +8,9 @@
 
 #import "AddNewVisitorVC.h"
 #import "InputCell.h"
+#import <AFNetworking.h>
+
+
 
 @interface AddNewVisitorVC ()
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
@@ -15,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *companyTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextFIeld;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+
+
 
 - (IBAction)doneButtonPressed:(id)sender;
 
@@ -31,11 +36,13 @@
     return self;
 }
 
+
+
+
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
    
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -116,5 +123,8 @@
 - (IBAction)doneButtonPressed:(id)sender {
     
       [self.navigationController popViewControllerAnimated:YES];
+    
+    
+    
 }
 @end

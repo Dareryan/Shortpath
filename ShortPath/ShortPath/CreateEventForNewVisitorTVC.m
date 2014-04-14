@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
+#import <AFNetworking.h>
 #import "CreateEventForNewVisitorTVC.h"
 
 @interface CreateEventForNewVisitorTVC ()
@@ -20,6 +21,11 @@
 @property (nonatomic) BOOL isEditingEndDate;
 @property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
+
+@property (strong, nonatomic) NSString *token;
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
+
+
 - (IBAction)startDateDidChange:(id)sender;
 - (IBAction)endDateDidChange:(id)sender;
 - (IBAction)doneButtonPressed:(id)sender;
@@ -38,6 +44,20 @@
     return self;
 }
 
+- (AFHTTPSessionManager *)manager
+{
+    if (!_manager) {
+        _manager = [AFHTTPSessionManager manager];
+        [_manager.requestSerializer setValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
+        
+        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        securityPolicy.allowInvalidCertificates=YES;
+        _manager.securityPolicy=securityPolicy;
+    }
+    return _manager;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -45,6 +65,21 @@
     self.isEditingEndDate = NO;
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
+    
+    [super viewDidLoad];
+    
+    NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
+    
+    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSDictionary *dict = responseObject[@"user"];
+        //completionBlock(dict);
+        NSLog(@"%@", dict);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error Code %d",  error.code);
+    }];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

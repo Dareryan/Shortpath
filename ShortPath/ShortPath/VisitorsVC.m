@@ -13,12 +13,14 @@
 #import "AddNewEventVC.h"
 #import "FISViewController.h"
 
+
 @interface VisitorsVC ()
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 
 @property (strong, nonatomic) NSArray *visitors;
 @property (strong, nonatomic) NSArray *letters;
@@ -415,10 +417,8 @@ static NSString *TableViewSelectedRowKey = @"TableViewSelectedRowKey";
     }
 }
 
-//- (IBAction)addNewVisitor:(id)sender {
-//    UIActionSheet *newVisitorAS = [[UIActionSheet alloc] initWithTitle:@"Assign to" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"New Event", @"Existing Event", nil];
-//    
-//    [newVisitorAS showInView:self.view];
-//}
+- (IBAction)addNewVisitor:(id)sender {
+ 
+}
 
 @end

@@ -36,29 +36,29 @@
     
     //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    FISTabBarControllerViewController *tabBarVC = (FISTabBarControllerViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"tabBarVC"];
+    //FISTabBarControllerViewController *tabBarVC = (FISTabBarControllerViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"tabBarVC"];
 //    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController: tabBarVC];
 //    navVC.navigationBarHidden = YES;
 //    self.window.rootViewController = navVC;
 //    [self.window makeKeyAndVisible];
 
-    Visitor *eugene = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
-    eugene.firstName = @"Eugene";
-    eugene.lastName = @"Watson";
-    
-    Visitor *bram = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
-    bram.firstName = @"Bram";
-    bram.lastName = @"Vandevelde";
-    
-    Visitor *dare = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
-    dare.firstName = @"Dare";
-    dare.lastName = @"Ryan";
-    
-    Visitor *nadia = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
-    nadia.firstName = @"Nadia";
-    nadia.lastName = @"Yudina";
-    
-    [self.dataStore saveContext];
+//    Visitor *eugene = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+//    eugene.firstName = @"Eugene";
+//    eugene.lastName = @"Watson";
+//    
+//    Visitor *bram = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+//    bram.firstName = @"Bram";
+//    bram.lastName = @"Vandevelde";
+//    
+//    Visitor *dare = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+//    dare.firstName = @"Dare";
+//    dare.lastName = @"Ryan";
+//    
+//    Visitor *nadia = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+//    nadia.firstName = @"Nadia";
+//    nadia.lastName = @"Yudina";
+//    
+//    [self.dataStore saveContext];
 
     return YES;
 

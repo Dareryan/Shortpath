@@ -36,7 +36,7 @@
     
     //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    FISTabBarControllerViewController *tabBarVC = (FISTabBarControllerViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"tabBarVC"];
+    //FISTabBarControllerViewController *tabBarVC = (FISTabBarControllerViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"tabBarVC"];
 //    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController: tabBarVC];
 //    navVC.navigationBarHidden = YES;
 //    self.window.rootViewController = navVC;

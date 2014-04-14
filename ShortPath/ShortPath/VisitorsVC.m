@@ -15,9 +15,11 @@
 #import "CreateEventForNewVisitorTVC.h"
 #import "CreateEventForExistingVisitorTVC.h"
 
+
 @interface VisitorsVC ()
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
+
 
 
 @property (strong, nonatomic) NSArray *visitors;
@@ -262,6 +264,10 @@
         
         existingVC.visitor = visitor;        
     }
+}
+
+- (IBAction)addNewVisitor:(id)sender {
+ 
 }
 
 

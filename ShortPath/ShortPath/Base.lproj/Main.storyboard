@@ -601,7 +601,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="wCK-Z3-qDA">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="bON-Db-HiB">
                             <connections>
-                                <action selector="doneButtonPressed:" destination="Vth-og-7C2" id="jek-hN-dMX"/>
+                                <action selector="doneButtonTapped:" destination="Vth-og-7C2" id="Umw-lL-131"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

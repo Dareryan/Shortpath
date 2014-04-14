@@ -24,6 +24,7 @@
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 
+- (IBAction)doneButtonTapped:(id)sender;
 
 @end
 
@@ -187,5 +188,7 @@
     self.departureTimeCell.textLabel.text = @"Departure";
     self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
     [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+}
+- (IBAction)doneButtonTapped:(id)sender {
 }
 @end

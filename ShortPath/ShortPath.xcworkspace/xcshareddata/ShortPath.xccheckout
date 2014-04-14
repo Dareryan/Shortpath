@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>590C1F40-0E5A-4175-A68D-214F9CBD7C96</string>
+	<string>372C9E6A-60D0-4705-9BF4-DCCF944026BA</string>
 	<key>IDESourceControlProjectName</key>
 	<string>ShortPath</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1241D5E3-2F9E-4A6A-B505-423BE21167DF</key>
-		<string>https://github.com/Dareryan/Shortpath</string>
+		<key>90611A13-3401-469F-9B5E-3CCC1A6032E2</key>
+		<string>https://github.com/Dareryan/Shortpath.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ShortPath/ShortPath.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1241D5E3-2F9E-4A6A-B505-423BE21167DF</key>
+		<key>90611A13-3401-469F-9B5E-3CCC1A6032E2</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/Dareryan/Shortpath</string>
+	<string>https://github.com/Dareryan/Shortpath.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1241D5E3-2F9E-4A6A-B505-423BE21167DF</string>
+	<string>90611A13-3401-469F-9B5E-3CCC1A6032E2</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1241D5E3-2F9E-4A6A-B505-423BE21167DF</string>
+			<string>90611A13-3401-469F-9B5E-3CCC1A6032E2</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Shortpath</string>
 		</dict>

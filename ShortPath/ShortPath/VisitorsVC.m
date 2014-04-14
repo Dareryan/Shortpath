@@ -118,7 +118,13 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    if ([[self.sections allKeys] count] != 0){
     return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+    }
+    else{
+        return nil;
+    }
+   
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -154,7 +160,9 @@
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
+        if ([self.searchResults count] != 0){
         visitor = [self.searchResults objectAtIndex:indexPath.row];
+        }
         
     } else {
         

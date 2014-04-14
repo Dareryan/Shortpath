@@ -31,6 +31,7 @@
 
 @property (strong, nonatomic) UISearchDisplayController *searchController;
 
+- (IBAction)cancelButtonPressed:(id)sender;
 
 
 
@@ -118,11 +119,17 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if ([[self.sections allKeys] count] != 0){
-    return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-    }
-    else{
+    
+    if  (tableView == self.searchDisplayController.searchResultsTableView){
         return nil;
+        
+    }
+    
+    else{
+    
+        return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+       
+
     }
    
 }
@@ -246,6 +253,11 @@
     
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Add code to add visitor to event
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -261,4 +273,8 @@
 }
 
 
+- (IBAction)cancelButtonPressed:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

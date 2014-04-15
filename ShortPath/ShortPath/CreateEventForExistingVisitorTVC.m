@@ -10,6 +10,7 @@
 #import "Event+Methods.h"
 #import "ShortPathDataStore.h"
 #import "User+Methods.h"
+#import "Visitor+Methods.h"
 
 @interface CreateEventForExistingVisitorTVC ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameCell;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *departureDatePicker;
 @property (nonatomic) BOOL arrivalTimeIsEditing;
 @property (nonatomic) BOOL departureTimeIsEditing;
+
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 
@@ -80,6 +82,7 @@
     visitorsEvent.start = self.arrivalDatePicker.date;
     visitorsEvent.end = self.departureDatePicker.date;
     visitorsEvent.title = [NSString stringWithFormat:@"Meeting with: %@", self.visitor.firstName];
+    visitorsEvent.identifier = @"";
     
     [visitorsEvent addVisitorsObject:self.visitor];
     [user addEventsObject:visitorsEvent];
@@ -191,21 +194,19 @@
 }
 - (IBAction)doneButtonTapped:(id)sender {
     
-
     
-  if ([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0) {
+    
+    if ([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
         
     } else {
         
         //Create and Add New Event Object Here
-        
+        [self createNewVisitorEvent];
         [self.navigationController popViewControllerAnimated:YES];
-        
-        
     }
-
-    
 }
+
+
 @end

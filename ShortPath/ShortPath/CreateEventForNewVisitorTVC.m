@@ -67,7 +67,7 @@
     self.isEditingEndDate = NO;
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
-
+    
     
     [super viewDidLoad];
     
@@ -85,7 +85,7 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-
+    
     
 }
 
@@ -194,26 +194,26 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     
-     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
     if ([self.firstNameTextField.text isEqualToString:@""] && [self.lastNameTextField.text isEqualToString:@""] && [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
-       
+        
         [alertView show];
     }
     else if ([self.firstNameTextField.text isEqualToString:@""] && [self.lastNameTextField.text isEqualToString:@""]){
         
         [alertView show];
-
+        
     }
     else if ([self.firstNameTextField.text isEqualToString:@""]) {
-               [alertView show];
+        [alertView show];
     }
     else if ([self.lastNameTextField.text isEqualToString:@""]){
         
         [alertView show];
     }
     else if ([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
-              [alertView show];
+        [alertView show];
         
     }
     else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)){
@@ -221,11 +221,12 @@
         /*
          Add code to insert event and visitor object into coredata. Event title should be set to [NSString stringWithFormat:@"%@ %@ visits", self.firstNameTextField.text, self.lastNameTextField.text];
          */
+        [self createNewVisitorEvent];
         
         [self dismissViewControllerAnimated:YES completion:nil];
- 
+        
     }
-  
+    
 }
 
 //api call POST event
@@ -247,6 +248,7 @@
     visitorsEvent.start = self.startDatePicker.date;
     visitorsEvent.end = self.endDatePicker.date;
     visitorsEvent.title = [NSString stringWithFormat:@"Meeting with: %@", newVisitor.firstName];
+    visitorsEvent.identifier = @"";
     
     [visitorsEvent addVisitorsObject:newVisitor];
     [user addEventsObject:visitorsEvent];

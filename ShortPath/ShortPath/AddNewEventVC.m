@@ -260,14 +260,7 @@
     else if(![self.titleLabel.text isEqualToString:@""] && ![self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0){
        
         //Create and Add New Event Object Here
-        NSEntityDescription *eventDescription = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
-        Event *newEvent = [[Event alloc]initWithEntity:eventDescription insertIntoManagedObjectContext:self.dataStore.managedObjectContext];
-        
-        newEvent.title = self.titleLabel.text;
-        newEvent.start = self.startDatePicker.date;
-        newEvent.end = self.endDatePicker.date;
-        newEvent.identifier = @"";
-        [self.dataStore saveContext];
+        [self createNewEvent];
         
         [self dismissViewControllerAnimated:YES completion:nil];
         
@@ -275,6 +268,27 @@
     }
     
 }
+
+-(void)createNewEvent
+{
+    
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+    
+    User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+    
+    
+    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
+    event.start = self.startDatePicker.date;
+    event.end = self.endDatePicker.date;
+    event.title = self.titleLabel.text;
+    event.identifier = @"";
+    
+    [user addEventsObject:event];
+    
+    [self.dataStore saveContext];
+    
+}
+
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {

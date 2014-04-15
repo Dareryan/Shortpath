@@ -43,9 +43,7 @@
     
     self.apiClient = [[APIClient alloc]init];
     
-    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
-    self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
 
     //[self.apiClient postEventForUser:self.user WithStartDate:@"04/15/2014" Time:@"17.5" EndDate:@"04/16/2014" Title:@"hello from flatiron app"];
    
@@ -72,6 +70,14 @@
         [self presentViewController:loginVC animated:YES completion:nil];
         
     }
+    
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+    
+    
+    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count]!= 0) {
+        self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+    }
+
     
 }
 
@@ -117,14 +123,18 @@
     
     eventsRequest.predicate = filter;
     
-    Event *targetEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
-    
-    Visitor *david = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
-    david.firstName = @"John";
-    
-    [targetEvent addVisitorsObject:david];
-    
-    [self.dataStore saveContext];
+    if ([[self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil]count] != 0) {
+       
+        Event *targetEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
+        
+        Visitor *david = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
+        david.firstName = @"John";
+        
+        [targetEvent addVisitorsObject:david];
+        
+        [self.dataStore saveContext];
+    }
+   
     
 }
 

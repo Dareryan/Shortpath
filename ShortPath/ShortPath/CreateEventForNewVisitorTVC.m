@@ -69,7 +69,6 @@
     [self.endDatePicker setHidden:YES];
     
     
-    [super viewDidLoad];
     
     NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
     

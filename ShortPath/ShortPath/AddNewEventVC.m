@@ -8,6 +8,8 @@
 
 #import "AddNewEventVC.h"
 #import "Event+Methods.h"
+#import "ShortPathDataStore.h"
+#import "Event.h"
 
 
 
@@ -16,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (nonatomic) BOOL isEditingStartDate;
 @property (nonatomic) BOOL isEditingEndDate;
+@property (strong, nonatomic) ShortPathDataStore *dataStore;
 @property (weak, nonatomic) IBOutlet UITableViewCell *startDateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *endDateCell;
 
@@ -47,7 +50,7 @@
 
 {
     [super viewDidLoad];
-    
+    self.dataStore = [ShortPathDataStore sharedDataStore];
 
     
     // Uncomment the following line to preserve selection between presentations.
@@ -239,23 +242,32 @@
 
 - (IBAction)doneTapped:(id)sender {
     
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, please specify a title and valid end date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    
     if ([self.titleLabel.text isEqualToString:@""] && [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a title and valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        
         [alertView show];
     }
     else if ([self.titleLabel.text isEqualToString:@""]) {
-        
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a title." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+       
         [alertView show];
     }
      else if ([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
-         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+         
          [alertView show];
 
     }
     else if(![self.titleLabel.text isEqualToString:@""] && ![self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0){
        
         //Create and Add New Event Object Here
+        NSEntityDescription *eventDescription = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
+        Event *newEvent = [[Event alloc]initWithEntity:eventDescription insertIntoManagedObjectContext:self.dataStore.managedObjectContext];
+        
+        newEvent.title = self.titleLabel.text;
+        newEvent.start = self.startDatePicker.date;
+        newEvent.end = self.endDatePicker.date;
+        newEvent.identifier = @"";
+        [self.dataStore saveContext];
         
         [self dismissViewControllerAnimated:YES completion:nil];
         

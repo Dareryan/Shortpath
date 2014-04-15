@@ -20,6 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    
+    
 //    APIClient *cl = [[APIClient alloc]init];
 //    
 //    [cl fetchUserInfoWithCompletion:^(NSDictionary *dict) {

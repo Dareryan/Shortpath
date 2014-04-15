@@ -2,7 +2,7 @@
 //  Event.h
 //  ShortPath
 //
-//  Created by Nadia Yudina on 4/11/14.
+//  Created by Nadia Yudina on 4/15/14.
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSDate * start;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain) NSDate * last_edit;
 @property (nonatomic, retain) User *user;
 @property (nonatomic, retain) NSSet *visitors;
 @end

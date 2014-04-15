@@ -37,14 +37,6 @@
 -(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock
 {
     
-    //AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    //[self.manager.requestSerializer setValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
-    
-//    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
-//    securityPolicy.allowInvalidCertificates=YES;
-//    self.manager.securityPolicy=securityPolicy;
-    
     NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
 
     

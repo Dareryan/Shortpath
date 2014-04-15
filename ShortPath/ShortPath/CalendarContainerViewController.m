@@ -32,31 +32,71 @@
     return self;
 }
 
+
+- (void)eventsToCoreDataWithCompletion: (void (^)())completionBlock
+{
+    __weak typeof(self) weakSelf = self;
+    
+    [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
+        
+        [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
+            
+            [weakSelf.dataStore saveContext];
+            
+            completionBlock();
+            
+        }];
+
+    }];
+}
+
+
+- (void)cleanCoreData
+{
+    NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+    
+    NSArray *events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
+    
+    for (Event *ev in events) {
+        
+        [self.dataStore.managedObjectContext deleteObject:ev];
+        
+    }
+    
+    [self.dataStore saveContext];
+}
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.dataStore = [ShortPathDataStore sharedDataStore];
-    
-    NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
-    
-    self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
     self.calendar = [[TKCalendarMonthView alloc] init];
+    
     self.calendar.delegate = self;
     self.calendar.dataSource = self;
     
     [self.view addSubview:self.calendar];
     
+    self.dataStore = [ShortPathDataStore sharedDataStore];
     
-    
-    //NSLog(@"Events for user: %d", [self.events count]);
-    // Do any additional setup after loading the view.
+    [self eventsToCoreDataWithCompletion:^{
+        
+        NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+        
+        self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
+        
+        NSLog(@"%d", [self.events count]);
+        
+        [self.calendar reloadData];
+
+    }];
+
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
     
 }
 
@@ -71,6 +111,7 @@
     
 	NSLog(@"calendarMonthView didSelectDate %@", d);
 }
+
 
 - (void)calendarMonthView:(TKCalendarMonthView *)monthView monthDidChange:(NSDate *)d {
 	NSLog(@"calendarMonthView monthDidChange");

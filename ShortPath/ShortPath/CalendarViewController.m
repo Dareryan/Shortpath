@@ -12,10 +12,16 @@
 #import "ShortPathDataStore.h"
 #import "Event+Methods.h"
 #import "Visitor+Methods.h"
+#import "APIClient.h"
+#import "User+Methods.h"
 
 @interface CalendarViewController ()
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
+
+@property (strong, nonatomic) APIClient *apiClient;
+
+@property (strong, nonatomic) User *user;
 
 @end
 
@@ -26,8 +32,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    
 }
 
 - (void)viewDidLoad
@@ -36,9 +40,13 @@
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
-    //[self eventsToCoreData];
+    self.apiClient = [[APIClient alloc]init];
     
-    //[self addFakeVisitorsToEventForApr13th:self.dataStore.managedObjectContext];
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+    
+    self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+
+    //[self.apiClient postEventForUser:self.user WithStartDate:@"04/15/2014" Time:@"17.5" EndDate:@"04/16/2014" Title:@"hello from flatiron app"];
    
 }
 
@@ -83,22 +91,7 @@
 
 #pragma mark - helpers to populate core data
 
-- (void)eventsToCoreData
-{
-    __weak typeof(self) weakSelf = self;
-    
-    [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
-        
-        [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
-            
-            [user addEventsObject:event];
-            
-            [weakSelf.dataStore saveContext];
-        }];
-        
-    }];
-    
-}
+
 
 
 - (void)removeEventsFromCoreData
@@ -133,8 +126,6 @@
     [self.dataStore saveContext];
     
 }
-
-
 
 
 @end

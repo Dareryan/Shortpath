@@ -74,8 +74,7 @@
         
         User *newUser = [User getUserFromDict:userDict ToContext:self.managedObjectContext];
         
-        NSLog(@"%@", newUser.username);
-        
+        //NSLog(@"%@", newUser.username);
         
         completionBlock(newUser);
     }];
@@ -89,6 +88,8 @@
         for (NSDictionary *eventDict in eventDicts) {
             
             Event *newEvent = [Event getEventFromDict:eventDict ToContext:self.managedObjectContext];
+            
+            [user addEventsObject:newEvent];
             
             completionBlock(newEvent);
         }

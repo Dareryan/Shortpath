@@ -13,6 +13,8 @@
 
 -(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock;
 
-- (void)fetchEventsForUser: (User *)user Completion: (void(^)(NSArray *))completionBlock;
+- (void)fetchEventsForUser:(User *)user Completion: (void(^)(NSArray *))completionBlock;
+
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime EndDate:(NSString *)endDate Title:(NSString *)title;
 
 @end

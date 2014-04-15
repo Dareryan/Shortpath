@@ -30,7 +30,8 @@
 {
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
-    NSString *searchID = dict[@"event_occurence"][@"id"];
+    NSString *searchID = dict[@"event"][@"id"];
+    NSLog(@"%@", searchID);
     
     NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"identifier==%@",searchID];
     fetchRequest.predicate = searchPredicate;
@@ -38,25 +39,22 @@
     NSArray *events = [context executeFetchRequest:fetchRequest error:nil];
     
     if ([events count] == 0) {
-    
-        //NSLog(@"%@", dict[@"event_occurrence"]);
             
         Event *newEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:context];
 
-        //NSNumber *dateNumber = dict[@"event_occurrence"][@"start_time"];
-        
-        newEvent.start = [self dateFromString:dict[@"event_occurrence"][@"start_time"]];
-        newEvent.end = [self dateFromString:dict[@"event_occurrence"][@"end_time"]];
-                
-        //newEvent.start = [NSDate dateWithTimeIntervalSince1970:[dateNumber doubleValue]];
+        newEvent.start = [self dateFromString:dict[@"event"][@"start_time"]];
+        newEvent.end = [self dateFromString:dict[@"event"][@"end_time"]];
+        newEvent.last_edit = [self dateFromString:dict[@"event"][@"updated_at"]];
+        newEvent.title = [NSString stringWithFormat:@"%@", dict[@"event"][@"subject"]];
 
-        newEvent.identifier = [NSString stringWithFormat:@"%@", dict[@"event_occurrence"][@"id"]];
+        newEvent.identifier = [NSString stringWithFormat:@"%@", dict[@"event"][@"id"]];
+        
 
         return newEvent;
         
     } else {
         
-        //Event *ev = events[0];
+        Event *ev = events[0];
         
         //NSLog(@"%@", ev.identifier);
         

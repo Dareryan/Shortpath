@@ -100,6 +100,7 @@
     
 }
 
+
 - (void)removeEventsFromCoreData
 {
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"Event"];

@@ -35,6 +35,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+    
+    self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
 }
 
 - (void)viewDidLoad
@@ -47,13 +53,9 @@
     
     [self.view addSubview:self.calendar];
     
-    self.dataStore = [ShortPathDataStore sharedDataStore];
     
-    NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
     
-    self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
-    
-    NSLog(@"Events for user: %d", [self.events count]);
+    //NSLog(@"Events for user: %d", [self.events count]);
     // Do any additional setup after loading the view.
     
 }

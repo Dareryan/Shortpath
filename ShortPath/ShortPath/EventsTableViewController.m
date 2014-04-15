@@ -104,6 +104,11 @@
     
     cell.textLabel.text = currentEvent.title;
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"h:mm a"];
+    
+    cell.detailTextLabel.text = [dateFormatter stringFromDate:currentEvent.start];
+    
     return cell;
 }
 

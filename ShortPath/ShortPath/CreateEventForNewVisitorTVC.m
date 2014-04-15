@@ -67,7 +67,7 @@
     self.isEditingEndDate = NO;
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
-
+    
     
     [super viewDidLoad];
     
@@ -85,7 +85,7 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-
+    
     
 }
 
@@ -175,18 +175,22 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
-    
-    self.startDateCell.textLabel.text = @"Arrival";
     self.startDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.startDatePicker.date];
     [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    
+    if (([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)) {
+        
+        [self.endDatePicker setDate:[NSDate dateWithTimeInterval: 1800 sinceDate:self.startDatePicker.date]];
+        self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
+        [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    }
+   
 }
 
 - (IBAction)endDateDidChange:(id)sender {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
-    
-    self.endDateCell.textLabel.text = @"Departure";
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     
@@ -194,38 +198,23 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     
-     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
-    if ([self.firstNameTextField.text isEqualToString:@""] && [self.lastNameTextField.text isEqualToString:@""] && [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
-       
-        [alertView show];
-    }
-    else if ([self.firstNameTextField.text isEqualToString:@""] && [self.lastNameTextField.text isEqualToString:@""]){
+    if ([self.firstNameTextField.text isEqualToString:@""] || [self.lastNameTextField.text isEqualToString:@""] || [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
         
         [alertView show];
-
-    }
-    else if ([self.firstNameTextField.text isEqualToString:@""]) {
-               [alertView show];
-    }
-    else if ([self.lastNameTextField.text isEqualToString:@""]){
         
-        [alertView show];
-    }
-    else if ([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
-              [alertView show];
-        
-    }
-    else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)){
+    } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)) {
         
         /*
          Add code to insert event and visitor object into coredata. Event title should be set to [NSString stringWithFormat:@"%@ %@ visits", self.firstNameTextField.text, self.lastNameTextField.text];
          */
+        [self createNewVisitorEvent];
         
         [self dismissViewControllerAnimated:YES completion:nil];
- 
+        
     }
-  
+    
 }
 
 //api call POST event
@@ -234,7 +223,6 @@
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
-    User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
     
     Visitor *newVisitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
     newVisitor.firstName = self.firstNameTextField.text;
@@ -247,9 +235,15 @@
     visitorsEvent.start = self.startDatePicker.date;
     visitorsEvent.end = self.endDatePicker.date;
     visitorsEvent.title = [NSString stringWithFormat:@"Meeting with: %@", newVisitor.firstName];
+    visitorsEvent.identifier = @"";
     
     [visitorsEvent addVisitorsObject:newVisitor];
-    [user addEventsObject:visitorsEvent];
+    
+    
+    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
+        User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+        [user addEventsObject:visitorsEvent];
+    }
     
     [self.dataStore saveContext];
     

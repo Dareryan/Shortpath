@@ -10,6 +10,7 @@
 #import "FISTabBarControllerViewController.h"
 #import "FISViewController.h"
 #import "APIClient.h"
+#import "Event+Methods.h"
 
 #import "Visitor.h"
 
@@ -60,6 +61,7 @@
 //    
 //    [self.dataStore saveContext];
 
+   
     return YES;
 
 }

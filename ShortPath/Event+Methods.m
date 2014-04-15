@@ -13,18 +13,26 @@
 
 + (NSDate *)dateFromString: (NSString *)dateString
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
-    //[dateFormatter setTimeZone:timeZone];
-    
-    NSString *dateStr = [dateString substringToIndex:[dateString length] - 6];
-    
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
-    NSDate *date = [dateFormatter dateFromString:dateStr];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [formatter setLocale:posix];
+    NSDate *date = [formatter dateFromString:dateString];
 
     return date;
 }
 
++(NSString *)timeStampFromDate: (NSDate *)date
+{
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [dateFormatter setLocale:enUSPOSIXLocale];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    NSString *iso8601String = [dateFormatter stringFromDate:date];
+    
+    return iso8601String;
+}
 
 + (Event *)getEventFromDict: (NSDictionary *)dict ToContext: (NSManagedObjectContext *)context
 {

@@ -34,6 +34,7 @@
     [super viewWillAppear:animated];
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -127,5 +128,9 @@
     
 }
 
+-(void)addLocalEventsToAPI
+{
+    
+}
 
 @end

@@ -22,3 +22,5 @@ DerivedData
 *.hmap
 *.ipa
 *.DS_Store
+
+ion-nav

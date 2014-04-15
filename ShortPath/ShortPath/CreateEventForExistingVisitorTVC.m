@@ -10,6 +10,7 @@
 #import "Event+Methods.h"
 #import "ShortPathDataStore.h"
 #import "User+Methods.h"
+#import "Visitor+Methods.h"
 
 @interface CreateEventForExistingVisitorTVC ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameCell;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *departureDatePicker;
 @property (nonatomic) BOOL arrivalTimeIsEditing;
 @property (nonatomic) BOOL departureTimeIsEditing;
+
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 
@@ -60,7 +62,7 @@
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
     self.arrivalTimeCell.textLabel.text = @"Arrival";
-    self.arrivalTimeCell.textLabel.text = @"Departure";
+    self.departureTimeCell.textLabel.text = @"Departure";
     self.arrivalTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.arrivalDatePicker.date];
     self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
     [self.arrivalTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
@@ -73,16 +75,22 @@
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
-    User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+ 
     
     Event *visitorsEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
     
     visitorsEvent.start = self.arrivalDatePicker.date;
     visitorsEvent.end = self.departureDatePicker.date;
     visitorsEvent.title = [NSString stringWithFormat:@"Meeting with: %@", self.visitor.firstName];
+    visitorsEvent.identifier = @"";
     
     [visitorsEvent addVisitorsObject:self.visitor];
-    [user addEventsObject:visitorsEvent];
+    
+    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
+        User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+        [user addEventsObject:visitorsEvent];
+    }
+    
     
     [self.dataStore saveContext];
     
@@ -175,9 +183,15 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-    self.arrivalTimeCell.textLabel.text = @"Arrival";
+   
     self.arrivalTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.arrivalDatePicker.date];
     [self.arrivalTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    
+    if (([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0)) {
+    [self.departureDatePicker setDate:[NSDate dateWithTimeInterval: 1800 sinceDate:self.arrivalDatePicker.date]];
+    self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
+    [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    }
 }
 
 
@@ -185,27 +199,24 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-    self.departureTimeCell.textLabel.text = @"Departure";
     self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
     [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
 - (IBAction)doneButtonTapped:(id)sender {
     
-
     
-  if ([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0) {
+    
+    if ([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
         
     } else {
         
         //Create and Add New Event Object Here
-        
+        [self createNewVisitorEvent];
         [self.navigationController popViewControllerAnimated:YES];
-        
-        
     }
-
-    
 }
+
+
 @end

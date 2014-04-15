@@ -42,10 +42,10 @@
 
 - (void)viewDidLoad
 {
-
+    
     [super viewDidLoad];
-
-   
+    
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -62,7 +62,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
@@ -72,7 +72,7 @@
     self.phoneNumberTextFIeld.placeholder = @"Phone Number";
     self.emailTextField.placeholder = @"Email Address";
     
-
+    
 }
 
 //add to api
@@ -95,16 +95,16 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     
-
+    
     //[self createNewVisitorForEvent];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
-
-
-      [self.navigationController popViewControllerAnimated:YES];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
-    
-    
-
+    if ([self.firstNameTextField.text isEqualToString:@""] || [self.lastNameTextField.text isEqualToString:@""]) {
+        [alertView show];
+    } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""]) {
+        [self createNewVisitorForEvent];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 @end

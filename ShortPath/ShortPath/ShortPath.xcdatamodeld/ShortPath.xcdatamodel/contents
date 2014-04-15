@@ -5,6 +5,7 @@
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="last_edit" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,7 +28,7 @@
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="visitors" inverseEntity="Event" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="63" positionY="-79" width="128" height="178"/>
+        <element name="Event" positionX="63" positionY="-79" width="128" height="193"/>
         <element name="User" positionX="-189" positionY="-189" width="128" height="118"/>
         <element name="Visitor" positionX="-254" positionY="9" width="128" height="133"/>
     </elements>

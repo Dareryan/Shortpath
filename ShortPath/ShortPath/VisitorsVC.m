@@ -184,8 +184,10 @@
 - (void)filterContentForSearchText:(NSString *)searchText scope:(NSString*)scope
 {
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"firstName contains[c] %@", searchText];
+    NSPredicate *lastNameResultPredicate = [NSPredicate predicateWithFormat:@"lastName contains[c] %@", searchText];
+    NSPredicate *compoundPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[resultPredicate, lastNameResultPredicate]];
     
-    self.searchResults = [NSMutableArray arrayWithArray:[self.visitors filteredArrayUsingPredicate:resultPredicate]];
+    self.searchResults = [NSMutableArray arrayWithArray:[self.visitors filteredArrayUsingPredicate:compoundPredicate]];
 
 }
 
@@ -216,6 +218,7 @@
     for (Visitor *visitor in self.visitors) {
         
         NSString *c = [visitor.firstName substringToIndex:1];
+        
         found = NO;
         
         for (NSString *str in [self.sections allKeys]) {
@@ -227,6 +230,7 @@
         if (!found) {
             
             [self.sections setValue:[[NSMutableArray alloc] init] forKey:c];
+            
         }
     }
     
@@ -234,15 +238,19 @@
     for (Visitor *visitor in self.visitors) {
         
         NSString *visitorName = [visitor.firstName substringToIndex:1];
+       
         
         [[self.sections objectForKey:visitorName] addObject:visitor];
+        
         
     }
     
     // Sort each section array
     for (NSString *key in [self.sections allKeys]) {
         
-        [[self.sections objectForKey:key] sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]]];
+        
+        
+        [[self.sections objectForKey:key] sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES],]];
     }
     
 }

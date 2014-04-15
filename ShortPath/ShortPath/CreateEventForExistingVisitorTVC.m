@@ -75,7 +75,7 @@
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
-    User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+ 
     
     Event *visitorsEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
     
@@ -85,7 +85,12 @@
     visitorsEvent.identifier = @"";
     
     [visitorsEvent addVisitorsObject:self.visitor];
-    [user addEventsObject:visitorsEvent];
+    
+    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
+        User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+        [user addEventsObject:visitorsEvent];
+    }
+    
     
     [self.dataStore saveContext];
     

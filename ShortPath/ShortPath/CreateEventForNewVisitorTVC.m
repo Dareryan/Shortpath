@@ -196,27 +196,11 @@
     
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
-    if ([self.firstNameTextField.text isEqualToString:@""] && [self.lastNameTextField.text isEqualToString:@""] && [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
-        
-        [alertView show];
-    }
-    else if ([self.firstNameTextField.text isEqualToString:@""] && [self.lastNameTextField.text isEqualToString:@""]){
+    if ([self.firstNameTextField.text isEqualToString:@""] || [self.lastNameTextField.text isEqualToString:@""] || [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
         
         [alertView show];
         
-    }
-    else if ([self.firstNameTextField.text isEqualToString:@""]) {
-        [alertView show];
-    }
-    else if ([self.lastNameTextField.text isEqualToString:@""]){
-        
-        [alertView show];
-    }
-    else if ([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
-        [alertView show];
-        
-    }
-    else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)){
+    } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)) {
         
         /*
          Add code to insert event and visitor object into coredata. Event title should be set to [NSString stringWithFormat:@"%@ %@ visits", self.firstNameTextField.text, self.lastNameTextField.text];
@@ -235,7 +219,6 @@
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
-    User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
     
     Visitor *newVisitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
     newVisitor.firstName = self.firstNameTextField.text;
@@ -251,7 +234,12 @@
     visitorsEvent.identifier = @"";
     
     [visitorsEvent addVisitorsObject:newVisitor];
-    [user addEventsObject:visitorsEvent];
+    
+    
+    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
+        User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+        [user addEventsObject:visitorsEvent];
+    }
     
     [self.dataStore saveContext];
     

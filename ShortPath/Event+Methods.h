@@ -12,4 +12,8 @@
 
 + (Event *)getEventFromDict: (NSDictionary *)dict ToContext: (NSManagedObjectContext *)context;
 
++(NSString *)timeStampFromDate: (NSDate *)date;
+
++ (NSDate *)dateFromString: (NSString *)dateString;
+
 @end

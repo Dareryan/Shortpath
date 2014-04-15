@@ -10,6 +10,7 @@
 #import "FISTabBarControllerViewController.h"
 #import "FISViewController.h"
 #import "APIClient.h"
+#import "Event+Methods.h"
 
 #import "Visitor.h"
 
@@ -60,6 +61,8 @@
 //    
 //    [self.dataStore saveContext];
 
+    NSDate *date = [Event dateFromString:@"2014-04-15T14:05:14-04:00"];
+    NSLog(@"%@", date);
     return YES;
 
 }

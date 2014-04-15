@@ -8,8 +8,14 @@
 
 #import "AddNewVisitorVC.h"
 #import "InputCell.h"
+
 #import "Visitor+Methods.h"
 #import "ShortPathDataStore.h"
+
+#import <AFNetworking.h>
+
+
+
 
 @interface AddNewVisitorVC ()
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
@@ -18,7 +24,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextFIeld;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 
+
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
+
+
+
 
 - (IBAction)doneButtonPressed:(id)sender;
 
@@ -27,9 +37,32 @@
 @implementation AddNewVisitorVC
 
 
+
+
+
 - (void)viewDidLoad
 {
+
     [super viewDidLoad];
+
+   
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
@@ -62,9 +95,16 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     
+
     //[self createNewVisitorForEvent];
     
     [self dismissViewControllerAnimated:YES completion:nil];
+
+
+      [self.navigationController popViewControllerAnimated:YES];
+    
+    
+    
 
 }
 @end

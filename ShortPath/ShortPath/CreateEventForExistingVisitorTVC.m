@@ -24,6 +24,7 @@
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 
+- (IBAction)doneButtonTapped:(id)sender;
 
 @end
 
@@ -32,7 +33,7 @@
 - (IBAction)doneButtonPressed:(id)sender
 {
     //[self createNewVisitorEvent];
-
+    
 }
 
 
@@ -84,7 +85,7 @@
     [user addEventsObject:visitorsEvent];
     
     [self.dataStore saveContext];
- 
+    
 }
 
 
@@ -153,36 +154,22 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     if (indexPath.section ==1 && indexPath.row ==1) {
-        
         if (self.arrivalTimeIsEditing)
         {
             return 225.0;
-        }
-        else
-        {
+        } else {
             return 0.0;
         }
-    }
-    
-    if (indexPath.section ==2 && indexPath.row == 1) {
+    } if (indexPath.section ==2 && indexPath.row == 1) {
         if (self.departureTimeIsEditing) {
-            
             return 225.0;
-            
-        }
-        else{
+        } else {
             return 0;
-            
         }
     }
-    
     return self.tableView.rowHeight;
 }
-
-
 
 - (IBAction)arrivalDateDidChange:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
@@ -201,5 +188,24 @@
     self.departureTimeCell.textLabel.text = @"Departure";
     self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
     [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+}
+- (IBAction)doneButtonTapped:(id)sender {
+    
+
+    
+  if ([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0) {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        
+    } else {
+        
+        //Create and Add New Event Object Here
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        
+    }
+
+    
 }
 @end

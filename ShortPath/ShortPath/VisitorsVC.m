@@ -15,9 +15,11 @@
 #import "CreateEventForNewVisitorTVC.h"
 #import "CreateEventForExistingVisitorTVC.h"
 
+
 @interface VisitorsVC ()
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
+
 
 
 @property (strong, nonatomic) NSArray *visitors;
@@ -31,6 +33,7 @@
 
 @property (strong, nonatomic) UISearchDisplayController *searchController;
 
+- (IBAction)cancelButtonPressed:(id)sender;
 
 
 
@@ -118,20 +121,23 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    
+    if  (tableView == self.searchDisplayController.searchResultsTableView){
+        return nil;
+    }
+    
+    else{
     return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        
-        return [self.searchResults count];
-        
+    return [self.searchResults count];
     } else {
-        
-        return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
-        
+    return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
     }
 }
 
@@ -154,7 +160,9 @@
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
+        if ([self.searchResults count] != 0){
         visitor = [self.searchResults objectAtIndex:indexPath.row];
+        }
         
     } else {
         
@@ -162,7 +170,8 @@
 
     }
     
-    cell.textLabel.text = visitor.firstName;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",visitor.firstName, visitor.lastName];
+    cell.detailTextLabel.text = visitor.email;
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -238,6 +247,11 @@
     
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Add code to add visitor to event
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -252,5 +266,13 @@
     }
 }
 
+- (IBAction)addNewVisitor:(id)sender {
+ 
+}
 
+
+- (IBAction)cancelButtonPressed:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

@@ -102,7 +102,7 @@
     
     Event *currentEvent = self.eventsForDate[indexPath.row];
     
-    cell.textLabel.text = currentEvent.identifier;
+    cell.textLabel.text = currentEvent.title;
     
     return cell;
 }

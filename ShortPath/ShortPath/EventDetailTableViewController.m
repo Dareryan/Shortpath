@@ -25,7 +25,7 @@
 {
     [super viewDidLoad];
     
-    self.titleCell.textLabel.text = self.event.identifier;
+    self.titleCell.textLabel.text = self.event.title;
     self.startDateCell.detailTextLabel.text = [self formatDate:self.event.start];
     self.endDateCell.detailTextLabel.text = [self formatDate:self.event.end];
 

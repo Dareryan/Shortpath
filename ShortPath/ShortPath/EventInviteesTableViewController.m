@@ -70,7 +70,8 @@
     
     Visitor *visitor = self.visitors[indexPath.row];
     
-    cell.textLabel.text = visitor.firstName;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",visitor.firstName, visitor.lastName];
+    cell.detailTextLabel.text = visitor.email;
     
     return cell;
 }

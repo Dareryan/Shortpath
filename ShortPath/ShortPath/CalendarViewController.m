@@ -125,10 +125,10 @@
     
     Event *targetEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
     
-    Visitor *alice = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
-    alice.firstName = @"Alice";
+    Visitor *david = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
+    david.firstName = @"John";
     
-    [targetEvent addVisitorsObject:alice];
+    [targetEvent addVisitorsObject:david];
     
     [self.dataStore saveContext];
     

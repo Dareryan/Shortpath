@@ -62,7 +62,7 @@
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
     self.arrivalTimeCell.textLabel.text = @"Arrival";
-    self.arrivalTimeCell.textLabel.text = @"Departure";
+    self.departureTimeCell.textLabel.text = @"Departure";
     self.arrivalTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.arrivalDatePicker.date];
     self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
     [self.arrivalTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
@@ -183,9 +183,15 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-    self.arrivalTimeCell.textLabel.text = @"Arrival";
+   
     self.arrivalTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.arrivalDatePicker.date];
     [self.arrivalTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    
+    if (([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0)) {
+    [self.departureDatePicker setDate:[NSDate dateWithTimeInterval: 1800 sinceDate:self.arrivalDatePicker.date]];
+    self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
+    [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    }
 }
 
 
@@ -193,7 +199,6 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-    self.departureTimeCell.textLabel.text = @"Departure";
     self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
     [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }

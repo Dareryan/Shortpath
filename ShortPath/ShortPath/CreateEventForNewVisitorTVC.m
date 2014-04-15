@@ -175,18 +175,22 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
-    
-    self.startDateCell.textLabel.text = @"Arrival";
     self.startDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.startDatePicker.date];
     [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    
+    if (([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)) {
+        
+        [self.endDatePicker setDate:[NSDate dateWithTimeInterval: 1800 sinceDate:self.startDatePicker.date]];
+        self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
+        [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+    }
+   
 }
 
 - (IBAction)endDateDidChange:(id)sender {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
-    
-    self.endDateCell.textLabel.text = @"Departure";
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     

@@ -79,16 +79,11 @@
 
 - (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime EndDate:(NSString *)endDate Title:(NSString *)title
 {
-    
+    //make a gist!!!
     NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events.json", user.group_id];
     
     NSString *str = [NSString stringWithFormat:@"{\"event\":{\"starts_at_date\":\"%@\",\"starts_at_time\":\"%@\",\"duration\":1,\"repeats\":\"0\",\"location_id\":7144,\"subject\":\"postman\"}}", startDate, startTime];
     
-//    NSDictionary *innerDict = [[NSDictionary alloc]initWithObjects:@[startDate, startTime, endDate, title, @"7144"] forKeys:@[@"starts_at_date", @"starts_at_time", @"ends_at_date", @"subject", @"location"]];
-//    
-//    NSDictionary *bodyJson = [[NSDictionary alloc]initWithObjects:@[innerDict] forKeys:@[@"event"]];
-    
-    //NSData *postData = [NSJSONSerialization dataWithJSONObject:bodyJson options:0 error:nil];
     
     NSData *postData = [str dataUsingEncoding:NSUTF8StringEncoding];
     

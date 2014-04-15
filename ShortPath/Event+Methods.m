@@ -18,7 +18,6 @@
     NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     [formatter setLocale:posix];
     NSDate *date = [formatter dateFromString:dateString];
-    NSLog(@"date = %@", date);
 
     return date;
 }

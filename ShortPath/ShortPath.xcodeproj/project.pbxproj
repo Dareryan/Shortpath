@@ -43,6 +43,7 @@
 		2E3B25B818EB1BEB0090336C /* shapes.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25B718EB1BEB0090336C /* shapes.png */; };
 		2E3B25BA18EB1ECF0090336C /* low_contrast_linen_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */; };
 		2E5FB06818EE0936004CE912 /* FISTabBarControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5FB06718EE0936004CE912 /* FISTabBarControllerViewController.m */; };
+		2EC5371B18FC8EEB009A17F6 /* Splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EC5371A18FC8EEA009A17F6 /* Splash.png */; };
 		2EDC906B18EDA473003EB2A4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EDC906A18EDA472003EB2A4 /* AudioToolbox.framework */; };
 		4531B01E18EF51C700DA0CD4 /* CalendarContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4531B01D18EF51C700DA0CD4 /* CalendarContainerViewController.m */; };
 		4546B9D118EC563600388603 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4546B9D018EC563600388603 /* CalendarViewController.m */; };
@@ -121,6 +122,7 @@
 		2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "low_contrast_linen_@2X.png"; path = "ShortPath/low_contrast_linen_@2X.png"; sourceTree = "<group>"; };
 		2E5FB06618EE0936004CE912 /* FISTabBarControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISTabBarControllerViewController.h; sourceTree = "<group>"; };
 		2E5FB06718EE0936004CE912 /* FISTabBarControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISTabBarControllerViewController.m; sourceTree = "<group>"; };
+		2EC5371A18FC8EEA009A17F6 /* Splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Splash.png; sourceTree = "<group>"; };
 		2EDC906A18EDA472003EB2A4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4531B01C18EF51C700DA0CD4 /* CalendarContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarContainerViewController.h; sourceTree = "<group>"; };
 		4531B01D18EF51C700DA0CD4 /* CalendarContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarContainerViewController.m; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				0073ECE0EDAC4C3C8FB7BE0B /* Pods.xcconfig */,
 				2E3B259118EB0F780090336C /* Images.xcassets */,
 				2E3B25B918EB1ECF0090336C /* low_contrast_linen_@2X.png */,
+				2EC5371A18FC8EEA009A17F6 /* Splash.png */,
 				2E3B25B718EB1BEB0090336C /* shapes.png */,
 				2E3B25AE18EB15F30090336C /* logo (2).png */,
 			);
@@ -426,6 +429,7 @@
 				2E3B258418EB0F780090336C /* InfoPlist.strings in Resources */,
 				2E3B258D18EB0F780090336C /* Main.storyboard in Resources */,
 				2E3B25AF18EB15F30090336C /* logo (2).png in Resources */,
+				2EC5371B18FC8EEB009A17F6 /* Splash.png in Resources */,
 				2E3B25BA18EB1ECF0090336C /* low_contrast_linen_@2X.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

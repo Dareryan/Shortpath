@@ -23,6 +23,7 @@
 - (AFHTTPSessionManager *)manager
 {
     if (!_manager) {
+        
         _manager = [AFHTTPSessionManager manager];
         AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         
@@ -78,9 +79,19 @@
 
 - (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime EndDate:(NSString *)endDate Title:(NSString *)title
 {
+    
     NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events.json", user.group_id];
     
-    NSString *json = [NSString stringWithFormat:@"{'event': {'starts_at_date': '%@', 'starts_at_time': '%@', 'ends_at_date': '%@', 'subject':'%@', 'location_id': '7144'}}", startDate, startTime, endDate, title];
+    NSString *str = [NSString stringWithFormat:@"{\"event\":{\"starts_at_date\":\"%@\",\"starts_at_time\":\"%@\",\"duration\":1,\"repeats\":\"0\",\"location_id\":7144,\"subject\":\"postman\"}}", startDate, startTime];
+    
+//    NSDictionary *innerDict = [[NSDictionary alloc]initWithObjects:@[startDate, startTime, endDate, title, @"7144"] forKeys:@[@"starts_at_date", @"starts_at_time", @"ends_at_date", @"subject", @"location"]];
+//    
+//    NSDictionary *bodyJson = [[NSDictionary alloc]initWithObjects:@[innerDict] forKeys:@[@"event"]];
+    
+    //NSData *postData = [NSJSONSerialization dataWithJSONObject:bodyJson options:0 error:nil];
+    
+    NSData *postData = [str dataUsingEncoding:NSUTF8StringEncoding];
+    
     
     NSURL *url = [NSURL URLWithString:urlString];
   
@@ -88,16 +99,15 @@
     [request setURL:url];
     [request setHTTPMethod:@"POST"];
     
+    
+    [request setHTTPBody:postData];
+    
     //set headers
-    NSString *contentType = [NSString stringWithFormat:@"application/json"];
-    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
     
-    //create the body
-    NSMutableData *postBody = [NSMutableData data];
-    [postBody appendData:[json dataUsingEncoding:NSUTF8StringEncoding]];
+    [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
     
-    //post
-    [request setHTTPBody:postBody];
     
     NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 
@@ -106,8 +116,7 @@
     }];
     
     [task resume];
-    
-    
+ 
 }
 
 

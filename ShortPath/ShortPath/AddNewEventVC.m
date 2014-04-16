@@ -110,6 +110,9 @@
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
     [self.locationPicker setHidden:YES];
+    self.startDateCell.textLabel.text = @"Start Date";
+    self.endDateCell.textLabel.text = @"End Date";
+    self.locationCell.textLabel.text = @"Location";
 
     
     
@@ -124,8 +127,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-    self.startDateCell.textLabel.text = @"Start Date";
-    self.endDateCell.textLabel.text = @"End Date";
+   
     self.startDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.startDatePicker.date];
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
@@ -138,7 +140,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSIndexPath *startIP = [NSIndexPath indexPathForRow:1 inSection:1];
+    NSIndexPath *endIP = [NSIndexPath indexPathForRow:1 inSection:2];
+    NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:4];
     if(indexPath.section==1 && indexPath.row == 0)
     {
         self.isEditingStartDate = !self.isEditingStartDate;
@@ -149,11 +153,9 @@
             [self.startDatePicker setHidden:NO];
         }
         
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            [tableView reloadData];
-        }];
+        [self.tableView reloadRowsAtIndexPaths:@[startIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadData];
+        [tableView scrollToRowAtIndexPath:startIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     
     else if (indexPath.section == 2 && indexPath.row == 0) {
@@ -164,12 +166,9 @@
             [self.endDatePicker setHidden:NO];
         }
         
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            [tableView reloadData];
-        }];
-        
+        [self.tableView reloadRowsAtIndexPaths:@[endIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadData];
+        [tableView scrollToRowAtIndexPath:endIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     
     else if (indexPath.section == 4 && indexPath.row ==0){
@@ -180,47 +179,33 @@
             [self.locationPicker setHidden:NO];
         }
        
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:4]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            [tableView reloadData];
-        }];
+        [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadData];
+        [tableView scrollToRowAtIndexPath:locIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 
-        
-    }
+        }
     else{
         
         if (!(indexPath.section == 1 && indexPath.row ==1))
         {
             self.isEditingStartDate = NO;
             
-            [UIView animateWithDuration:.4 animations:^{
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
-                
-                [tableView reloadData];
-            }];
-            
-            
+            [self.tableView reloadRowsAtIndexPaths:@[startIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView reloadData];
             
         }
         if (!(indexPath.section == 2 && indexPath.row ==1)) {
             self.isEditingEndDate = NO;
             
-            [UIView animateWithDuration:.4 animations:^{
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
-                
-                [tableView reloadData];
-            }];
-            
+            [self.tableView reloadRowsAtIndexPaths:@[endIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView reloadData];
+           
         }
         if (!(indexPath.section == 4 && indexPath.row == 1)) {
             self.isEditingLocation = NO;
             
-            [UIView animateWithDuration:.4 animations:^{
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:4]] withRowAnimation:UITableViewRowAnimationFade];
-                
-                [tableView reloadData];
-            }];
+            [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView reloadData];
         }
         
     }
@@ -278,9 +263,9 @@
 
 - (IBAction)doneTapped:(id)sender {
     
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, please specify a title and valid end date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, please specify a title, location and valid end date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
-    if ([self.titleLabel.text isEqualToString:@""] || [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
+    if ([self.titleLabel.text isEqualToString:@""] || [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0 || self.selectedLocation == nil) {
         
         [alertView show];
         

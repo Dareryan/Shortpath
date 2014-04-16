@@ -10,6 +10,7 @@
 #import <TapkuLibrary/NSDate+TKCategory.h>
 #import "ShortPathDataStore.h"
 #import "Event+Methods.h"
+#import "SVProgressHUD.h"
 
 @interface CalendarContainerViewController ()
 
@@ -73,6 +74,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [SVProgressHUD show];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCalendar:) name:NSManagedObjectContextDidSaveNotification object:self.dataStore.managedObjectContext];
 
@@ -188,6 +191,8 @@
     //NSLog(@"%d", [self.events count]);
 
     [self.calendar reloadData];
+    
+    [SVProgressHUD dismiss];
 }
 
 

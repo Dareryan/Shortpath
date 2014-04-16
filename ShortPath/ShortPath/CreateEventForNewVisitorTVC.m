@@ -323,8 +323,6 @@
 -(void)writeNewVisitorEventToCoreData
 {
     
-    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
-    
     Visitor *newVisitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
     newVisitor.firstName = self.firstNameTextField.text;
     newVisitor.lastName = self.lastNameTextField.text;
@@ -337,7 +335,8 @@
     visitorsEvent.end = self.endDatePicker.date;
     visitorsEvent.title = [NSString stringWithFormat:@"Meeting with: %@", newVisitor.firstName];
     visitorsEvent.identifier = @"";
-    
+    visitorsEvent.location_id = self.selectedLocation.identifier;
+
     [visitorsEvent addVisitorsObject:newVisitor];
     
     [self.user addEventsObject:visitorsEvent];

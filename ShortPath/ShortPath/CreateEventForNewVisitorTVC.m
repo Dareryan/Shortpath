@@ -12,8 +12,10 @@
 #import "ShortPathDataStore.h"
 #import "Event+Methods.h"
 #import "User+Methods.h"
+#import "FISViewController.h"
 #import "APIClient.h"
 #import "Location+Methods.h"
+
 
 @interface CreateEventForNewVisitorTVC ()
 
@@ -115,6 +117,19 @@
     
     
     
+
+//    NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
+//    
+//    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+//        
+//        NSDictionary *dict = responseObject[@"user"];
+//        //completionBlock(dict);
+//        NSLog(@"%@", dict);
+//        
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        NSLog(@"Error Code %long",  error.code);
+//    }];
+
     NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
     
     [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -128,6 +143,7 @@
         NSLog(@"Error Code %long",  error.code);
         
     }];
+
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -274,13 +290,13 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name, location and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
-    if ([self.firstNameTextField.text isEqualToString:@""] || [self.lastNameTextField.text isEqualToString:@""] || [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
+    if ([self.firstNameTextField.text isEqualToString:@""] || [self.lastNameTextField.text isEqualToString:@""] || [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0 || self.selectedLocation == nil) {
         
         [alertView show];
         
-    } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)) {
+    } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) && self.selectedLocation != nil) {
         
         
         /*
@@ -288,24 +304,55 @@
          */
         
         if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
-        
-        
+            
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"key"]) {
+                
+                //CONTINUE POST
+                
+                
+            } else {
+                UIAlertView *alertAuth = [[UIAlertView alloc] initWithTitle:@"Application is not authorized" message:@"Please re-log in to retrieve a new access key" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertAuth show];
+                
+                
+                //STORE TO CORE DATA
+                //GO TO AUTH HOME SCREEN
+            }
+            
             [self writeNewVisitorEventToCoreData];
+            
             [self dismissViewControllerAnimated:YES completion:nil];
             
             NSLog(@"IS REACHABILE");
             
         } else {
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-            //NSLog(@"NOT REACHABLE");
+            UIAlertView *alertConnect = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertConnect show];
+            
         }
         
     }
 }
 
-- (void)postNewVisitorEventToServer
+
+- (void)alertAuth:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
+        [self presentViewController:loginVC animated:YES completion:nil];
+        self.tabBarController.navigationController.viewControllers = @[loginVC];
+        [self.tabBarController.navigationController pushViewController:loginVC animated:YES];
+        
+        NSLog(@"pressed No");
+    }
+}
+
+
+
+//api call POST event
+
+-(void)postNewVisitorEventToServer
 {
     NSString *startDate = [Event dateStringFromDate:self.startDatePicker.date];
     NSString *time = [Event timeStringFromDate:self.startDatePicker.date];

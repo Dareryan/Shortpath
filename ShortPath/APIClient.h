@@ -17,4 +17,6 @@
 
 - (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime EndDate:(NSString *)endDate Title:(NSString *)title;
 
+- (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock;
+
 @end

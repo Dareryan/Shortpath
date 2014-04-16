@@ -39,14 +39,16 @@
     
     [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
         
-        [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
+        [weakSelf.dataStore addLocationsToCoreDataForUser:user Completion:^(Location *location) {
             
-            [weakSelf.dataStore saveContext];
-            
-            completionBlock();
-            
+            [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
+                
+                [weakSelf.dataStore saveContext];
+                
+                completionBlock();
+                
+            }];
         }];
-        
     }];
 }
 

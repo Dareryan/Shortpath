@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class Visitor;
 #import "User+Methods.h"
+#import "Location+Methods.h"
 
 @interface ShortPathDataStore : NSObject
 
@@ -18,6 +19,7 @@
 
 - (void)addUserToCoreDataWithCompletion: (void(^)(User *))completionBlock;
 - (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(Event *))completionBlock;
+- (void)addLocationsToCoreDataForUser: (User *)user Completion: (void(^)(Location *))completionBlock;
 
 
 - (void)saveContext;

@@ -54,6 +54,7 @@
         newEvent.end = [self dateFromString:dict[@"event"][@"end_time"]];
         newEvent.last_edit = [self dateFromString:dict[@"event"][@"updated_at"]];
         newEvent.title = [NSString stringWithFormat:@"%@", dict[@"event"][@"subject"]];
+        newEvent.location_id = [NSString stringWithFormat:@"%@", dict[@"event"][@"location_id"]];
 
         newEvent.identifier = [NSString stringWithFormat:@"%@", dict[@"event"][@"id"]];
         
@@ -62,7 +63,7 @@
         
     } else {
         
-        Event *ev = events[0];
+        //Event *ev = events[0];
         
         //NSLog(@"%@", ev.identifier);
         

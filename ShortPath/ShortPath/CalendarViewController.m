@@ -43,9 +43,17 @@
     
     self.apiClient = [[APIClient alloc]init];
     
+
+//    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+//    
+//    self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+//
+//    [self.apiClient postEventForUser:self.user WithStartDate:@"04/17/2014" Time:@"17.5" EndDate:@"04/16/2014" Title:@"hello from flatiron app"];
+
     
 
     //[self.apiClient postEventForUser:self.user WithStartDate:@"04/15/2014" Time:@"17.5" EndDate:@"04/16/2014" Title:@"hello from flatiron app"];
+
    
 }
 

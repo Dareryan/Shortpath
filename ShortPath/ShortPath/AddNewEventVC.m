@@ -38,8 +38,9 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *titleCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
 @property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
-@property (strong, nonatomic) NSMutableArray *locations;
-@property (strong, nonatomic) NSString *selectedLocationName;
+@property (strong, nonatomic) NSArray *locations;
+@property (strong, nonatomic) Location *selectedLocation;
+
 
 @end
 
@@ -70,20 +71,13 @@
         //NSLog(@"NOT REACHABLE");
     }
     
-    self.locations = [[NSMutableArray alloc]init];
-    
 
     self.dataStore = [ShortPathDataStore sharedDataStore];
     self.locationPicker.dataSource = self;
     self.locationPicker.delegate = self;
     
     NSFetchRequest *locRequest = [[NSFetchRequest alloc]initWithEntityName:@"Location"];
-    NSArray *locations = [self.dataStore.managedObjectContext executeFetchRequest:locRequest error:nil];
-    
-    for (Location *loc in locations) {
-
-        [self.locations addObject:loc.title];
-    }
+    self.locations = [self.dataStore.managedObjectContext executeFetchRequest:locRequest error:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -295,17 +289,14 @@
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
-    NSFetchRequest *locationReq = [[NSFetchRequest alloc]initWithEntityName:@"Location"];
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"title == %@", self.selectedLocationName];
-    locationReq.predicate = pred;
-    Location *location = [self.dataStore.managedObjectContext executeFetchRequest:locationReq error:nil][0];
+    
 
     Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
     event.start = self.startDatePicker.date;
     event.end = self.endDatePicker.date;
     event.title = self.titleLabel.text;
     event.identifier = @"";
-    event.location_id = location.identifier;
+    event.location_id = self.selectedLocation.identifier;
     
     if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
         User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
@@ -351,7 +342,7 @@
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.selectedLocationName = self.locations[row];
+    self.selectedLocation = self.locations[row];
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
@@ -363,6 +354,19 @@
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    
+    
+    NSMutableArray *names = [[NSMutableArray alloc]init];
+    
+    for (Location *loc in self.locations) {
+        [names addObject:loc.title];
+    }
+    
+    return [names objectAtIndex:row];
 }
 
 @end

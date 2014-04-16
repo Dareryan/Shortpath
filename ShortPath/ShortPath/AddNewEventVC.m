@@ -269,7 +269,7 @@
         
         [alertView show];
         
-    } else if(![self.titleLabel.text isEqualToString:@""] && ![self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
+    } else if(![self.titleLabel.text isEqualToString:@""] && ![self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0 && self.selectedLocation != nil) {
         
         //Create and Add New Event Object Here
         if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {

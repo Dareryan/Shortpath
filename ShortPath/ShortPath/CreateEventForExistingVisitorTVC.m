@@ -11,6 +11,8 @@
 #import "ShortPathDataStore.h"
 #import "User+Methods.h"
 #import "Visitor+Methods.h"
+#import "Location+Methods.h"
+#import "APIClient.h"
 
 @interface CreateEventForExistingVisitorTVC ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameCell;
@@ -32,6 +34,9 @@
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) NSArray *locations;
 
+@property (strong, nonatomic) APIClient *apiClient;
+@property (strong, nonatomic) Location *selectedLocation;
+
 
 - (IBAction)doneButtonTapped:(id)sender;
 
@@ -51,6 +56,7 @@
     [super viewDidLoad];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    self.apiClient = [[APIClient alloc]init];
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
@@ -68,7 +74,7 @@
     [self.departureDatePicker setHidden:YES];
     [self.locationPicker setHidden:YES];
     
-    self.nameCell.textLabel.text = self.visitor.firstName;
+    self.nameCell.textLabel.text = [NSString stringWithFormat:@"%@ %@", self.visitor.firstName, self.visitor.lastName];
     
     self.locationPicker.showsSelectionIndicator = YES;
     UITapGestureRecognizer *locationGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickerViewTapGestureRecognized:)];
@@ -78,9 +84,6 @@
     self.arrivalTimeCell.textLabel.text = @"Arrival";
     self.departureTimeCell.textLabel.text = @"Departure";
     self.locationCell.textLabel.text = @"Location";
-
-
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -229,9 +232,7 @@
 
 
 - (IBAction)doneButtonTapped:(id)sender {
-    
-    
-    
+
     if ([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, it must have a valid End Date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
@@ -248,27 +249,33 @@
 
 -(void)writeNewVisitorEventToCoreData
 {
-    
-    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
-    
-    
-    
     Event *visitorsEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
     
     visitorsEvent.start = self.arrivalDatePicker.date;
     visitorsEvent.end = self.departureDatePicker.date;
     visitorsEvent.title = [NSString stringWithFormat:@"Meeting with: %@", self.visitor.firstName];
     visitorsEvent.identifier = @"";
+    visitorsEvent.location_id = self.selectedLocation.identifier;
     
     [visitorsEvent addVisitorsObject:self.visitor];
     
-    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
-        User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
-        [user addEventsObject:visitorsEvent];
-    }
+    [self.user addEventsObject:visitorsEvent];
 
     [self.dataStore saveContext];
     
+}
+
+- (void)postNewVisitorEventToServer
+{
+    NSString *startDate = [Event dateStringFromDate:self.arrivalDatePicker.date];
+    NSString *time = [Event timeStringFromDate:self.arrivalDatePicker.date];
+    NSString *title = [NSString stringWithFormat:@"Meeting with: %@ %@", self.visitor.firstName, self.visitor.lastName];
+    
+    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Completion:^{
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+        
+    }];
 }
 
 
@@ -276,7 +283,7 @@
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 1;
+    return [self.locations count];
     
 }
 
@@ -290,6 +297,19 @@
     return YES;
 }
 
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    NSMutableArray *names = [[NSMutableArray alloc]init];
+    
+    for (Location *loc in self.locations) {
+        
+        [names addObject:loc.title];
+    }    
+    return [names objectAtIndex:row];
+}
+
+
 - (void)pickerViewTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer
 {
     CGPoint touchPoint = [gestureRecognizer locationInView:gestureRecognizer.view.superview];
@@ -299,9 +319,9 @@
     
     if( CGRectContainsPoint( selectorFrame, touchPoint) )
     {
-        //self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
+        self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
         self.isEditingLocation = NO;
-       // self.locationCell.textLabel.text = self.selectedLocation.title;
+        self.locationCell.textLabel.text = self.selectedLocation.title;
         NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:3];
         [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView reloadData];

@@ -856,6 +856,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="calendarContainerView" destination="z0o-ba-xcy" id="HgV-yO-N3p"/>
+                        <outlet property="eventsContainerView" destination="wpJ-lJ-RfM" id="BaN-LM-kEg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQY-5U-l5U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

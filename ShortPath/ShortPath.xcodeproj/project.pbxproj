@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		05582AC418F72DCF00148951 /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC318F72DCF00148951 /* APIClient.m */; };
-		05582AC718F7331500148951 /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC618F7331500148951 /* Visitor.m */; };
-		05582ACA18F7331600148951 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582AC918F7331600148951 /* User.m */; };
 		05582AD018F733B600148951 /* User+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582ACF18F733B600148951 /* User+Methods.m */; };
 		05582B1718F84BE700148951 /* Visitor+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582B1618F84BE700148951 /* Visitor+Methods.m */; };
-		05582B5C18FD861B00148951 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582B5B18FD861B00148951 /* Event.m */; };
+		05582B6118FEC86A00148951 /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582B6018FEC86A00148951 /* Visitor.m */; };
+		05582B6418FEC86A00148951 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582B6318FEC86A00148951 /* User.m */; };
+		05582B6D18FEC87E00148951 /* Location+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582B6C18FEC87E00148951 /* Location+Methods.m */; };
+		05582B7018FECE9D00148951 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582B6F18FECE9D00148951 /* Location.m */; };
+		05582B7318FED30B00148951 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 05582B7218FED30B00148951 /* Event.m */; };
 		0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2AF18F4561200D02D78 /* Event+Methods.m */; };
 		0589F2B418F45D7700D02D78 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589F2B318F45D7700D02D78 /* EventsTableViewController.m */; };
 		05EA535018F44BB100948310 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EA534F18F44BB100948310 /* CoreData.framework */; };
@@ -70,16 +72,20 @@
 		01787EEBDFC44B7EB2652066 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		05582AC218F72DCF00148951 /* APIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIClient.h; sourceTree = "<group>"; };
 		05582AC318F72DCF00148951 /* APIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIClient.m; sourceTree = "<group>"; };
-		05582AC518F7331500148951 /* Visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
-		05582AC618F7331500148951 /* Visitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitor.m; sourceTree = "<group>"; };
-		05582AC818F7331600148951 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		05582AC918F7331600148951 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		05582ACE18F733B600148951 /* User+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Methods.h"; sourceTree = "<group>"; };
 		05582ACF18F733B600148951 /* User+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Methods.m"; sourceTree = "<group>"; };
 		05582B1518F84BE700148951 /* Visitor+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Visitor+Methods.h"; sourceTree = "<group>"; };
 		05582B1618F84BE700148951 /* Visitor+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Visitor+Methods.m"; sourceTree = "<group>"; };
-		05582B5A18FD861B00148951 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		05582B5B18FD861B00148951 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		05582B5F18FEC86A00148951 /* Visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
+		05582B6018FEC86A00148951 /* Visitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visitor.m; sourceTree = "<group>"; };
+		05582B6218FEC86A00148951 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		05582B6318FEC86A00148951 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		05582B6B18FEC87E00148951 /* Location+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+Methods.h"; sourceTree = "<group>"; };
+		05582B6C18FEC87E00148951 /* Location+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+Methods.m"; sourceTree = "<group>"; };
+		05582B6E18FECE9D00148951 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		05582B6F18FECE9D00148951 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		05582B7118FED30B00148951 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		05582B7218FED30B00148951 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		0589F2AE18F4561200D02D78 /* Event+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+Methods.h"; sourceTree = "<group>"; };
 		0589F2AF18F4561200D02D78 /* Event+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+Methods.m"; sourceTree = "<group>"; };
 		0589F2B218F45D7700D02D78 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsTableViewController.h; sourceTree = "<group>"; };
@@ -188,12 +194,16 @@
 			isa = PBXGroup;
 			children = (
 				05EA535118F44BE300948310 /* ShortPath.xcdatamodeld */,
-				05582B5A18FD861B00148951 /* Event.h */,
-				05582B5B18FD861B00148951 /* Event.m */,
-				05582AC818F7331600148951 /* User.h */,
-				05582AC918F7331600148951 /* User.m */,
-				05582AC518F7331500148951 /* Visitor.h */,
-				05582AC618F7331500148951 /* Visitor.m */,
+				05582B7118FED30B00148951 /* Event.h */,
+				05582B7218FED30B00148951 /* Event.m */,
+				05582B6E18FECE9D00148951 /* Location.h */,
+				05582B6F18FECE9D00148951 /* Location.m */,
+				05582B6218FEC86A00148951 /* User.h */,
+				05582B6318FEC86A00148951 /* User.m */,
+				05582B5F18FEC86A00148951 /* Visitor.h */,
+				05582B6018FEC86A00148951 /* Visitor.m */,
+				05582B6B18FEC87E00148951 /* Location+Methods.h */,
+				05582B6C18FEC87E00148951 /* Location+Methods.m */,
 				05582ACE18F733B600148951 /* User+Methods.h */,
 				05582ACF18F733B600148951 /* User+Methods.m */,
 				0589F2AE18F4561200D02D78 /* Event+Methods.h */,
@@ -484,25 +494,27 @@
 			files = (
 				05582AC418F72DCF00148951 /* APIClient.m in Sources */,
 				4531B01E18EF51C700DA0CD4 /* CalendarContainerViewController.m in Sources */,
-				05582AC718F7331500148951 /* Visitor.m in Sources */,
 				45B136DF18F70F9400A3302E /* CreateEventForExistingVisitorTVC.m in Sources */,
 				05582AD018F733B600148951 /* User+Methods.m in Sources */,
 				4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */,
 				0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */,
-				05582ACA18F7331600148951 /* User.m in Sources */,
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
 				2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */,
+				05582B6418FEC86A00148951 /* User.m in Sources */,
 				05582B1718F84BE700148951 /* Visitor+Methods.m in Sources */,
 				2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */,
-				05582B5C18FD861B00148951 /* Event.m in Sources */,
 				2E3B258618EB0F780090336C /* main.m in Sources */,
 				25127EA118F5FAB7008BB7C1 /* AddNewEventVC.m in Sources */,
+				05582B7018FECE9D00148951 /* Location.m in Sources */,
 				05EA535718F44F2300948310 /* ShortPathDataStore.m in Sources */,
 				2E5FB06818EE0936004CE912 /* FISTabBarControllerViewController.m in Sources */,
+				05582B7318FED30B00148951 /* Event.m in Sources */,
 				05EA535318F44BE300948310 /* ShortPath.xcdatamodeld in Sources */,
 				4546B9D118EC563600388603 /* CalendarViewController.m in Sources */,
+				05582B6D18FEC87E00148951 /* Location+Methods.m in Sources */,
 				45B136D918F70BD400A3302E /* EventDetailTableViewController.m in Sources */,
 				45B136E218F7109C00A3302E /* CreateEventForNewVisitorTVC.m in Sources */,
+				05582B6118FEC86A00148951 /* Visitor.m in Sources */,
 				45B136DC18F70BF900A3302E /* EventInviteesTableViewController.m in Sources */,
 				0589F2B418F45D7700D02D78 /* EventsTableViewController.m in Sources */,
 				2E3B258A18EB0F780090336C /* FISAppDelegate.m in Sources */,

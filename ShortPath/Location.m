@@ -1,22 +1,21 @@
 //
-//  User.m
+//  Location.m
 //  ShortPath
 //
 //  Created by Nadia Yudina on 4/16/14.
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
-#import "User.h"
+#import "Location.h"
 #import "Event.h"
+#import "User.h"
 
 
-@implementation User
+@implementation Location
 
-@dynamic building_id;
-@dynamic group_id;
 @dynamic identifier;
-@dynamic username;
+@dynamic title;
+@dynamic user;
 @dynamic events;
-@dynamic locations;
 
 @end

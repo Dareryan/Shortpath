@@ -439,7 +439,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Visitors" id="4x5-vY-8xM">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="nC4-wa-V0L">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nC4-wa-V0L">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="PiA-MZ-col" id="cdV-dX-EK3"/>
                             </connections>

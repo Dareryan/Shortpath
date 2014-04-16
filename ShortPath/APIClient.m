@@ -23,12 +23,12 @@
 - (AFHTTPSessionManager *)manager
 {
     if (!_manager) {
+        
         _manager = [AFHTTPSessionManager manager];
         AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         
         [requestSerializer setValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
-        //[requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        //[requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
         _manager.requestSerializer = requestSerializer;
     
@@ -58,6 +58,24 @@
 
 }
 
+- (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/users/locations"];
+    
+    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray *locationsArray = responseObject;
+        
+        completionBlock(locationsArray);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"Error on API call %@", error);
+    }];
+
+}
+
+
 
 - (void)fetchEventsForUser:(User *)user Completion: (void(^)(NSArray *))completionBlock
 {
@@ -76,11 +94,17 @@
 }
 
 
-- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime EndDate:(NSString *)endDate Title:(NSString *)title
+
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Completion: (void(^)())completionBlock
 {
-    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events.json", user.group_id];
+    //make a gist!!!
+    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events", user.group_id];
     
-    NSString *json = [NSString stringWithFormat:@"{'event': {'starts_at_date': '%@', 'starts_at_time': '%@', 'ends_at_date': '%@', 'subject':'%@', 'location_id': '7144'}}", startDate, startTime, endDate, title];
+    NSString *str = [NSString stringWithFormat:@"{\"event\":{\"starts_at_date\":\"%@\",\"starts_at_time\":\"%@\",\"duration\":1,\"repeats\":\"0\",\"location_id\":\"%@\",\"subject\":\"%@\"}}", startDate, startTime, location.identifier, title];
+    
+    
+    NSData *postData = [str dataUsingEncoding:NSUTF8StringEncoding];
+    
     
     NSURL *url = [NSURL URLWithString:urlString];
   
@@ -88,16 +112,15 @@
     [request setURL:url];
     [request setHTTPMethod:@"POST"];
     
+    
+    [request setHTTPBody:postData];
+    
     //set headers
-    NSString *contentType = [NSString stringWithFormat:@"application/json"];
-    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
     
-    //create the body
-    NSMutableData *postBody = [NSMutableData data];
-    [postBody appendData:[json dataUsingEncoding:NSUTF8StringEncoding]];
+    [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
     
-    //post
-    [request setHTTPBody:postBody];
     
     NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 
@@ -107,7 +130,8 @@
     
     [task resume];
     
-    
+    completionBlock();
+ 
 }
 
 

@@ -9,6 +9,7 @@
 #import "ShortPathDataStore.h"
 #import "Event+Methods.h"
 #import "APIClient.h"
+#import <SBJson/SBJson4Parser.h>
 
 
 @interface ShortPathDataStore ()
@@ -64,6 +65,27 @@
     }
 }
 
+- (void) cleanCoreData
+{
+    [self.managedObjectContext lock];
+    
+    NSArray *stores = [self.persistentStoreCoordinator persistentStores];
+    
+    for (NSPersistentStore *store in stores) {
+        
+        [self.persistentStoreCoordinator removePersistentStore:store error:nil];
+        
+        [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
+    }
+    
+    [self.managedObjectContext unlock];
+    
+    _managedObjectContext = nil;
+    _persistentStoreCoordinator = nil;
+    _managedObjectModel = nil;
+}
+
+
 
 #pragma mark - API to Core Data methods
 
@@ -97,7 +119,26 @@
 }
 
 
+- (void)addLocationsToCoreDataForUser: (User *)user Completion: (void(^)(Location *))completionBlock
+{
+    [self.apiClient fetchLocationsWithCompletion:^(NSArray *locations) {
+       
+        for (NSArray *allLocs in locations) {
+            
+            for (id eachLoc in allLocs[1]) {
+                    
+                Location *newLocation = [Location getLocationFromDict:eachLoc ToContext:self.managedObjectContext];
+                
+                [user addLocationsObject:newLocation];
+                
+                completionBlock(newLocation);
+                
+                }
 
+        }
+        
+    }];
+}
 
 
 #pragma mark - Core Data stack

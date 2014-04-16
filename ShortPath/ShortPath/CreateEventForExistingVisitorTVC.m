@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *departureDatePicker;
 @property (nonatomic) BOOL arrivalTimeIsEditing;
 @property (nonatomic) BOOL departureTimeIsEditing;
+@property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
+@property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
+@property (nonatomic) BOOL isEditingLocation;
 
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
@@ -44,14 +47,24 @@
     [super viewDidLoad];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    self.locationPicker.dataSource = self;
+    self.locationPicker.delegate = self;
     
     self.arrivalTimeIsEditing = NO;
     self.departureTimeIsEditing = NO;
     
     [self.arrivalDatePicker setHidden:YES];
     [self.departureDatePicker setHidden:YES];
+    [self.locationPicker setHidden:YES];
     
     self.nameCell.textLabel.text = self.visitor.firstName;
+    
+    self.locationPicker.showsSelectionIndicator = YES;
+    UITapGestureRecognizer *locationGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickerViewTapGestureRecognized:)];
+    locationGestureRecognizer.delegate = self;
+    locationGestureRecognizer.cancelsTouchesInView = NO;
+    [self.locationPicker addGestureRecognizer:locationGestureRecognizer];
+
     
 }
 
@@ -75,7 +88,7 @@
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
- 
+    
     
     Event *visitorsEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
     
@@ -105,6 +118,7 @@
     {
         self.arrivalTimeIsEditing = !self.arrivalTimeIsEditing;
         self.departureTimeIsEditing = NO;
+        self.isEditingLocation = NO;
         
         if (self.arrivalTimeIsEditing) {
             [self.arrivalDatePicker setHidden:NO];
@@ -120,6 +134,7 @@
     else if (indexPath.section == 2 && indexPath.row == 0) {
         self.departureTimeIsEditing = !self.departureTimeIsEditing;
         self.arrivalTimeIsEditing = NO;
+        self.isEditingLocation = NO;
         if (self.departureTimeIsEditing){
             [self.departureDatePicker setHidden:NO];
         }
@@ -129,6 +144,23 @@
             
             [tableView reloadData];
         }];
+        
+    }
+    else if (indexPath.section == 3 && indexPath.row == 0){
+        self.isEditingLocation = !self.isEditingLocation;
+        self.departureTimeIsEditing = NO;
+        self.arrivalTimeIsEditing = NO;
+        if (self.isEditingLocation) {
+            [self.locationPicker setHidden:NO];
+        }
+        
+        [UIView animateWithDuration:.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:3]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [tableView reloadData];
+        }];
+
+        
         
     }
     else{
@@ -154,7 +186,16 @@
             }];
             
         }
-        
+        if (!(indexPath.section == 3 && indexPath.row == 1)) {
+            self.isEditingLocation = NO;
+            
+            [UIView animateWithDuration:.4 animations:^{
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:3]] withRowAnimation:UITableViewRowAnimationFade];
+                
+                [tableView reloadData];
+            }];
+            
+        }
     }
     
     
@@ -176,6 +217,15 @@
             return 0;
         }
     }
+    if (indexPath.section == 3 && indexPath.row ==1) {
+        if (self.isEditingLocation) {
+            return 225.0;
+        }
+        else{
+            return 0;
+        }
+    }
+    
     return self.tableView.rowHeight;
 }
 
@@ -183,14 +233,14 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-   
+    
     self.arrivalTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.arrivalDatePicker.date];
     [self.arrivalTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     
     if (([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0)) {
-    [self.departureDatePicker setDate:[NSDate dateWithTimeInterval: 1800 sinceDate:self.arrivalDatePicker.date]];
-    self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
-    [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+        [self.departureDatePicker setDate:[NSDate dateWithTimeInterval: 1800 sinceDate:self.arrivalDatePicker.date]];
+        self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
+        [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     }
 }
 
@@ -217,6 +267,44 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+#pragma mark PickerView methods
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 1;
+    
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+- (void)pickerViewTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer
+{
+    CGPoint touchPoint = [gestureRecognizer locationInView:gestureRecognizer.view.superview];
+    
+    CGRect frame = self.locationPicker.frame;
+    CGRect selectorFrame = CGRectInset( frame, 0.0, self.locationPicker.bounds.size.height * 0.85 / 2.0 );
+    
+    if( CGRectContainsPoint( selectorFrame, touchPoint) )
+    {
+        //self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
+        self.isEditingLocation = NO;
+       // self.locationCell.textLabel.text = self.selectedLocation.title;
+        NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:3];
+        [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadData];
+        
+    }
+}
+
 
 
 @end

@@ -90,6 +90,12 @@
 #define COCOAPODS_VERSION_MINOR_FontAwesomeKit_Zocial 1
 #define COCOAPODS_VERSION_PATCH_FontAwesomeKit_Zocial 5
 
+// SBJson
+#define COCOAPODS_POD_AVAILABLE_SBJson
+#define COCOAPODS_VERSION_MAJOR_SBJson 4
+#define COCOAPODS_VERSION_MINOR_SBJson 0
+#define COCOAPODS_VERSION_PATCH_SBJson 0
+
 // TapkuLibrary
 #define COCOAPODS_POD_AVAILABLE_TapkuLibrary
 #define COCOAPODS_VERSION_MAJOR_TapkuLibrary 0

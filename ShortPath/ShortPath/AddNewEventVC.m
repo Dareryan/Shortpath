@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
+#import <AFNetworking.h>
 #import "AddNewEventVC.h"
 #import "Event+Methods.h"
 #import "ShortPathDataStore.h"
@@ -21,6 +22,7 @@
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 @property (weak, nonatomic) IBOutlet UITableViewCell *startDateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *endDateCell;
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 
 
 - (IBAction)cancelTapped:(id)sender;
@@ -50,6 +52,19 @@
 
 {
     [super viewDidLoad];
+    
+    if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        
+        NSLog(@"IS REACHABILE");
+        
+    } else {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        //NSLog(@"NOT REACHABLE");
+    }
+    
+
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
     
@@ -250,9 +265,24 @@
     } else if(![self.titleLabel.text isEqualToString:@""] && ![self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
         
         //Create and Add New Event Object Here
-        [self createNewEvent];
+        if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            
+            [self createNewEvent];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            NSLog(@"IS REACHABILE");
+            
+        } else {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            //NSLog(@"NOT REACHABLE");
+        }
+
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        
     }
 }
 

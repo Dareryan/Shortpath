@@ -11,7 +11,7 @@
 #import "FISViewController.h"
 #import "APIClient.h"
 #import "Event+Methods.h"
-
+#import <AFNetworking.h>
 #import "Visitor.h"
 
 
@@ -20,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    
+        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
 //    APIClient *cl = [[APIClient alloc]init];
 //    

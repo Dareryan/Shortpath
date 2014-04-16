@@ -59,6 +59,13 @@
     
     self.nameCell.textLabel.text = self.visitor.firstName;
     
+    self.locationPicker.showsSelectionIndicator = YES;
+    UITapGestureRecognizer *locationGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickerViewTapGestureRecognized:)];
+    locationGestureRecognizer.delegate = self;
+    locationGestureRecognizer.cancelsTouchesInView = NO;
+    [self.locationPicker addGestureRecognizer:locationGestureRecognizer];
+
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -263,11 +270,6 @@
 
 #pragma mark PickerView methods
 
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    
-}
-
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     return 1;
@@ -278,6 +280,31 @@
 {
     return 1;
 }
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+- (void)pickerViewTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer
+{
+    CGPoint touchPoint = [gestureRecognizer locationInView:gestureRecognizer.view.superview];
+    
+    CGRect frame = self.locationPicker.frame;
+    CGRect selectorFrame = CGRectInset( frame, 0.0, self.locationPicker.bounds.size.height * 0.85 / 2.0 );
+    
+    if( CGRectContainsPoint( selectorFrame, touchPoint) )
+    {
+        //self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
+        self.isEditingLocation = NO;
+       // self.locationCell.textLabel.text = self.selectedLocation.title;
+        NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:3];
+        [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadData];
+        
+    }
+}
+
 
 
 @end

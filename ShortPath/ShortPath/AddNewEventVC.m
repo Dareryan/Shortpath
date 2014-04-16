@@ -368,13 +368,6 @@
 
 #pragma mark PickerView methods
 
-//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-//{
-//    self.selectedLocation = self.locations[row];
-//    
-//    NSLog(@"%@", self.selectedLocation);
-//}
-
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     return [self.locations count];
@@ -417,6 +410,8 @@
         self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
         self.isEditingLocation = NO;
         self.locationCell.textLabel.text = self.selectedLocation.title;
+        NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:4];
+         [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView reloadData];
         
     }

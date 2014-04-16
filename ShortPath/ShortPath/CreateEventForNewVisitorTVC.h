@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CreateEventForNewVisitorTVC : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface CreateEventForNewVisitorTVC : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate>
 
 @end

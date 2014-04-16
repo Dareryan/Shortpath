@@ -29,6 +29,10 @@
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 
+@property (strong, nonatomic) User *user;
+@property (strong, nonatomic) NSArray *locations;
+
+
 - (IBAction)doneButtonTapped:(id)sender;
 
 @end
@@ -47,6 +51,13 @@
     [super viewDidLoad];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+    self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+    
+    NSFetchRequest *locRequest = [[NSFetchRequest alloc]initWithEntityName:@"Location"];
+    self.locations = [self.dataStore.managedObjectContext executeFetchRequest:locRequest error:nil];
+    
     self.locationPicker.dataSource = self;
     self.locationPicker.delegate = self;
     
@@ -81,34 +92,6 @@
     [self.arrivalTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
-
-
--(void)createNewVisitorEvent
-{
-    
-    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
-    
-    
-    
-    Event *visitorsEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
-    
-    visitorsEvent.start = self.arrivalDatePicker.date;
-    visitorsEvent.end = self.departureDatePicker.date;
-    visitorsEvent.title = [NSString stringWithFormat:@"Meeting with: %@", self.visitor.firstName];
-    visitorsEvent.identifier = @"";
-    
-    [visitorsEvent addVisitorsObject:self.visitor];
-    
-    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
-        User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
-        [user addEventsObject:visitorsEvent];
-    }
-    
-    
-    [self.dataStore saveContext];
-    
-}
-
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -252,6 +235,8 @@
     self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
     [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
+
+
 - (IBAction)doneButtonTapped:(id)sender {
     
     
@@ -263,10 +248,38 @@
     } else {
         
         //Create and Add New Event Object Here
-        [self createNewVisitorEvent];
+        [self writeNewVisitorEventToCoreData];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+
+
+-(void)writeNewVisitorEventToCoreData
+{
+    
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+    
+    
+    
+    Event *visitorsEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
+    
+    visitorsEvent.start = self.arrivalDatePicker.date;
+    visitorsEvent.end = self.departureDatePicker.date;
+    visitorsEvent.title = [NSString stringWithFormat:@"Meeting with: %@", self.visitor.firstName];
+    visitorsEvent.identifier = @"";
+    
+    [visitorsEvent addVisitorsObject:self.visitor];
+    
+    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
+        User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+        [user addEventsObject:visitorsEvent];
+    }
+
+    [self.dataStore saveContext];
+    
+}
+
 
 #pragma mark PickerView methods
 

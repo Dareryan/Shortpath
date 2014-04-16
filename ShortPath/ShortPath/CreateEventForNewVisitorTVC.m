@@ -12,6 +12,8 @@
 #import "ShortPathDataStore.h"
 #import "Event+Methods.h"
 #import "User+Methods.h"
+#import "APIClient.h"
+#import "Location+Methods.h"
 
 @interface CreateEventForNewVisitorTVC ()
 
@@ -33,6 +35,10 @@
 @property (readonly, nonatomic, assign) BOOL reachable;
 @property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
 @property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
+@property (strong, nonatomic) APIClient *apiClient;
+@property (strong, nonatomic) User *user;
+@property (strong, nonatomic) NSArray *locations;
+@property (strong, nonatomic) Location *selectedLocation;
 
 
 - (IBAction)startDateDidChange:(id)sender;
@@ -65,6 +71,8 @@
 {
     [super viewDidLoad];
     
+    self.apiClient = [[APIClient alloc]init];
+    
     if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
         
         NSLog(@"IS REACHABILE");
@@ -83,6 +91,14 @@
 
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+    self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+    
+    NSFetchRequest *locRequest = [[NSFetchRequest alloc]initWithEntityName:@"Location"];
+    self.locations = [self.dataStore.managedObjectContext executeFetchRequest:locRequest error:nil];
+    
+    //NSLog(@"Locations: %@", self.locations);
     
     self.isEditingStartDate = NO;
     self.isEditingEndDate = NO;
@@ -105,8 +121,11 @@
         NSLog(@"%@", dict);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
         NSLog(@"Error Code %long",  error.code);
+        
     }];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -270,7 +289,8 @@
         if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
         
         
-            [self createNewVisitorEvent];[self dismissViewControllerAnimated:YES completion:nil];
+            [self writeNewVisitorEventToCoreData];
+            [self dismissViewControllerAnimated:YES completion:nil];
             
             NSLog(@"IS REACHABILE");
             
@@ -284,12 +304,25 @@
     }
 }
 
-//api call POST event
--(void)createNewVisitorEvent
+- (void)postNewVisitorEventToServer
+{
+    NSString *startDate = [Event dateStringFromDate:self.startDatePicker.date];
+    NSString *time = [Event timeStringFromDate:self.startDatePicker.date];
+    NSString *title = [NSString stringWithFormat:@"Meeting with: %@ %@", self.firstNameTextField.text, self.lastNameTextField.text];
+    
+    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Completion:^{
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+        
+    }];
+
+}
+
+
+-(void)writeNewVisitorEventToCoreData
 {
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
-    
     
     Visitor *newVisitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
     newVisitor.firstName = self.firstNameTextField.text;
@@ -306,11 +339,7 @@
     
     [visitorsEvent addVisitorsObject:newVisitor];
     
-    
-    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
-        User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
-        [user addEventsObject:visitorsEvent];
-    }
+    [self.user addEventsObject:visitorsEvent];
     
     [self.dataStore saveContext];
     
@@ -322,11 +351,9 @@
 
 #pragma mark PickerView methods
 
-
-
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 1;
+    return [self.locations count];
     
 }
 
@@ -334,6 +361,19 @@
 {
     return 1;
 }
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    NSMutableArray *names = [[NSMutableArray alloc]init];
+    
+    for (Location *loc in self.locations) {
+        
+        [names addObject:loc.title];
+    }
+    
+    return [names objectAtIndex:row];
+}
+
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
@@ -349,15 +389,14 @@
     
     if( CGRectContainsPoint( selectorFrame, touchPoint) )
     {
-        //self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
+        self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
         self.isEditingLocation = NO;
-        // self.locationCell.textLabel.text = self.selectedLocation.title;
-        NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:3];
+        self.locationCell.textLabel.text = self.selectedLocation.title;
+        NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:7];
         [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView reloadData];
         
-    }
-}
+    }}
 
 
 

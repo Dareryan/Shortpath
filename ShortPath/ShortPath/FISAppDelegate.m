@@ -11,6 +11,7 @@
 #import "FISViewController.h"
 #import "APIClient.h"
 #import "Event+Methods.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 #import "Visitor.h"
 
@@ -19,7 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    [[AFNetworkActivityIndicatorManager sharedManager]setEnabled:YES];
 //    APIClient *cl = [[APIClient alloc]init];
 //    
 //    [cl fetchUserInfoWithCompletion:^(NSDictionary *dict) {

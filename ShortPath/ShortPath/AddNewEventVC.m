@@ -11,6 +11,8 @@
 #import "Event+Methods.h"
 #import "ShortPathDataStore.h"
 #import "Event.h"
+#import "Location+Methods.h"
+#import "APIClient.h"
 
 
 
@@ -37,6 +39,11 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *titleCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
 @property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
+@property (strong, nonatomic) NSArray *locations;
+@property (strong, nonatomic) Location *selectedLocation;
+@property (strong, nonatomic) User *user;
+@property (strong, nonatomic) APIClient *apiClient;
+
 
 @end
 
@@ -67,12 +74,17 @@
         //NSLog(@"NOT REACHABLE");
     }
     
+    self.apiClient = [[APIClient alloc]init];
+
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+    self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
 
     self.dataStore = [ShortPathDataStore sharedDataStore];
     self.locationPicker.dataSource = self;
     self.locationPicker.delegate = self;
     
-    
+    NSFetchRequest *locRequest = [[NSFetchRequest alloc]initWithEntityName:@"Location"];
+    self.locations = [self.dataStore.managedObjectContext executeFetchRequest:locRequest error:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -112,56 +124,6 @@
 
 #pragma mark - Table view data source
 
-
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -333,24 +295,21 @@
 {
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+
+//    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
+//    event.start = self.startDatePicker.date;
+//    event.end = self.endDatePicker.date;
+//    event.title = self.titleLabel.text;
+//    event.identifier = @"";
+//    event.location_id = self.selectedLocation.identifier;
     
+    NSString *startDate = [Event dateStringFromDate:self.startDatePicker.date];
+    NSString *time = [Event timeStringFromDate:self.startDatePicker.date];
+    NSString *endDate = [Event dateStringFromDate:self.endDatePicker.date];
     
+    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time EndDate:endDate Title:self.titleTextField.text Location:self.selectedLocation];
     
-    
-    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
-    event.start = self.startDatePicker.date;
-    event.end = self.endDatePicker.date;
-    event.title = self.titleLabel.text;
-    event.identifier = @"";
-    
-    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
-        User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
-        [user addEventsObject:event];
-    }
-    
-    
-    
-    [self.dataStore saveContext];
+    //[self.dataStore saveContext];
     
 }
 
@@ -387,12 +346,14 @@
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    self.selectedLocation = self.locations[row];
     
+    NSLog(@"%@", self.selectedLocation);
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 1;
+    return [self.locations count];
     
 }
 
@@ -401,6 +362,18 @@
     return 1;
 }
 
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    NSMutableArray *names = [[NSMutableArray alloc]init];
+    
+    for (Location *loc in self.locations) {
+        
+        [names addObject:loc.title];
+    }
+    
+    return [names objectAtIndex:row];
+}
 
 
 @end

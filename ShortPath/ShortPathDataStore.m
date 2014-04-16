@@ -65,6 +65,27 @@
     }
 }
 
+- (void) cleanCoreData
+{
+    [self.managedObjectContext lock];
+    
+    NSArray *stores = [self.persistentStoreCoordinator persistentStores];
+    
+    for (NSPersistentStore *store in stores) {
+        
+        [self.persistentStoreCoordinator removePersistentStore:store error:nil];
+        
+        [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
+    }
+    
+    [self.managedObjectContext unlock];
+    
+    _managedObjectContext = nil;
+    _persistentStoreCoordinator = nil;
+    _managedObjectModel = nil;
+}
+
+
 
 #pragma mark - API to Core Data methods
 

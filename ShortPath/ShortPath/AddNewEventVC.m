@@ -403,6 +403,9 @@
     if( CGRectContainsPoint( selectorFrame, touchPoint) )
     {
         self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
+        self.isEditingLocation = NO;
+        self.locationCell.textLabel.text = self.selectedLocation.title;
+        [self.tableView reloadData];
         
     }
 }

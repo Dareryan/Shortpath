@@ -298,7 +298,6 @@
         
     } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)) {
         
-        
         /*
          Add code to insert event and visitor object into coredata. Event title should be set to [NSString stringWithFormat:@"%@ %@ visits", self.firstNameTextField.text, self.lastNameTextField.text];
          */
@@ -306,22 +305,20 @@
         if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
             
             if ([[NSUserDefaults standardUserDefaults] objectForKey:@"key"]) {
-                
+                [self postNewVisitorEventToServer];
+                [self dismissViewControllerAnimated:YES completion:nil];
                 //CONTINUE POST
                 
-                
             } else {
-                UIAlertView *alertAuth = [[UIAlertView alloc] initWithTitle:@"Application is not authorized" message:@"Please re-log in to retrieve a new access key" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alertAuth show];
-                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Application is not authorized" message:@"Please re-log in to retrieve a new access key" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Authorize",nil];
+                [alert show];
+                [self writeNewVisitorEventToCoreData];
                 
                 //STORE TO CORE DATA
                 //GO TO AUTH HOME SCREEN
             }
             
             [self writeNewVisitorEventToCoreData];
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
             
             NSLog(@"IS REACHABILE");
             
@@ -335,16 +332,16 @@
     }
 }
 
-
-- (void)alertAuth:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
+        NSLog(@"pressed Cancel");
+    }
+    else {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
         [self presentViewController:loginVC animated:YES completion:nil];
         self.tabBarController.navigationController.viewControllers = @[loginVC];
         [self.tabBarController.navigationController pushViewController:loginVC animated:YES];
-        
-        NSLog(@"pressed No");
     }
 }
 

@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *departureDatePicker;
 @property (nonatomic) BOOL arrivalTimeIsEditing;
 @property (nonatomic) BOOL departureTimeIsEditing;
+@property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
+@property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
 
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
@@ -44,12 +46,15 @@
     [super viewDidLoad];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    self.locationPicker.dataSource = self;
+    self.locationPicker.delegate = self;
     
     self.arrivalTimeIsEditing = NO;
     self.departureTimeIsEditing = NO;
     
     [self.arrivalDatePicker setHidden:YES];
     [self.departureDatePicker setHidden:YES];
+    [self.locationPicker setHidden:YES];
     
     self.nameCell.textLabel.text = self.visitor.firstName;
     
@@ -216,6 +221,24 @@
         [self createNewVisitorEvent];
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+#pragma mark PickerView methods
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 1;
+    
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
 }
 
 

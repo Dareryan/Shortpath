@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Eugene Watson. All rights reserved.
 //
 
+#import <AFNetworking.h>
 #import "AddNewEventVC.h"
 #import "Event+Methods.h"
 #import "ShortPathDataStore.h"
@@ -21,6 +22,8 @@
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 @property (weak, nonatomic) IBOutlet UITableViewCell *startDateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *endDateCell;
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
+@property (nonatomic) BOOL isEditingLocation;
 
 
 - (IBAction)cancelTapped:(id)sender;
@@ -32,6 +35,8 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITableViewCell *titleCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
+@property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
 
 @end
 
@@ -50,7 +55,23 @@
 
 {
     [super viewDidLoad];
+    
+    if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        
+        NSLog(@"IS REACHABILE");
+        
+    } else {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        //NSLog(@"NOT REACHABLE");
+    }
+    
+
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    self.locationPicker.dataSource = self;
+    self.locationPicker.delegate = self;
+    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -65,6 +86,7 @@
     self.isEditingEndDate = NO;
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
+    [self.locationPicker setHidden:YES];
     
     //    [self.tableView registerClass:[SwitchCell class] forCellReuseIdentifier:@"switchCell"];
     //    [self.tableView registerClass:[DateCell class] forCellReuseIdentifier:@"dateCell"];
@@ -247,12 +269,25 @@
     if ([self.titleLabel.text isEqualToString:@""] || [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
         
         [alertView show];
+        
     } else if(![self.titleLabel.text isEqualToString:@""] && ![self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
         
         //Create and Add New Event Object Here
-        [self createNewEvent];
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            
+            [self createNewEvent];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            NSLog(@"IS REACHABILE");
+            
+        } else {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            //NSLog(@"NOT REACHABLE");
+        }
+
     }
 }
 
@@ -309,4 +344,23 @@
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
+
+#pragma mark PickerView methods
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 1;
+    
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
 @end

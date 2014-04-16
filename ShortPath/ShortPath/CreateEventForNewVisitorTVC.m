@@ -29,6 +29,9 @@
 
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
+@property (readonly, nonatomic, assign) BOOL reachable;
+@property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
+@property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
 
 
 - (IBAction)startDateDidChange:(id)sender;
@@ -61,15 +64,30 @@
 {
     [super viewDidLoad];
     
+    if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        
+        NSLog(@"IS REACHABILE");
+        
+    } else {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        //NSLog(@"NOT REACHABLE");
+    }
+
+    
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
     self.isEditingStartDate = NO;
     self.isEditingEndDate = NO;
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
+    [self.locationPicker setHidden:YES];
+    self.locationPicker.dataSource = self;
+    self.locationPicker.delegate = self;
     
     
-    [super viewDidLoad];
+    
     
     NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
     
@@ -80,7 +98,7 @@
         NSLog(@"%@", dict);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"Error Code %d",  error.code);
+        NSLog(@"Error Code %long",  error.code);
     }];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -88,6 +106,8 @@
     
     
 }
+
+
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -184,7 +204,7 @@
         self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
         [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     }
-   
+    
 }
 
 - (IBAction)endDateDidChange:(id)sender {
@@ -206,15 +226,26 @@
         
     } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)) {
         
+        
         /*
          Add code to insert event and visitor object into coredata. Event title should be set to [NSString stringWithFormat:@"%@ %@ visits", self.firstNameTextField.text, self.lastNameTextField.text];
          */
-        [self createNewVisitorEvent];
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        
+        
+            [self createNewVisitorEvent];[self dismissViewControllerAnimated:YES completion:nil];
+            
+            NSLog(@"IS REACHABILE");
+            
+        } else {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            //NSLog(@"NOT REACHABLE");
+        }
         
     }
-    
 }
 
 //api call POST event
@@ -252,4 +283,24 @@
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark PickerView methods
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 1;
+    
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+
 @end

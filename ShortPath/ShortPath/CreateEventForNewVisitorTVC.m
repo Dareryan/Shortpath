@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *endDateCell;
 @property (nonatomic) BOOL isEditingStartDate;
 @property (nonatomic) BOOL isEditingEndDate;
+@property (nonatomic) BOOL isEditingLocation;
 @property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
 
@@ -80,6 +81,7 @@
     
     self.isEditingStartDate = NO;
     self.isEditingEndDate = NO;
+    self.isEditingLocation = NO;
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
     [self.locationPicker setHidden:YES];
@@ -128,41 +130,61 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSIndexPath *topIP = [NSIndexPath indexPathForRow:1 inSection:5];
-    NSIndexPath *bottomIP = [NSIndexPath indexPathForRow:1 inSection:6];
+    NSIndexPath *startIP = [NSIndexPath indexPathForRow:1 inSection:5];
+    NSIndexPath *endIP = [NSIndexPath indexPathForRow:1 inSection:6];
+    NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:7];
     if(indexPath.section==5 && indexPath.row == 0)
     {
         self.isEditingStartDate = !self.isEditingStartDate;
         self.isEditingEndDate = NO;
+        self.isEditingLocation = NO;
         
         if (self.isEditingStartDate) {
             [self.startDatePicker setHidden:NO];
         }
         
-        [self.tableView reloadRowsAtIndexPaths:@[topIP] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadRowsAtIndexPaths:@[startIP] withRowAnimation:UITableViewRowAnimationAutomatic];
         [tableView reloadData];
-        [tableView scrollToRowAtIndexPath:topIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [tableView scrollToRowAtIndexPath:startIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     else if (indexPath.section == 6 && indexPath.row == 0) {
         self.isEditingEndDate = !self.isEditingEndDate;
         self.isEditingStartDate = NO;
+        self.isEditingLocation = NO;
         
         if (self.isEditingEndDate){
             [self.endDatePicker setHidden:NO];
         }
-        [self.tableView reloadRowsAtIndexPaths:@[bottomIP] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadRowsAtIndexPaths:@[endIP] withRowAnimation:UITableViewRowAnimationAutomatic];
         [tableView reloadData];
-        [tableView scrollToRowAtIndexPath:bottomIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [tableView scrollToRowAtIndexPath:endIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    else if (indexPath.section == 7 && indexPath.row ==0) {
+        self.isEditingLocation = !self.isEditingLocation;
+        self.isEditingStartDate = NO;
+        self.isEditingEndDate = NO;
+        
+        if (self.isEditingLocation) {
+            [self.locationPicker setHidden:NO];
+        }
+        [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadData];
+        [tableView scrollToRowAtIndexPath:locIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     else{
         if (!(indexPath.section == 5 && indexPath.row ==1)){
             self.isEditingStartDate = NO;
-            [self.tableView reloadRowsAtIndexPaths:@[topIP] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadRowsAtIndexPaths:@[startIP] withRowAnimation:UITableViewRowAnimationAutomatic];
             [tableView reloadData];
         }
         if (!(indexPath.section == 6 && indexPath.row ==1)) {
             self.isEditingEndDate = NO;
-            [self.tableView reloadRowsAtIndexPaths:@[bottomIP] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadRowsAtIndexPaths:@[endIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView reloadData];
+        }
+        if (!(indexPath.section == 7 && indexPath.row ==1)) {
+            self.isEditingLocation = NO;
+            [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
             [tableView reloadData];
         }
     }
@@ -181,6 +203,14 @@
     }
     if (indexPath.section ==6 && indexPath.row == 1) {
         if (self.isEditingEndDate) {
+            return 225.0;
+        }
+        else{
+            return 0;
+        }
+    }
+    if (indexPath.section == 7 && indexPath.row == 1) {
+        if (self.isEditingLocation) {
             return 225.0;
         }
         else{

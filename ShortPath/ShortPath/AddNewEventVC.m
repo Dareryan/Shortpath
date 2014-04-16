@@ -24,6 +24,7 @@
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 @property (weak, nonatomic) IBOutlet UITableViewCell *startDateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *endDateCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *locationPickerViewCell;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (nonatomic) BOOL isEditingLocation;
 
@@ -63,6 +64,12 @@
 {
     [super viewDidLoad];
     
+    self.locationPicker.showsSelectionIndicator = YES;
+    UITapGestureRecognizer *locationGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickerViewTapGestureRecognized:)];
+    locationGestureRecognizer.delegate = self;
+    locationGestureRecognizer.cancelsTouchesInView = NO;
+    [self.locationPicker addGestureRecognizer:locationGestureRecognizer];
+    
     if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
         
         NSLog(@"IS REACHABILE");
@@ -73,6 +80,7 @@
         [alert show];
         //NSLog(@"NOT REACHABLE");
     }
+    
     
     self.apiClient = [[APIClient alloc]init];
     self.dataStore = [ShortPathDataStore sharedDataStore];
@@ -103,6 +111,7 @@
     [self.endDatePicker setHidden:YES];
     [self.locationPicker setHidden:YES];
 
+    
     
     //    [self.tableView registerClass:[SwitchCell class] forCellReuseIdentifier:@"switchCell"];
     //    [self.tableView registerClass:[DateCell class] forCellReuseIdentifier:@"dateCell"];
@@ -343,14 +352,19 @@
     [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
 
+-(void)pickerViewTapped
+{
+    NSLog(@"tapped");
+}
+
 #pragma mark PickerView methods
 
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    self.selectedLocation = self.locations[row];
-    
-    NSLog(@"%@", self.selectedLocation);
-}
+//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+//{
+//    self.selectedLocation = self.locations[row];
+//    
+//    NSLog(@"%@", self.selectedLocation);
+//}
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
@@ -363,6 +377,7 @@
     return 1;
 }
 
+
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
     NSMutableArray *names = [[NSMutableArray alloc]init];
@@ -373,6 +388,27 @@
     }
     
     return [names objectAtIndex:row];
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+- (void)pickerViewTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer
+{
+    CGPoint touchPoint = [gestureRecognizer locationInView:gestureRecognizer.view.superview];
+    
+    CGRect frame = self.locationPicker.frame;
+    CGRect selectorFrame = CGRectInset( frame, 0.0, self.locationPicker.bounds.size.height * 0.85 / 2.0 );
+    
+    if( CGRectContainsPoint( selectorFrame, touchPoint) )
+    {
+        self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
+        self.isEditingLocation = NO;
+        self.locationCell.textLabel.text = self.selectedLocation.title;
+        [self.tableView reloadData];
+        
+    }
 }
 
 @end

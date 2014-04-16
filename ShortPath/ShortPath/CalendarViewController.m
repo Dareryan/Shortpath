@@ -14,7 +14,6 @@
 #import "Visitor+Methods.h"
 #import "APIClient.h"
 #import "User+Methods.h"
-#import "SVProgressHUD.h"
 
 @interface CalendarViewController ()
 
@@ -39,8 +38,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [SVProgressHUD show];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     

@@ -32,7 +32,7 @@
 
 #pragma mark - NSDate + TKCategory
 @implementation NSDate (TKCategory)
-
+static NSInteger j = 0;
 #pragma mark Yesterday
 + (NSDate*) yesterday{
 	return [NSDate yesterdayWithTimeZone:[NSTimeZone defaultTimeZone]];
@@ -116,6 +116,7 @@
 - (BOOL) isSameDay:(NSDate*)anotherDate timeZone:(NSTimeZone*)timeZone{
 	NSCalendar* calendar = [NSCalendar currentCalendar];
 	calendar.timeZone = timeZone;
+   
 	NSDateComponents* components1 = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:self];
 	NSDateComponents* components2 = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:anotherDate];
 	return ([components1 year] == [components2 year] && [components1 month] == [components2 month] && [components1 day] == [components2 day]);

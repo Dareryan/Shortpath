@@ -28,8 +28,7 @@
         AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         
         [requestSerializer setValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
-        //[requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        //[requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
         _manager.requestSerializer = requestSerializer;
     
@@ -58,6 +57,24 @@
     }];
 
 }
+
+- (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/users/locations"];
+    
+    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray *locationsArray = responseObject;
+        
+        completionBlock(locationsArray);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"Error on API call %@", error);
+    }];
+
+}
+
 
 
 - (void)fetchEventsForUser:(User *)user Completion: (void(^)(NSArray *))completionBlock

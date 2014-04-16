@@ -9,6 +9,7 @@
 #import "ShortPathDataStore.h"
 #import "Event+Methods.h"
 #import "APIClient.h"
+#import <SBJson/SBJson4Parser.h>
 
 
 @interface ShortPathDataStore ()
@@ -97,7 +98,26 @@
 }
 
 
+- (void)addLocationsToCoreDataForUser: (User *)user Completion: (void(^)(Location *))completionBlock
+{
+    [self.apiClient fetchLocationsWithCompletion:^(NSArray *locations) {
+       
+        for (NSArray *allLocs in locations) {
+            
+            for (id eachLoc in allLocs[1]) {
+                    
+                Location *newLocation = [Location getLocationFromDict:eachLoc ToContext:self.managedObjectContext];
+                
+                [user addLocationsObject:newLocation];
+                
+                completionBlock(newLocation);
+                
+                }
 
+        }
+        
+    }];
+}
 
 
 #pragma mark - Core Data stack

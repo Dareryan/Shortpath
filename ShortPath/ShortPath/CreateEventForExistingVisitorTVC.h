@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Visitor+Methods.h"
 
-@interface CreateEventForExistingVisitorTVC : UITableViewController
+@interface CreateEventForExistingVisitorTVC : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (strong, nonatomic) Visitor *visitor;
 

@@ -82,6 +82,10 @@
     self.isEditingEndDate = NO;
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
+    [self.locationPicker setHidden:YES];
+    self.locationPicker.dataSource = self;
+    self.locationPicker.delegate = self;
+    
     
     
     
@@ -279,4 +283,24 @@
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark PickerView methods
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 1;
+    
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+
 @end

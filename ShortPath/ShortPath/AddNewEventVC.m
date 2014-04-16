@@ -69,6 +69,9 @@
     
 
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    self.locationPicker.dataSource = self;
+    self.locationPicker.delegate = self;
+    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -83,6 +86,7 @@
     self.isEditingEndDate = NO;
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
+    [self.locationPicker setHidden:YES];
     
     //    [self.tableView registerClass:[SwitchCell class] forCellReuseIdentifier:@"switchCell"];
     //    [self.tableView registerClass:[DateCell class] forCellReuseIdentifier:@"dateCell"];
@@ -340,4 +344,23 @@
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
 }
+
+#pragma mark PickerView methods
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 1;
+    
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
 @end

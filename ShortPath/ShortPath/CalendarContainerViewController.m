@@ -81,11 +81,11 @@
     [self.view addSubview:self.calendar];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
+   
     [self eventsToCoreDataWithCompletion:^{
         NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
         self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
         NSLog(@"%d", [self.events count]);
-        [self.calendar reloadData];
     }];
 }
 

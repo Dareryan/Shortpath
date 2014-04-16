@@ -24,6 +24,7 @@
 @property (nonatomic) BOOL departureTimeIsEditing;
 @property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
 @property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
+@property (nonatomic) BOOL isEditingLocation;
 
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
@@ -181,6 +182,15 @@
             return 0;
         }
     }
+    if (indexPath.section ==4 && indexPath.row ==1) {
+        if (self.isEditingLocation) {
+            return 225.0;
+        }
+        else{
+            return 0;
+        }
+    }
+
     return self.tableView.rowHeight;
 }
 

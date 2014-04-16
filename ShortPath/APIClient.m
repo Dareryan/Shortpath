@@ -95,12 +95,12 @@
 
 
 
-- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime EndDate:(NSString *)endDate Title:(NSString *)title Location: (Location *)location
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location
 {
     //make a gist!!!
-    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events.json", user.group_id];
+    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events", user.group_id];
     
-    NSString *str = [NSString stringWithFormat:@"{\"event\":{\"starts_at_date\":\"%@\",\"starts_at_time\":\"%@\",\"duration\":1,\"repeats\":\"0\",\"location_id\":\"%@\",\"subject\":\"%@\", \"ends_at_date\":\"%@\"}}", startDate, startTime, location.identifier, title, endDate];
+    NSString *str = [NSString stringWithFormat:@"{\"event\":{\"starts_at_date\":\"%@\",\"starts_at_time\":\"%@\",\"duration\":1,\"repeats\":\"0\",\"location_id\":\"%@\",\"subject\":\"%@\"}}", startDate, startTime, location.identifier, title];
     
     
     NSData *postData = [str dataUsingEncoding:NSUTF8StringEncoding];
@@ -124,7 +124,7 @@
     
     NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 
-        //NSLog(@"%@", response);
+        NSLog(@"%@", response);
 
     }];
     

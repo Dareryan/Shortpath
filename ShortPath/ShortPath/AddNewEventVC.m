@@ -11,6 +11,7 @@
 #import "Event+Methods.h"
 #import "ShortPathDataStore.h"
 #import "Event.h"
+#import "Location+Methods.h"
 
 
 
@@ -37,6 +38,8 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *titleCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
 @property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
+@property (strong, nonatomic) NSMutableArray *locations;
+@property (strong, nonatomic) NSString *selectedLocationName;
 
 @end
 
@@ -67,12 +70,20 @@
         //NSLog(@"NOT REACHABLE");
     }
     
+    self.locations = [[NSMutableArray alloc]init];
+    
 
     self.dataStore = [ShortPathDataStore sharedDataStore];
     self.locationPicker.dataSource = self;
     self.locationPicker.delegate = self;
     
+    NSFetchRequest *locRequest = [[NSFetchRequest alloc]initWithEntityName:@"Location"];
+    NSArray *locations = [self.dataStore.managedObjectContext executeFetchRequest:locRequest error:nil];
     
+    for (Location *loc in locations) {
+
+        [self.locations addObject:loc.title];
+    }
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -111,56 +122,6 @@
 
 #pragma mark - Table view data source
 
-
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -296,14 +257,17 @@
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
-    
-    
-    
+    NSFetchRequest *locationReq = [[NSFetchRequest alloc]initWithEntityName:@"Location"];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"title == %@", self.selectedLocationName];
+    locationReq.predicate = pred;
+    Location *location = [self.dataStore.managedObjectContext executeFetchRequest:locationReq error:nil][0];
+
     Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
     event.start = self.startDatePicker.date;
     event.end = self.endDatePicker.date;
     event.title = self.titleLabel.text;
     event.identifier = @"";
+    event.location_id = location.identifier;
     
     if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
         User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
@@ -349,12 +313,12 @@
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
+    self.selectedLocationName = self.locations[row];
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 1;
+    return [self.locations count];
     
 }
 

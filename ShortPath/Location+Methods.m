@@ -14,7 +14,7 @@
 + (Location *)getLocationFromDict: (NSDictionary *)locationDict ToContext: (NSManagedObjectContext *)context
 {
     
-    NSLog(@"Dict: %@", locationDict[@"space"]);
+    //NSLog(@"Dict: %@", locationDict[@"space"]);
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
     NSString *searchId = [NSString stringWithFormat:@"%@", locationDict[@"space"][@"id"]];

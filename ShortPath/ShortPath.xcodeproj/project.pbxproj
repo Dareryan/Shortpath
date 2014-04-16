@@ -23,6 +23,9 @@
 		2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C018EF5AE600329B9F /* VisitorsVC.m */; };
 		2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */; };
 		25127EA118F5FAB7008BB7C1 /* AddNewEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 25127EA018F5FAB7008BB7C1 /* AddNewEventVC.m */; };
+		25FCB41D18FF01EB00E84E42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FCB41C18FF01EB00E84E42 /* QuartzCore.framework */; };
+		25FCB42318FF023B00E84E42 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25FCB42018FF023B00E84E42 /* SVProgressHUD.bundle */; };
+		25FCB42418FF023B00E84E42 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FCB42218FF023B00E84E42 /* SVProgressHUD.m */; };
 		2E02FAE018EB406200FF5770 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2E02FADC18EB406200FF5770 /* OFL.txt */; };
 		2E02FAE118EB406200FF5770 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E02FADD18EB406200FF5770 /* Oswald-Bold.ttf */; };
 		2E02FAE218EB406200FF5770 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E02FADE18EB406200FF5770 /* Oswald-Light.ttf */; };
@@ -100,6 +103,11 @@
 		2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewVisitorVC.m; sourceTree = "<group>"; };
 		25127E9F18F5FAB7008BB7C1 /* AddNewEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewEventVC.h; sourceTree = "<group>"; };
 		25127EA018F5FAB7008BB7C1 /* AddNewEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewEventVC.m; sourceTree = "<group>"; };
+		25FCB41C18FF01EB00E84E42 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		25FCB41F18FF023B00E84E42 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		25FCB42018FF023B00E84E42 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		25FCB42118FF023B00E84E42 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		25FCB42218FF023B00E84E42 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		2E02FADC18EB406200FF5770 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		2E02FADD18EB406200FF5770 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
 		2E02FADE18EB406200FF5770 /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
@@ -151,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25FCB41D18FF01EB00E84E42 /* QuartzCore.framework in Frameworks */,
 				05EA535018F44BB100948310 /* CoreData.framework in Frameworks */,
 				2EDC906B18EDA473003EB2A4 /* AudioToolbox.framework in Frameworks */,
 				2E3B257C18EB0F780090336C /* CoreGraphics.framework in Frameworks */,
@@ -216,6 +225,17 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		25FCB41E18FF023B00E84E42 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				25FCB41F18FF023B00E84E42 /* SVProgressHUD-Prefix.pch */,
+				25FCB42018FF023B00E84E42 /* SVProgressHUD.bundle */,
+				25FCB42118FF023B00E84E42 /* SVProgressHUD.h */,
+				25FCB42218FF023B00E84E42 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		2E02FADB18EB406200FF5770 /* Oswald */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				05582B5918FA033900148951 /* View */,
+				25FCB41E18FF023B00E84E42 /* SVProgressHUD */,
 				05582AC118F72D9800148951 /* APIClient */,
 				05EA535418F44BFC00948310 /* Model */,
 				2E3B257F18EB0F780090336C /* ShortPath */,
@@ -259,6 +280,7 @@
 		2E3B257818EB0F780090336C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25FCB41C18FF01EB00E84E42 /* QuartzCore.framework */,
 				05EA534F18F44BB100948310 /* CoreData.framework */,
 				2EDC906A18EDA472003EB2A4 /* AudioToolbox.framework */,
 				2E3B257918EB0F780090336C /* Foundation.framework */,
@@ -437,6 +459,7 @@
 				2E3B25B818EB1BEB0090336C /* shapes.png in Resources */,
 				2E3B259218EB0F780090336C /* Images.xcassets in Resources */,
 				2E3B258418EB0F780090336C /* InfoPlist.strings in Resources */,
+				25FCB42318FF023B00E84E42 /* SVProgressHUD.bundle in Resources */,
 				2E3B258D18EB0F780090336C /* Main.storyboard in Resources */,
 				2E3B25AF18EB15F30090336C /* logo (2).png in Resources */,
 				2EC5371B18FC8EEB009A17F6 /* Splash.png in Resources */,
@@ -497,6 +520,7 @@
 				45B136DF18F70F9400A3302E /* CreateEventForExistingVisitorTVC.m in Sources */,
 				05582AD018F733B600148951 /* User+Methods.m in Sources */,
 				4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */,
+				25FCB42418FF023B00E84E42 /* SVProgressHUD.m in Sources */,
 				0589F2B018F4561200D02D78 /* Event+Methods.m in Sources */,
 				2E3B259018EB0F780090336C /* FISViewController.m in Sources */,
 				2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */,

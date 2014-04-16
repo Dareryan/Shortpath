@@ -95,7 +95,7 @@
 
 
 
-- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Completion: (void(^)())completionBlock
 {
     //make a gist!!!
     NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events", user.group_id];
@@ -129,6 +129,8 @@
     }];
     
     [task resume];
+    
+    completionBlock();
  
 }
 

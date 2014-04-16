@@ -47,8 +47,6 @@
     self.apiClient = [[APIClient alloc]init];
     
     //NSLog(@"Time test: %@", [Event timeStringFromDate:[[NSDate alloc]init]]);
-    
-    [SVProgressHUD dismiss];
 
 }
 

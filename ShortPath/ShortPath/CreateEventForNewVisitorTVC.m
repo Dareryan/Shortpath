@@ -29,6 +29,7 @@
 
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
+@property (readonly, nonatomic, assign) BOOL reachable;
 
 
 - (IBAction)startDateDidChange:(id)sender;
@@ -61,6 +62,22 @@
 {
     [super viewDidLoad];
     
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            
+            NSLog(@"IS REACHABILE");
+            
+        } else {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            //NSLog(@"NOT REACHABLE");
+        }
+        
+    }];
+
+    
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
     self.isEditingStartDate = NO;
@@ -79,7 +96,7 @@
         NSLog(@"%@", dict);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"Error Code %d",  error.code);
+        NSLog(@"Error Code %long",  error.code);
     }];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -87,6 +104,8 @@
     
     
 }
+
+
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -183,7 +202,7 @@
         self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
         [self.endDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     }
-   
+    
 }
 
 - (IBAction)endDateDidChange:(id)sender {

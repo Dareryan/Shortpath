@@ -259,6 +259,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+
 - (IBAction)doneTapped:(id)sender {
     
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, please specify a title and valid end date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -272,7 +274,7 @@
         //Create and Add New Event Object Here
         if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
             
-            [self createNewEvent];
+            [self postNewEventToServer];
             
             [self dismissViewControllerAnimated:YES completion:nil];
             
@@ -288,25 +290,32 @@
     }
 }
 
--(void)createNewEvent
+-(void)postNewEventToServer
 {
-
-//    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
-//    event.start = self.startDatePicker.date;
-//    event.end = self.endDatePicker.date;
-//    event.title = self.titleLabel.text;
-//    event.identifier = @"";
-//    event.location_id = self.selectedLocation.identifier;
-    
     NSString *startDate = [Event dateStringFromDate:self.startDatePicker.date];
     NSLog(@"%@", startDate);
     NSString *time = [Event timeStringFromDate:self.startDatePicker.date];
     
-    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:self.titleTextField.text Location:self.locations[0]];
-    
-    //[self.dataStore saveContext];
-    
+    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:self.titleTextField.text Location:self.selectedLocation Completion:^{
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+
+    }];  
 }
+
+
+- (void)writeEventToCoreData
+{
+    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
+    event.start = self.startDatePicker.date;
+    event.end = self.endDatePicker.date;
+    event.title = self.self.titleTextField.text;
+    event.identifier = @"";
+    event.location_id = self.selectedLocation.identifier;
+    [self.user addEventsObject:event];
+    [self.dataStore saveContext];
+}
+
 
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -372,6 +381,8 @@
 {
     return YES;
 }
+
+
 - (void)pickerViewTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer
 {
     CGPoint touchPoint = [gestureRecognizer locationInView:gestureRecognizer.view.superview];

@@ -68,13 +68,14 @@
     [self.dataStore saveContext];
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCalendar:) name:NSManagedObjectContextDidSaveNotification object:self.dataStore.managedObjectContext];
-    
-    
+
     self.calendar = [[TKCalendarMonthView alloc] init];
     
     self.calendar.delegate = self;
@@ -83,8 +84,11 @@
     [self.view addSubview:self.calendar];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postNotificatonReceived:) name:@"postRequestComplete" object:nil];
    
     [self eventsToCoreDataWithCompletion:^{
+        
         NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
         
         self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
@@ -97,7 +101,6 @@
 - (void)calendarMonthView:(TKCalendarMonthView *)monthView didSelectDate:(NSDate *)d {
     
     NSDictionary *dateDict = [[NSDictionary alloc]initWithObjectsAndKeys:d, @"date",nil];
-    
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dateNotif" object:nil userInfo:dateDict];
     
@@ -126,9 +129,7 @@
         
         [data addObject:event.start];
     }
-    
-	
-    
+
 	// Initialise empty marks array, this will be populated with TRUE/FALSE in order for each day a marker should be placed on.
 	NSMutableArray *marks = [NSMutableArray array];
 	
@@ -173,9 +174,9 @@
 		d = [cal dateByAddingComponents:offsetComponents toDate:d options:0];
 	}
 	
-	return [NSArray arrayWithArray:marks];
-    
+	return [NSArray arrayWithArray:marks];    
 }
+
 
 -(void)reloadCalendar: (NSNotification *)notification
 {
@@ -185,22 +186,22 @@
     self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
     
     //NSLog(@"%d", [self.events count]);
-    
-    
+
     [self.calendar reloadData];
 }
 
 
+- (void)postNotificatonReceived: (NSNotification *)notification
+{
+    [self eventsToCoreDataWithCompletion:^{
+        
+        NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+        
+        self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
+       
+    }];
+}
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
 
 @end

@@ -120,6 +120,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Visitor" id="Hiu-Mu-vTB">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="kO1-qR-j8y">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="HxY-o5-756" id="UWW-Tp-IH1"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ix5-N2-McI">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="HxY-o5-756" id="TGM-B0-mWL"/>
@@ -402,7 +407,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3321" y="-490"/>
         </scene>
-        <!--VisitorsVC-->
+        <!--VisitorsVC - Visitors-->
         <scene sceneID="Ye2-4H-ui2">
             <objects>
                 <tableViewController id="PiA-MZ-col" customClass="VisitorsVC" sceneMemberID="viewController">
@@ -433,7 +438,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="PiA-MZ-col" id="8SZ-QX-Izh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="4x5-vY-8xM">
+                    <navigationItem key="navigationItem" title="Visitors" id="4x5-vY-8xM">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="nC4-wa-V0L">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="PiA-MZ-col" id="cdV-dX-EK3"/>
@@ -462,7 +467,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="4428" y="-930"/>
         </scene>
-        <!--Create Event For Existing VisitorTVC-->
+        <!--Create Event For Existing VisitorTVC - NAMEGOESHERE-->
         <scene sceneID="s1B-yl-r3Y">
             <objects>
                 <tableViewController id="Vth-og-7C2" customClass="CreateEventForExistingVisitorTVC" sceneMemberID="viewController">
@@ -671,7 +676,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="Vth-og-7C2" id="KOd-cl-2ax"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="wCK-Z3-qDA">
+                    <navigationItem key="navigationItem" title="NAMEGOESHERE" id="wCK-Z3-qDA">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="bON-Db-HiB">
                             <connections>
                                 <action selector="doneButtonTapped:" destination="Vth-og-7C2" id="Umw-lL-131"/>
@@ -752,7 +757,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1176" y="310"/>
         </scene>
-        <!--Settings Table View Controller - Settings-->
+        <!--Settings Table View Controller - More-->
         <scene sceneID="XyA-k6-DKv">
             <objects>
                 <tableViewController id="wo0-8A-VYM" customClass="SettingsTableViewController" sceneMemberID="viewController">
@@ -785,7 +790,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="wo0-8A-VYM" id="cuJ-uA-AvQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="RrB-6g-gYo"/>
+                    <navigationItem key="navigationItem" title="More" id="RrB-6g-gYo"/>
                     <connections>
                         <segue destination="dZV-4s-eEg" kind="push" identifier="detailSegue" id="26p-vz-22M"/>
                     </connections>
@@ -813,7 +818,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2952" y="2175"/>
         </scene>
-        <!--Calendar View Controller-->
+        <!--Calendar View Controller - Events-->
         <scene sceneID="66k-Oo-MHD">
             <objects>
                 <viewController id="EfF-Lh-Zgc" customClass="CalendarViewController" sceneMemberID="viewController">
@@ -844,7 +849,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ep3-Qp-Srp">
+                    <navigationItem key="navigationItem" title="Events" id="ep3-Qp-Srp">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="TOk-J2-3Cv">
                             <connections>
                                 <segue destination="SQP-0N-RWf" kind="modal" id="5Ft-Jb-F1s"/>
@@ -1070,7 +1075,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3321" y="-1224"/>
         </scene>
-        <!--Event Invitees Table View Controller-->
+        <!--Event Invitees Table View Controller - Invitees-->
         <scene sceneID="CY1-ST-TlE">
             <objects>
                 <tableViewController id="9Rn-7W-ngg" customClass="EventInviteesTableViewController" sceneMemberID="viewController">
@@ -1109,7 +1114,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="9Rn-7W-ngg" id="3Mf-Uz-vVy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="0Wj-RI-7Jl">
+                    <navigationItem key="navigationItem" title="Invitees" id="0Wj-RI-7Jl">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Sds-KS-N40">
                             <connections>
                                 <segue destination="MAD-I5-1yE" kind="modal" id="rzZ-6X-CDy"/>
@@ -1143,7 +1148,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1737" y="646"/>
         </scene>
-        <!--VisitorsVC-->
+        <!--VisitorsVC - Visitors-->
         <scene sceneID="gAC-BX-E9s">
             <objects>
                 <tableViewController id="ubh-5y-fPV" customClass="VisitorsVC" sceneMemberID="viewController">
@@ -1177,7 +1182,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="ubh-5y-fPV" id="qsg-fD-Ooz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="zd7-RQ-s6Y">
+                    <navigationItem key="navigationItem" title="Visitors" id="zd7-RQ-s6Y">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="b8s-kg-nil">
                             <connections>
                                 <segue destination="y8K-OU-T0F" kind="modal" id="kWR-gd-kWa"/>

@@ -87,7 +87,7 @@
 
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
-    NSLog(@"User to add event: %@", self.user.group_id);
+    //NSLog(@"User to add event: %@", self.user.group_id);
 
     
     self.locationPicker.dataSource = self;

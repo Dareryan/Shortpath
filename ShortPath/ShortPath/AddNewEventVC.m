@@ -84,6 +84,7 @@
     self.tableView.delegate = self;
     self.isEditingStartDate = NO;
     self.isEditingEndDate = NO;
+    self.isEditingLocation = NO;
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
     [self.locationPicker setHidden:YES];
@@ -168,6 +169,7 @@
     {
         self.isEditingStartDate = !self.isEditingStartDate;
         self.isEditingEndDate = NO;
+        self.isEditingLocation = NO;
         
         if (self.isEditingStartDate) {
             [self.startDatePicker setHidden:NO];
@@ -183,6 +185,7 @@
     else if (indexPath.section == 2 && indexPath.row == 0) {
         self.isEditingEndDate = !self.isEditingEndDate;
         self.isEditingStartDate = NO;
+        self.isEditingLocation = NO;
         if (self.isEditingEndDate){
             [self.endDatePicker setHidden:NO];
         }
@@ -192,6 +195,23 @@
             
             [tableView reloadData];
         }];
+        
+    }
+    
+    else if (indexPath.section == 4 && indexPath.row ==0){
+        self.isEditingLocation = !self.isEditingLocation;
+        self.isEditingStartDate = NO;
+        self.isEditingEndDate = NO;
+        if (self.isEditingLocation) {
+            [self.locationPicker setHidden:NO];
+        }
+       
+        [UIView animateWithDuration:.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:4]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [tableView reloadData];
+        }];
+
         
     }
     else{
@@ -218,6 +238,15 @@
                 [tableView reloadData];
             }];
             
+        }
+        if (!(indexPath.section == 4 && indexPath.row == 1)) {
+            self.isEditingLocation = NO;
+            
+            [UIView animateWithDuration:.4 animations:^{
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:4]] withRowAnimation:UITableViewRowAnimationFade];
+                
+                [tableView reloadData];
+            }];
         }
         
     }
@@ -250,6 +279,15 @@
         else{
             return 0;
             
+        }
+    }
+    
+    if (indexPath.section ==4 && indexPath.row ==1) {
+        if (self.isEditingLocation) {
+            return 225.0;
+        }
+        else{
+            return 0;
         }
     }
     

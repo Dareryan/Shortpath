@@ -87,7 +87,7 @@
 
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
-    NSLog(@"User to add event: %@", self.user.group_id);
+    //NSLog(@"User to add event: %@", self.user.group_id);
 
     
     self.locationPicker.dataSource = self;
@@ -269,7 +269,7 @@
         
         [alertView show];
         
-    } else if(![self.titleLabel.text isEqualToString:@""] && ![self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
+    } else if(![self.titleLabel.text isEqualToString:@""] && ![self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0 && self.selectedLocation != nil) {
         
         //Create and Add New Event Object Here
         if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {

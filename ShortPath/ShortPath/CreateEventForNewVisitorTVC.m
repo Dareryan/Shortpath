@@ -62,20 +62,16 @@
 {
     [super viewDidLoad];
     
-    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+    if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
         
-        if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
-            
-            NSLog(@"IS REACHABILE");
-            
-        } else {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-            //NSLog(@"NOT REACHABLE");
-        }
+        NSLog(@"IS REACHABILE");
         
-    }];
+    } else {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        //NSLog(@"NOT REACHABLE");
+    }
 
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
@@ -224,15 +220,26 @@
         
     } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && !([self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0)) {
         
+        
         /*
          Add code to insert event and visitor object into coredata. Event title should be set to [NSString stringWithFormat:@"%@ %@ visits", self.firstNameTextField.text, self.lastNameTextField.text];
          */
-        [self createNewVisitorEvent];
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        
+        
+            [self createNewVisitorEvent];[self dismissViewControllerAnimated:YES completion:nil];
+            
+            NSLog(@"IS REACHABILE");
+            
+        } else {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            //NSLog(@"NOT REACHABLE");
+        }
         
     }
-    
 }
 
 //api call POST event

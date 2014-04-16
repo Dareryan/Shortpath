@@ -262,6 +262,7 @@
     if ([self.titleLabel.text isEqualToString:@""] || [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
         
         [alertView show];
+        
     } else if(![self.titleLabel.text isEqualToString:@""] && ![self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0) {
         
         //Create and Add New Event Object Here
@@ -280,9 +281,6 @@
             //NSLog(@"NOT REACHABLE");
         }
 
-        
-        
-        
     }
 }
 

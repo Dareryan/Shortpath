@@ -34,6 +34,37 @@
     return iso8601String;
 }
 
++ (NSString *)dateStringFromDate: (NSDate *)date
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"mm/dd/yyyy"];
+    NSString *dateString = [format stringFromDate:date];
+    return dateString;
+}
+
++ (NSString *)timeStringFromDate: (NSDate *)date
+{
+    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+    [timeFormat setDateFormat:@"HH.mm"];
+    NSString *timeString = [timeFormat stringFromDate:date];
+    NSString *timeFraction = [timeString substringFromIndex:3];
+    if ([timeFraction isEqualToString: @"00"]) {
+        
+        NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+        [timeFormat setDateFormat:@"HH.0"];
+        NSString *timeString = [timeFormat stringFromDate:date];
+        return timeString;
+        
+    } else {
+        
+        NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+        [timeFormat setDateFormat:@"HH.5"];
+        NSString *timeString = [timeFormat stringFromDate:date];
+        return timeString;
+    }
+
+}
+
 + (Event *)getEventFromDict: (NSDictionary *)dict ToContext: (NSManagedObjectContext *)context
 {
 

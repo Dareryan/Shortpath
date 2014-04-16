@@ -12,6 +12,7 @@
 #import "ShortPathDataStore.h"
 #import "Event.h"
 #import "Location+Methods.h"
+#import "APIClient.h"
 
 
 
@@ -40,6 +41,8 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
 @property (strong, nonatomic) NSArray *locations;
 @property (strong, nonatomic) Location *selectedLocation;
+@property (strong, nonatomic) User *user;
+@property (strong, nonatomic) APIClient *apiClient;
 
 
 @end
@@ -71,6 +74,10 @@
         //NSLog(@"NOT REACHABLE");
     }
     
+    self.apiClient = [[APIClient alloc]init];
+
+    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
+    self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
 
     self.dataStore = [ShortPathDataStore sharedDataStore];
     self.locationPicker.dataSource = self;
@@ -288,24 +295,21 @@
 {
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
-    
-    
 
-    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
-    event.start = self.startDatePicker.date;
-    event.end = self.endDatePicker.date;
-    event.title = self.titleLabel.text;
-    event.identifier = @"";
-    event.location_id = self.selectedLocation.identifier;
+//    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
+//    event.start = self.startDatePicker.date;
+//    event.end = self.endDatePicker.date;
+//    event.title = self.titleLabel.text;
+//    event.identifier = @"";
+//    event.location_id = self.selectedLocation.identifier;
     
-    if ([[self.dataStore.managedObjectContext executeFetchRequest:req error:nil] count] != 0) {
-        User *user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
-        [user addEventsObject:event];
-    }
+    NSString *startDate = [Event dateStringFromDate:self.startDatePicker.date];
+    NSString *time = [Event timeStringFromDate:self.startDatePicker.date];
+    NSString *endDate = [Event dateStringFromDate:self.endDatePicker.date];
     
+    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time EndDate:endDate Title:self.titleTextField.text Location:self.selectedLocation];
     
-    
-    [self.dataStore saveContext];
+    //[self.dataStore saveContext];
     
 }
 
@@ -343,6 +347,8 @@
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     self.selectedLocation = self.locations[row];
+    
+    NSLog(@"%@", self.selectedLocation);
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
@@ -358,11 +364,10 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
-    
-    
     NSMutableArray *names = [[NSMutableArray alloc]init];
     
     for (Location *loc in self.locations) {
+        
         [names addObject:loc.title];
     }
     

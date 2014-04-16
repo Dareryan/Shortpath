@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "User+Methods.h"
+#import "Location+Methods.h"
 
 @interface APIClient : NSObject
 
@@ -15,7 +16,7 @@
 
 - (void)fetchEventsForUser:(User *)user Completion: (void(^)(NSArray *))completionBlock;
 
-- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime EndDate:(NSString *)endDate Title:(NSString *)title;
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime EndDate:(NSString *)endDate Title:(NSString *)title Location: (Location *)location;
 
 - (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock;
 

@@ -75,11 +75,13 @@
     }
     
     self.apiClient = [[APIClient alloc]init];
+    self.dataStore = [ShortPathDataStore sharedDataStore];
 
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
+    NSLog(@"User to add event: %@", self.user.group_id);
 
-    self.dataStore = [ShortPathDataStore sharedDataStore];
+    
     self.locationPicker.dataSource = self;
     self.locationPicker.delegate = self;
     
@@ -100,6 +102,7 @@
     [self.startDatePicker setHidden:YES];
     [self.endDatePicker setHidden:YES];
     [self.locationPicker setHidden:YES];
+
     
     //    [self.tableView registerClass:[SwitchCell class] forCellReuseIdentifier:@"switchCell"];
     //    [self.tableView registerClass:[DateCell class] forCellReuseIdentifier:@"dateCell"];
@@ -293,8 +296,6 @@
 
 -(void)createNewEvent
 {
-    
-    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
 
 //    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
 //    event.start = self.startDatePicker.date;
@@ -304,10 +305,10 @@
 //    event.location_id = self.selectedLocation.identifier;
     
     NSString *startDate = [Event dateStringFromDate:self.startDatePicker.date];
+    NSLog(@"%@", startDate);
     NSString *time = [Event timeStringFromDate:self.startDatePicker.date];
-    NSString *endDate = [Event dateStringFromDate:self.endDatePicker.date];
     
-    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time EndDate:endDate Title:self.titleTextField.text Location:self.selectedLocation];
+    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:self.titleTextField.text Location:self.locations[0]];
     
     //[self.dataStore saveContext];
     

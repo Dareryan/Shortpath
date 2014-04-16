@@ -30,6 +30,8 @@
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (readonly, nonatomic, assign) BOOL reachable;
+@property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
+@property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
 
 
 - (IBAction)startDateDidChange:(id)sender;

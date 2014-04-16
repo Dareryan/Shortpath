@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *startDateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *endDateCell;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
+@property (nonatomic) BOOL isEditingLocation;
 
 
 - (IBAction)cancelTapped:(id)sender;
@@ -34,6 +35,8 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITableViewCell *titleCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
+@property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
 
 @end
 

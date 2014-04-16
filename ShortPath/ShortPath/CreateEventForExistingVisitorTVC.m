@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *departureDatePicker;
 @property (nonatomic) BOOL arrivalTimeIsEditing;
 @property (nonatomic) BOOL departureTimeIsEditing;
+@property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;
+@property (weak, nonatomic) IBOutlet UIPickerView *locationPicker;
 
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;

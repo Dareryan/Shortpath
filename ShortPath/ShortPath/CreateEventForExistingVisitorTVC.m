@@ -64,6 +64,10 @@
     locationGestureRecognizer.delegate = self;
     locationGestureRecognizer.cancelsTouchesInView = NO;
     [self.locationPicker addGestureRecognizer:locationGestureRecognizer];
+    self.arrivalTimeCell.textLabel.text = @"Arrival";
+    self.departureTimeCell.textLabel.text = @"Departure";
+    self.locationCell.textLabel.text = @"Location";
+
 
     
 }
@@ -74,8 +78,6 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-    self.arrivalTimeCell.textLabel.text = @"Arrival";
-    self.departureTimeCell.textLabel.text = @"Departure";
     self.arrivalTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.arrivalDatePicker.date];
     self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
     [self.arrivalTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
@@ -113,6 +115,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSIndexPath *arrivalCellIP = [NSIndexPath indexPathForRow:1 inSection:1];
+    NSIndexPath *departureCellIP = [NSIndexPath indexPathForRow:1 inSection:2];
+    NSIndexPath *locationCellIP = [NSIndexPath indexPathForRow:1 inSection:3];
     
     if(indexPath.section==1 && indexPath.row == 0)
     {
@@ -124,11 +129,9 @@
             [self.arrivalDatePicker setHidden:NO];
         }
         
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            [tableView reloadData];
-        }];
+        [self.tableView reloadRowsAtIndexPaths:@[arrivalCellIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadData];
+        [tableView scrollToRowAtIndexPath:arrivalCellIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     
     else if (indexPath.section == 2 && indexPath.row == 0) {
@@ -139,11 +142,11 @@
             [self.departureDatePicker setHidden:NO];
         }
         
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            [tableView reloadData];
-        }];
+        
+        [self.tableView reloadRowsAtIndexPaths:@[departureCellIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadData];
+        [tableView scrollToRowAtIndexPath:departureCellIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+       
         
     }
     else if (indexPath.section == 3 && indexPath.row == 0){
@@ -154,12 +157,9 @@
             [self.locationPicker setHidden:NO];
         }
         
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:3]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            [tableView reloadData];
-        }];
-
+        [self.tableView reloadRowsAtIndexPaths:@[locationCellIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadData];
+        [tableView scrollToRowAtIndexPath:locationCellIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         
         
     }
@@ -169,31 +169,22 @@
         {
             self.arrivalTimeIsEditing = NO;
             
-            [UIView animateWithDuration:.4 animations:^{
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
-                
-                [tableView reloadData];
-            }];
-            
+            [self.tableView reloadRowsAtIndexPaths:@[arrivalCellIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView reloadData];
+           
         }
         if (!(indexPath.section == 2 && indexPath.row ==1)) {
             self.departureTimeIsEditing = NO;
             
-            [UIView animateWithDuration:.4 animations:^{
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
-                
-                [tableView reloadData];
-            }];
+            [self.tableView reloadRowsAtIndexPaths:@[departureCellIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView reloadData];
             
         }
         if (!(indexPath.section == 3 && indexPath.row == 1)) {
             self.isEditingLocation = NO;
             
-            [UIView animateWithDuration:.4 animations:^{
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:3]] withRowAnimation:UITableViewRowAnimationFade];
-                
-                [tableView reloadData];
-            }];
+            [self.tableView reloadRowsAtIndexPaths:@[locationCellIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView reloadData];
             
         }
     }

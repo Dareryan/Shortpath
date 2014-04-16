@@ -31,6 +31,8 @@
 
 
 - (IBAction)doneButtonPressed:(id)sender;
+- (IBAction)cancelButtonTapped:(id)sender;
+
 
 @end
 
@@ -106,5 +108,9 @@
         [self createNewVisitorForEvent];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+- (IBAction)cancelButtonTapped:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 @end

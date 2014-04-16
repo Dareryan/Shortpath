@@ -93,6 +93,9 @@
     [self.locationPicker setHidden:YES];
     self.locationPicker.dataSource = self;
     self.locationPicker.delegate = self;
+    self.startDateCell.textLabel.text = @"Arrival";
+    self.endDateCell.textLabel.text = @"Departure";
+    self.locationCell.textLabel.text = @"Location";
     
     
     
@@ -124,9 +127,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-    self.startDateCell.textLabel.text = @"Arrival";
-    self.endDateCell.textLabel.text = @"Departure";
-    self.locationCell.textLabel.text = @"Location";
+
     self.startDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.startDatePicker.date];
     self.endDateCell.detailTextLabel.text = [dateFormatter stringFromDate:self.endDatePicker.date];
     [self.startDateCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];

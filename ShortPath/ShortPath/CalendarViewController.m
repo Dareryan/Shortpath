@@ -14,7 +14,6 @@
 #import "Visitor+Methods.h"
 #import "APIClient.h"
 #import "User+Methods.h"
-#import "SVProgressHUD.h"
 
 @interface CalendarViewController ()
 
@@ -40,15 +39,11 @@
 {
     [super viewDidLoad];
     
-    [SVProgressHUD show];
-    
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
     self.apiClient = [[APIClient alloc]init];
     
     //NSLog(@"Time test: %@", [Event timeStringFromDate:[[NSDate alloc]init]]);
-    
-    [SVProgressHUD dismiss];
 
 }
 

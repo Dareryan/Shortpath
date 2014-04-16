@@ -81,7 +81,7 @@
     
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     
- 
+    
     
     Event *visitorsEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
     
@@ -111,6 +111,7 @@
     {
         self.arrivalTimeIsEditing = !self.arrivalTimeIsEditing;
         self.departureTimeIsEditing = NO;
+        self.isEditingLocation = NO;
         
         if (self.arrivalTimeIsEditing) {
             [self.arrivalDatePicker setHidden:NO];
@@ -126,6 +127,7 @@
     else if (indexPath.section == 2 && indexPath.row == 0) {
         self.departureTimeIsEditing = !self.departureTimeIsEditing;
         self.arrivalTimeIsEditing = NO;
+        self.isEditingLocation = NO;
         if (self.departureTimeIsEditing){
             [self.departureDatePicker setHidden:NO];
         }
@@ -135,6 +137,23 @@
             
             [tableView reloadData];
         }];
+        
+    }
+    else if (indexPath.section == 3 && indexPath.row == 0){
+        self.isEditingLocation = !self.isEditingLocation;
+        self.departureTimeIsEditing = NO;
+        self.arrivalTimeIsEditing = NO;
+        if (self.isEditingLocation) {
+            [self.locationPicker setHidden:NO];
+        }
+        
+        [UIView animateWithDuration:.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:3]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [tableView reloadData];
+        }];
+
+        
         
     }
     else{
@@ -160,7 +179,16 @@
             }];
             
         }
-        
+        if (!(indexPath.section == 3 && indexPath.row == 1)) {
+            self.isEditingLocation = NO;
+            
+            [UIView animateWithDuration:.4 animations:^{
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:3]] withRowAnimation:UITableViewRowAnimationFade];
+                
+                [tableView reloadData];
+            }];
+            
+        }
     }
     
     
@@ -182,7 +210,7 @@
             return 0;
         }
     }
-    if (indexPath.section ==4 && indexPath.row ==1) {
+    if (indexPath.section == 3 && indexPath.row ==1) {
         if (self.isEditingLocation) {
             return 225.0;
         }
@@ -190,7 +218,7 @@
             return 0;
         }
     }
-
+    
     return self.tableView.rowHeight;
 }
 
@@ -198,14 +226,14 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
     
-   
+    
     self.arrivalTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.arrivalDatePicker.date];
     [self.arrivalTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     
     if (([self.arrivalDatePicker.date timeIntervalSinceDate:self.departureDatePicker.date] >= 0)) {
-    [self.departureDatePicker setDate:[NSDate dateWithTimeInterval: 1800 sinceDate:self.arrivalDatePicker.date]];
-    self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
-    [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
+        [self.departureDatePicker setDate:[NSDate dateWithTimeInterval: 1800 sinceDate:self.arrivalDatePicker.date]];
+        self.departureTimeCell.detailTextLabel.text = [dateFormatter stringFromDate:self.departureDatePicker.date];
+        [self.departureTimeCell.detailTextLabel setTextColor:[UIColor colorWithRed:0.788 green:0.169 blue:0.078 alpha:1]];
     }
 }
 

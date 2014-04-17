@@ -40,7 +40,7 @@
 }
 
 
--(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock Failure: (void(^)())failureBlock
+-(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock Failure: (void(^)(NSInteger))failureBlock
 {
     
     NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
@@ -53,14 +53,14 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        NSLog(@"Error on API call %d", error.code);
+        NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
         
-        failureBlock();
+        failureBlock(errorCode);
     }];
 
 }
 
-- (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock Failure: (void(^)())failureBlock
+- (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock Failure: (void(^)(NSInteger))failureBlock
 {
     NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/users/locations"];
     
@@ -71,17 +71,17 @@
         completionBlock(locationsArray);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+
+         NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
         
-        NSLog(@"Error on API call %@", error);
-        
-        failureBlock();
+        failureBlock(errorCode);
     }];
 
 }
 
 
 
-- (void)fetchEventsForUser:(User *)user Completion: (void(^)(NSArray *))completionBlock Failure: (void(^)())failureBlock
+- (void)fetchEventsForUser:(User *)user Completion: (void(^)(NSArray *))completionBlock Failure: (void(^)(NSInteger))failureBlock
 {
     NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events", user.group_id];
     
@@ -93,15 +93,15 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        NSLog(@"Error on API call %@", error);
+        NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
         
-        failureBlock();
+        failureBlock(errorCode);
     }];
 }
 
 
 
-- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Completion: (void(^)())completionBlock Failure: (void(^)())failureBlock
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Completion: (void(^)())completionBlock Failure: (void(^)(NSInteger))failureBlock
 {
     //make a gist!!!
     NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events", user.group_id];
@@ -138,7 +138,9 @@
             
         } else {
             
-            failureBlock();
+            NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
+            
+            failureBlock(errorCode);
         }
 
     }];

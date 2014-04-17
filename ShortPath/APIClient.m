@@ -68,6 +68,8 @@
         
         NSArray *locationsArray = responseObject;
         
+        //NSLog(@"Status code: %d", [responseObject statusCode]);
+        
         completionBlock(locationsArray);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

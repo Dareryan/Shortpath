@@ -53,7 +53,7 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        NSLog(@"Error on API call %@", error);
+        NSLog(@"Error on API call %d", error.code);
         
         failureBlock();
     }];

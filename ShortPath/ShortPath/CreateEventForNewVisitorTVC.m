@@ -337,7 +337,9 @@
 
 
 - (void)alertAuth:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     if (buttonIndex == 0) {
+        
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
         [self presentViewController:loginVC animated:YES completion:nil];

@@ -259,7 +259,12 @@
 {
     //Add code to add visitor to event
     //[self dismissViewControllerAnimated:YES completion:nil];
-    //[self.navigationController popViewControllerAnimated:YES];
+    if (self.navigationController.viewControllers[0] == self) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else{
+    [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -282,6 +287,11 @@
 
 - (IBAction)cancelButtonPressed:(id)sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.navigationController.viewControllers[0] == self) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 @end

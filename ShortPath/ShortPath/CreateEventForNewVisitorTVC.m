@@ -310,8 +310,8 @@
                 //CONTINUE POST
                 
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Application is not authorized" message:@"Please re-log in to retrieve a new access key" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Authorize",nil];
-                [alert show];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Application is not authorized" message:@"Please re-log in to retrieve a new access key" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Authorize",nil];
+                [alertView show];
                 [self writeNewVisitorEventToCoreData];
                 
                 //STORE TO CORE DATA
@@ -332,9 +332,10 @@
     }
 }
 
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        NSLog(@"pressed Cancel");
+        NSLog(@"pressed No");
     }
     else {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -342,9 +343,9 @@
         [self presentViewController:loginVC animated:YES completion:nil];
         self.tabBarController.navigationController.viewControllers = @[loginVC];
         [self.tabBarController.navigationController pushViewController:loginVC animated:YES];
+
     }
 }
-
 
 
 //api call POST event
@@ -355,12 +356,16 @@
     NSString *time = [Event timeStringFromDate:self.startDatePicker.date];
     NSString *title = [NSString stringWithFormat:@"Meeting with: %@ %@", self.firstNameTextField.text, self.lastNameTextField.text];
     
+    
     [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Completion:^{
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
         
+    } Failure:^{
+        
+        NSLog(@"failure to post create event for new visitor");
     }];
-
+    
 }
 
 

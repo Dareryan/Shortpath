@@ -40,7 +40,7 @@
 }
 
 
--(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock
+-(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock Failure: (void(^)())failureBlock
 {
     
     NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
@@ -53,12 +53,14 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        NSLog(@"Error on API call %@", error);
+        NSLog(@"Error on API call %d", error.code);
+        
+        failureBlock();
     }];
 
 }
 
-- (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock
+- (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock Failure: (void(^)())failureBlock
 {
     NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/users/locations"];
     
@@ -71,13 +73,15 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
         NSLog(@"Error on API call %@", error);
+        
+        failureBlock();
     }];
 
 }
 
 
 
-- (void)fetchEventsForUser:(User *)user Completion: (void(^)(NSArray *))completionBlock
+- (void)fetchEventsForUser:(User *)user Completion: (void(^)(NSArray *))completionBlock Failure: (void(^)())failureBlock
 {
     NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events", user.group_id];
     
@@ -90,12 +94,14 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
         NSLog(@"Error on API call %@", error);
+        
+        failureBlock();
     }];
 }
 
 
 
-- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Completion: (void(^)())completionBlock
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Completion: (void(^)())completionBlock Failure: (void(^)())failureBlock
 {
     //make a gist!!!
     NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events", user.group_id];
@@ -124,13 +130,22 @@
     
     NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 
-        NSLog(@"%@", response);
+        if (!error) {
+            
+            NSLog(@"%@", response);
+            
+            completionBlock();
+            
+        } else {
+            
+            failureBlock();
+        }
 
     }];
     
     [task resume];
     
-    completionBlock();
+    
  
 }
 

@@ -78,7 +78,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    VisitorsVC *visitorsVC = [[segue destinationViewController] topViewController];
+    VisitorsVC *visitorsVC = ((VisitorsVC *)[[segue destinationViewController] topViewController]);
     
     visitorsVC.event = self.event;
 }

@@ -23,9 +23,9 @@
 
 @implementation FISViewController
 
--(void)viewWillAppear:(BOOL)animated
-{
-    
+//-(void)viewWillAppear:(BOOL)animated
+//{
+
 //    CAGradientLayer *gradient = [CAGradientLayer layer];
 //    
 //    gradient.frame = self.view.bounds;
@@ -34,37 +34,33 @@
 //    
 //    [self.view.layer insertSublayer:gradient atIndex:0];
 
-}
+//}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.authenticateButton.titleLabel.font = [UIFont fontWithName:@"Oswald-Regular" size:30.0f];
+    
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    self.authenticateButton.titleLabel.font = [UIFont fontWithName:@"Oswald-Regular" size:30.0];
- 
-    [self.authenticateButton setTitle:@"Authenticate" forState:UIControlStateNormal];
+    [super viewDidAppear:animated];
     
-    self.logo.alpha = 0; [UIView animateWithDuration:1.0f animations:^{
-        
-        self.logo.hidden = NO;
-        
-        self.logo.alpha=1.0;
-   
+    self.logo.alpha = 0.0f;
+    
+    [UIView animateWithDuration:1.0f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
+        <#code#>
+    } completion:<#^(BOOL finished)completion#> dekanimations:^{
+//        self.logo.hidden = NO;
+        self.logo.alpha = 1.0;
     }];
-    
 }
 
--(void)viewWillLayoutSubviews
-{
-  
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle
+- (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
 }
@@ -107,7 +103,7 @@
     [defaults setObject:testKey forKey:@"key"];
     [defaults synchronize];
     
-    NSLog(@"Keyfournd");
+    NSLog(@"Key found");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

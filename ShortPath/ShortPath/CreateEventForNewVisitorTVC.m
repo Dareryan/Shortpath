@@ -358,12 +358,16 @@
     NSString *time = [Event timeStringFromDate:self.startDatePicker.date];
     NSString *title = [NSString stringWithFormat:@"Meeting with: %@ %@", self.firstNameTextField.text, self.lastNameTextField.text];
     
+    
     [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Completion:^{
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
         
+    } Failure:^{
+        
+        NSLog(@"failure to post create event for new visitor");
     }];
-
+    
 }
 
 

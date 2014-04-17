@@ -52,12 +52,12 @@
     
     self.logo.alpha = 0.0f;
     
-    [UIView animateWithDuration:1.0f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
-        <#code#>
-    } completion:<#^(BOOL finished)completion#> dekanimations:^{
-//        self.logo.hidden = NO;
-        self.logo.alpha = 1.0;
-    }];
+//    [UIView animateWithDuration:1.0f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
+//        <#code#>
+//    } completion:<#^(BOOL finished)completion#> dekanimations:^{
+////        self.logo.hidden = NO;
+//        self.logo.alpha = 1.0;
+//    }];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle

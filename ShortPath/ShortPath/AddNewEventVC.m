@@ -44,6 +44,7 @@
 @property (strong, nonatomic) Location *selectedLocation;
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) APIClient *apiClient;
+@property (weak, nonatomic) IBOutlet UITableViewCell *inviteesCell;
 
 
 @end
@@ -61,7 +62,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self createEvent];
-    
+    [self.inviteesCell setHidden:YES];
 }
 
 - (void)viewDidLoad

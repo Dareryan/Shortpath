@@ -711,10 +711,20 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FiA-Qd-Awc">
-                                <rect key="frame" x="46" y="444" width="228" height="56"/>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="KVe-y8-gdI">
+                                <rect key="frame" x="20" y="50" width="280" height="359"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="359" id="e2i-Wz-IBx"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FiA-Qd-Awc">
+                                <rect key="frame" x="46" y="417" width="228" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="O9X-7S-tCh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="30"/>
                                 <state key="normal" title="Authenticate">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -722,10 +732,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="logInButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="51E-nv-3Vj"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="KVe-y8-gdI">
-                                <rect key="frame" x="20" y="50" width="280" height="359"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490868091583" green="0.32941177487373352" blue="0.51764708757400513" alpha="1" colorSpace="deviceRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -834,16 +840,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z0o-ba-xcy">
-                                <rect key="frame" x="0.0" y="65" width="320" height="317"/>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z0o-ba-xcy">
+                                <rect key="frame" x="0.0" y="64" width="320" height="317"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="9s6-1e-iLH" kind="embed" id="Xfc-iS-OmD"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wpJ-lJ-RfM">
-                                <rect key="frame" x="0.0" y="382" width="320" height="136"/>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpJ-lJ-RfM">
+                                <rect key="frame" x="0.0" y="381" width="320" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
@@ -853,8 +859,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="z0o-ba-xcy" firstAttribute="top" secondItem="Jpk-Q0-SbP" secondAttribute="bottom" constant="1" id="873-P6-0UD"/>
-                            <constraint firstItem="z0o-ba-xcy" firstAttribute="bottom" secondItem="wpJ-lJ-RfM" secondAttribute="bottom" constant="-136" id="uuN-rj-zdL"/>
+                            <constraint firstItem="wpJ-lJ-RfM" firstAttribute="trailing" secondItem="z0o-ba-xcy" secondAttribute="trailing" id="1K7-dg-HAD"/>
+                            <constraint firstItem="wpJ-lJ-RfM" firstAttribute="top" secondItem="z0o-ba-xcy" secondAttribute="bottom" id="2HX-ny-xQh"/>
+                            <constraint firstItem="wpJ-lJ-RfM" firstAttribute="leading" secondItem="z0o-ba-xcy" secondAttribute="leading" id="8Oa-NW-OGx"/>
+                            <constraint firstAttribute="trailing" secondItem="z0o-ba-xcy" secondAttribute="trailing" id="BqC-Ge-HZS"/>
+                            <constraint firstItem="z0o-ba-xcy" firstAttribute="top" secondItem="Jpk-Q0-SbP" secondAttribute="bottom" id="Q50-hb-pud"/>
+                            <constraint firstItem="z0o-ba-xcy" firstAttribute="leading" secondItem="o50-AT-bmB" secondAttribute="leading" id="i9f-is-ixY"/>
+                            <constraint firstItem="wpJ-lJ-RfM" firstAttribute="top" secondItem="Jpk-Q0-SbP" secondAttribute="bottom" constant="317" id="j14-QD-FfX"/>
+                            <constraint firstItem="mJE-Vn-maW" firstAttribute="top" secondItem="wpJ-lJ-RfM" secondAttribute="bottom" constant="1" id="yeB-UZ-zCx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Events" id="ep3-Qp-Srp">
@@ -916,7 +928,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <tableViewController id="bf8-Wu-myx" customClass="EventsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="23J-fe-pdL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="137"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

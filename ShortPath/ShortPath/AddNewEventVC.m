@@ -299,8 +299,12 @@
     [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:self.titleTextField.text Location:self.selectedLocation Completion:^{
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+        
+    } Failure:^{
+        
+        NSLog(@"fail to post new event");
+    }];
 
-    }];  
 }
 
 

@@ -99,12 +99,17 @@
         //NSLog(@"%@", newUser.username);
         
         completionBlock(newUser);
+        
+    } Failure:^{
+        
+        NSLog(@"Fetch user failure");
     }];
 }
 
 
 - (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(Event *))completionBlock
 {
+    
     [self.apiClient fetchEventsForUser:user Completion:^(NSArray *eventDicts) {
         
         for (NSDictionary *eventDict in eventDicts) {
@@ -115,29 +120,38 @@
             
             completionBlock(newEvent);
         }
+
+    } Failure:^{
+        
+        NSLog(@"fetch events failure");
     }];
+    
 }
 
 
 - (void)addLocationsToCoreDataForUser: (User *)user Completion: (void(^)(Location *))completionBlock
 {
+    
     [self.apiClient fetchLocationsWithCompletion:^(NSArray *locations) {
-       
+        
         for (NSArray *allLocs in locations) {
             
             for (id eachLoc in allLocs[1]) {
-                    
+                
                 Location *newLocation = [Location getLocationFromDict:eachLoc ToContext:self.managedObjectContext];
                 
                 [user addLocationsObject:newLocation];
                 
                 completionBlock(newLocation);
                 
-                }
-
+            }
         }
+
+    } Failure:^{
         
+        NSLog(@"fetch locations failure");
     }];
+    
 }
 
 

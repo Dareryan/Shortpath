@@ -275,6 +275,8 @@
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
         
+    } Failure:^{
+        NSLog(@"failure to post event for existing visitor");
     }];
 }
 

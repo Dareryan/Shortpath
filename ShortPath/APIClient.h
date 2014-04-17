@@ -12,12 +12,12 @@
 
 @interface APIClient : NSObject
 
--(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock;
+-(void)fetchUserInfoWithCompletion: (void(^)(NSDictionary *))completionBlock Failure: (void(^)())failureBlock;
 
-- (void)fetchEventsForUser:(User *)user Completion: (void(^)(NSArray *))completionBlock;
+- (void)fetchEventsForUser:(User *)user Completion: (void(^)(NSArray *))completionBlock Failure: (void(^)())failureBlock;
 
-- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Completion: (void(^)())completionBlock;
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Completion: (void(^)())completionBlock Failure: (void(^)())failureBlock;
 
-- (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock;
+- (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock Failure: (void(^)())failureBlock;
 
 @end

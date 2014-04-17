@@ -49,10 +49,17 @@
     
     //NSLog(@"Time test: %@", [Event timeStringFromDate:[[NSDate alloc]init]]);
     
+<<<<<<< HEAD
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calendarContainerView, _eventsContainerView);
     
     NSLayoutConstraint *lc = [NSLayoutConstraint constraintWithItem:_eventsContainerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_calendarContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:64.0f];
     [self.view addConstraint:lc];
+=======
+//    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calendarContainerView, _eventsContainerView);
+//    
+//    NSLayoutConstraint *lc = [NSLayoutConstraint constraintWithItem:_eventsContainerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_calendarContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:64.0f];
+//    [self.eventsContainerView addConstraint:lc];
+>>>>>>> 718ad2ca463c6b1c9aaa69f1fa1d2d4da9c230d5
 }
 
 

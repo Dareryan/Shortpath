@@ -320,7 +320,7 @@
             
             [self writeNewVisitorEventToCoreData];
             
-            NSLog(@"IS REACHABILE");
+            NSLog(@"IS REACHABLE");
             
         } else {
             

@@ -96,13 +96,14 @@
         
         User *newUser = [User getUserFromDict:userDict ToContext:self.managedObjectContext];
         
-        //NSLog(@"%@", newUser.username);
+        NSLog(@"%@", newUser.username);
         
         completionBlock(newUser);
         
-    } Failure:^{
+    } Failure:^(NSInteger errorCode) {
         
-        NSLog(@"Fetch user failure");
+        NSLog(@"Fetch user error code: %d", errorCode);
+        
     }];
 }
 
@@ -121,10 +122,12 @@
             completionBlock(newEvent);
         }
 
-    } Failure:^{
+    } Failure:^(NSInteger errorCode) {
         
-        NSLog(@"fetch events failure");
+        NSLog(@"Fetch events error code: %d", errorCode);
+        
     }];
+
     
 }
 
@@ -147,9 +150,10 @@
             }
         }
 
-    } Failure:^{
+    } Failure:^(NSInteger errorCode) {
         
-        NSLog(@"fetch locations failure");
+        NSLog(@"Fetch location error code: %d", errorCode);
+        
     }];
     
 }

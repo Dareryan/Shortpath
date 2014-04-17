@@ -300,9 +300,10 @@
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
         
-    } Failure:^{
+    } Failure:^(NSInteger errorCode) {
         
-        NSLog(@"fail to post new event");
+        NSLog(@"Post new event error code: %d", errorCode);
+        
     }];
 
 }

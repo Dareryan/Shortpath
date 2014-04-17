@@ -834,16 +834,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z0o-ba-xcy">
-                                <rect key="frame" x="0.0" y="65" width="320" height="317"/>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z0o-ba-xcy">
+                                <rect key="frame" x="0.0" y="64" width="320" height="317"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="9s6-1e-iLH" kind="embed" id="Xfc-iS-OmD"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wpJ-lJ-RfM">
-                                <rect key="frame" x="0.0" y="382" width="320" height="136"/>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpJ-lJ-RfM">
+                                <rect key="frame" x="0.0" y="381" width="320" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
@@ -853,8 +853,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="z0o-ba-xcy" firstAttribute="top" secondItem="Jpk-Q0-SbP" secondAttribute="bottom" constant="1" id="873-P6-0UD"/>
-                            <constraint firstItem="z0o-ba-xcy" firstAttribute="bottom" secondItem="wpJ-lJ-RfM" secondAttribute="bottom" constant="-136" id="uuN-rj-zdL"/>
+                            <constraint firstItem="wpJ-lJ-RfM" firstAttribute="trailing" secondItem="z0o-ba-xcy" secondAttribute="trailing" id="1K7-dg-HAD"/>
+                            <constraint firstItem="wpJ-lJ-RfM" firstAttribute="top" secondItem="z0o-ba-xcy" secondAttribute="bottom" id="2HX-ny-xQh"/>
+                            <constraint firstItem="wpJ-lJ-RfM" firstAttribute="leading" secondItem="z0o-ba-xcy" secondAttribute="leading" id="8Oa-NW-OGx"/>
+                            <constraint firstAttribute="trailing" secondItem="z0o-ba-xcy" secondAttribute="trailing" id="BqC-Ge-HZS"/>
+                            <constraint firstItem="z0o-ba-xcy" firstAttribute="top" secondItem="Jpk-Q0-SbP" secondAttribute="bottom" id="Q50-hb-pud"/>
+                            <constraint firstItem="z0o-ba-xcy" firstAttribute="leading" secondItem="o50-AT-bmB" secondAttribute="leading" id="i9f-is-ixY"/>
+                            <constraint firstItem="wpJ-lJ-RfM" firstAttribute="top" secondItem="Jpk-Q0-SbP" secondAttribute="bottom" constant="317" id="j14-QD-FfX"/>
+                            <constraint firstItem="mJE-Vn-maW" firstAttribute="top" secondItem="wpJ-lJ-RfM" secondAttribute="bottom" constant="1" id="yeB-UZ-zCx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Events" id="ep3-Qp-Srp">
@@ -916,7 +922,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <tableViewController id="bf8-Wu-myx" customClass="EventsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="23J-fe-pdL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="137"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

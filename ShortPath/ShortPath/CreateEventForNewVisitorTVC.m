@@ -130,19 +130,19 @@
 //        NSLog(@"Error Code %long",  error.code);
 //    }];
 
-    NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
-    
-    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSDictionary *dict = responseObject[@"user"];
-        //completionBlock(dict);
-        NSLog(@"%@", dict);
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-        NSLog(@"Error Code %long",  error.code);
-        
-    }];
+//    NSString *urlString = @"https://core.staging.shortpath.net/api/users/me.json";
+//    
+//    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+//        
+//        NSDictionary *dict = responseObject[@"user"];
+//        //completionBlock(dict);
+//        NSLog(@"%@", dict);
+//        
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        
+//        NSLog(@"Error Code %long",  error.code);
+//        
+//    }];
 
     
     
@@ -361,9 +361,10 @@
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
         
-    } Failure:^{
+    } Failure:^(NSInteger errorCode) {
         
-        NSLog(@"failure to post create event for new visitor");
+        NSLog(@"Post new event for new visitor error code: %d", errorCode);
+        
     }];
     
 }

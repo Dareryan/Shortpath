@@ -52,7 +52,7 @@
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calendarContainerView, _eventsContainerView);
     
     NSLayoutConstraint *lc = [NSLayoutConstraint constraintWithItem:_eventsContainerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_calendarContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:64.0f];
-    [self.eventsContainerView addConstraint:lc];
+    [self.view addConstraint:lc];
 }
 
 

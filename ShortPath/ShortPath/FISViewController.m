@@ -12,35 +12,27 @@
 #import <AFOAuth2Client/AFOAuth2Client.h>
 
 @interface FISViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *logoText;
-@property (weak, nonatomic) IBOutlet UILabel *logoTextBottom;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
 @property (weak, nonatomic) IBOutlet UIButton *authenticateButton;
 
-
 - (IBAction)logInButton:(id)sender;
-
 
 @end
 
 
-
 @implementation FISViewController
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
-   
-    self.imageView.hidden = YES;
     
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    
-    gradient.frame = self.view.bounds;
-    
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0 green:0.475 blue:0.82 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:0.137 green:0.329 blue:0.518 alpha:1.0] CGColor], nil];
-    //gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0 green:0.475 blue:0.82 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:0 green:0.231 blue:0.51 alpha:1.0] CGColor], nil];
-    
-    [self.view.layer insertSublayer:gradient atIndex:0];
+//    CAGradientLayer *gradient = [CAGradientLayer layer];
+//    
+//    gradient.frame = self.view.bounds;
+//    
+//    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0 green:0.475 blue:0.82 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:0.137 green:0.329 blue:0.518 alpha:1.0] CGColor], nil];
+//    
+//    [self.view.layer insertSublayer:gradient atIndex:0];
 
 }
 
@@ -53,33 +45,20 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    
-    
-
     self.authenticateButton.titleLabel.font = [UIFont fontWithName:@"Oswald-Regular" size:30.0];
  
     [self.authenticateButton setTitle:@"Authenticate" forState:UIControlStateNormal];
     
-    
- 
-    
-    self.logoText.font = [UIFont fontWithName:@"Oswald-Regular" size:40.0];
-    
-    //self.logoText.text = @"Building";
-
-    self.logoTextBottom.font = [UIFont fontWithName:@"Oswald-Regular" size:40.0];
-    
-    //self.logoTextBottom.text = @"Intelligence";
-    
-    self.imageView.alpha = 0; [UIView animateWithDuration:1.0f animations:^{
+    self.logo.alpha = 0; [UIView animateWithDuration:1.0f animations:^{
         
-        self.imageView.hidden = NO;
+        self.logo.hidden = NO;
         
-        self.imageView.alpha=1.0;
+        self.logo.alpha=1.0;
    
     }];
     
 }
+
 -(void)viewWillLayoutSubviews
 {
   
@@ -131,6 +110,5 @@
     NSLog(@"Keyfournd");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 @end

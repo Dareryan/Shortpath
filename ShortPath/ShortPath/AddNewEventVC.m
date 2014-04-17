@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *locationPickerViewCell;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (nonatomic) BOOL isEditingLocation;
-
+@property (strong, nonatomic) Event *event;
 
 - (IBAction)cancelTapped:(id)sender;
 - (IBAction)doneTapped:(id)sender;
@@ -44,6 +44,7 @@
 @property (strong, nonatomic) Location *selectedLocation;
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) APIClient *apiClient;
+@property (weak, nonatomic) IBOutlet UITableViewCell *inviteesCell;
 
 
 @end
@@ -57,6 +58,11 @@
         // Custom initialization
     }
     return self;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self createEvent];
+    [self.inviteesCell setHidden:YES];
 }
 
 - (void)viewDidLoad
@@ -311,17 +317,21 @@
 
 - (void)writeEventToCoreData
 {
-    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
-    event.start = self.startDatePicker.date;
-    event.end = self.endDatePicker.date;
-    event.title = self.self.titleTextField.text;
-    event.identifier = @"";
-    event.location_id = self.selectedLocation.identifier;
-    [self.user addEventsObject:event];
+    [self.dataStore.managedObjectContext insertObject:self.event];
+    self.event.start = self.startDatePicker.date;
+    self.event.end = self.endDatePicker.date;
+    self.event.title = self.self.titleTextField.text;
+    self.event.identifier = @"";
+    self.event.location_id = self.selectedLocation.identifier;
+    [self.user addEventsObject:self.event];
     [self.dataStore saveContext];
 }
 
-
+-(void)createEvent
+{
+    NSEntityDescription *eventDescription = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
+    self.event = [[Event alloc]initWithEntity:eventDescription insertIntoManagedObjectContext:nil];
+}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {

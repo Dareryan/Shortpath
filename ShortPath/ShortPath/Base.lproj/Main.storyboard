@@ -446,7 +446,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dGi-l3-KaA">
                             <connections>
-                                <segue destination="STP-Hr-pxs" kind="modal" id="i82-eS-dPe"/>
+                                <segue destination="STP-Hr-pxs" kind="modal" identifier="addNewVisitor" id="i82-eS-dPe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

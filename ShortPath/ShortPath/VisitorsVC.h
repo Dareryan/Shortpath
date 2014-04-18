@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Event+Methods.h"
+#import "Location+Methods.h"
 
 @interface VisitorsVC : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) Event *event;
+@property (strong, nonatomic) Location *location;
 
 @end

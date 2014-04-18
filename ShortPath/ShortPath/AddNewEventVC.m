@@ -13,6 +13,7 @@
 #import "Event.h"
 #import "Location+Methods.h"
 #import "APIClient.h"
+#import "VisitorsVC.h"
 
 
 
@@ -312,6 +313,7 @@
 
 
 - (void)writeEventToCoreData
+
 {
     Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
     event.start = self.startDatePicker.date;
@@ -320,7 +322,7 @@
     event.identifier = @"";
     event.location_id = self.selectedLocation.identifier;
     [self.user addEventsObject:event];
-    [self.dataStore saveContext];
+    //[self.dataStore saveContext];
 }
 
 
@@ -410,6 +412,23 @@
         
     }
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    VisitorsVC *visitorsVC = [segue destinationViewController];    
+    
+    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
+    event.start = self.startDatePicker.date;
+    event.end = self.endDatePicker.date;
+    event.title = self.self.titleTextField.text;
+    event.identifier = @"";
+    event.location_id = self.selectedLocation.identifier;
+    [self.user addEventsObject:event];
+    
+    visitorsVC.event = event;
+    visitorsVC.location = self.selectedLocation;
+}
+
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {

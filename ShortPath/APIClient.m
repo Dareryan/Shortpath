@@ -11,6 +11,7 @@
 #import "FISViewController.h"
 
 
+
 @interface APIClient ()
 
 @property (strong, nonatomic) NSString *token;
@@ -195,10 +196,61 @@
     }];
     
     [task resume];
-    
-    
- 
+
 }
+
+
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Visitor: (Visitor *)visitor  Completion: (void(^)())completionBlock Failure: (void(^)(NSInteger))failureBlock
+{
+    //make a gist!!!
+    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events", user.group_id];
+    
+    NSString *str = [NSString stringWithFormat:@"{\"event\":{\"starts_at_date\":\"%@\",\"starts_at_time\":\"%@\",\"duration\":1,\"repeats\":\"0\",\"location_id\":\"%@\",\"subject\":\"%@\", \"guests_attributes\" : {\"%@\" : {\"company\":\"%@\", \"name\" : \"%@\",\"email\":\"%@\"}}}}", startDate, startTime, location.identifier, title, visitor.identifier, visitor.company, visitor.firstName, visitor.email];
+    
+    
+    NSData *postData = [str dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    
+    [request setHTTPBody:postData];
+    
+    //set headers
+    
+    [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
+    
+    
+    NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        
+        if (!error) {
+            
+            NSLog(@"%@", response);
+            
+            completionBlock();
+            
+        } else {
+            
+            NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
+            
+            failureBlock(errorCode);
+        }
+        
+    }];
+    
+    [task resume];
+    
+}
+
+
+
+
 
 
 

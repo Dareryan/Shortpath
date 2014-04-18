@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "User+Methods.h"
 #import "Location+Methods.h"
+#import "Visitor+Methods.h"
 
 @interface APIClient : NSObject
 
@@ -23,5 +24,8 @@
 - (void)handleError: (NSInteger)errorCode InViewController: (UIViewController *)controller;
 
 - (void)fetchAllVisitorsforUser: (User *)user Completion: (void(^)(NSArray *))completionBlock Failure: (void(^)(NSInteger))failureBlock;
+
+
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Visitor: (Visitor *)visitor  Completion: (void(^)())completionBlock Failure: (void(^)(NSInteger))failureBlock;
 
 @end

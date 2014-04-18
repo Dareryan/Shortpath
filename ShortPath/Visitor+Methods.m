@@ -27,6 +27,7 @@
         
         Visitor *newVisitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:context];
         
+        
         newVisitor.firstName = [NSString stringWithFormat:@"%@", dict[@"contact"][@"first_name"]];
         
         if ([dict[@"contact"][@"last_name"] isEqual:[NSNull null]]) {
@@ -37,9 +38,27 @@
             
             newVisitor.lastName = [NSString stringWithFormat:@"%@", dict[@"contact"][@"last_name"]];
         }
+        
+        
+        if ([dict[@"contact"][@"phone_number"] isEqual:[NSNull null]]) {
+            
+            newVisitor.phone = @" ";
+        } else {
+            
+            newVisitor.phone = [NSString stringWithFormat:@"%@", dict[@"contact"][@"phone_number"]];
+        }
        
-        newVisitor.phone = [NSString stringWithFormat:@"%@", dict[@"contact"][@"phone_number"]];
-        newVisitor.email = [NSString stringWithFormat:@"%@", dict[@"contact"][@"email"]];
+        
+        if ([dict[@"contact"][@"email"] isEqual:[NSNull null]]) {
+            
+            newVisitor.email = @" ";
+            
+        } else {
+            
+            newVisitor.email = [NSString stringWithFormat:@"%@", dict[@"contact"][@"email"]];
+        }
+        
+        
         newVisitor.identifier = [NSString stringWithFormat:@"%@", dict[@"contact"][@"id"]];
         
         

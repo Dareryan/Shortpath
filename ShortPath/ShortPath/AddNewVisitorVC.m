@@ -11,8 +11,9 @@
 
 #import "Visitor+Methods.h"
 #import "ShortPathDataStore.h"
-
+#import "Event+Methods.h"
 #import <AFNetworking.h>
+#import "APIClient.h"
 
 
 
@@ -26,9 +27,8 @@
 
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
-
-
-
+@property (strong, nonatomic) Visitor *visitor;
+@property (strong, nonatomic) APIClient *apiClient;
 
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonTapped:(id)sender;
@@ -47,13 +47,8 @@
     
     [super viewDidLoad];
     
-    
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.apiClient = [[APIClient alloc]init];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,34 +75,53 @@
 //add to api
 - (void)createNewVisitorForEvent
 {
-    Visitor *newVisitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
-    newVisitor.firstName = self.firstNameTextField.text;
-    newVisitor.lastName = self.lastNameTextField.text;
-    newVisitor.company = self.companyTextField.text;
-    newVisitor.phone = self.phoneNumberTextFIeld.text;
-    newVisitor.email = self.emailTextField.text;
+    self.visitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    self.visitor.firstName = self.firstNameTextField.text;
+    self.visitor.lastName = self.lastNameTextField.text;
+    self.visitor.company = self.companyTextField.text;
+    self.visitor.phone = self.phoneNumberTextFIeld.text;
+    self.visitor.email = self.emailTextField.text;
     
-    [self.event addVisitorsObject:newVisitor];
+    [self.event addVisitorsObject:self.visitor];
     
-    [self.dataStore saveContext];
+    //[self.dataStore saveContext];
 }
 
 #pragma mark - Table view data source
 
 
 - (IBAction)doneButtonPressed:(id)sender {
-    
-    
-    //[self createNewVisitorForEvent];
-    
+
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
     if ([self.firstNameTextField.text isEqualToString:@""] || [self.lastNameTextField.text isEqualToString:@""]) {
+        
         [alertView show];
+        
     } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""]) {
+        
         [self createNewVisitorForEvent];
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        
+        NSString *startDate = [Event dateStringFromDate:self.event.start];
+        NSString *time = [Event timeStringFromDate:self.event.start];
+        
+        [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location Visitor:self.visitor Completion:^{
+            
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+            
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
+        } Failure:^(NSInteger errorCode) {
+            
+            [self.apiClient handleError:errorCode InViewController:self];
+            
+            NSLog(@"Error adding new visitor for new event: %d", errorCode);
+        }];
+        
+        
     }
+    
+    
 }
 
 - (IBAction)cancelButtonTapped:(id)sender {

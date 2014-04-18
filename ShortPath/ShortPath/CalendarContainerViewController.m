@@ -104,7 +104,7 @@
 {
     [super viewDidLoad];
     
-    [SVProgressHUD show];
+    //[SVProgressHUD show];
         
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCalendar:) name:NSManagedObjectContextDidSaveNotification object:self.dataStore.managedObjectContext];
     

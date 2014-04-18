@@ -289,8 +289,23 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //Add code to add visitor to event
-    //[self dismissViewControllerAnimated:YES completion:nil];
+    Visitor *visitor;
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        
+        if ([self.searchResults count] != 0){
+            visitor = [self.searchResults objectAtIndex:indexPath.row];
+        }
+        
+    } else {
+        
+        visitor = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+        
+    }
+    
+    
+    [self.event addVisitorsObject:visitor];
+    
     if (self.navigationController.viewControllers[0] == self) {
         
         [self.navigationController popViewControllerAnimated:YES];

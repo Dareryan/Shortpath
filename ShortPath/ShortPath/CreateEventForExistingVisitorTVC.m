@@ -55,6 +55,7 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Create Event";
     self.dataStore = [ShortPathDataStore sharedDataStore];
     self.apiClient = [[APIClient alloc]init];
     

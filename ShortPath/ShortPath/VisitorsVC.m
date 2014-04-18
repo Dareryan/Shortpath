@@ -308,7 +308,7 @@
     
     if (self.navigationController.viewControllers[0] == self) {
         
-        [self.navigationController popViewControllerAnimated:YES];
+       // [self.navigationController popViewControllerAnimated:YES];
         
         
     } else {

@@ -110,31 +110,18 @@
 }
 
 
-- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(BOOL))completionBlock Failure: (void(^)(NSInteger))failureBlock
+- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)())completionBlock Failure: (void(^)(NSInteger))failureBlock
 {
-    
-    
-    
+
     [self.apiClient fetchEventsForUser:user Completion:^(NSArray *eventDicts) {
-        
-        NSInteger counter = 0;
-        
-        BOOL isDone = NO;
         
         for (NSDictionary *eventDict in eventDicts) {
             
             Event *newEvent = [Event getEventFromDict:eventDict ToContext:self.managedObjectContext];
             
             [user addEventsObject:newEvent];
-            
-            counter++;
-            
-            if (counter == [eventDicts count]) {
-                
-                isDone = YES;
-            }
-            
-            completionBlock(isDone);
+                        
+            completionBlock();
         }
 
     } Failure:^(NSInteger errorCode) {

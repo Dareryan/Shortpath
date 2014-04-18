@@ -31,7 +31,7 @@
         
         if ([dict[@"contact"][@"last_name"] isEqual:[NSNull null]]) {
             
-            newVisitor.lastName = @"";
+            newVisitor.lastName = @" ";
             
         } else {
             

@@ -42,7 +42,24 @@
     __weak typeof(self) weakSelf = self;    
     
     [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
+
+        [weakSelf.dataStore addLocationsToCoreDataForUser:user Completion:^(Location *location) {
+            
+            [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^{
+                
+                completionBlock();
+                
+            } Failure:^(NSInteger errorCode) {
+                
+                [weakSelf.apiClient handleError:errorCode InViewController:weakSelf];
+            }];
+            
+        } Failure:^(NSInteger errorCode) {
+            
+            [weakSelf.apiClient handleError:errorCode InViewController:weakSelf];
+        }];
         
+        //save context only once when network call is done
         [weakSelf.dataStore addVisitorsForUser:user Completion:^(BOOL isDone) {
             
             if (isDone) {
@@ -54,26 +71,7 @@
             
             [weakSelf.apiClient handleError:errorCode InViewController:weakSelf];
         }];
-        
-        [weakSelf.dataStore addLocationsToCoreDataForUser:user Completion:^(Location *location) {
-            
-            [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(BOOL isDone) {
-                
-                if (isDone) {
-                    
-                completionBlock();
-                    
-                }
-                
-            } Failure:^(NSInteger errorCode) {
-                
-                [weakSelf.apiClient handleError:errorCode InViewController:weakSelf];
-            }];
-            
-        } Failure:^(NSInteger errorCode) {
-            
-            [weakSelf.apiClient handleError:errorCode InViewController:weakSelf];
-        }];
+
         
     } Failure:^(NSInteger errorCode) {
         
@@ -125,7 +123,7 @@
    
     [self eventsToCoreDataWithCompletion:^{
         
-        [self.dataStore saveContext];
+        //[self.dataStore saveContext];
         
         NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
         

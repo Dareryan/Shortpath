@@ -346,6 +346,8 @@
     }
     
 }
+
+
 - (IBAction)endDatePickerValueChanged:(id)sender {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, yyyy – h:mm a"];
@@ -406,6 +408,21 @@
          [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView reloadData];
         
+    }
+}
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create a new event, please specify a title, location and valid end date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    
+    if ([self.titleLabel.text isEqualToString:@""] || [self.startDatePicker.date timeIntervalSinceDate:self.endDatePicker.date] >= 0 || self.selectedLocation == nil) {
+        
+        [alertView show];
+        return NO;
+        
+    } else {
+        
+        return YES;
     }
 }
 

@@ -70,7 +70,7 @@
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
     NSString *searchID = dict[@"event"][@"id"];
-    NSLog(@"%@", searchID);
+    //NSLog(@"%@", searchID);
     
     NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"identifier==%@",searchID];
     fetchRequest.predicate = searchPredicate;

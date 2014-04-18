@@ -1063,7 +1063,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="9Rn-7W-ngg" kind="push" id="WFa-c3-K0T"/>
+                                            <segue destination="9Rn-7W-ngg" kind="push" identifier="addInvitees" id="WFa-c3-K0T"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>

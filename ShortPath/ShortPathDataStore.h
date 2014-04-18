@@ -18,7 +18,7 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (void)addUserToCoreDataWithCompletion: (void(^)(User *))completionBlock Failure: (void(^)(NSInteger))failureBlock;
-- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(BOOL))completionBlock Failure: (void(^)(NSInteger))failureBlock;
+- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)())completionBlock Failure: (void(^)(NSInteger))failureBlock;
 - (void)addLocationsToCoreDataForUser: (User *)user Completion: (void(^)(Location *))completionBlock Failure: (void(^)(NSInteger))failureBlock;
 - (void)addVisitorsForUser: (User *)user Completion: (void(^)(BOOL))completionBlock Failure: (void(^)(NSInteger))failureBlock;
 

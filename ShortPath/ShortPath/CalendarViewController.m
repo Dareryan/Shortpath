@@ -46,34 +46,6 @@
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
     self.apiClient = [[APIClient alloc]init];
-    
-    //NSLog(@"Time test: %@", [Event timeStringFromDate:[[NSDate alloc]init]]);
-    
-
-<<<<<<< HEAD
-//    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calendarContainerView, _eventsContainerView);
-//    
-//    NSLayoutConstraint *lc = [NSLayoutConstraint constraintWithItem:_eventsContainerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_calendarContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:64.0f];
-//    [self.view addConstraint:lc];
-=======
-
-
-
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calendarContainerView, _eventsContainerView);
-    
-    NSLayoutConstraint *lc = [NSLayoutConstraint constraintWithItem:_eventsContainerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_calendarContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:64.0f];
-    [self.view addConstraint:lc];
->>>>>>> bce0ddb16b727a1e87dd059defce8e714f8a27df
-
-//    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calendarContainerView, _eventsContainerView);
-//    
-//    NSLayoutConstraint *lc = [NSLayoutConstraint constraintWithItem:_eventsContainerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_calendarContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:64.0f];
-//    [self.view addConstraint:lc];
-
-//    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calendarContainerView, _eventsContainerView);
-//    
-//    NSLayoutConstraint *lc = [NSLayoutConstraint constraintWithItem:_eventsContainerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_calendarContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:64.0f];
-//    [self.eventsContainerView addConstraint:lc];
 }
 
 

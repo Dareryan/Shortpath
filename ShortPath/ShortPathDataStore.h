@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class Visitor;
+#import "Visitor+Methods.h"
 #import "User+Methods.h"
 #import "Location+Methods.h"
 
@@ -17,9 +17,10 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (void)addUserToCoreDataWithCompletion: (void(^)(User *))completionBlock;
-- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(Event *))completionBlock;
-- (void)addLocationsToCoreDataForUser: (User *)user Completion: (void(^)(Location *))completionBlock;
+- (void)addUserToCoreDataWithCompletion: (void(^)(User *))completionBlock Failure: (void(^)(NSInteger))failureBlock;
+- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(BOOL))completionBlock Failure: (void(^)(NSInteger))failureBlock;
+- (void)addLocationsToCoreDataForUser: (User *)user Completion: (void(^)(Location *))completionBlock Failure: (void(^)(NSInteger))failureBlock;
+- (void)addVisitorsForUser: (User *)user Completion: (void(^)(BOOL))completionBlock Failure: (void(^)(NSInteger))failureBlock;
 
 
 - (void)saveContext;

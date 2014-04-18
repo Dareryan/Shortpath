@@ -10,4 +10,6 @@
 
 @interface Visitor (Methods)
 
++ (Visitor *)getVisitorFromDict: (NSDictionary *)dict ToContext: (NSManagedObjectContext *)context;
+
 @end

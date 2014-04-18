@@ -50,10 +50,10 @@
     //NSLog(@"Time test: %@", [Event timeStringFromDate:[[NSDate alloc]init]]);
     
 
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calendarContainerView, _eventsContainerView);
-    
-    NSLayoutConstraint *lc = [NSLayoutConstraint constraintWithItem:_eventsContainerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_calendarContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:64.0f];
-    [self.view addConstraint:lc];
+//    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calendarContainerView, _eventsContainerView);
+//    
+//    NSLayoutConstraint *lc = [NSLayoutConstraint constraintWithItem:_eventsContainerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_calendarContainerView attribute:NSLayoutAttributeBottom multiplier:1 constant:64.0f];
+//    [self.view addConstraint:lc];
 
 //    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calendarContainerView, _eventsContainerView);
 //    
@@ -113,47 +113,43 @@
 
 
 
+//
+//- (void)removeEventsFromCoreData
+//{
+//    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+//    
+//    NSArray *events = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil];
+//    
+//    for (NSManagedObject *ev in events) {
+//        
+//        [self.dataStore.managedObjectContext deleteObject:ev];
+//        [self.dataStore saveContext];
+//    }
+//    
+//}
+//
+//- (void)addFakeVisitorsToEventForApr13th: (NSManagedObjectContext *)cont
+//{
+//    NSFetchRequest *eventsRequest = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+//    
+//    NSPredicate *filter = [NSPredicate predicateWithFormat:@"identifier==%@", @"593716"];
+//    
+//    eventsRequest.predicate = filter;
+//    
+//    if ([[self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil]count] != 0) {
+//       
+//        Event *targetEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
+//        
+//        Visitor *david = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
+//        david.firstName = @"John";
+//        
+//        [targetEvent addVisitorsObject:david];
+//        
+//        [self.dataStore saveContext];
+//    }
+//
+//}
 
-- (void)removeEventsFromCoreData
-{
-    NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
-    
-    NSArray *events = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil];
-    
-    for (NSManagedObject *ev in events) {
-        
-        [self.dataStore.managedObjectContext deleteObject:ev];
-        [self.dataStore saveContext];
-    }
-    
-}
 
-- (void)addFakeVisitorsToEventForApr13th: (NSManagedObjectContext *)cont
-{
-    NSFetchRequest *eventsRequest = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
-    
-    NSPredicate *filter = [NSPredicate predicateWithFormat:@"identifier==%@", @"593716"];
-    
-    eventsRequest.predicate = filter;
-    
-    if ([[self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil]count] != 0) {
-       
-        Event *targetEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
-        
-        Visitor *david = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:cont];
-        david.firstName = @"John";
-        
-        [targetEvent addVisitorsObject:david];
-        
-        [self.dataStore saveContext];
-    }
-   
-    
-}
-
--(void)addLocalEventsToAPI
-{
-    
-}
 
 @end

@@ -32,14 +32,15 @@
         <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="visitors" inverseEntity="Event" syncable="YES"/>
     </entity>
     <elements>
         <element name="Event" positionX="63" positionY="-79" width="128" height="223"/>
-        <element name="User" positionX="-225" positionY="-190" width="128" height="133"/>
-        <element name="Visitor" positionX="-254" positionY="9" width="128" height="133"/>
         <element name="Location" positionX="25" positionY="-322" width="128" height="103"/>
+        <element name="User" positionX="-225" positionY="-190" width="128" height="133"/>
+        <element name="Visitor" positionX="-254" positionY="9" width="128" height="150"/>
     </elements>
 </model>

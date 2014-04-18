@@ -302,6 +302,8 @@
         
     } Failure:^(NSInteger errorCode) {
         
+        [self.apiClient handleError:errorCode InViewController:self];
+        
         NSLog(@"Post new event error code: %d", errorCode);
         
     }];

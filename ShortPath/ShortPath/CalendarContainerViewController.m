@@ -11,12 +11,15 @@
 #import "ShortPathDataStore.h"
 #import "Event+Methods.h"
 #import "SVProgressHUD.h"
+#import "APIClient.h"
 
 @interface CalendarContainerViewController ()
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
 
 @property (strong, nonatomic) NSArray *events;
+
+@property (strong, nonatomic) APIClient *apiClient;
 
 
 @end
@@ -36,38 +39,66 @@
 
 - (void)eventsToCoreDataWithCompletion: (void (^)())completionBlock
 {
-    __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;    
     
     [self.dataStore addUserToCoreDataWithCompletion:^(User *user) {
         
-        [weakSelf.dataStore addLocationsToCoreDataForUser:user Completion:^(Location *location) {
+        [weakSelf.dataStore addVisitorsForUser:user Completion:^(BOOL isDone) {
             
-            [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(Event *event) {
+            if (isDone) {
                 
                 [weakSelf.dataStore saveContext];
-                
-                completionBlock();
-                
-            }];
+            }
+            
+        } Failure:^(NSInteger errorCode) {
+            
+            [weakSelf.apiClient handleError:errorCode InViewController:weakSelf];
         }];
+        
+        [weakSelf.dataStore addLocationsToCoreDataForUser:user Completion:^(Location *location) {
+            
+            [weakSelf.dataStore addEventsForUser:user ToCoreDataWithCompletion:^(BOOL isDone) {
+                
+                if (isDone) {
+                    
+                completionBlock();
+                    
+                }
+                
+            } Failure:^(NSInteger errorCode) {
+                
+                [weakSelf.apiClient handleError:errorCode InViewController:weakSelf];
+            }];
+            
+        } Failure:^(NSInteger errorCode) {
+            
+            [weakSelf.apiClient handleError:errorCode InViewController:weakSelf];
+        }];
+        
+    } Failure:^(NSInteger errorCode) {
+        
+        [SVProgressHUD dismiss];
+        
+        [weakSelf.apiClient handleError:errorCode InViewController:weakSelf];
     }];
+
 }
 
-
-- (void)cleanCoreData
-{
-    NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
-    
-    NSArray *events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
-    
-    for (Event *ev in events) {
-        
-        [self.dataStore.managedObjectContext deleteObject:ev];
-        
-    }
-    
-    [self.dataStore saveContext];
-}
+//
+//- (void)cleanCoreData
+//{
+//    NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
+//    
+//    NSArray *events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
+//    
+//    for (Event *ev in events) {
+//        
+//        [self.dataStore.managedObjectContext deleteObject:ev];
+//        
+//    }
+//    
+//    [self.dataStore saveContext];
+//}
 
 
 
@@ -76,8 +107,10 @@
     [super viewDidLoad];
     
     [SVProgressHUD show];
-    
+        
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCalendar:) name:NSManagedObjectContextDidSaveNotification object:self.dataStore.managedObjectContext];
+    
+    self.apiClient = [[APIClient alloc]init];
 
     self.calendar = [[TKCalendarMonthView alloc] init];
     
@@ -92,10 +125,12 @@
    
     [self eventsToCoreDataWithCompletion:^{
         
+        [self.dataStore saveContext];
+        
         NSFetchRequest *requestEvents = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
         
         self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
-        //NSLog(@"%d", [self.events count]);
+        
     }];
 }
 

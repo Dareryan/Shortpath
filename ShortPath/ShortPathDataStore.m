@@ -89,7 +89,7 @@
 
 #pragma mark - API to Core Data methods
 
-- (void)addUserToCoreDataWithCompletion: (void(^)(User *))completionBlock
+- (void)addUserToCoreDataWithCompletion: (void(^)(User *))completionBlock Failure: (void(^)(NSInteger))failureBlock
 {
     
     [self.apiClient fetchUserInfoWithCompletion:^(NSDictionary *userDict) {
@@ -102,16 +102,24 @@
         
     } Failure:^(NSInteger errorCode) {
         
+        failureBlock(errorCode);
+        
         NSLog(@"Fetch user error code: %d", errorCode);
         
     }];
 }
 
 
-- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(Event *))completionBlock
+- (void)addEventsForUser: (User *)user ToCoreDataWithCompletion: (void(^)(BOOL))completionBlock Failure: (void(^)(NSInteger))failureBlock
 {
     
+    
+    
     [self.apiClient fetchEventsForUser:user Completion:^(NSArray *eventDicts) {
+        
+        NSInteger counter = 0;
+        
+        BOOL isDone = NO;
         
         for (NSDictionary *eventDict in eventDicts) {
             
@@ -119,10 +127,19 @@
             
             [user addEventsObject:newEvent];
             
-            completionBlock(newEvent);
+            counter++;
+            
+            if (counter == [eventDicts count]) {
+                
+                isDone = YES;
+            }
+            
+            completionBlock(isDone);
         }
 
     } Failure:^(NSInteger errorCode) {
+        
+        failureBlock(errorCode);
         
         NSLog(@"Fetch events error code: %d", errorCode);
         
@@ -132,7 +149,7 @@
 }
 
 
-- (void)addLocationsToCoreDataForUser: (User *)user Completion: (void(^)(Location *))completionBlock
+- (void)addLocationsToCoreDataForUser: (User *)user Completion: (void(^)(Location *))completionBlock Failure: (void(^)(NSInteger))failureBlock
 {
     
     [self.apiClient fetchLocationsWithCompletion:^(NSArray *locations) {
@@ -152,11 +169,46 @@
 
     } Failure:^(NSInteger errorCode) {
         
+        failureBlock(errorCode);
+        
         NSLog(@"Fetch location error code: %d", errorCode);
         
     }];
     
 }
+
+- (void)addVisitorsForUser: (User *)user Completion: (void(^)(BOOL))completionBlock Failure: (void(^)(NSInteger))failureBlock
+{
+    [self.apiClient fetchAllVisitorsforUser:user Completion:^(NSArray *visitorsArray) {
+        
+        NSInteger counter = 0;
+        
+        BOOL isDone = NO;
+        
+        for (NSDictionary *dict in visitorsArray) {
+            
+            counter++;
+
+            [Visitor getVisitorFromDict:dict ToContext:self.managedObjectContext];
+            
+            if (counter == [visitorsArray count]) {
+                
+                isDone = YES;
+                
+            }
+            
+            completionBlock(isDone);
+            
+        }
+        
+    } Failure:^(NSInteger errorCode) {
+        
+        failureBlock(errorCode);
+        
+        NSLog(@"Fetch location error code: %d", errorCode);
+    }];
+}
+
 
 
 #pragma mark - Core Data stack

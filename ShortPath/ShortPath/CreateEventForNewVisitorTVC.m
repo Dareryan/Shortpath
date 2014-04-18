@@ -367,7 +367,10 @@
         
     } Failure:^(NSInteger errorCode) {
         
+        [self.apiClient handleError:errorCode InViewController:self];
+        
         NSLog(@"Post new event for new visitor error code: %d", errorCode);
+        
         
     }];
     
@@ -399,7 +402,8 @@
     
 }
 
-- (IBAction)cancelButtonPressed:(id)sender {
+- (IBAction)cancelButtonPressed:(id)sender
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

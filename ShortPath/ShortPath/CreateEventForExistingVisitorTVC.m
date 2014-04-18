@@ -277,6 +277,8 @@
         
     } Failure:^(NSInteger errorCode) {
         
+        [self.apiClient handleError:errorCode InViewController:self];
+        
         NSLog(@"Post new event for existing visitor error code: %d", errorCode);
         
     }];

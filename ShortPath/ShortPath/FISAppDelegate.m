@@ -14,6 +14,8 @@
 #import "AFNetworkActivityIndicatorManager.h"
 #import <AFNetworking.h>
 #import "Visitor.h"
+#import <AFOAuth2Client/AFOAuth2Client.h>
+#import <AFNetworking/AFNetworking.h>
 
 
 @implementation FISAppDelegate
@@ -23,52 +25,8 @@
 
     [[AFNetworkActivityIndicatorManager sharedManager]setEnabled:YES];
 
-    
-        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 
-//    APIClient *cl = [[APIClient alloc]init];
-//    
-//    [cl fetchUserInfoWithCompletion:^(NSDictionary *dict) {
-//        NSLog(@"%@", dict);
-//    }];
-    
-    // Override point for customization after application launch.
-    
-    //Create Nav VC here
-    //Check to see if have a token
-    // set root view based on having a token or not
-    
-    //make method to handle logging out - delete the token and pop back to root nav controller and present login screen (Blue Logo screen)
-    //this is everytime app is launched, need to check for token bc not always coming from log out screen
-    
-    //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    //UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    //FISTabBarControllerViewController *tabBarVC = (FISTabBarControllerViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"tabBarVC"];
-//    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController: tabBarVC];
-//    navVC.navigationBarHidden = YES;
-//    self.window.rootViewController = navVC;
-//    [self.window makeKeyAndVisible];
-
-//    Visitor *eugene = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
-//    eugene.firstName = @"Eugene";
-//    eugene.lastName = @"Watson";
-//    
-//    Visitor *bram = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
-//    bram.firstName = @"Bram";
-//    bram.lastName = @"Vandevelde";
-//    
-//    Visitor *dare = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
-//    dare.firstName = @"Dare";
-//    dare.lastName = @"Ryan";
-//    
-//    Visitor *nadia = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
-//    nadia.firstName = @"Nadia";
-//    nadia.lastName = @"Yudina";
-//    
-//    [self.dataStore saveContext];
-
-   
     return YES;
 
 }
@@ -84,7 +42,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    [self.dataStore saveContext];
+    //[self.dataStore saveContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -102,12 +60,44 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-+(void)hasToken
-{
-    
-    
-}
-
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+//{
+//    NSString *responseURL = [url absoluteString];
+//    NSLog(@"%@",responseURL);
+//    
+//    NSString *pattern = @"flatironshortpath:\\/\\/oauthCallback\\?code=(.+)&state=";
+//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
+//    NSArray *matches = [regex matchesInString:responseURL options:0 range:NSMakeRange(0, [responseURL length])];
+//    NSTextCheckingResult *match = matches[0];
+//    
+//    NSString *code = [responseURL substringWithRange:[match rangeAtIndex:1]];
+//    
+//    NSLog(@"%@",code);
+//    
+//    NSURL *urlForBase = [NSURL URLWithString:@"https://core.staging.shortpath.net"];
+//    
+//    
+//    AFOAuth2Client *client = [[AFOAuth2Client alloc] initWithBaseURL:urlForBase clientID:@"F50bIw7OVNXDU0ohYkn15U8cHTbKeUu1Kaa1zRlK" secret:@"b89HZvCKilyMJbF1d0GQZFfOvbFI5JkgFY5wSV89"];
+//    client.requestSerializer = [AFJSONRequestSerializer serializer];
+//    
+//    
+//    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+//    securityPolicy.allowInvalidCertificates = YES;
+//    [client setSecurityPolicy:securityPolicy];
+//    
+//    [client authenticateUsingOAuthWithURLString:@"https://core.staging.shortpath.net/oauth/access_token" code:code redirectURI:@"flatironshortpath://oauthCallback" success:^(AFOAuthCredential *credential) {
+//        
+//        NSLog(@"credential: %@", credential);
+//        
+//    } failure:^(NSError *error) {
+//        
+//        NSLog(@"fail with error: %@", error);
+//    }];
+//    
+//    
+//    return YES;
+//}
+//
 
 
 

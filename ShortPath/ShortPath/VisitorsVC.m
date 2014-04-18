@@ -171,7 +171,8 @@
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",visitor.firstName, visitor.lastName];
-    cell.detailTextLabel.text = visitor.email;
+    NSLog(@"name: %@", visitor.lastName);
+    //cell.detailTextLabel.text = visitor.email;
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -217,7 +218,7 @@
     
     for (Visitor *visitor in self.visitors) {
         
-        NSString *c = [visitor.firstName substringToIndex:1];
+        NSString *c = [visitor.lastName substringToIndex:1];
         
         found = NO;
         
@@ -237,9 +238,8 @@
     // Loop again and sort visitors into their respective keys
     for (Visitor *visitor in self.visitors) {
         
-        NSString *visitorName = [visitor.firstName substringToIndex:1];
+        NSString *visitorName = [visitor.lastName substringToIndex:1];
        
-        
         [[self.sections objectForKey:visitorName] addObject:visitor];
         
         
@@ -247,9 +247,7 @@
     
     // Sort each section array
     for (NSString *key in [self.sections allKeys]) {
-        
-        
-        
+
         [[self.sections objectForKey:key] sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES],]];
     }
     

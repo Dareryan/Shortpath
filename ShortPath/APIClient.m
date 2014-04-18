@@ -8,7 +8,7 @@
 
 #import "APIClient.h"
 #import <AFNetworking.h>
-
+#import "FISViewController.h"
 
 
 @interface APIClient ()
@@ -36,7 +36,35 @@
         securityPolicy.allowInvalidCertificates=YES;
         _manager.securityPolicy=securityPolicy;
     }
+    
     return _manager;
+}
+
+
+- (void)handleError: (NSInteger)errorCode InViewController: (UIViewController *)controller
+{
+    
+    if (errorCode == 401) {
+        
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
+        
+        [controller presentViewController:loginVC animated:YES completion:nil];
+        controller.tabBarController.navigationController.viewControllers = @[loginVC];
+        [controller.tabBarController.navigationController pushViewController:loginVC animated:YES];
+        
+    } else if (errorCode == 500) {
+        
+        UIAlertView *alertConnect = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:controller cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertConnect show];
+        
+    } else if (errorCode == 404) {
+        
+        UIAlertView *alertBad = [[UIAlertView alloc] initWithTitle:@"That's bad" message:@"try again, but it wouldn't help" delegate:controller cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertBad show];
+    }
+    
+    
 }
 
 
@@ -53,9 +81,11 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
+        //NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
         
-        failureBlock(errorCode);
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        
+        failureBlock(response.statusCode);
     }];
 
 }
@@ -72,9 +102,9 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
 
-         NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         
-        failureBlock(errorCode);
+        failureBlock(response.statusCode);
     }];
 
 }
@@ -93,9 +123,28 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-        NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         
-        failureBlock(errorCode);
+        failureBlock(response.statusCode);
+    }];
+}
+
+
+- (void)fetchAllVisitorsforUser: (User *)user Completion: (void(^)(NSArray *))completionBlock Failure: (void(^)(NSInteger))failureBlock
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/contacts", user.group_id];
+    
+    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray *visitorsDicts = responseObject;
+        
+        completionBlock(visitorsDicts);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        
+        failureBlock(response.statusCode);
     }];
 }
 

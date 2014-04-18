@@ -20,4 +20,8 @@
 
 - (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock Failure: (void(^)(NSInteger))failureBlock;
 
+- (void)handleError: (NSInteger)errorCode InViewController: (UIViewController *)controller;
+
+- (void)fetchAllVisitorsforUser: (User *)user Completion: (void(^)(NSArray *))completionBlock Failure: (void(^)(NSInteger))failureBlock;
+
 @end

@@ -50,7 +50,7 @@
 {
     [super viewDidAppear:animated];
     
-    self.logo.alpha = 0.0f;
+   // self.logo.alpha = 0.0f;
     
 //    [UIView animateWithDuration:1.0f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
 //        <#code#>

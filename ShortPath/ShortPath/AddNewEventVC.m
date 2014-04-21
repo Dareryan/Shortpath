@@ -159,7 +159,7 @@
 {
     NSIndexPath *startIP = [NSIndexPath indexPathForRow:1 inSection:1];
     NSIndexPath *endIP = [NSIndexPath indexPathForRow:1 inSection:2];
-    NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:4];
+    NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:3];
     if(indexPath.section==1 && indexPath.row == 0)
     {
         self.isEditingStartDate = !self.isEditingStartDate;
@@ -188,7 +188,7 @@
         [tableView scrollToRowAtIndexPath:endIP atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     
-    else if (indexPath.section == 4 && indexPath.row ==0){
+    else if (indexPath.section == 3 && indexPath.row ==0){
         self.isEditingLocation = !self.isEditingLocation;
         self.isEditingStartDate = NO;
         self.isEditingEndDate = NO;
@@ -218,7 +218,7 @@
             [tableView reloadData];
            
         }
-        if (!(indexPath.section == 4 && indexPath.row == 1)) {
+        if (!(indexPath.section == 3 && indexPath.row == 1)) {
             self.isEditingLocation = NO;
             
             [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -258,7 +258,7 @@
         }
     }
     
-    if (indexPath.section ==4 && indexPath.row ==1) {
+    if (indexPath.section ==3 && indexPath.row ==1) {
         if (self.isEditingLocation) {
             return 225.0;
         }
@@ -446,7 +446,7 @@
             self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
             self.isEditingLocation = NO;
             self.locationCell.textLabel.text = self.selectedLocation.title;
-            NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:4];
+            NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:3];
             [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
             [self.tableView reloadData];
         }

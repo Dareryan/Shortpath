@@ -307,6 +307,11 @@
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
         
+        [self.dataStore.managedObjectContext deleteObject:self.event];
+        
+        [self.dataStore saveContext];
+        
+        
     } Failure:^(NSInteger errorCode) {
         
         [self.apiClient handleError:errorCode InViewController:self];

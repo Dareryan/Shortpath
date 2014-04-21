@@ -96,7 +96,7 @@
         
         User *newUser = [User getUserFromDict:userDict ToContext:self.managedObjectContext];
         
-        NSLog(@"%@", newUser.username);
+        //NSLog(@"%@", newUser.username);
         
         completionBlock(newUser);
         
@@ -170,11 +170,15 @@
         
         NSInteger counter = 0;
         
+        //NSLog(@"array: %d", [visitorsArray count]);
+        
         BOOL isDone = NO;
         
         for (NSDictionary *dict in visitorsArray) {
             
             counter++;
+            
+            //NSLog(@"Counter: %d", counter);
 
             [Visitor getVisitorFromDict:dict ToContext:self.managedObjectContext];
             

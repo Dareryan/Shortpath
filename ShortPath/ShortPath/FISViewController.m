@@ -94,7 +94,7 @@
     
     
     [client GET:@"https://core.staging.shortpath.net/api/groups/8351/events/?start=2014-04-07T11:39:43-04:00&end=2014-04-07T11:39:43-05:00" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@",responseObject);
+        //NSLog(@"%@",responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];

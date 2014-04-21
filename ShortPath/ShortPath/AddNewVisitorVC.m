@@ -134,6 +134,8 @@
                 
                 CalendarViewController *calendarVC = [storyBoard instantiateViewControllerWithIdentifier:@"calendarVC"];
                 
+                [self.dataStore.managedObjectContext deleteObject:self.event];
+                
                 [self.navigationController pushViewController:calendarVC animated:YES];
 
                 

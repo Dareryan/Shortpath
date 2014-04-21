@@ -52,17 +52,10 @@
 
 @implementation AddNewEventVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self createEvent];
+    
     //[self.inviteesCell setHidden:YES];
 }
 
@@ -70,6 +63,8 @@
 
 {
     [super viewDidLoad];
+    
+    
     
     self.locationPicker.showsSelectionIndicator = YES;
     UITapGestureRecognizer *locationGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickerViewTapGestureRecognized:)];
@@ -91,6 +86,8 @@
     
     self.apiClient = [[APIClient alloc]init];
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    //[self createEvent];
 
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
@@ -431,7 +428,9 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    VisitorsVC *visitorsVC = [segue destinationViewController];    
+    
+    
+    VisitorsVC *visitorsVC = [segue destinationViewController];
     
     Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
     event.start = self.startDatePicker.date;
@@ -439,6 +438,7 @@
     event.title = self.self.titleTextField.text;
     event.identifier = @"";
     event.location_id = self.selectedLocation.identifier;
+    
     [self.user addEventsObject:event];
     
     visitorsVC.event = event;

@@ -228,10 +228,6 @@
     BOOL found;
     // Loop through visitors and create keys
     
-    NSMutableArray *noLastNameVisitors = [NSMutableArray new];
-    
-    NSMutableArray *mutableVisitors = [self.visitors mutableCopy];
-    
     for (Visitor *visitor in self.visitors) {
 
         NSString *c = [visitor.lastName substringToIndex:1];
@@ -275,13 +271,14 @@
     NSString *startDate = [Event dateStringFromDate:self.event.start];
     NSString *time = [Event timeStringFromDate:self.event.start];
     
+
     if (buttonIndex == 1) {
         
         [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location Visitor:self.selectedVisitor Completion:^{
             
             [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
             
-            
+            [self.dataStore.managedObjectContext deleteObject:self.event];
             
             [self dismissViewControllerAnimated:YES completion:nil];
             

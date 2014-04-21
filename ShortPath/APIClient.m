@@ -91,6 +91,28 @@
 
 }
 
+
+- (void)fetchVisitorsForEvent: (Event *)event ForUser: (User *)user Completion: (void(^)(NSArray *))completionBlock Failure: (void(^)(NSInteger))failureBlock
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events/%@", user.group_id, event.identifier];
+    
+    [self.manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        
+        NSDictionary *eventDict = responseObject;
+        NSArray *guests = eventDict[@"event"][@"event_guests"]; //array if dicts with guest info
+        
+        completionBlock(guests);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+        
+        failureBlock(response.statusCode);
+    }];
+
+}
+
 - (void)fetchLocationsWithCompletion: (void(^)(NSArray *))completionBlock Failure: (void(^)(NSInteger))failureBlock
 {
     NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/users/locations"];
@@ -182,7 +204,7 @@
 
         if (!error) {
             
-            NSLog(@"%@", response);
+            //NSLog(@"%@", response);
             
             completionBlock();
             
@@ -231,7 +253,7 @@
         
         if (!error) {
             
-            NSLog(@"%@", response);
+            //NSLog(@"%@", response);
             
             completionBlock();
             
@@ -245,8 +267,9 @@
     }];
     
     [task resume];
-    
 }
+
+
 
 
 

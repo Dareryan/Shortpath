@@ -61,6 +61,8 @@
     self.minutes = @[@"Minutes", @"0", @"30"];
     
     self.title = @"Create Event";
+    
+    
     self.dataStore = [ShortPathDataStore sharedDataStore];
     self.apiClient = [[APIClient alloc]init];
     
@@ -84,6 +86,10 @@
     
     self.nameCell.textLabel.text = [NSString stringWithFormat:@"%@ %@", self.visitor.firstName, self.visitor.lastName];
     
+    [self.locationPicker selectRow:0 inComponent:0 animated:NO];
+    self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
+    self.locationCell.textLabel.text = self.selectedLocation.title;
+    
     
     UITapGestureRecognizer *locationGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickerViewTapGestureRecognized:)];
     locationGestureRecognizer.delegate = self;
@@ -98,7 +104,7 @@
     self.arrivalTimeCell.textLabel.text = @"Arrival";
     self.departureTimeCell.textLabel.text = @"Duration";
     self.departureTimeCell.detailTextLabel.text = @"";
-    self.locationCell.textLabel.text = @"Location";
+    //self.locationCell.textLabel.text = @"Location";
 }
 
 -(void)viewDidAppear:(BOOL)animated

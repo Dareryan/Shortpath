@@ -76,6 +76,9 @@
     self.hours = @[@"Hours", @"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12"];
     self.minutes = @[@"Minutes", @"0", @"30"];
     
+    
+   
+    
     UITapGestureRecognizer *locationGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickerViewTapGestureRecognized:)];
     locationGestureRecognizer.delegate = self;
     locationGestureRecognizer.cancelsTouchesInView = NO;
@@ -114,6 +117,10 @@
     NSFetchRequest *locRequest = [[NSFetchRequest alloc]initWithEntityName:@"Location"];
     self.locations = [self.dataStore.managedObjectContext executeFetchRequest:locRequest error:nil];
     
+    [self.locationPicker selectRow:0 inComponent:0 animated:NO];
+    self.selectedLocation = [self.locations objectAtIndex:[self.locationPicker selectedRowInComponent:0]];
+    self.locationCell.textLabel.text = self.selectedLocation.title;
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -130,7 +137,7 @@
     [self.locationPicker setHidden:YES];
     self.startDateCell.textLabel.text = @"Start Date";
     self.endDateCell.textLabel.text = @"Duration";
-    self.locationCell.textLabel.text = @"Location";
+   // self.locationCell.textLabel.text = @"Location";
 
     
     

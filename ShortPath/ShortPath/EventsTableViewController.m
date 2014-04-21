@@ -34,6 +34,7 @@
     [super viewDidLoad];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    //[self.tableView setBackgroundColor:[UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:1.0]];
   
 }
 
@@ -108,6 +109,10 @@
     [dateFormatter setDateFormat:@"h:mm a"];
     
     cell.detailTextLabel.text = [dateFormatter stringFromDate:currentEvent.start];
+    
+//    cell.backgroundColor = [UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:0.5];
+//    [cell.textLabel setTextColor:[UIColor whiteColor]];
+//    [cell.detailTextLabel setTextColor:[UIColor whiteColor]];
     
     return cell;
 }

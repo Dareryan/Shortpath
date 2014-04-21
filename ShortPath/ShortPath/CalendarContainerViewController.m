@@ -37,6 +37,9 @@
 }
 
 
+
+
+
 - (void)eventsToCoreDataWithCompletion: (void (^)())completionBlock
 {
     __weak typeof(self) weakSelf = self;    

@@ -14,6 +14,7 @@
 #import "Event+Methods.h"
 #import <AFNetworking.h>
 #import "APIClient.h"
+#import "CalendarViewController.h"
 
 
 
@@ -87,44 +88,75 @@
     //[self.dataStore saveContext];
 }
 
-#pragma mark - Table view data source
+
+- (BOOL) validateEmail: (NSString *) candidate {
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    return [emailTest evaluateWithObject:candidate];
+}
 
 
 - (IBAction)doneButtonPressed:(id)sender {
 
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
+    UIAlertView *emailAlert = [[UIAlertView alloc]initWithTitle:@"Invalid email" message:@"The email address you have entered is not valid" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+
+    
     if ([self.firstNameTextField.text isEqualToString:@""] || [self.lastNameTextField.text isEqualToString:@""]) {
         
         [alertView show];
         
-    } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""]) {
+    } else if (![self.emailTextField.text isEqualToString:@""]) {
+        
+        if (![self validateEmail:self.emailTextField.text]) {
+            
+            [emailAlert show];
+        }
+        
+    } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && ([self validateEmail:self.emailTextField.text] || [self.emailTextField.text isEqualToString:@""])) {
         
         [self createNewVisitorForEvent];
         
         NSString *startDate = [Event dateStringFromDate:self.event.start];
         NSString *time = [Event timeStringFromDate:self.event.start];
         
-        [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location Visitor:self.visitor Completion:^{
+        [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location VisitorWithNoId:self.visitor Completion:^(NSDictionary *json) {
             
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+            self.visitor.identifier = [NSString stringWithFormat:@"%@", json[@"contact"][@"id"]];
             
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location Visitor:self.visitor Completion:^{
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+                
+                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                
+                CalendarViewController *calendarVC = [storyBoard instantiateViewControllerWithIdentifier:@"calendarVC"];
+                
+                [self.navigationController pushViewController:calendarVC animated:YES];
 
+                
+            } Failure:^(NSInteger errorCode) {
+                
+                [self.apiClient handleError:errorCode InViewController:self];
+                
+                NSLog(@"Error adding new visitor for new event: %d", errorCode);
+
+            }];
+            
         } Failure:^(NSInteger errorCode) {
             
             [self.apiClient handleError:errorCode InViewController:self];
             
             NSLog(@"Error adding new visitor for new event: %d", errorCode);
         }];
-        
-        
     }
-    
-    
 }
 
 - (IBAction)cancelButtonTapped:(id)sender {
+    
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 

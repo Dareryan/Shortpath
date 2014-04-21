@@ -16,7 +16,7 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Visitor"];
     NSString *searchID = [NSString stringWithFormat:@"%@", dict[@"contact"][@"id"]];
-    NSLog(@"%@", searchID);
+    //NSLog(@"%@", searchID);
     
     NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"identifier==%@",searchID];
     fetchRequest.predicate = searchPredicate;

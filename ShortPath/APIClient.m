@@ -250,6 +250,60 @@
 
 
 
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location VisitorWithNoId: (Visitor *)visitor  Completion: (void(^)(NSDictionary *))completionBlock Failure: (void(^)(NSInteger))failureBlock
+{
+
+    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/contacts.json", user.group_id];
+    
+    NSString *str = [NSString stringWithFormat:@"{\"contact\": {\"first_name\": \"%@\", \"last_name\": \"%@\", \"company\": \"%@\", \"email\": \"%@\", \"phone_number\":\"%@\"}}", visitor.firstName, visitor.lastName, visitor.company, visitor.email, visitor.phone];
+    
+    
+    NSData *postData = [str dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    
+    [request setHTTPBody:postData];
+    
+    //set headers
+    
+    [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
+    
+    
+    NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        
+        if (!error) {
+            
+            NSDictionary *json = responseObject;
+            
+            //NSLog(@"responce: %@", responseObject);
+            
+            completionBlock(json);
+            
+        } else {
+            
+            NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
+            
+            failureBlock(errorCode);
+        }
+        
+    }];
+    
+    [task resume];
+    
+}
+
+
+
+
+
 
 
 

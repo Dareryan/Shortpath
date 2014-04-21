@@ -32,7 +32,7 @@
 
 #pragma mark - NSDate + TKCategory
 @implementation NSDate (TKCategory)
-static NSInteger j = 0;
+//static NSInteger j = 0;
 #pragma mark Yesterday
 + (NSDate*) yesterday{
 	return [NSDate yesterdayWithTimeZone:[NSTimeZone defaultTimeZone]];

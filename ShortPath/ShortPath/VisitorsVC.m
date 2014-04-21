@@ -294,13 +294,14 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
         if ([self.searchResults count] != 0){
+            
             visitor = [self.searchResults objectAtIndex:indexPath.row];
         }
         
     } else {
         
         visitor = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-        
+
     }
     
     
@@ -318,22 +319,33 @@
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Add event?" message:@"Would you like to create an event with this visitor?" delegate:self cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
         
         [alertView show];
-
-        
-        
     }
 }
+
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"fromVisitor"]) {
+        
         CreateEventForExistingVisitorTVC *existingVC = [segue destinationViewController];
         
         NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
         
-        Visitor *visitor = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:ip.section]] objectAtIndex:ip.row];
-        
-        existingVC.visitor = visitor;
+        if (self.searchDisplayController.isActive) {
+            
+            Visitor *visitor = [self.searchResults objectAtIndex:ip.row];
+            
+            existingVC.visitor = visitor;
+
+        } else {
+            
+            Visitor *visitor = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:ip.section]] objectAtIndex:ip.row];
+            
+            existingVC.visitor = visitor;
+
+        }
+
         
     } else if ([segue.identifier isEqualToString:@"addNewVisitor"]) {
         

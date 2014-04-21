@@ -63,7 +63,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self createEvent];
-    
+    //[self.inviteesCell setHidden:YES];
 }
 
 - (void)viewDidLoad
@@ -300,7 +300,7 @@
 -(void)postNewEventToServer
 {
     NSString *startDate = [Event dateStringFromDate:self.startDatePicker.date];
-    NSLog(@"%@", startDate);
+    //NSLog(@"%@", startDate);
     NSString *time = [Event timeStringFromDate:self.startDatePicker.date];
     
     [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:self.titleTextField.text Location:self.selectedLocation Completion:^{
@@ -330,7 +330,6 @@
     event.location_id = self.selectedLocation.identifier;
     [self.user addEventsObject:event];
     //[self.dataStore saveContext];
-
 }
 
 -(void)createEvent

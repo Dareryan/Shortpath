@@ -28,4 +28,7 @@
 
 - (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location Visitor: (Visitor *)visitor  Completion: (void(^)())completionBlock Failure: (void(^)(NSInteger))failureBlock;
 
+- (void)postEventForUser:(User *)user WithStartDate:(NSString *)startDate Time:(NSString *)startTime Title:(NSString *)title Location: (Location *)location VisitorWithNoId: (Visitor *)visitor  Completion: (void(^)(NSDictionary *))completionBlock Failure: (void(^)(NSInteger))failureBlock;
+
+
 @end

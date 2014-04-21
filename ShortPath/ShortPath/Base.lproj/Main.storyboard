@@ -712,19 +712,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="KVe-y8-gdI">
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="KVe-y8-gdI">
                                 <rect key="frame" x="20" y="50" width="280" height="359"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="359" id="e2i-Wz-IBx"/>
-                                </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FiA-Qd-Awc">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FiA-Qd-Awc">
                                 <rect key="frame" x="46" y="417" width="228" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="O9X-7S-tCh"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="30"/>
                                 <state key="normal" title="Authenticate">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -736,16 +730,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" red="0.13725490868091583" green="0.32941177487373352" blue="0.51764708757400513" alpha="1" colorSpace="deviceRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="wmv-Zm-L2G" firstAttribute="top" secondItem="FiA-Qd-Awc" secondAttribute="bottom" constant="7" id="94H-QJ-AoR"/>
-                            <constraint firstItem="FiA-Qd-Awc" firstAttribute="top" secondItem="KVe-y8-gdI" secondAttribute="bottom" constant="8" id="CP0-kW-kEs"/>
-                            <constraint firstAttribute="trailing" secondItem="KVe-y8-gdI" secondAttribute="trailing" constant="20" id="IWr-F9-fai"/>
-                            <constraint firstItem="FiA-Qd-Awc" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="46" id="OGa-BW-al7"/>
-                            <constraint firstAttribute="trailing" secondItem="FiA-Qd-Awc" secondAttribute="trailing" constant="46" id="a09-w5-bII"/>
-                            <constraint firstItem="FiA-Qd-Awc" firstAttribute="top" secondItem="KVe-y8-gdI" secondAttribute="bottom" constant="8" id="iev-tH-JkA"/>
-                            <constraint firstItem="KVe-y8-gdI" firstAttribute="top" secondItem="x6w-pF-dCb" secondAttribute="bottom" constant="30" id="npI-f4-fuh"/>
-                            <constraint firstItem="KVe-y8-gdI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="oXB-Tx-Z1c"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="l6e-Q9-rch"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>

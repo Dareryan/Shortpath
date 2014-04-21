@@ -26,23 +26,32 @@
     if ([visitors count] == 0) {
         
         Visitor *newVisitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:context];
+
+        if ([dict[@"contact"][@"first_name"] isEqual:[NSNull null]]) {
+            
+            newVisitor.firstName = @"";
+            
+        } else {
+            
+            newVisitor.firstName = [NSString stringWithFormat:@"%@", dict[@"contact"][@"first_name"]];
+        }
         
-        
-        newVisitor.firstName = [NSString stringWithFormat:@"%@", dict[@"contact"][@"first_name"]];
         
         if ([dict[@"contact"][@"last_name"] isEqual:[NSNull null]]) {
             
-            newVisitor.lastName = @" ";
+            newVisitor.lastName = dict[@"contact"][@"first_name"];
+            newVisitor.firstName = @"";
             
         } else {
             
             newVisitor.lastName = [NSString stringWithFormat:@"%@", dict[@"contact"][@"last_name"]];
         }
-        
+
         
         if ([dict[@"contact"][@"phone_number"] isEqual:[NSNull null]]) {
             
             newVisitor.phone = @" ";
+            
         } else {
             
             newVisitor.phone = [NSString stringWithFormat:@"%@", dict[@"contact"][@"phone_number"]];

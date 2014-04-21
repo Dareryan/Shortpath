@@ -179,9 +179,12 @@
 
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",visitor.firstName, visitor.lastName];
-    NSLog(@"name: %@", visitor.lastName);
-    //cell.detailTextLabel.text = visitor.email;
+    if ([visitor.firstName isEqualToString:@""]) {
+        cell.textLabel.text = visitor.lastName;
+    } else {
+    
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", visitor.firstName, visitor.lastName];
+    }
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -225,15 +228,21 @@
     BOOL found;
     // Loop through visitors and create keys
     
+    NSMutableArray *noLastNameVisitors = [NSMutableArray new];
+    
+    NSMutableArray *mutableVisitors = [self.visitors mutableCopy];
+    
     for (Visitor *visitor in self.visitors) {
-        
+
         NSString *c = [visitor.lastName substringToIndex:1];
+        c = [c capitalizedString];
         
         found = NO;
         
         for (NSString *str in [self.sections allKeys]) {
             
             if ([str isEqualToString:c]) {
+                
                 found = YES;
             }
         }
@@ -242,16 +251,16 @@
             [self.sections setValue:[[NSMutableArray alloc] init] forKey:c];
             
         }
+
     }
     
     // Loop again and sort visitors into their respective keys
     for (Visitor *visitor in self.visitors) {
         
         NSString *visitorName = [visitor.lastName substringToIndex:1];
+        visitorName = [visitorName capitalizedString];
        
         [[self.sections objectForKey:visitorName] addObject:visitor];
-        
-        
     }
     
     // Sort each section array

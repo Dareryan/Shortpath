@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
 - (IBAction)endDatePickerValueChanged:(id)sender;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
+@property (weak, nonatomic) IBOutlet UIPickerView *durationPicker;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITableViewCell *titleCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *locationCell;

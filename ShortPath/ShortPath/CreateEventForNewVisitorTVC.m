@@ -31,6 +31,7 @@
 @property (nonatomic) BOOL isEditingLocation;
 @property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
+@property (weak, nonatomic) IBOutlet UIPickerView *durationPicker;
 
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;

@@ -134,6 +134,9 @@
         self.events = [self.dataStore.managedObjectContext executeFetchRequest:requestEvents error:nil];
         
     }];
+    
+    
+    
 }
 
 #pragma mark - TKCalendarMonthViewDelegate methods
@@ -229,7 +232,7 @@
 
     [self.calendar reloadData];
     
-    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
 }
 
 

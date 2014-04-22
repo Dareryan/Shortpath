@@ -11,12 +11,15 @@
 #import "Event+Methods.h"
 #import "Visitor+Methods.h"
 #import "VisitorsVC.h"
+#import "APIClient.h"
 
 @interface EventInviteesTableViewController ()
 
-@property (strong, nonatomic) NSArray *visitors;
+@property (strong, nonatomic) NSMutableArray *visitors;
 
 @property (strong, nonatomic) ShortPathDataStore *dataStore;
+
+@property (strong, nonatomic) APIClient *apiClient;
 
 @end
 
@@ -28,26 +31,45 @@
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
+    self.apiClient = [[APIClient alloc]init];
     
+    NSMutableArray *visitorIds = [NSMutableArray new];
     
-    [self getVisitorsForEvent:self.event];
+    self.visitors = [NSMutableArray new];
+    
+    [self.apiClient fetchVisitorsForEvent:self.event ForUser:self.event.user Completion:^(NSArray *userDicts) {
+        
+        for (NSDictionary *dict in userDicts) {
+            
+            NSString *visitorId = [NSString stringWithFormat:@"%@", dict[@"event_guest"][@"contact"][@"id"]];
+            
+            [visitorIds addObject:visitorId];
+        }
+        
+        for (NSString *visitorId in visitorIds) {
+            
+            NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Visitor"];
+            
+            NSPredicate *filter = [NSPredicate predicateWithFormat:@"identifier=%@", visitorId];
+            
+            request.predicate = filter;
+            
+            Visitor *visitor = [self.dataStore.managedObjectContext executeFetchRequest:request error:nil][0];
+            
+            [self.visitors addObject:visitor];
+            
+            [self.tableView reloadData];
+            
+        }
+
+        
+    } Failure:^(NSInteger errorCode) {
+        
+        [self.apiClient handleError:errorCode InViewController:self];
+    }];
     
 }
 
-//here goes API call????
-- (void)getVisitorsForEvent: (Event *)event
-{
-    NSFetchRequest *eventsRequest = [[NSFetchRequest alloc]initWithEntityName:@"Event"];
-    
-    NSPredicate *filter = [NSPredicate predicateWithFormat:@"identifier=%@", event.identifier];
-    
-    eventsRequest.predicate = filter;
-    
-    Event *currentEvent = [self.dataStore.managedObjectContext executeFetchRequest:eventsRequest error:nil][0];
-    
-    self.visitors = [currentEvent.visitors allObjects];
-    
-}
 
 
 #pragma mark - Table view data source

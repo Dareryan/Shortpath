@@ -242,10 +242,6 @@
     BOOL found;
     // Loop through visitors and create keys
     
-    NSMutableArray *noLastNameVisitors = [NSMutableArray new];
-    
-    NSMutableArray *mutableVisitors = [self.visitors mutableCopy];
-    
     for (Visitor *visitor in self.visitors) {
 
         NSString *c = [visitor.lastName substringToIndex:1];
@@ -289,6 +285,7 @@
     NSString *startDate = [Event dateStringFromDate:self.event.start];
     NSString *time = [Event timeStringFromDate:self.event.start];
     
+
     if (buttonIndex == 1) {
         
         
@@ -296,7 +293,10 @@
             
             [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
             
+
 #warning FIX SEGUE
+            
+            [self.dataStore.managedObjectContext deleteObject:self.event];
             
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             UITabBarController *TabBarVC = [storyboard instantiateInitialViewController];
@@ -336,6 +336,8 @@
     
     
     
+    //NSLog(@"selected visitor: %@ %@", visitor.firstName, visitor.lastName);
+    
     if (self.navigationController.viewControllers[0] == self) {
 #warning perform API call to add visitor to event
         //[self.event addVisitorsObject:visitor];
@@ -359,16 +361,18 @@
     if ([segue.identifier isEqualToString:@"fromVisitor"]) {
         
         CreateEventForExistingVisitorTVC *existingVC = [segue destinationViewController];
-        
-        NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
-        
+
         if (self.searchDisplayController.isActive) {
             
-            Visitor *visitor = [self.searchResults objectAtIndex:ip.row];
+            NSIndexPath *ipSearch = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            
+            Visitor *visitor = [self.searchResults objectAtIndex:ipSearch.row];
             
             existingVC.visitor = visitor;
 
         } else {
+            
+            NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
             
             Visitor *visitor = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:ip.section]] objectAtIndex:ip.row];
             

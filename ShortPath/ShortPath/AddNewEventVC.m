@@ -54,17 +54,10 @@
 
 @implementation AddNewEventVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self createEvent];
+    
     //[self.inviteesCell setHidden:YES];
 }
 
@@ -73,11 +66,10 @@
 {
     [super viewDidLoad];
     
+    self.locationPicker.showsSelectionIndicator = YES;
+
     self.hours = @[@"Hours", @"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12"];
     self.minutes = @[@"Minutes", @"0", @"30"];
-    
-    
-   
     
     UITapGestureRecognizer *locationGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickerViewTapGestureRecognized:)];
     locationGestureRecognizer.delegate = self;
@@ -103,6 +95,8 @@
     
     self.apiClient = [[APIClient alloc]init];
     self.dataStore = [ShortPathDataStore sharedDataStore];
+    
+    //[self createEvent];
 
     NSFetchRequest *req = [[NSFetchRequest alloc]initWithEntityName:@"User"];
     self.user = [self.dataStore.managedObjectContext executeFetchRequest:req error:nil][0];
@@ -280,6 +274,7 @@
 
 
 - (IBAction)cancelTapped:(id)sender {
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -307,6 +302,7 @@
         } else {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
             [alert show];
             //NSLog(@"NOT REACHABLE");
         }
@@ -324,9 +320,13 @@
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
         
-        [self.dataStore.managedObjectContext deleteObject:self.event];
+        if (self.event) {
+            
+            [self.dataStore.managedObjectContext deleteObject:self.event];
+            
+            [self.dataStore saveContext];
+        }
         
-        [self.dataStore saveContext];
         
         
     } Failure:^(NSInteger errorCode) {
@@ -500,7 +500,9 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    VisitorsVC *visitorsVC = [segue destinationViewController];    
+    
+    
+    VisitorsVC *visitorsVC = [segue destinationViewController];
     
     Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:self.dataStore.managedObjectContext];
     event.start = self.startDatePicker.date;
@@ -508,6 +510,7 @@
     event.title = self.self.titleTextField.text;
     event.identifier = @"";
     event.location_id = self.selectedLocation.identifier;
+    
     [self.user addEventsObject:event];
     
     visitorsVC.event = event;

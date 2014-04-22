@@ -291,6 +291,7 @@
     
     if (buttonIndex == 1) {
         
+        
         [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location Visitor:self.selectedVisitor Completion:^{
             
             [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
@@ -328,11 +329,12 @@
     }
     
     
-    [self.event addVisitorsObject:visitor];
+    
     
     if (self.navigationController.viewControllers[0] == self) {
-        
-       // [self.navigationController popViewControllerAnimated:YES];
+#warning perform API call to add visitor to event
+        //[self.event addVisitorsObject:visitor];
+        [self dismissViewControllerAnimated:YES completion:nil];
         
         
     } else {

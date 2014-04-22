@@ -304,20 +304,24 @@
         if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
             
             if ([[NSUserDefaults standardUserDefaults] objectForKey:@"key"]) {
+
                 [self postNewVisitorEventToServer];
+                
                 [self dismissViewControllerAnimated:YES completion:nil];
                 //CONTINUE POST
                 
             } else {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Application is not authorized" message:@"Please re-log in to retrieve a new access key" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Authorize",nil];
                 [alertView show];
-                [self writeNewVisitorEventToCoreData];
+                //[self writeNewVisitorEventToCoreData];
                 
                 //STORE TO CORE DATA
                 //GO TO AUTH HOME SCREEN
             }
             
-            [self writeNewVisitorEventToCoreData];
+            
+            
+            //[self writeNewVisitorEventToCoreData];
             
             NSLog(@"IS REACHABLE");
             
@@ -400,23 +404,6 @@
         
         NSLog(@"Error adding new visitor for new event: %d", errorCode);
     }];
-
-    
-    
-    
-    
-//    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Completion:^{
-//        
-//        [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
-//        
-//    } Failure:^(NSInteger errorCode) {
-//        
-//        [self.apiClient handleError:errorCode InViewController:self];
-//        
-//        NSLog(@"Post new event for new visitor error code: %d", errorCode);
-//        
-//        
-//    }];
     
 }
 

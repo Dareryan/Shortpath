@@ -63,44 +63,52 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-//{
-//    NSString *responseURL = [url absoluteString];
-//    NSLog(@"%@",responseURL);
-//    
-//    NSString *pattern = @"flatironshortpath:\\/\\/oauthCallback\\?code=(.+)&state=";
-//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
-//    NSArray *matches = [regex matchesInString:responseURL options:0 range:NSMakeRange(0, [responseURL length])];
-//    NSTextCheckingResult *match = matches[0];
-//    
-//    NSString *code = [responseURL substringWithRange:[match rangeAtIndex:1]];
-//    
-//    NSLog(@"%@",code);
-//    
-//    NSURL *urlForBase = [NSURL URLWithString:@"https://core.staging.shortpath.net"];
-//    
-//    
-//    AFOAuth2Client *client = [[AFOAuth2Client alloc] initWithBaseURL:urlForBase clientID:@"F50bIw7OVNXDU0ohYkn15U8cHTbKeUu1Kaa1zRlK" secret:@"b89HZvCKilyMJbF1d0GQZFfOvbFI5JkgFY5wSV89"];
-//    client.requestSerializer = [AFJSONRequestSerializer serializer];
-//    
-//    
-//    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
-//    securityPolicy.allowInvalidCertificates = YES;
-//    [client setSecurityPolicy:securityPolicy];
-//    
-//    [client authenticateUsingOAuthWithURLString:@"https://core.staging.shortpath.net/oauth/access_token" code:code redirectURI:@"flatironshortpath://oauthCallback" success:^(AFOAuthCredential *credential) {
-//        
-//        NSLog(@"credential: %@", credential);
-//        
-//    } failure:^(NSError *error) {
-//        
-//        NSLog(@"fail with error: %@", error);
-//    }];
-//    
-//    
-//    return YES;
-//}
-//
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    NSString *responseURL = [url absoluteString];
+    NSLog(@"%@",responseURL);
+    
+    NSString *pattern = @"flatironshortpath:\\/\\/oauthCallback\\?code=(.+)&state=";
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
+    NSArray *matches = [regex matchesInString:responseURL options:0 range:NSMakeRange(0, [responseURL length])];
+    NSTextCheckingResult *match = matches[0];
+    
+    NSString *code = [responseURL substringWithRange:[match rangeAtIndex:1]];
+    
+    NSLog(@"code: %@",code);
+    
+    NSURL *urlForBase = [NSURL URLWithString:@"https://core.staging.shortpath.net"];
+    
+    
+    AFOAuth2Client *client = [[AFOAuth2Client alloc] initWithBaseURL:urlForBase clientID:@"slVf1C1STyJZDSnxRbkGmugGWpi4LZxCdosmnxuq" secret:@"iApfYuOzoqqIZaCPVn3EDvHozOSLwzsVI3Vv893n"];
+    client.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+    securityPolicy.allowInvalidCertificates = YES;
+    [client setSecurityPolicy:securityPolicy];
+    
+    [client authenticateUsingOAuthWithURLString:@"https://core.staging.shortpath.net/oauth/token" code:code redirectURI:@"flatironshortpath://oauthCallback" success:^(AFOAuthCredential *credential) {
+        
+        
+        [AFOAuthCredential storeCredential:credential withIdentifier:@"ShortPathCred"];
+        
+        AFOAuthCredential *cred = [AFOAuthCredential retrieveCredentialWithIdentifier:@"ShortPathCred"];
+        
+        
+        
+
+        NSLog(@"token: %@", cred.accessToken);
+        
+    } failure:^(NSError *error) {
+        
+        NSLog(@"fail with error: %@", error);
+    }];
+    
+    
+    return YES;
+}
+
 
 
 

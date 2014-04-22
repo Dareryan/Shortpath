@@ -8,6 +8,7 @@
 
 #import "APIClient.h"
 #import <AFNetworking.h>
+#import <AFOAuth2Client.h>
 #import "FISViewController.h"
 
 
@@ -28,7 +29,11 @@
         _manager = [AFHTTPSessionManager manager];
         AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         
-        [requestSerializer setValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
+        
+        AFOAuthCredential *cred = [AFOAuthCredential retrieveCredentialWithIdentifier:@"ShortPathCred"];
+        NSString *credString = [NSString stringWithFormat:@"Bearer %@", cred.accessToken];
+        
+        [requestSerializer setValue:credString forHTTPHeaderField:@"Authorization"];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
         _manager.requestSerializer = requestSerializer;
@@ -195,9 +200,12 @@
     
     //set headers
     
+    AFOAuthCredential *cred = [AFOAuthCredential retrieveCredentialWithIdentifier:@"ShortPathCred"];
+    NSString *credString = [NSString stringWithFormat:@"Bearer %@", cred.accessToken];
+    
     [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request addValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
+    [request addValue:credString forHTTPHeaderField:@"Authorization"];
     
     
     NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -244,9 +252,12 @@
     
     //set headers
     
+    AFOAuthCredential *cred = [AFOAuthCredential retrieveCredentialWithIdentifier:@"ShortPathCred"];
+    NSString *credString = [NSString stringWithFormat:@"Bearer %@", cred.accessToken];
+    
     [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request addValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
+    [request addValue:credString forHTTPHeaderField:@"Authorization"];
     
     
     NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -294,10 +305,12 @@
     [request setHTTPBody:postData];
     
     //set headers
+    AFOAuthCredential *cred = [AFOAuthCredential retrieveCredentialWithIdentifier:@"ShortPathCred"];
+    NSString *credString = [NSString stringWithFormat:@"Bearer %@", cred.accessToken];
     
     [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request addValue:@"Bearer qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" forHTTPHeaderField:@"Authorization"];
+    [request addValue:credString forHTTPHeaderField:@"Authorization"];
     
     
     NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {

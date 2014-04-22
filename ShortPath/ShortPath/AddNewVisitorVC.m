@@ -131,13 +131,14 @@
                 
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
                 
-                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 
+
                 CalendarViewController *calendarVC = [storyBoard instantiateViewControllerWithIdentifier:@"calendarVC"];
                 
                 [self.dataStore.managedObjectContext deleteObject:self.event];
                 
-                [self.navigationController pushViewController:calendarVC animated:YES];
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
 
                 
             } Failure:^(NSInteger errorCode) {

@@ -199,7 +199,7 @@
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    cell.backgroundColor = [UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:0.5];
+    cell.backgroundColor = [UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:0.2];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
     
     return cell;

@@ -90,7 +90,7 @@
 
 
 - (BOOL) validateEmail: (NSString *) candidate {
-#warning check regex
+
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     
@@ -136,13 +136,6 @@
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 UITabBarController *TabBarVC = [storyboard instantiateInitialViewController];
                 [self.navigationController presentViewController:TabBarVC animated:YES completion:nil];
-
-                
-               
-                
-
-
-
                 
             } Failure:^(NSInteger errorCode) {
                 

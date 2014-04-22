@@ -39,8 +39,8 @@
         
         if ([dict[@"contact"][@"last_name"] isEqual:[NSNull null]]) {
             
-            newVisitor.lastName = dict[@"contact"][@"first_name"];
-            newVisitor.firstName = @"";
+            newVisitor.lastName = @" ";
+            //newVisitor.firstName = @"";
             
         } else {
             

@@ -136,13 +136,6 @@
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 UITabBarController *TabBarVC = [storyboard instantiateInitialViewController];
                 [self.navigationController presentViewController:TabBarVC animated:YES completion:nil];
-
-                
-               
-                
-
-
-
                 
             } Failure:^(NSInteger errorCode) {
                 

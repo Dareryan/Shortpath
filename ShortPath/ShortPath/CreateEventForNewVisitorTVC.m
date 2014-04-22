@@ -303,7 +303,7 @@
         
         if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
             
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"ky"]) {
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"key"]) {
                 [self postNewVisitorEventToServer];
                 [self dismissViewControllerAnimated:YES completion:nil];
                 //CONTINUE POST

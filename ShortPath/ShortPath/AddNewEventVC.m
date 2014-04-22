@@ -66,9 +66,6 @@
 {
     [super viewDidLoad];
     
-
-    
-    
     self.locationPicker.showsSelectionIndicator = YES;
 
     self.hours = @[@"Hours", @"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12"];
@@ -277,6 +274,7 @@
 
 
 - (IBAction)cancelTapped:(id)sender {
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -304,6 +302,7 @@
         } else {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Connected" message:@"Please check your connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
             [alert show];
             //NSLog(@"NOT REACHABLE");
         }
@@ -321,9 +320,13 @@
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
         
-        [self.dataStore.managedObjectContext deleteObject:self.event];
+        if (self.event) {
+            
+            [self.dataStore.managedObjectContext deleteObject:self.event];
+            
+            [self.dataStore saveContext];
+        }
         
-        [self.dataStore saveContext];
         
         
     } Failure:^(NSInteger errorCode) {

@@ -56,7 +56,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view
+//    [self.tableView setBackgroundView:nil];
+//    UIView *tableBG = [[UIView alloc]init];
+//    [tableBG setBackgroundColor:[UIColor redColor]];
+    [self.tableView setBackgroundColor:[UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:1.0]];
+    
+    
     
     self.apiClient = [[APIClient alloc]init];
     
@@ -117,12 +124,13 @@
 {
     // Return the number of sections.
     
+    
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
         return 1;
         
     } else {
-        
+       
         return [[self.sections allKeys] count];
     }
 
@@ -130,12 +138,14 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+
     
     if  (tableView == self.searchDisplayController.searchResultsTableView){
         return nil;
     }
     
     else{
+        
     return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
     }
 }
@@ -144,6 +154,7 @@
 {
     // Return the number of rows in the section.
     if (tableView == self.searchDisplayController.searchResultsTableView) {
+    [tableView setBackgroundColor:[UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:1.0]];
     return [self.searchResults count];
     } else {
     return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
@@ -187,6 +198,9 @@
     }
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    cell.backgroundColor = [UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:0.5];
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
     
     return cell;
 }
@@ -364,7 +378,6 @@
         
     }
 }
-
 
 
 - (IBAction)cancelButtonPressed:(id)sender {

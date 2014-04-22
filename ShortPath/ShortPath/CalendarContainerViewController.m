@@ -107,6 +107,7 @@
 {
     [super viewDidLoad];
     
+    //[self.view setBackgroundColor:[UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:1.0]];
     //[SVProgressHUD show];
         
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCalendar:) name:NSManagedObjectContextDidSaveNotification object:self.dataStore.managedObjectContext];

@@ -327,6 +327,8 @@
     
     [self.event addVisitorsObject:visitor];
     
+    //NSLog(@"selected visitor: %@ %@", visitor.firstName, visitor.lastName);
+    
     if (self.navigationController.viewControllers[0] == self) {
         
        // [self.navigationController popViewControllerAnimated:YES];
@@ -349,16 +351,18 @@
     if ([segue.identifier isEqualToString:@"fromVisitor"]) {
         
         CreateEventForExistingVisitorTVC *existingVC = [segue destinationViewController];
-        
-        NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
-        
+
         if (self.searchDisplayController.isActive) {
             
-            Visitor *visitor = [self.searchResults objectAtIndex:ip.row];
+            NSIndexPath *ipSearch = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            
+            Visitor *visitor = [self.searchResults objectAtIndex:ipSearch.row];
             
             existingVC.visitor = visitor;
 
         } else {
+            
+            NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
             
             Visitor *visitor = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:ip.section]] objectAtIndex:ip.row];
             

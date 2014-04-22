@@ -132,7 +132,9 @@
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
                 
                 
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                UITabBarController *TabBarVC = [storyboard instantiateInitialViewController];
+                [self.navigationController presentViewController:TabBarVC animated:YES completion:nil];
 
                 
             } Failure:^(NSInteger errorCode) {
@@ -155,7 +157,9 @@
 - (IBAction)cancelButtonTapped:(id)sender {
     
     
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UITabBarController *TabBarVC = [storyboard instantiateInitialViewController];
+    [self.navigationController presentViewController:TabBarVC animated:YES completion:nil];
 }
 
 @end

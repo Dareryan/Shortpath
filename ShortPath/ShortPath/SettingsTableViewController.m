@@ -38,7 +38,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    self.content = [[NSArray alloc] initWithObjects:@"Team", @"Building", @"Notifications", nil];
+    //self.content = [[NSArray alloc] initWithObjects:@"Team", @"Building", @"Notifications", nil];
     
     
     
@@ -105,10 +105,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section ==0) {
-        return [self.content count];
-    }
-    return 1;
+        return 1;
 }
 
 
@@ -120,8 +117,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (indexPath.section==0) {
-        NSString *content = [self.content objectAtIndex:indexPath.row];
-        [cell.textLabel setText:content];
+        [cell.textLabel setText:@"Visit shortpath.com"];
     }
     
     else
@@ -138,7 +134,7 @@
     
     if (indexPath.section ==0)
     {
-        [self performSegueWithIdentifier:@"detailSegue" sender:self];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.shortpath.com"]];
     }
     else if (indexPath.section ==1)
     {

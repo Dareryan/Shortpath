@@ -199,7 +199,7 @@
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    cell.backgroundColor = [UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:0.5];
+    cell.backgroundColor = [UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:0.2];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
     
     return cell;
@@ -288,6 +288,7 @@
 
     if (buttonIndex == 1) {
         
+        
         [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location Visitor:self.selectedVisitor Completion:^{
             
             [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
@@ -325,13 +326,14 @@
     }
     
     
-    [self.event addVisitorsObject:visitor];
+    
     
     //NSLog(@"selected visitor: %@ %@", visitor.firstName, visitor.lastName);
     
     if (self.navigationController.viewControllers[0] == self) {
-        
-       // [self.navigationController popViewControllerAnimated:YES];
+#warning perform API call to add visitor to event
+        //[self.event addVisitorsObject:visitor];
+        [self dismissViewControllerAnimated:YES completion:nil];
         
         
     } else {

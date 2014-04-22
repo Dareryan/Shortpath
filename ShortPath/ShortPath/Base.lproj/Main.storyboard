@@ -717,7 +717,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="settingsCell" textLabel="Yiv-nw-4EE" style="IBUITableViewCellStyleDefault" id="Clh-GJ-0ku">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="settingsCell" textLabel="Yiv-nw-4EE" style="IBUITableViewCellStyleDefault" id="Clh-GJ-0ku">
                                 <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Clh-GJ-0ku" id="tVC-Gj-mGO">
@@ -742,32 +742,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="More" id="RrB-6g-gYo"/>
-                    <connections>
-                        <segue destination="dZV-4s-eEg" kind="push" identifier="detailSegue" id="26p-vz-22M"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vog-Ie-y9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2323" y="2175"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="5EP-K6-jgj">
-            <objects>
-                <viewController id="dZV-4s-eEg" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hrH-cM-1lh"/>
-                        <viewControllerLayoutGuide type="bottom" id="I4f-Yd-igU"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9VV-nI-raC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.71005869919999998" green="1" blue="0.35268614549999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Q3V-L1-pcv"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gKp-2W-yhX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2952" y="2175"/>
         </scene>
         <!--Calendar View Controller - Events-->
         <scene sceneID="66k-Oo-MHD">

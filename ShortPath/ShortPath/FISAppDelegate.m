@@ -16,12 +16,15 @@
 #import "Visitor.h"
 #import <AFOAuth2Client/AFOAuth2Client.h>
 #import <AFNetworking/AFNetworking.h>
+#import "UIColor+Methods.h"
 
 
 @implementation FISAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UITabBar appearance] setTintColor:[UIColor shortpathBlue]];
+    [[UINavigationBar appearance] setTintColor:[UIColor shortpathBlue]];
 
     [[AFNetworkActivityIndicatorManager sharedManager]setEnabled:YES];
 

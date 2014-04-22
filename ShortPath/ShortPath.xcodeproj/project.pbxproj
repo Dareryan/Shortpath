@@ -23,6 +23,7 @@
 		2502C8C118EF5AE600329B9F /* VisitorsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C018EF5AE600329B9F /* VisitorsVC.m */; };
 		2502C8C918EFC3F500329B9F /* AddNewVisitorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */; };
 		25127EA118F5FAB7008BB7C1 /* AddNewEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 25127EA018F5FAB7008BB7C1 /* AddNewEventVC.m */; };
+		258025041906BC900046B723 /* UIColor+Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = 258025031906BC900046B723 /* UIColor+Methods.m */; };
 		25FCB41D18FF01EB00E84E42 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FCB41C18FF01EB00E84E42 /* QuartzCore.framework */; };
 		25FCB42318FF023B00E84E42 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25FCB42018FF023B00E84E42 /* SVProgressHUD.bundle */; };
 		25FCB42418FF023B00E84E42 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FCB42218FF023B00E84E42 /* SVProgressHUD.m */; };
@@ -103,6 +104,8 @@
 		2502C8C818EFC3F500329B9F /* AddNewVisitorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewVisitorVC.m; sourceTree = "<group>"; };
 		25127E9F18F5FAB7008BB7C1 /* AddNewEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewEventVC.h; sourceTree = "<group>"; };
 		25127EA018F5FAB7008BB7C1 /* AddNewEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewEventVC.m; sourceTree = "<group>"; };
+		258025021906BC900046B723 /* UIColor+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Methods.h"; sourceTree = "<group>"; };
+		258025031906BC900046B723 /* UIColor+Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Methods.m"; sourceTree = "<group>"; };
 		25FCB41C18FF01EB00E84E42 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		25FCB41F18FF023B00E84E42 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		25FCB42018FF023B00E84E42 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				2E3B258B18EB0F780090336C /* Main.storyboard */,
+				258025021906BC900046B723 /* UIColor+Methods.h */,
+				258025031906BC900046B723 /* UIColor+Methods.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -519,6 +524,7 @@
 				4531B01E18EF51C700DA0CD4 /* CalendarContainerViewController.m in Sources */,
 				05BAAFF219018CD100D930D6 /* Visitor.m in Sources */,
 				45B136DF18F70F9400A3302E /* CreateEventForExistingVisitorTVC.m in Sources */,
+				258025041906BC900046B723 /* UIColor+Methods.m in Sources */,
 				05582AD018F733B600148951 /* User+Methods.m in Sources */,
 				4546B9D418EC565A00388603 /* SettingsTableViewController.m in Sources */,
 				25FCB42418FF023B00E84E42 /* SVProgressHUD.m in Sources */,

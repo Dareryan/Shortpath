@@ -349,7 +349,8 @@
     
     if (self.navigationController.viewControllers[0] == self) {
 
-        //[self.event addVisitorsObject:visitor];
+      
+        
       [self dismissViewControllerAnimated:YES completion:nil];
         
         

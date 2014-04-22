@@ -78,35 +78,38 @@
     FISTabBarControllerViewController *tabBarVC = (FISTabBarControllerViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"tabBarVC"];
     [self.navigationController pushViewController:tabBarVC animated:YES];
     
-    NSURL *url = [NSURL URLWithString:@"https://core.staging.shortpath.net/oauth/authorize?client_id=DGSqzOPpA52alnof48tUDpg4tMiwOT68E2JNRpkM&response_type=code&redirect_uri=flatironshortpath://oauthCallback"];
+    NSURL *url = [NSURL URLWithString:@"https://core.staging.shortpath.net/oauth/authorize?client_id=slVf1C1STyJZDSnxRbkGmugGWpi4LZxCdosmnxuq&response_type=code&redirect_uri=flatironshortpath://oauthCallback"];
     [[UIApplication sharedApplication] openURL:url];
-
-    
-    AFOAuthCredential *cred = [[AFOAuthCredential alloc] initWithOAuthToken:@"qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" tokenType:@"bearer" response:nil];
-    [AFOAuthCredential storeCredential:cred withIdentifier:@"FlationShortPathCred"];
-    AFOAuth2Client *client = [[AFOAuth2Client alloc] init];
-    client.requestSerializer = [AFJSONRequestSerializer serializer];
-    [client setAuthorizationHeaderWithCredential:cred];
-    
-    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
-    securityPolicy.allowInvalidCertificates = YES;
-    [client setSecurityPolicy:securityPolicy];
-    
-    
-    [client GET:@"https://core.staging.shortpath.net/api/groups/8351/events/?start=2014-04-07T11:39:43-04:00&end=2014-04-07T11:39:43-05:00" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //NSLog(@"%@",responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
-    }];
-    
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *testKey = @"responseObject";
     [defaults setObject:testKey forKey:@"key"];
     [defaults synchronize];
     
-    NSLog(@"Key found");
     [self dismissViewControllerAnimated:YES completion:nil];
+
+    
+//    AFOAuthCredential *cred = [[AFOAuthCredential alloc] initWithOAuthToken:@"qFSIRW5HTyKdCEGltw16GFtG3oT4Dl2VCZPlH5Lk" tokenType:@"bearer" response:nil];
+//    [AFOAuthCredential storeCredential:cred withIdentifier:@"FlationShortPathCred"];
+//    AFOAuth2Client *client = [[AFOAuth2Client alloc] init];
+//    client.requestSerializer = [AFJSONRequestSerializer serializer];
+//    [client setAuthorizationHeaderWithCredential:cred];
+    
+//    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+//    securityPolicy.allowInvalidCertificates = YES;
+//    [client setSecurityPolicy:securityPolicy];
+//    
+//    
+//    [client GET:@"https://core.staging.shortpath.net/api/groups/8351/events/?start=2014-04-07T11:39:43-04:00&end=2014-04-07T11:39:43-05:00" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        //NSLog(@"%@",responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"%@",error);
+//    }];
+//    
+//    
+    //
+//    NSLog(@"Key found");
+
 }
 
 @end

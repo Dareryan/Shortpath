@@ -298,12 +298,14 @@
             
             
             
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+
             
         } Failure:^(NSInteger errorCode) {
             
             [self.apiClient handleError:errorCode InViewController:self];
-            
+            [self.navigationController popViewControllerAnimated:YES];
+
             NSLog(@"Error adding visitor from existing visitors: %d", errorCode);
         }];
     }
@@ -334,7 +336,7 @@
     if (self.navigationController.viewControllers[0] == self) {
 #warning perform API call to add visitor to event
         //[self.event addVisitorsObject:visitor];
-        [self dismissViewControllerAnimated:YES completion:nil];
+      [self dismissViewControllerAnimated:YES completion:nil];
         
         
     } else {

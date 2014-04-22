@@ -508,6 +508,11 @@
     return nil;
 }
 
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
 
 - (void)pickerViewTapGestureRecognized:(UITapGestureRecognizer*)gestureRecognizer
 {
@@ -562,7 +567,7 @@
         self.endDateCell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",hourString, minuteString];
         self.isEditingEndDate = NO;
         // self.departureTimeCell.textLabel.text = self.selectedLocation.title;
-        NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:3];
+        NSIndexPath *locIP = [NSIndexPath indexPathForRow:1 inSection:6];
         [self.tableView reloadRowsAtIndexPaths:@[locIP] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView reloadData];
     }

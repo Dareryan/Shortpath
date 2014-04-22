@@ -43,6 +43,7 @@
 @property (strong, nonatomic) NSArray *hours;
 @property (strong, nonatomic) NSArray *minutes;
 @property (nonatomic) NSInteger eventDurationInSeconds;
+@property (strong, nonatomic) Visitor *visitor;
 
 - (IBAction)startDateDidChange:(id)sender;
 - (IBAction)doneButtonPressed:(id)sender;
@@ -346,27 +347,76 @@
 }
 
 
+- (void)createNewVisitorForEvent
+{
+    self.visitor = [NSEntityDescription insertNewObjectForEntityForName:@"Visitor" inManagedObjectContext:self.dataStore.managedObjectContext];
+    self.visitor.firstName = self.firstNameTextField.text;
+    self.visitor.lastName = self.lastNameTextField.text;
+    self.visitor.company = self.companyTextField.text;
+    self.visitor.phone = self.phoneNumberTextField.text;
+    self.visitor.email = self.emailTextField.text;
+    
+    //[self.event addVisitorsObject:self.visitor];
+    
+    //[self.dataStore saveContext];
+}
+
+
 //api call POST event
 
 -(void)postNewVisitorEventToServer
 {
+    [self createNewVisitorForEvent];
+    
     NSString *startDate = [Event dateStringFromDate:self.startDatePicker.date];
     NSString *time = [Event timeStringFromDate:self.startDatePicker.date];
     NSString *title = [NSString stringWithFormat:@"Meeting with: %@ %@", self.firstNameTextField.text, self.lastNameTextField.text];
     
-    
-    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Completion:^{
+    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation VisitorWithNoId:self.visitor Completion:^(NSDictionary *json) {
         
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+        self.visitor.identifier = [NSString stringWithFormat:@"%@", json[@"contact"][@"id"]];
+        
+        [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Visitor:self.visitor Completion:^{
+            
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+            
+            //[self.dataStore.managedObjectContext deleteObject:self.event];
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UITabBarController *TabBarVC = [storyboard instantiateInitialViewController];
+            [self.navigationController presentViewController:TabBarVC animated:YES completion:nil];
+            
+        } Failure:^(NSInteger errorCode) {
+            
+            [self.apiClient handleError:errorCode InViewController:self];
+            
+            NSLog(@"Error adding new visitor for new event: %d", errorCode);
+            
+        }];
         
     } Failure:^(NSInteger errorCode) {
         
         [self.apiClient handleError:errorCode InViewController:self];
         
-        NSLog(@"Post new event for new visitor error code: %d", errorCode);
-        
-        
+        NSLog(@"Error adding new visitor for new event: %d", errorCode);
     }];
+
+    
+    
+    
+    
+//    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Completion:^{
+//        
+//        [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+//        
+//    } Failure:^(NSInteger errorCode) {
+//        
+//        [self.apiClient handleError:errorCode InViewController:self];
+//        
+//        NSLog(@"Post new event for new visitor error code: %d", errorCode);
+//        
+//        
+//    }];
     
 }
 

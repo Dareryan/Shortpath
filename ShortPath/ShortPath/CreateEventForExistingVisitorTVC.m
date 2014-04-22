@@ -244,7 +244,11 @@
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required fields are missing" message:@"Please select a start date, duration and location to create a new event" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     if (self.eventDurationInSeconds > 0 && self.selectedLocation != nil) {
-        [self writeNewVisitorEventToCoreData];
+        
+        //[self writeNewVisitorEventToCoreData];
+        
+        [self postNewVisitorEventToServer];
+        
         [self.navigationController popViewControllerAnimated:YES];
     }
     //Create and Add New Event Object Here
@@ -280,7 +284,7 @@
     NSString *time = [Event timeStringFromDate:self.arrivalDatePicker.date];
     NSString *title = [NSString stringWithFormat:@"Meeting with: %@ %@", self.visitor.firstName, self.visitor.lastName];
     
-    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Completion:^{
+    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Visitor:self.visitor Completion:^{
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
         
@@ -289,8 +293,21 @@
         [self.apiClient handleError:errorCode InViewController:self];
         
         NSLog(@"Post new event for existing visitor error code: %d", errorCode);
-        
+    
     }];
+    
+    
+//    [self.apiClient postEventForUser:self.user WithStartDate:startDate Time:time Title:title Location:self.selectedLocation Completion:^{
+//        
+//        [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+//        
+//    } Failure:^(NSInteger errorCode) {
+//        
+//        [self.apiClient handleError:errorCode InViewController:self];
+//        
+//        NSLog(@"Post new event for existing visitor error code: %d", errorCode);
+//        
+//    }];
 }
 
 

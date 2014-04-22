@@ -181,6 +181,7 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
         if ([self.searchResults count] != 0){
+            
         visitor = [self.searchResults objectAtIndex:indexPath.row];
         }
         
@@ -243,34 +244,44 @@
     // Loop through visitors and create keys
     
     for (Visitor *visitor in self.visitors) {
-
-        NSString *c = [visitor.lastName substringToIndex:1];
-        c = [c capitalizedString];
         
-        found = NO;
-        
-        for (NSString *str in [self.sections allKeys]) {
+        if (![visitor.lastName isEqualToString:@""]) {
             
-            if ([str isEqualToString:c]) {
+            NSString *c = [visitor.lastName substringToIndex:1];
+            c = [c capitalizedString];
+            
+            found = NO;
+            
+            for (NSString *str in [self.sections allKeys]) {
                 
-                found = YES;
+                if ([str isEqualToString:c]) {
+                    
+                    found = YES;
+                }
             }
-        }
-        if (!found) {
-            
-            [self.sections setValue:[[NSMutableArray alloc] init] forKey:c];
-            
+            if (!found) {
+                
+                [self.sections setValue:[[NSMutableArray alloc] init] forKey:c];
+                
+            }
+
         }
 
+        
     }
     
     // Loop again and sort visitors into their respective keys
     for (Visitor *visitor in self.visitors) {
         
-        NSString *visitorName = [visitor.lastName substringToIndex:1];
-        visitorName = [visitorName capitalizedString];
-       
-        [[self.sections objectForKey:visitorName] addObject:visitor];
+        if (![visitor.lastName isEqualToString:@""]) {
+            
+            NSString *visitorName = [visitor.lastName substringToIndex:1];
+            visitorName = [visitorName capitalizedString];
+            
+            [[self.sections objectForKey:visitorName] addObject:visitor];
+        }
+        
+        
     }
     
     // Sort each section array
@@ -288,14 +299,12 @@
 
     if (buttonIndex == 1) {
         
+        NSLog(@"visitor to be added: %@", self.selectedVisitor);
         
         [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location Visitor:self.selectedVisitor Completion:^{
             
             [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
-            
 
-#warning FIX SEGUE
-            
             [self.dataStore.managedObjectContext deleteObject:self.event];
             
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -325,28 +334,31 @@
         if ([self.searchResults count] != 0){
             
             visitor = [self.searchResults objectAtIndex:indexPath.row];
+            self.selectedVisitor = visitor;
+            
         }
         
     } else {
         
         visitor = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+        self.selectedVisitor = visitor;
 
     }
-    
-    
-    
-    
-    //NSLog(@"selected visitor: %@ %@", visitor.firstName, visitor.lastName);
+
+    NSLog(@"selected visitor: %@ %@", visitor.firstName, visitor.lastName);
     
     if (self.navigationController.viewControllers[0] == self) {
-#warning perform API call to add visitor to event
+
         //[self.event addVisitorsObject:visitor];
       [self dismissViewControllerAnimated:YES completion:nil];
         
         
     } else {
         
-        self.selectedVisitor = self.visitors[indexPath.row];
+        if (!self.selectedVisitor) {
+            
+            self.selectedVisitor = self.visitors[indexPath.row];
+        }
         
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Add event?" message:@"Would you like to create an event with this visitor?" delegate:self cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
         

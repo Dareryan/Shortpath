@@ -38,6 +38,7 @@
 @property (strong, nonatomic) APIClient *apiClient;
 @property (strong, nonatomic) Visitor *selectedVisitor;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 
 
@@ -56,6 +57,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     
     // Do any additional setup after loading the view
 //    [self.tableView setBackgroundView:nil];
@@ -86,6 +88,13 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    if ([self.event.identifier isEqualToString:@""]||!self.event.identifier) {
+        [self.addButton setEnabled:YES];
+    }
+    else{
+        [self.addButton setEnabled:NO];
+    }
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FISViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"logIn"];
     

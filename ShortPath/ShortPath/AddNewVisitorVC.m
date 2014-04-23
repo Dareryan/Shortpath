@@ -162,13 +162,7 @@
             UITabBarController *TabBarVC = [storyboard instantiateInitialViewController];
             [self.navigationController presentViewController:TabBarVC animated:YES completion:nil];
         }
-        
-        
-       
-        
-       
     }
-    
 }
 
 - (IBAction)cancelButtonTapped:(id)sender {

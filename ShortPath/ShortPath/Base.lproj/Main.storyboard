@@ -424,6 +424,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="dGi-l3-KaA" id="efh-Wl-tOq"/>
                         <outlet property="searchDisplayController" destination="z6F-Hn-413" id="AF4-K1-zL4"/>
                     </connections>
                 </tableViewController>

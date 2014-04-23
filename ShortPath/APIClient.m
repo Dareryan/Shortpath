@@ -10,6 +10,7 @@
 #import <AFNetworking.h>
 #import <AFOAuth2Client.h>
 #import "FISViewController.h"
+#import "Event+Methods.m"
 
 
 
@@ -337,7 +338,55 @@
 }
 
 
+-(void)addVisitors:(NSString *) visitors ToEvent:(Event *)event Completion: (void(^)())completionBlock Failure: (void(^)(NSInteger))failureBlock
+{
+    NSString *urlString = [NSString stringWithFormat:@"https://core.staging.shortpath.net/api/groups/%@/events/%@", event.user.group_id, event.identifier];
+    
+    NSString *str = [NSString stringWithFormat:@"{\"event\":{},\"event_guest_ids\":[%@]}", visitors];
+    
+    
+    NSData *postData = [str dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:url];
+    [request setHTTPMethod:@"PUT"];
+    
+    
+    [request setHTTPBody:postData];
+    
+    //set headers
+    
+    AFOAuthCredential *cred = [AFOAuthCredential retrieveCredentialWithIdentifier:@"ShortPathCred"];
+    NSString *credString = [NSString stringWithFormat:@"Bearer %@", cred.accessToken];
+    
+    [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:credString forHTTPHeaderField:@"Authorization"];
+    
+    
+    NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        
+        if (!error) {
+            
+            //NSLog(@"%@", response);
+            
+            completionBlock();
+            
+        } else {
+            
+            NSInteger errorCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
+            
+            failureBlock(errorCode);
+        }
+        
+    }];
+    
+    [task resume];
 
+}
 
 
 

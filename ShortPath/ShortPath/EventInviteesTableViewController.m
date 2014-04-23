@@ -21,13 +21,17 @@
 
 @property (strong, nonatomic) APIClient *apiClient;
 
+@property (strong, nonatomic) NSString *visitorIDString;
+
 @end
 
 @implementation EventInviteesTableViewController
 
-- (void)viewDidLoad
+
+
+-(void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewDidAppear:animated];
     
     self.dataStore = [ShortPathDataStore sharedDataStore];
     
@@ -58,16 +62,23 @@
             
             [self.visitors addObject:visitor];
             
-            [self.tableView reloadData];
+            
             
         }
-
+        
+        [self.tableView reloadData];
+        //NSMutableString *visitorIDString = [[NSMutableString alloc]init];
+        NSMutableArray *visitorIDArray = [[NSMutableArray alloc]init];
+        for (Visitor *visitor in self.visitors) {
+            [visitorIDArray addObject: visitor.identifier];
+        }
+        self.visitorIDString = [visitorIDArray componentsJoinedByString:@","];
         
     } Failure:^(NSInteger errorCode) {
         
         [self.apiClient handleError:errorCode InViewController:self];
     }];
-    
+
 }
 
 
@@ -103,6 +114,7 @@
     VisitorsVC *visitorsVC = ((VisitorsVC *)[[segue destinationViewController] topViewController]);
     
     visitorsVC.event = self.event;
+    visitorsVC.visitorIDString = self.visitorIDString;
 }
 
 

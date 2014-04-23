@@ -61,7 +61,7 @@
 //    [self.tableView setBackgroundView:nil];
 //    UIView *tableBG = [[UIView alloc]init];
 //    [tableBG setBackgroundColor:[UIColor redColor]];
-    [self.tableView setBackgroundColor:[UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:1.0]];
+   // [self.tableView setBackgroundColor:[UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:1.0]];
     
     
     
@@ -154,7 +154,7 @@
 {
     // Return the number of rows in the section.
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-    [tableView setBackgroundColor:[UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:1.0]];
+   // [tableView setBackgroundColor:[UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:1.0]];
     return [self.searchResults count];
     } else {
     return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
@@ -200,8 +200,8 @@
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    cell.backgroundColor = [UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:0.2];
-    [cell.textLabel setTextColor:[UIColor whiteColor]];
+    //cell.backgroundColor = [UIColor colorWithRed:0.024 green:0.439 blue:0.659 alpha:0.2];
+   // [cell.textLabel setTextColor:[UIColor whiteColor]];
     
     return cell;
 }
@@ -349,7 +349,17 @@
     
     if (self.navigationController.viewControllers[0] == self) {
 
-        //[self.event addVisitorsObject:visitor];
+      
+        NSMutableString *mutableIDString =  [self.visitorIDString mutableCopy];
+        [mutableIDString appendString:[NSString stringWithFormat:@",%@",self.selectedVisitor.identifier]];
+        [self.apiClient addVisitors:mutableIDString ToEvent:self.event Completion:^{
+            
+            //[self.tableView reloadData];
+            
+        } Failure:^(NSInteger errorCode) {
+           // NSLog(@"error %d", errorCode);
+        }];
+        
       [self dismissViewControllerAnimated:YES completion:nil];
         
         

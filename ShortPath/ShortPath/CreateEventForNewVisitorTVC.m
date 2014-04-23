@@ -74,7 +74,7 @@
 {
     [super viewDidLoad];
     
-    self.hours = @[@"Hours", @"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12"];
+    self.hours = @[@"Hours", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12"];
     self.minutes = @[@"Minutes", @"0", @"30"];
     
    
@@ -304,7 +304,7 @@
         if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
             
             if ([[NSUserDefaults standardUserDefaults] objectForKey:@"key"]) {
-                
+
                 [self postNewVisitorEventToServer];
                 
                 [self dismissViewControllerAnimated:YES completion:nil];
@@ -447,7 +447,7 @@
     }
     else if (pickerView == self.durationPicker) {
         if (component == 0) {
-            return 14;
+            return 13;
         }
         else if (component == 1){
             return 3;

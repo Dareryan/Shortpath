@@ -49,9 +49,6 @@
     [super viewDidLoad];
     
     self.apiClient = [[APIClient alloc]init];
-    
-    NSLog(@"%@", self.event);
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,7 +89,7 @@
 
 
 - (BOOL) validateEmail: (NSString *) candidate {
-
+    
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     
@@ -101,11 +98,12 @@
 
 
 - (IBAction)doneButtonPressed:(id)sender {
-
+    
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Required Fields Are Missing" message:@"In order to create an event for this visitor, the visitor must have a first name, last name and valid departure date" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
     UIAlertView *emailAlert = [[UIAlertView alloc]initWithTitle:@"Invalid email" message:@"The email address you have entered is not valid" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-
+    
+    
     
     if ([self.firstNameTextField.text isEqualToString:@""] || [self.lastNameTextField.text isEqualToString:@""]) {
         
@@ -118,42 +116,58 @@
             [emailAlert show];
         }
         
-    } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && ([self validateEmail:self.emailTextField.text] || [self.emailTextField.text isEqualToString:@""])) {
-        
-        [self createNewVisitorForEvent];
-        
-        NSString *startDate = [Event dateStringFromDate:self.event.start];
-        NSString *time = [Event timeStringFromDate:self.event.start];
-        
-        [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location VisitorWithNoId:self.visitor Completion:^(NSDictionary *json) {
+    } else if(![self.firstNameTextField.text isEqualToString:@""] && ![self.lastNameTextField.text isEqualToString:@""] && ([self validateEmail:self.emailTextField.text] || [self.emailTextField.text isEqualToString:@""]))
+    {
+        if ([self.event.identifier isEqualToString:@""]) {
             
-            self.visitor.identifier = [NSString stringWithFormat:@"%@", json[@"contact"][@"id"]];
+            [self createNewVisitorForEvent];
             
-            [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location Visitor:self.visitor Completion:^{
+            NSString *startDate = [Event dateStringFromDate:self.event.start];
+            NSString *time = [Event timeStringFromDate:self.event.start];
+            
+            [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location VisitorWithNoId:self.visitor Completion:^(NSDictionary *json) {
                 
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+                self.visitor.identifier = [NSString stringWithFormat:@"%@", json[@"contact"][@"id"]];
                 
-                 [self.dataStore.managedObjectContext deleteObject:self.event];
-
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                UITabBarController *TabBarVC = [storyboard instantiateInitialViewController];
-                [self.navigationController presentViewController:TabBarVC animated:YES completion:nil];
+                [self.apiClient postEventForUser:self.event.user WithStartDate:startDate Time:time Title:self.event.title Location:self.location Visitor:self.visitor Completion:^{
+                    
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"postRequestComplete" object:nil];
+                    
+                    [self.dataStore.managedObjectContext deleteObject:self.event];
+                    
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    UITabBarController *TabBarVC = [storyboard instantiateInitialViewController];
+                    [self.navigationController presentViewController:TabBarVC animated:YES completion:nil];
+                    
+                } Failure:^(NSInteger errorCode) {
+                    
+                    [self.apiClient handleError:errorCode InViewController:self];
+                    
+                    // NSLog(@"Error adding new visitor for new event: %d", errorCode);
+                    
+                }];
                 
             } Failure:^(NSInteger errorCode) {
                 
                 [self.apiClient handleError:errorCode InViewController:self];
                 
-                NSLog(@"Error adding new visitor for new event: %d", errorCode);
-
+                //NSLog(@"Error adding new visitor for new event: %d", errorCode);
             }];
+        }
+        else{
             
-        } Failure:^(NSInteger errorCode) {
-            
-            [self.apiClient handleError:errorCode InViewController:self];
-            
-            NSLog(@"Error adding new visitor for new event: %d", errorCode);
-        }];
+             //Insert new user object to add to existing event
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UITabBarController *TabBarVC = [storyboard instantiateInitialViewController];
+            [self.navigationController presentViewController:TabBarVC animated:YES completion:nil];
+        }
+        
+        
+       
+        
+       
     }
+    
 }
 
 - (IBAction)cancelButtonTapped:(id)sender {

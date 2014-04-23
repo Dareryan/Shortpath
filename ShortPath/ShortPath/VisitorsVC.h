@@ -14,5 +14,6 @@
 
 @property (strong, nonatomic) Event *event;
 @property (strong, nonatomic) Location *location;
+@property (strong, nonatomic) NSString *visitorIDString;
 
 @end

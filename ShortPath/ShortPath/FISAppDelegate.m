@@ -94,11 +94,8 @@
         [AFOAuthCredential storeCredential:credential withIdentifier:@"ShortPathCred"];
         
         AFOAuthCredential *cred = [AFOAuthCredential retrieveCredentialWithIdentifier:@"ShortPathCred"];
-        
-        
-        
 
-        NSLog(@"token: %@", cred.accessToken);
+        //NSLog(@"token: %@", cred.accessToken);
         
     } failure:^(NSError *error) {
         

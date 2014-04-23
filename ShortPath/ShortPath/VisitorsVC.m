@@ -419,6 +419,7 @@
         AddNewVisitorVC *addNewVisitor = navController.viewControllers[0];
         
         addNewVisitor.event = self.event;
+        
         addNewVisitor.location = self.location;
         
     }

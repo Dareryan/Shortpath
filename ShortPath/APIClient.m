@@ -67,7 +67,7 @@
         
     } else if (errorCode == 404) {
         
-        UIAlertView *alertBad = [[UIAlertView alloc] initWithTitle:@"That's bad" message:@"try again, but it wouldn't help" delegate:controller cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alertBad = [[UIAlertView alloc] initWithTitle:@"Server error" message:@"Please try again later" delegate:controller cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertBad show];
     }
     

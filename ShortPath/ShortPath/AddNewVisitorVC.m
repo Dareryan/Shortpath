@@ -49,7 +49,6 @@
     [super viewDidLoad];
     
     self.apiClient = [[APIClient alloc]init];
-    
 }
 
 - (void)didReceiveMemoryWarning
